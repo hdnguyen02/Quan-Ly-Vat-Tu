@@ -143,8 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="autoLoad.h" />
-    <ClInclude Include="ctdl.h" />
     <ClInclude Include="custom.h" />
+    <ClInclude Include="BstVatTu.h" />
+    <ClInclude Include="doHoa.h" />
+    <ClInclude Include="dsNhanVien.h" />
+    <ClInclude Include="HoaDon.h" />
+    <ClInclude Include="ListCTHD.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

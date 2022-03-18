@@ -23,10 +23,22 @@
     <ClInclude Include="autoLoad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ctdl.h">
+    <ClInclude Include="custom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="custom.h">
+    <ClInclude Include="BstVatTu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dsNhanVien.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListCTHD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HoaDon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="doHoa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
