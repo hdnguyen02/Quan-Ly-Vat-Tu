@@ -6,11 +6,20 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+	 
 	StartBGI start; 	
-	//menuQuanLyVatTu(); 
-	ONhap test(0,0,250,40,"");
-	test.NhapVao(); 
+	// menuQuanLyVatTu(); 
+	ONhap test(0,0,250,40,70,"duc");
+	 
+	test.veONhap(); 
 	test.NhapVao(); 	
+ 	
+	
+	
+
+
+	getch(); 
+	 
 
 	
 	

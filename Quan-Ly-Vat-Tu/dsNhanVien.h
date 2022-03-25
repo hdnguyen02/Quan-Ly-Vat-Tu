@@ -2,14 +2,14 @@
 #include "autoLoad.h"
 using namespace std;
 
-const int NHANVIENTOIDA = 500;
+const int NHANVIENTOIDA = 500;  // n 
 
 
 struct nhanVien {
-    string id;  
+    string id;  // maNV
     string ho;
     string ten;
-    int phai;  
+    int phai;   // 0. nam 1. nu 
 };
 
 
@@ -18,7 +18,8 @@ struct nhanVien {
 
 class dsNhanVien {
 private:
-    nhanVien nv[NHANVIENTOIDA];
+	int sl;  // so luong thuc te. 
+    nhanVien *nv[NHANVIENTOIDA];  // 
 public:
 
 

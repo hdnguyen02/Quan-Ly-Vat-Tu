@@ -5,10 +5,10 @@ using namespace std;
 struct CThoaDon {
     string maVT;   
     float soLuong;
-    string donGia;
-    float VAT;  
+    float donGia; // sai => so thuc 
+    float VAT;  // 10% 0,1 
     // constructor 
-    CThoaDon(string maVT, float soLuong, string donGia, float VAT) :
+    CThoaDon(string maVT, float soLuong, float donGia, float VAT) :
         maVT(maVT), soLuong(soLuong), donGia(donGia), VAT(VAT) {}
     CThoaDon() {}
 };
@@ -20,7 +20,7 @@ private:
     NodeCTHD* pNext;
 public:
     NodeCTHD() : pNext(NULL) { }
-    NodeCTHD(string maVT, float soLuong, string donGia, float VAT) : info(maVT, soLuong, donGia, VAT), pNext(NULL) {}
+    NodeCTHD(string maVT, float soLuong, float donGia, float VAT) : info(maVT, soLuong, donGia, VAT), pNext(NULL) {}
 };
 
 class listCTHD {
@@ -28,7 +28,7 @@ private:
     NodeCTHD* head;
 
 public:
-    listCTHD() : head(NULL) {}
+    listCTHD() : head(NULL) {} // hoi ki 
  
 
 };
