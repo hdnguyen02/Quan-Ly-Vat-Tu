@@ -9,7 +9,9 @@ int main(int argc, char *argv[])
 	StartBGI start; 	
 	menuQuanLyVatTu(); 
 	
-	// thu nghiem tao ra o nhap 
+	
+	
+	
 	 
 	
 	
