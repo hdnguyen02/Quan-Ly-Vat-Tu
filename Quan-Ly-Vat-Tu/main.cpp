@@ -7,9 +7,11 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	StartBGI start; 	
-	menuQuanLyVatTu(); 
-	
-	
+	//menuQuanLyVatTu(); 
+	ONhap test(0,0,250,40,"");
+	test.NhapVao(); 
+	test.NhapVao(); 	
+
 	
 	
 	 

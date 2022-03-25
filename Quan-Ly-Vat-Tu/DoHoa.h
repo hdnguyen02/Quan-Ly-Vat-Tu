@@ -14,6 +14,7 @@ using namespace std;
 
 
 #define DODAIMANHINH 1536
+#define DORONGMANHINH 864
 #define BACKGROUP 7 // mau xam
 #define COLOR_MENU_CAP1 1   // màu LIGHTBLUE
 #define COLOR_HIGHT_LIGHT 8    // mau LIGHTMAGENTA 
@@ -46,19 +47,11 @@ using namespace std;
 #define COLOR_TEXT_INPUT 2
 
 // Nguyen mau ham 
-struct NutBam; 
-struct ONhap;
-class TienIchDoHoa;  
-void menuQuanLyVatTu(); 
-void menuCha();
-void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu); 
-void hienThiInputVatTu(); 
 
 
-void hienThiInputVatTu() {
-	// ve ra form vatTu. 
-	
-}
+
+
+
 
 
 // dung de chua cac ham lien quan den do hoa. 
@@ -195,9 +188,6 @@ struct ONhap {
 				// thoat khong cho nhap nua 
 				the_end = 1;  
 			}
-			else if (c == 's') {
-				boNhoDem = boNhoDem + 's'; 
-			}
 			else if (c == BACK_SPACE && !boNhoDem.empty() ) {
 					boNhoDem.erase(boNhoDem.size() - 1); 
 					kiemTraBackSpace = true; 
@@ -316,7 +306,26 @@ void xoaManHinh() {
 	bar(0, 30, 3000, 3000); 
 }
 
+void hienThiTinhNangHoaDon() {
 
+	// xoa het man hinh di 
+	
+	outtextxy(500,500,"hello word"); 
+	cout << "thanh cong"; 
+}
+
+void hienThiInputVatTu() {
+	int WidthTieuDe = 350;
+	int xWidthTieuDe = (DODAIMANHINH / 2 ) - (WidthTieuDe/2);
+	int xHeighTieuDe = 300;
+	NutBam tieuDe(1,xWidthTieuDe,xHeighTieuDe,WidthTieuDe,40,2,3,4,"NHAP THONG TIN VAT TU");
+	tieuDe.veNut(); 
+	
+	// ve ra o vuong  
+	// ve ra o vuong co backgoup mau trang.
+	NutBam box (1,xWidthTieuDe,xHeighTieuDe + WidthTieuDe,WidthTieuDe,40,2,30,4,"" ); 
+	box.veNut();  
+}
 
 void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu) {
 	bool kiemTra[3] = {false};
@@ -371,7 +380,8 @@ void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doa
 			}
 			else if (themVT.isMouseHover(xclick,yclick)) { 
 				// hien thi ra cai form nhap. 
-				themVT.duocChon(); 
+				themVT.duocTroVao = true; 
+				themVT.veNut();
 				hienThiInputVatTu() ; 
 				
 			}
@@ -391,13 +401,7 @@ void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doa
 }
 
 
-void hienThiTinhNangHoaDon() {
 
-	// xoa het man hinh di 
-	
-	outtextxy(500,500,"hello word"); 
-	cout << "thanh cong"; 
-}
 
 
 
@@ -482,5 +486,7 @@ void menuQuanLyVatTu() {
 	
 
 }
+
+
 
 
