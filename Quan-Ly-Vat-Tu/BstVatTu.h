@@ -37,9 +37,6 @@ public:
 class BstVatTu {
 private:
     NodeVatTu* root;
-
-
-
 public:
     BstVatTu() : root(NULL) {};
     ~BstVatTu(); 
@@ -49,10 +46,9 @@ public:
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
     void deleteTree(NodeVatTu* root);
-
-
-
-
+	NodeVatTu* search(const string& key);  // return ve NULL neu khong tim thay va vi tri cua no neu tim thay 
+	bool isNULL(); 
+	
 
 };
 
@@ -113,6 +109,34 @@ void BstVatTu::deleteTree(NodeVatTu* root) {
 	cout << "delete Node : " << root->info.maVT << endl ; 
 	delete root; 
 }
+
+// viet ham hieu chinh vatTu ( nhap vao ma soVT de co the hieu chinh 
+
+NodeVatTu* BstVatTu::search(const string& key) {
+	NodeVatTu* temp = root;
+	// neu nhu moi voa ma temp == NULL => root nay rong => cha co node nay 
+	// hoac cai node nó bang => quy pham => cham duc => return ve chinh node nay. 
+	while (temp != NULL && temp->info.maVT != key) {
+		if (key < temp->info.maVT) {
+			temp = temp->pLeft; 
+		}
+		else {
+			temp = temp->pRight; 
+		}
+	}
+	if (temp == NULL) {
+		return NULL;
+	}
+	return temp; 
+}
+// hàm tra ve true neu nhu cay nay rong 
+bool BstVatTu::isNULL() {
+	if (root == NULL) {
+		return true; 
+	}
+	return false; 
+}
+
 
 BstVatTu::~BstVatTu() {
      

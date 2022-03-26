@@ -10,22 +10,31 @@ int main(int argc, char *argv[])
 {
 	 
 	
-//	VatTu vt1("VT05","vat tu 5","kg",100); 
-//	VatTu vt2("VT02","vat tu 2","kg",100); 
-// 	VatTu vt3("VT07","vat tu 7","kg",100); 
-// 	VatTu vt4("VT01","vat tu 1","kg",100); 
-// 	VatTu vt5("VT08","vat tu 8","kg",100);
-//	 // thuc hien insert vao 
-//	// tao ra 1 cay 
-//	BstVatTu dsVatTu; 
-//	dsVatTu.insert(vt1);
-//	dsVatTu.insert(vt2); 
-//	dsVatTu.insert(vt3); 
-//	dsVatTu.insert(vt4); 
-//	dsVatTu.insert(vt5);
-//	// duyet qua cay 
-//	dsVatTu.duyetCay(); 
+	VatTu vt1("VT05","vat tu 5","kg",100); 
+	VatTu vt2("VT02","vat tu 2","kg",100); 
+ 	VatTu vt3("VT07","vat tu 7","kg",100); 
+ 	VatTu vt4("VT01","vat tu 1","kg",100); 
+ 	VatTu vt5("VT08","vat tu 8","kg",100);
+	 // thuc hien insert vao 
+	// tao ra 1 cay 
+	BstVatTu dsVatTu; 
+	dsVatTu.insert(vt1);
+	dsVatTu.insert(vt2); 
+	dsVatTu.insert(vt3); 
+	dsVatTu.insert(vt4); 
+	dsVatTu.insert(vt5);
+	dsVatTu.duyetCay(); 
 	
+	
+	// tim kiem 1 phan tu 
+	if (dsVatTu.search("v") != NULL) {
+	
+		// không phai NULL tuc la tim thay 
+		cout << "da tim thay"; 
+	}
+	else {
+		cout << "khong tim thay"; 
+	}
 	
 	//string s = "VT083343"; 
 //	string s1 = "VT094545"; 
@@ -38,13 +47,13 @@ int main(int argc, char *argv[])
 	 
 	 
 	 // thu nghiem voi o Form nhap 
-	 StartBGI start; 
+
 	 // hien thi ra o form nhap 
-	menuQuanLyVatTu(); 
+	//menuQuanLyVatTu(); 
 	 
 	 
-	getch();   // haha nho su dung. 
-	
+	// getch();   // haha nho su dung. 
+	system("pause"); 
 	
 	return 0;
 }
