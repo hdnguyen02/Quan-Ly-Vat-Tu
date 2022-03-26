@@ -139,7 +139,7 @@ struct ONhap {
 	string boNhoDem; 
 	string goiY; // goi cho nguoi dung nen nhap nhung gi. 
 	int loaiNhap; // quy dinh nhap duoc nhap nhung gi 
-	int widthTitle; 
+	int widthTitle;  
 	// 0 : nhap ca so lan chu 
 	// 1 : chi duoc nhap chu ( co the in hoac thuong ). 
 	// 2 : chi duoc nhap so
@@ -148,6 +148,7 @@ struct ONhap {
 	string tieuDe; // hien thi phia truoc duoi dang 1 o vuong  
 	bool duocChon; // trang thai co duoc chon hay khong 
 	
+ 
 	
 	ONhap(int x,int y,int w,int h,int widthTitle,string tieuDe) { 
 		this->x= x; 
@@ -155,13 +156,15 @@ struct ONhap {
 		this->w = w; 
 		this->h = h; 
 		this->tieuDe = tieuDe; 
-		this->widthTitle = widthTitle; 
+		this->widthTitle = widthTitle;  
 		this->duocChon = false; // lan dau tao ra nen chua duoc nhap. 
 		this->boNhoDem = ""; 
 	}
 	// viet 1 phuong thuc de cho nguoi dung co the cho nhap vao 
 	
 	void veONhap() {
+		// ve ra cai boder 
+		
 		NutBam boxTieuDe(x,y,widthTitle,h,2,3,4,tieuDe); 
 		boxTieuDe.veNut(); 		
 		setfillstyle(SOLID_FILL,COLOR_BACKGROUP_INPUT); 
@@ -173,21 +176,17 @@ struct ONhap {
 	
 	
 	// kiem tra vua chu vua so 
-	bool kiTuChuHoacSo(char &c) {
-		if (this->kiTuChu(c) || this->kiTuSo(c)) {
-			return true; 
-		}
-		return false; 
-	}
+	
 	// viet ham xoa di ki tu cuoi 
 	void xoaKiTuCuoi() {
 		this->boNhoDem.erase(this->boNhoDem.size() - 1); // xoa di ki tu cuoi cung. 
 	}
 	// hàm xoa het tat ca nhung gi nam ben trong   
 	void xoaNoiDungONhap() {
-	
+		
 		TienIchDoHoa::xoaManHinhTheoToaDo(x + widthTitle,y,w,h,COLOR_BACKGROUP_INPUT);  // xoa song ve lai 
 		this->veONhap(); // ve lai. 
+		this->hienThiBoder(); 
 	
 	}
 	
@@ -202,7 +201,19 @@ struct ONhap {
 			outtextxy (x + CACH_LE_O_NHAP + widthTitle,toaDoTextY, boNhoDem.c_str());
 	}
 	
-	void NhapVao() {
+	
+	// viet 1 hàm tat hien thi boder 
+	void tatHienThiBoder() {
+		// ve ra cai mau nen trung voi cai mau backgourp la duoc 
+		setcolor(COLOR_BACKGROUP_INPUT); 
+		rectangle(x + widthTitle,y,x + w + widthTitle ,y + h); // hien thi thanh sang cai boder len. 
+	}
+	
+	// tao ra con tro ham. 
+	// ham chi nhan gia tri. 
+	
+	void NhapVao(bool(*loaiKiTu)(char)) {
+		// this->hienThiBoder(); 
 		int the_end = 0;
 		char c; 
 		bool kiemTraBackSpace = false; 
@@ -223,17 +234,20 @@ struct ONhap {
 				the_end = 1;  
 				this->xoaNoiDungONhap();
 				this->inNoiDung(); 
+				// this->tatHienThiBoder(); 
+				
 			}
 			else if (c == BACK_SPACE && !boNhoDem.empty() ) {
 					boNhoDem.erase(boNhoDem.size() - 1); 
 					kiemTraBackSpace = true; 
+					
 			}
 			else if (c == SPACE) {
 				boNhoDem = boNhoDem + " " ; 
 			}
 			
-			else if (this->kiTuChuHoacSo(c)) {  
-				boNhoDem = boNhoDem + c ; 
+			else if (loaiKiTu(c)) {
+				boNhoDem = boNhoDem + c; // thoa man ki tu.
 			}
 			
 		} while (!the_end);
@@ -246,7 +260,7 @@ struct ONhap {
 	// viet ham ve lai boder cho cai khung khi dang nhap 
 	void hienThiBoder() {
 		setcolor(COLOR_BODER_INPUT); 
-		rectangle(x,y,x + w,y + h); // hien thi thanh sang cai boder len. 
+		rectangle(x + widthTitle,y,x + w + widthTitle ,y + h); // hien thi thanh sang cai boder len. 
 	}
 	
 	
@@ -258,32 +272,9 @@ struct ONhap {
 	}
 	
 	ONhap() {}
-	bool kiTuSo(char &c) {
-		if (c >= 48 && c <= 57) {
-			return true; // dung chu so. 
-		}
-		return false; // khong phai chu so. 
-	}
 	
-	bool kiTuChuHoa(char &c) {
-		if (c >= 65 && c <=90 ) {
-			// la chu hoa. 
-			return true; 
-		}
-		return false;   
-	}
-	bool kiTuChuThuong(char &c) {
-		if (c >= 97 && c <=122) {
-			return true; 
-		}
-		return false; 
-	}
-	bool kiTuChu(char &c) {
-		if (this->kiTuChuHoa(c) || this->kiTuChuThuong(c)){
-			return true; // la ki tu chu hoa thi cung la ki tu chu. 
-		}
-		return false; // khong phai la chu. 	
-	}
+	
+	
 	
 };
 
@@ -338,6 +329,7 @@ void hienThiInputVatTu() {
 	
 	// truoc tien xoa man hinh
 	// xoa het man hinh di. 
+	// xoa het man hinh di. 
 	const int chieuDaiBox = 500;
 	const int mxTieuDe = (DODAIMANHINH / 2 ) - (chieuDaiBox/2);
 	const int cachLeTrenTieuDe = 250;
@@ -374,6 +366,8 @@ void hienThiInputVatTu() {
 
 // =================================HIEN THI TINH NANG VAT TU=========================================
 void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu) {
+	// xoa di man hinh phia duoi va ve lai toan bo 
+	TienIchDoHoa::xoaManHinhTheoToaDo(0,42,DODAIMANHINH,DORONGMANHINH,BACKGROUP);  // xoa di nua man hinh ben duoi. 
 	bool kiemTra[3] = {false};
 	bool kiemTraVT[3] = {false};  
 	OVuong ovVatTu(5,45,DODAIMANHINH - 12,50,2); 
@@ -487,6 +481,7 @@ void menuCha() {
 				index = -1; 
 				
 			}
+			// nhung cai sau. 
 		}
 		if (ismouseclick(WM_MOUSEMOVE)) {  // duy chuyen chuoc. 
 			getmouseclick(WM_MOUSEMOVE, mx, my);  

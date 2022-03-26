@@ -9,12 +9,14 @@ struct VatTu {
     VatTu() {}; 
     VatTu(string maVT, string ten, string donVi, float soLuongTon) : maVT(maVT), ten(ten),
         donVi(donVi), soLuongTon(soLuongTon) {};
-
+    void inVatTu(); 
 
 
 
 };
-
+void VatTu::inVatTu() {
+	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon; 
+}
 
 class NodeVatTu {
 private:
@@ -26,8 +28,11 @@ public:
     NodeVatTu(): pLeft(NULL), pRight(NULL) {};  
     NodeVatTu(const VatTu& info) : info(info.maVT, info.ten, info.donVi, info.soLuongTon),
         pLeft(NULL), pRight(NULL) {}
+   
 
 };
+
+
 
 class BstVatTu {
 private:
@@ -38,15 +43,12 @@ private:
 public:
     BstVatTu() : root(NULL) {};
     ~BstVatTu(); 
-
-
-    
     void supportInsert(NodeVatTu* root, const VatTu& info);
     void insert(const VatTu& info);
-
-    void deleteNode(NodeVatTu* root) {
-
-    }
+    void deleteNode(NodeVatTu* root) ; 
+    void duyetCay();
+    void hoTroDuyetCay(NodeVatTu* root); 
+    void deleteTree(NodeVatTu* root);
 
 
 
@@ -87,8 +89,34 @@ void BstVatTu::supportInsert(NodeVatTu* root,const VatTu& info) {
     }
 }
 
+void BstVatTu::duyetCay() {
+	// goi toi ham va truyen doi so vao 
+	hoTroDuyetCay(root); 
+	
+}
+
+void BstVatTu::hoTroDuyetCay(NodeVatTu* root) {
+	if (root == NULL) {
+		return;  
+	}
+	hoTroDuyetCay(root->pLeft);
+	root->info.inVatTu(); 
+	cout << endl; 
+	hoTroDuyetCay(root->pRight); 
+}	
+void BstVatTu::deleteTree(NodeVatTu* root) {
+	if (root == NULL) {
+		return; 
+	}
+	deleteTree(root->pLeft); 
+	deleteTree(root->pRight); 
+	cout << "delete Node : " << root->info.maVT << endl ; 
+	delete root; 
+}
 
 BstVatTu::~BstVatTu() {
-    // giai phong 
+     
+     this->deleteTree(root); // giai phong di bo nho
+    
     
 }

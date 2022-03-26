@@ -7,5 +7,6 @@
 #include "dsNhanVien.h"
 #include "listCTHD.h"
 #include<winbgim.h>
+#include "BstVatTu.h"
 
 

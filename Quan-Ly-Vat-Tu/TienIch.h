@@ -37,9 +37,46 @@ public:
 		closegraph();
 	}
 
+
 };
 
 
+// =========================== HAM KIEM TRA KY TU ==============================
+bool kiTuChuHoa(char c) {
+			if (c >= 65 && c <=90 ) {
+				return true; 
+			}
+			return false;   
+		}
+	bool kiTuChuThuong(char c) {
+		if (c >= 97 && c <=122) {
+			return true; 
+		}
+		return false; 
+	}
+bool kiTuSo(char c) {
+			if (c >= 48 && c <= 57) {
+				return true;
+			}
+			return false; 
+		}
+
+bool kiTuChu(char c) {
+		if (kiTuChuHoa(c) || kiTuChuThuong(c)){
+			return true; 
+		}
+		return false;  	
+	}
+bool kiTuChuHoacSo(char &c) {
+		if (kiTuChu(c) || kiTuSo(c)) {
+			return true; 
+		}
+		return false; 
+}
+
+	
+	
+	
 
 
 
