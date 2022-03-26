@@ -10,7 +10,7 @@ struct VatTu {
     VatTu(string maVT, string ten, string donVi, float soLuongTon) : maVT(maVT), ten(ten),
         donVi(donVi), soLuongTon(soLuongTon) {};
     void inVatTu(); 
-
+	
 
 
 };
@@ -32,7 +32,16 @@ public:
 
 };
 
-
+// struct ho tro chua 2 con tro ( 1 con tro tro vao vi tri node va 1 con tro tro vao vi tri phia truoc no
+// kieu du lieu dung de chua 2 con tro ( con tro phia truoc 1 node bst va 1 con tro bst. 
+struct pointerBstVT {
+	NodeVatTu* poiterNode; 
+	NodeVatTu* poiterPrevious; // vi tri tro phia truoc no 
+	pointerBstVT(NodeVatTu *Node,NodeVatTu *previous) {
+		this->poiterNode = Node; 
+		this->previous = previous; 
+	}
+}
 
 class BstVatTu {
 private:
@@ -40,14 +49,33 @@ private:
 public:
     BstVatTu() : root(NULL) {};
     ~BstVatTu(); 
-    void supportInsert(NodeVatTu* root, const VatTu& info);
-    void insert(const VatTu& info);
-    void deleteNode(NodeVatTu* root) ; 
+    void hoTroThem(NodeVatTu* root, const VatTu& info); 
+    void themVT(const VatTu& info); 
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
-    void deleteTree(NodeVatTu* root);
-	NodeVatTu* search(const string& key);  // return ve NULL neu khong tim thay va vi tri cua no neu tim thay 
+    void giaiPhong(NodeVatTu* root);
+	NodeVatTu* timKiemVT(const string& key);  // return ve NULL neu khong tim thay va vi tri cua no neu tim thay 
 	bool isNULL(); 
+	// xoa xong thi giai phong cai node do luon 
+	bool xoaVT(const string& key) {
+		NodeVatTu* nodeDelete = this->search(); // NULL neu khong tim thay gi. 
+		if (!nodeDelete) { // neu nhu khong tim key nay!
+			return false; 
+		}
+		// tiep tuc xu ly. 
+		// lay ra vi tri can xoa. 
+		// da lay ra duoc node can xoa
+		// kiem tra dieu kien 
+		// neu nhu node can xoa chi co 1 node con hoac khong co node con nao 
+		if (nodeDelete->pLeft == NULL && nodeDelete->pRight == NULL) {
+				
+		}
+		
+		
+		
+	}
+	
+	// tra ve true neu ham nay xoa thanh cong. và false neu key nay khong ton tai trong bstVT
 	
 
 };

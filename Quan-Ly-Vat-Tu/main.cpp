@@ -27,14 +27,6 @@ int main(int argc, char *argv[])
 	
 	
 	// tim kiem 1 phan tu 
-	if (dsVatTu.search("v") != NULL) {
-	
-		// không phai NULL tuc la tim thay 
-		cout << "da tim thay"; 
-	}
-	else {
-		cout << "khong tim thay"; 
-	}
 	
 	//string s = "VT083343"; 
 //	string s1 = "VT094545"; 
