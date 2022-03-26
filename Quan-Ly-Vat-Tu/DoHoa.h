@@ -49,11 +49,6 @@ using namespace std;
 // Nguyen mau ham 
 
 
-
-
-
-
-
 // ================================== CLASS TIEN ICH DO HOA=========================================
 class TienIchDoHoa {
 	// xu dung de xoa man hinh. 
@@ -63,14 +58,18 @@ class TienIchDoHoa {
 		bar(x, y, x + w, y + h); 
 	}
 };  
+
+
+
+
 //=====================================STRUCT NUT BAM===================================================
 struct NutBam {
-	int  id,x, y, w, h;
+	int x, y, w, h; 
 	int colorBack,colorHight,colorText; 
 	string tieuDe;
 	bool duocTroVao;
-	NutBam(int id, int x, int y, int w, int h,int colorBack,int colorHight,int colorText,string tieuDe) {
-		this->id = id; 
+	
+	NutBam( int x, int y, int w, int h,int colorBack,int colorHight,int colorText,string tieuDe) {
 		this->x = x; 
 		this->y = y; 
 		this->w = w;
@@ -104,7 +103,7 @@ struct NutBam {
 		
 		setfillstyle(SOLID_FILL, duocTroVao ? colorHight : colorBack); // bo bua. 
 		bar(x, y, x + w, y + h);
-		settextstyle(10, 0, 1);
+		settextstyle(10, 0, 1);  
 		int text_w = textwidth(arr);
 		int text_h = textheight(arr);
 		int toaDoTextX = x + (w - text_w) / 2;
@@ -112,7 +111,6 @@ struct NutBam {
 		setcolor(colorText);
 		if (duocTroVao) setbkcolor(colorHight);
 		else setbkcolor(colorBack); 
-		
 		outtextxy(toaDoTextX, toaDoTextY, arr);
 	}
 	
@@ -164,7 +162,7 @@ struct ONhap {
 	// viet 1 phuong thuc de cho nguoi dung co the cho nhap vao 
 	
 	void veONhap() {
-		NutBam boxTieuDe(0,x,y,widthTitle,h,2,3,4,tieuDe); 
+		NutBam boxTieuDe(x,y,widthTitle,h,2,3,4,tieuDe); 
 		boxTieuDe.veNut(); 		
 		setfillstyle(SOLID_FILL,COLOR_BACKGROUP_INPUT); 
 		bar(x + widthTitle,y, x+ widthTitle + w , y+h);  
@@ -190,34 +188,32 @@ struct ONhap {
 	
 		TienIchDoHoa::xoaManHinhTheoToaDo(x + widthTitle,y,w,h,COLOR_BACKGROUP_INPUT);  // xoa song ve lai 
 		this->veONhap(); // ve lai. 
+	
+	}
+	
+	void inNoiDung() {
+			int text_h; 
+			int toaDoTextY;
+			settextstyle(1, 0, 2);
+			text_h = textheight(boNhoDem.c_str());
+			toaDoTextY = y + (h - text_h) / 2;
+			setbkcolor(COLOR_BACKGROUP_INPUT);  // chung mau voi cai ma no ve
+			setcolor(COLOR_TEXT_INPUT); 
+			outtextxy (x + CACH_LE_O_NHAP + widthTitle,toaDoTextY, boNhoDem.c_str());
 	}
 	
 	void NhapVao() {
 		int the_end = 0;
 		char c; 
-		int text_h; 
-		int toaDoTextY;
-		char arr_char[80]; 
 		bool kiemTraBackSpace = false; 
 		do
 		{
 			boNhoDem = boNhoDem + "|"; // them dau gach nhay. 
-    		settextstyle(1, 0, 2);
-			text_h = textheight(boNhoDem.c_str());
-			toaDoTextY = y + (h - text_h) / 2;
-			
-			
-			// xoa het cai cu di. 
-			// va xoa tu vi tri nao. 
-			// xoa het. ve lai. 
-			if (kiemTraBackSpace == true) {
+			if (kiemTraBackSpace) {
 				this->xoaNoiDungONhap();  
 				kiemTraBackSpace = false;  
 			}
-			setbkcolor(COLOR_BACKGROUP_INPUT);  // chung mau voi cai ma no ve
-			setcolor(COLOR_TEXT_INPUT); 
-		   	outtextxy (CACH_LE_O_NHAP + widthTitle,toaDoTextY, boNhoDem.c_str());
-		   	// xoa di cai phim nhap 
+		   	this->inNoiDung(); 
 			this->xoaKiTuCuoi(); 
 		   	c = getch();
 		   	// cac dieu kien dung. khi nguoi dung nhap enter 
@@ -225,19 +221,18 @@ struct ONhap {
 			if (c == ENTER || c == ESC) {
 				// thoat khong cho nhap nua 
 				the_end = 1;  
+				this->xoaNoiDungONhap();
+				this->inNoiDung(); 
 			}
 			else if (c == BACK_SPACE && !boNhoDem.empty() ) {
 					boNhoDem.erase(boNhoDem.size() - 1); 
 					kiemTraBackSpace = true; 
 			}
 			else if (c == SPACE) {
-				// this->xoaKiTuCuoi();  // xoa di 
-				boNhoDem = boNhoDem + " " ; // dau cach gia // cong them 1 dau cach.
+				boNhoDem = boNhoDem + " " ; 
 			}
 			
-			else if (this->kiTuChuHoacSo(c)) {  // lay tu ki tu nao den ki tu nao. 
-				// xoa di cai dau "_" 
-				// this->xoaKiTuCuoi(); 
+			else if (this->kiTuChuHoacSo(c)) {  
 				boNhoDem = boNhoDem + c ; 
 			}
 			
@@ -291,9 +286,6 @@ struct ONhap {
 	}
 	
 };
- 
-
-
 
 
 //===========================================STRUCT OVUONG==============================================
@@ -315,6 +307,16 @@ struct OVuong {
 		rectangle(x, y, x + w, y + h);
 	}
 };
+
+
+
+
+
+ 
+
+
+
+
 
 
 
@@ -340,13 +342,13 @@ void hienThiInputVatTu() {
 	const int mxTieuDe = (DODAIMANHINH / 2 ) - (chieuDaiBox/2);
 	const int cachLeTrenTieuDe = 250;
 	const int chieuCaoTieuDe = 40; 
-	NutBam tieuDe(1,mxTieuDe,cachLeTrenTieuDe,chieuDaiBox,chieuCaoTieuDe,2,3,4,"NHAP THONG TIN VAT TU");
+	NutBam tieuDe(mxTieuDe,cachLeTrenTieuDe,chieuDaiBox,chieuCaoTieuDe,2,3,4,"NHAP THONG TIN VAT TU");
 	
 	
 	// ==========BIEN O VUONG===========
 	const int chieuCaoBox = 300; 
 	const int cachLeTrenBox = cachLeTrenTieuDe + chieuCaoTieuDe + 5; 
-	NutBam box(1,mxTieuDe,cachLeTrenBox,chieuDaiBox,chieuCaoBox,15,3,4,""); // ve ra 1 cai hop trong
+	NutBam box(mxTieuDe,cachLeTrenBox,chieuDaiBox,chieuCaoBox,15,3,4,""); // ve ra 1 cai hop trong
 	  
 	
 	// ============BIEN O NHAP============
@@ -380,9 +382,9 @@ void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doa
 	const int chieuCaoVT = 35;
 	const int cachLeNgang = 15; 
 	const int cachLeTren = 53 ;
-	NutBam themVT(ID_THEM_VT,cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"THEM VAT TU");
-	NutBam hieuChinhVT(ID_HIEUCHINH_VT,chieuDaiVT + cachLeNgang*2 ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"HIEU CHINH VAT TU");
-	NutBam inDSVT(ID_IN_VT,(chieuDaiVT + cachLeNgang )*2 + cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"IN DANH SACH VAT TU"); 
+	NutBam themVT(cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"THEM VAT TU");
+	NutBam hieuChinhVT(chieuDaiVT + cachLeNgang*2 ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"HIEU CHINH VAT TU");
+	NutBam inDSVT((chieuDaiVT + cachLeNgang )*2 + cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"IN DANH SACH VAT TU"); 
 	themVT.veNut(); 
 	hieuChinhVT.veNut() ; 
 	inDSVT.veNut(); 
@@ -455,10 +457,10 @@ void menuCha() {
 	int index = -1;  
 	int doDai = DODAIMANHINH / 4 - 16; 
 	const int chieuCaoMenuCap1 = 40;  
-	NutBam vatTu(ID_VT,0,0, doDai,chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT,"VAT TU");
-	NutBam nhanVien(ID_NV,doDai, 0, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "NHAN VIEN");
-	NutBam hoaDon( ID_HD,doDai*2 , 0, doDai , chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "HOA DON");
-	NutBam doanhThu(ID_DT, doDai * 3, 0, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "DOANH THU");
+	NutBam vatTu(0,0, doDai,chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT,"VAT TU");
+	NutBam nhanVien(doDai, 0, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "NHAN VIEN");
+	NutBam hoaDon( doDai*2 , 0, doDai , chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "HOA DON");
+	NutBam doanhThu( doDai * 3, 0, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "DOANH THU");
 	vatTu.veNut(); 
 	nhanVien.veNut(); 
 	hoaDon.veNut(); 

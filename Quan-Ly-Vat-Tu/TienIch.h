@@ -2,6 +2,9 @@
 #include "autoLoad.h"
 using namespace std;
 
+// khai bao nguyen mau ham 
+ 
+
 struct Date {
 	int ngay;
 	int thang;
@@ -35,6 +38,10 @@ public:
 	}
 
 };
+
+
+
+
 
 
 
