@@ -15,36 +15,32 @@ int main(int argc, char *argv[])
  	VatTu vt3("VT07","vat tu 7","kg",100); 
  	VatTu vt4("VT01","vat tu 1","kg",100); 
  	VatTu vt5("VT08","vat tu 8","kg",100);
-	 // thuc hien insert vao 
-	// tao ra 1 cay 
+ 	VatTu vt6("VT03","vat tu 8","kg",100);
+ 	VatTu vt7("VT06","vat tu 8","kg",100);
+//	 // thuc hien insert vao 
+//	// tao ra 1 cay 
 	BstVatTu dsVatTu; 
-	dsVatTu.insert(vt1);
-	dsVatTu.insert(vt2); 
-	dsVatTu.insert(vt3); 
-	dsVatTu.insert(vt4); 
-	dsVatTu.insert(vt5);
+	dsVatTu.themVT(vt1);
+	dsVatTu.themVT(vt2); 
+	dsVatTu.themVT(vt3); 
+	dsVatTu.themVT(vt4); 
+	dsVatTu.themVT(vt5);
+	dsVatTu.themVT(vt6); 
+	dsVatTu.themVT(vt7); 
+	
+	
+	
 	dsVatTu.duyetCay(); 
 	
-	
-	// tim kiem 1 phan tu 
-	
-	//string s = "VT083343"; 
-//	string s1 = "VT094545"; 
-// string s2 = "VT12"
-// 
-	// neu nhu dem ra so sanh thi tk s1 se lon lon ( vi no la vt 09 ) 
-	//if (s1 > s) {
-	//	cout << "chinh xac"; 
-	//}
-	 
-	 
-	 // thu nghiem voi o Form nhap 
+	cout << "sau khi xoa di root goc : " << endl; 
+	dsVatTu.xoaVT("VT05");  
+	dsVatTu.duyetCay(); 
 
-	 // hien thi ra o form nhap 
+
 	//menuQuanLyVatTu(); 
 	 
 	 
-	// getch();   // haha nho su dung. 
+	// getch();   
 	system("pause"); 
 	
 	return 0;

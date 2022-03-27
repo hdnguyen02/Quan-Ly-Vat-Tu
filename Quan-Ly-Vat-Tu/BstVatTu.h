@@ -34,14 +34,7 @@ public:
 
 // struct ho tro chua 2 con tro ( 1 con tro tro vao vi tri node va 1 con tro tro vao vi tri phia truoc no
 // kieu du lieu dung de chua 2 con tro ( con tro phia truoc 1 node bst va 1 con tro bst. 
-struct pointerBstVT {
-	NodeVatTu* poiterNode; 
-	NodeVatTu* poiterPrevious; // vi tri tro phia truoc no 
-	pointerBstVT(NodeVatTu *Node,NodeVatTu *previous) {
-		this->poiterNode = Node; 
-		this->previous = previous; 
-	}
-}
+
 
 class BstVatTu {
 private:
@@ -49,7 +42,7 @@ private:
 public:
     BstVatTu() : root(NULL) {};
     ~BstVatTu(); 
-    void hoTroThem(NodeVatTu* root, const VatTu& info); 
+    void hoTroThemVT(NodeVatTu* root, const VatTu& info); 
     void themVT(const VatTu& info); 
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
@@ -57,23 +50,8 @@ public:
 	NodeVatTu* timKiemVT(const string& key);  // return ve NULL neu khong tim thay va vi tri cua no neu tim thay 
 	bool isNULL(); 
 	// xoa xong thi giai phong cai node do luon 
-	bool xoaVT(const string& key) {
-		NodeVatTu* nodeDelete = this->search(); // NULL neu khong tim thay gi. 
-		if (!nodeDelete) { // neu nhu khong tim key nay!
-			return false; 
-		}
-		// tiep tuc xu ly. 
-		// lay ra vi tri can xoa. 
-		// da lay ra duoc node can xoa
-		// kiem tra dieu kien 
-		// neu nhu node can xoa chi co 1 node con hoac khong co node con nao 
-		if (nodeDelete->pLeft == NULL && nodeDelete->pRight == NULL) {
-				
-		}
-		
-		
-		
-	}
+	bool xoaVT(const string& key); 
+	
 	
 	// tra ve true neu ham nay xoa thanh cong. và false neu key nay khong ton tai trong bstVT
 	
@@ -82,25 +60,127 @@ public:
 
 
 
+bool BstVatTu::xoaVT(const string& key) {
+		// di chuyen den vi tri node can xoa. 
+		NodeVatTu* nodeDelete = root; 
+		NodeVatTu* previousNodeDelete = NULL; // tro truoc vi tri node can xoa. 
+		while (nodeDelete != NULL && nodeDelete->info.maVT != key ) {
+			previousNodeDelete = nodeDelete; 
+			// kiem tra xem de co the di xuong 
+			if (key < nodeDelete->info.maVT) {
+				// duy chuyen phai de co the tim kiem 
+				nodeDelete = nodeDelete->pLeft; 
+			}
+			else {
+				nodeDelete = nodeDelete->pRight; 
+			}
+			
+		}
+		
+		// kiem tra xem co ton tai node do khong. 
+		if (nodeDelete == NULL) { // tuc la khong tim thay. 
+			return false; // xoa that bai vi khong co node nào co key nao. 
+		}
 
 
-void BstVatTu::insert(const VatTu& info) {
+	
+		
+		NodeVatTu* pTempDelete = nodeDelete;  
+		if (nodeDelete->pLeft == NULL && nodeDelete->pRight == NULL ) {
+				// truong hop nay la node la. 
+				delete nodeDelete; 
+		}
+		
+		else if (nodeDelete->pRight != NULL && nodeDelete->pLeft == NULL ) {
+				// kiem tra xem node can xoa co phai la root khac hay khong. 
+				if (previousNodeDelete == NULL) {
+					root = nodeDelete->pRight; 
+					// giai phong di node dau tien 
+					delete nodeDelete; 
+				}
+				// node can xoa co 1 child. va child do la node Right. 
+				// kiem tra xem node can xoa la node left hay node right cua node parent. 
+				else {
+					if (previousNodeDelete->pLeft == nodeDelete) {
+					// node dang can xoa la node left cua node parent. 
+					previousNodeDelete->pLeft = nodeDelete->pRight; 
+					}
+					else {
+						previousNodeDelete->pRight = nodeDelete->pRight; 
+					}
+					delete pTempDelete;
+				}
+			
+		}
+		else if (nodeDelete->pLeft != NULL && nodeDelete->pRight == NULL) {
+			if (previousNodeDelete == NULL) {
+					root = nodeDelete->pLeft; 
+					delete nodeDelete;
+				}
+			else {
+				if (previousNodeDelete->pLeft == nodeDelete) {
+				previousNodeDelete->pLeft = nodeDelete->pLeft; 
+				}
+				else {
+					previousNodeDelete->pRight = nodeDelete->pLeft; 
+				}
+				delete pTempDelete;
+				}
+			
+		}
+		else if (nodeDelete->pLeft!=NULL && nodeDelete->pRight != NULL) {
+			// truong hop cay con do co hai nut. 
+			// tim kiem node nho nhat phia ben phai cua node do 
+			NodeVatTu* parentNodeMin = NULL; // node phai truoc node Min ( node se ke vi node bi xoa )
+			NodeVatTu* nodeMin = nodeDelete->pRight; 
+			// tim thang nho nhat ( va thang do la node cuoi cung phia ben tay phai 
+			// xu dung vong lap 
+			while (nodeMin->pLeft != NULL) {
+				// chua phai node cuoi cung
+				parentNodeMin = nodeMin; 
+				nodeMin = nodeMin->pLeft;
+			}
+			
+			// sau khi tim ra duoc node min nhat 
+			if (parentNodeMin != NULL) {
+				parentNodeMin->pLeft = nodeDelete->pRight; 
+			}
+			else {
+				// truong hop : truong hop node the mang chinh la node trai cua node can xoa 
+				nodeDelete->pRight = nodeMin->pRight; 
+				// truong hop nay co nghia la : node parentNodeMin dang la NULL
+				// tuc la cai node can xoa chinh la cai node ben phia duoi no luon 
+				// luc nay ta chi can cho tk node dang can xoa tro den thang node phia ben 
+				// phai cua node hau de sau ( vi phia ben tay trai dang NULL -> nen moi dung vong lap 	
+			}
+			
+			// coppy noi dung cua node hau de sang node can xoa va xoa di cai node hau de 
+			// coppy info. 
+				nodeDelete->info = nodeMin->info; 
+			
+		}
+		
+		return true; 
+		
+	}
+
+void BstVatTu::themVT(const VatTu& info) {
     if (root == NULL) { 
         root = new NodeVatTu(info); 
     }
     else {
-        supportInsert(root, info); 
+        hoTroThemVT(root, info); 
     }
 }
 
 
-void BstVatTu::supportInsert(NodeVatTu* root,const VatTu& info) {
+void BstVatTu::hoTroThemVT(NodeVatTu* root,const VatTu& info) {
     if (info.maVT < root->info.maVT ) {
         if (root->pLeft == NULL) {
             root->pLeft = new NodeVatTu(info); 
         }
         else {
-            supportInsert(root->pLeft, info); 
+            hoTroThemVT(root->pLeft, info); 
         }
     }
     else {
@@ -108,7 +188,7 @@ void BstVatTu::supportInsert(NodeVatTu* root,const VatTu& info) {
             root->pRight = new NodeVatTu(info); 
         }
         else {
-            supportInsert(root->pRight, info);
+            hoTroThemVT(root->pRight, info);
         }
     }
 }
@@ -128,19 +208,19 @@ void BstVatTu::hoTroDuyetCay(NodeVatTu* root) {
 	cout << endl; 
 	hoTroDuyetCay(root->pRight); 
 }	
-void BstVatTu::deleteTree(NodeVatTu* root) {
+void BstVatTu::giaiPhong(NodeVatTu* root) {
 	if (root == NULL) {
 		return; 
 	}
-	deleteTree(root->pLeft); 
-	deleteTree(root->pRight); 
+	giaiPhong(root->pLeft); 
+	giaiPhong(root->pRight); 
 	cout << "delete Node : " << root->info.maVT << endl ; 
 	delete root; 
 }
 
 // viet ham hieu chinh vatTu ( nhap vao ma soVT de co the hieu chinh 
 
-NodeVatTu* BstVatTu::search(const string& key) {
+NodeVatTu* BstVatTu::timKiemVT(const string& key) {
 	NodeVatTu* temp = root;
 	// neu nhu moi voa ma temp == NULL => root nay rong => cha co node nay 
 	// hoac cai node nó bang => quy pham => cham duc => return ve chinh node nay. 
@@ -168,7 +248,7 @@ bool BstVatTu::isNULL() {
 
 BstVatTu::~BstVatTu() {
      
-     this->deleteTree(root); // giai phong di bo nho
+     this->giaiPhong(root); // giai phong di bo nho
     
     
 }
