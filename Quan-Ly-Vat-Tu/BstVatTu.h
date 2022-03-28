@@ -66,9 +66,7 @@ bool BstVatTu::xoaVT(const string& key) {
 		NodeVatTu* previousNodeDelete = NULL; // tro truoc vi tri node can xoa. 
 		while (nodeDelete != NULL && nodeDelete->info.maVT != key ) {
 			previousNodeDelete = nodeDelete; 
-			// kiem tra xem de co the di xuong 
 			if (key < nodeDelete->info.maVT) {
-				// duy chuyen phai de co the tim kiem 
 				nodeDelete = nodeDelete->pLeft; 
 			}
 			else {
@@ -77,60 +75,47 @@ bool BstVatTu::xoaVT(const string& key) {
 			
 		}
 		
-		// kiem tra xem co ton tai node do khong. 
-		if (nodeDelete == NULL) { // tuc la khong tim thay. 
-			return false; // xoa that bai vi khong co node nào co key nao. 
+		// truong hop can tim thay node de xoa hoac la 
+		if (nodeDelete == NULL) { 
+			return false; 
 		}
 
-
-	
-		
-		NodeVatTu* pTempDelete = nodeDelete;  
-		if (nodeDelete->pLeft == NULL && nodeDelete->pRight == NULL ) {
-				// truong hop nay la node la. 
-				delete nodeDelete; 
-		}
-		
-		else if (nodeDelete->pRight != NULL && nodeDelete->pLeft == NULL ) {
-				// kiem tra xem node can xoa co phai la root khac hay khong. 
-				if (previousNodeDelete == NULL) {
-					root = nodeDelete->pRight; 
-					// giai phong di node dau tien 
-					delete nodeDelete; 
-				}
-				// node can xoa co 1 child. va child do la node Right. 
-				// kiem tra xem node can xoa la node left hay node right cua node parent. 
-				else {
-					if (previousNodeDelete->pLeft == nodeDelete) {
-					// node dang can xoa la node left cua node parent. 
-					previousNodeDelete->pLeft = nodeDelete->pRight; 
-					}
-					else {
-						previousNodeDelete->pRight = nodeDelete->pRight; 
-					}
-					delete pTempDelete;
-				}
-			
-		}
-		else if (nodeDelete->pLeft != NULL && nodeDelete->pRight == NULL) {
-			if (previousNodeDelete == NULL) {
-					root = nodeDelete->pLeft; 
-					delete nodeDelete;
-				}
+		if (nodeDelete->pLeft == NULL || nodeDelete->pRight == NULL) {
+			// co the xay ra 2 truong Hop : 
+			// la node co 1 con hoac la node la
+			NodeVatTu* pTempDelete ; 
+			if (nodeDelete->pLeft == NULL) {
+				// truong hop cay co 1 con va node con do la node rigth
+				pTempDelete = nodeDelete->pRight; 
+				
+			}
 			else {
-				if (previousNodeDelete->pLeft == nodeDelete) {
-				previousNodeDelete->pLeft = nodeDelete->pLeft; 
-				}
-				else {
-					previousNodeDelete->pRight = nodeDelete->pLeft; 
-				}
-				delete pTempDelete;
-				}
+				pTempDelete = nodeDelete->pLeft; 
+			}
 			
+			if (previousNodeDelete == NULL) { // node can xoa la node NULL. 
+				// mat ke la node do co 2 la hay 1 la tá : 
+				// truong hop ca 2 deu NULL => thi tk root bi xoa di song nó NULL 
+				// xoa di node root
+				delete root; 
+				root = pTempDelete;
+				return true; 
+				// giai phong di node root truoc do. 
+			}
+			if (previousNodeDelete->pLeft == nodeDelete) {
+				// node can xoa nam o phia ben tay phai so voi node do./ 
+				previousNodeDelete->pLeft = pTempDelete; 
+				
+			}
+			else {
+				previousNodeDelete->pRight= pTempDelete; 
+			}
+			delete pTempDelete; // giai phong di node can xoa. 
 		}
 		else if (nodeDelete->pLeft!=NULL && nodeDelete->pRight != NULL) {
 			// truong hop cay con do co hai nut. 
 			// tim kiem node nho nhat phia ben phai cua node do 
+			cout <<endl << "truong hop xoa vao node nay" << endl; 
 			NodeVatTu* parentNodeMin = NULL; // node phai truoc node Min ( node se ke vi node bi xoa )
 			NodeVatTu* nodeMin = nodeDelete->pRight; 
 			// tim thang nho nhat ( va thang do la node cuoi cung phia ben tay phai 
@@ -141,9 +126,9 @@ bool BstVatTu::xoaVT(const string& key) {
 				nodeMin = nodeMin->pLeft;
 			}
 			
-			// sau khi tim ra duoc node min nhat 
+			// sau khi tim ra duoc node min nhat phia ben tay phai cua node can xoa. 
 			if (parentNodeMin != NULL) {
-				parentNodeMin->pLeft = nodeDelete->pRight; 
+				parentNodeMin->pLeft = nodeMin->pRight; 
 			}
 			else {
 				// truong hop : truong hop node the mang chinh la node trai cua node can xoa 
@@ -157,7 +142,8 @@ bool BstVatTu::xoaVT(const string& key) {
 			// coppy noi dung cua node hau de sang node can xoa va xoa di cai node hau de 
 			// coppy info. 
 				nodeDelete->info = nodeMin->info; 
-			
+			// xoa di nodeMin 
+			delete nodeMin; 
 		}
 		
 		return true; 
