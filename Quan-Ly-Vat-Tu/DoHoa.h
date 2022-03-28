@@ -16,9 +16,9 @@ using namespace std;
 #define DODAIMANHINH 1536
 #define DORONGMANHINH 864
 #define BACKGROUP 7 // mau xam
-#define COLOR_MENU_CAP1 1   // màu LIGHTBLUE
+#define COLOR_MENU_CAP1 2 // màu LIGHTBLUE
 #define COLOR_HIGHT_LIGHT 8    // mau LIGHTMAGENTA 
-#define COLOR_TEXT 3
+#define COLOR_TEXT 10
 #define COLOR_BODER_INPUT 2
 
 
@@ -36,7 +36,9 @@ using namespace std;
 
 
 // mau cho cac nut con 
-#define COLOR_BTN_SUB 2  // mau cua cac nut con 
+#define COLOR_BTN_SUB 6  // mau cua cac nut con 
+#define COLOR_TEXT_BTN_SUB 10
+#define COLOR_HIGHT_BTN_SUB 8
 
 
 
@@ -135,7 +137,7 @@ struct NutBam {
 
 // ====================================STRUCT O NHAP===============================================
 struct ONhap {
-	int x,y, w, h; 
+	int x,y, w, h,slKiTu; // so luong ki tu duoc nhap. 
 	string boNhoDem; 
 	string goiY; // goi cho nguoi dung nen nhap nhung gi. 
 	int loaiNhap; // quy dinh nhap duoc nhap nhung gi 
@@ -150,7 +152,7 @@ struct ONhap {
 	
  
 	
-	ONhap(int x,int y,int w,int h,int widthTitle,string tieuDe) { 
+	ONhap(int x,int y,int w,int h,int widthTitle,string tieuDe,int sl,string goiY) { 
 		this->x= x; 
 		this->y = y; 
 		this->w = w; 
@@ -159,13 +161,15 @@ struct ONhap {
 		this->widthTitle = widthTitle;  
 		this->duocChon = false; // lan dau tao ra nen chua duoc nhap. 
 		this->boNhoDem = ""; 
+		this->slKiTu = sl;  // so luong ki tu duoc nhap. 
+		
 	}
 	// viet 1 phuong thuc de cho nguoi dung co the cho nhap vao 
 	
 	void veONhap() {
 		// ve ra cai boder 
 		
-		NutBam boxTieuDe(x,y,widthTitle,h,2,3,4,tieuDe); 
+		NutBam boxTieuDe(x,y,widthTitle,h,2,3,7,tieuDe); 
 		boxTieuDe.veNut(); 		
 		setfillstyle(SOLID_FILL,COLOR_BACKGROUP_INPUT); 
 		bar(x + widthTitle,y, x+ widthTitle + w , y+h);  
@@ -213,7 +217,7 @@ struct ONhap {
 	// ham chi nhan gia tri. 
 	
 	void NhapVao(bool(*loaiKiTu)(char)) {
-		// this->hienThiBoder(); 
+		this->hienThiBoder(); 
 		int the_end = 0;
 		char c; 
 		bool kiemTraBackSpace = false; 
@@ -234,7 +238,7 @@ struct ONhap {
 				the_end = 1;  
 				this->xoaNoiDungONhap();
 				this->inNoiDung(); 
-				// this->tatHienThiBoder(); 
+				this->tatHienThiBoder(); 
 				
 			}
 			else if (c == BACK_SPACE && !boNhoDem.empty() ) {
@@ -325,48 +329,118 @@ void hienThiTinhNangHoaDon() {
 
 
 // ====================================HIEN THI INPUT VATTU==============================================
-void hienThiInputVatTu() {
+void hienThiInputVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam& hieuChinhVT,NutBam& inDSVT) {
 	
 	// truoc tien xoa man hinh
 	// xoa het man hinh di. 
 	// xoa het man hinh di. 
-	const int chieuDaiBox = 500;
+	const int chieuDaiBox = 700;
 	const int mxTieuDe = (DODAIMANHINH / 2 ) - (chieuDaiBox/2);
-	const int cachLeTrenTieuDe = 250;
+	const int cachLeTrenTieuDe = 200;
 	const int chieuCaoTieuDe = 40; 
-	NutBam tieuDe(mxTieuDe,cachLeTrenTieuDe,chieuDaiBox,chieuCaoTieuDe,2,3,4,"NHAP THONG TIN VAT TU");
+	NutBam tieuDe(mxTieuDe,cachLeTrenTieuDe,chieuDaiBox,chieuCaoTieuDe,8,9,10,"NHAP THONG TIN VAT TU");
 	
 	
 	// ==========BIEN O VUONG===========
-	const int chieuCaoBox = 300; 
+	const int chieuCaoBox = 350; 
 	const int cachLeTrenBox = cachLeTrenTieuDe + chieuCaoTieuDe + 5; 
 	NutBam box(mxTieuDe,cachLeTrenBox,chieuDaiBox,chieuCaoBox,15,3,4,""); // ve ra 1 cai hop trong
 	  
 	
-	// ============BIEN O NHAP============
-	const int chieuDaiInput = chieuDaiBox - 40;  
+	// ============BIEN O NHAP===========
+	const int chieuDaiTieuDe = 150; 
+	const int chieuDaiInput =  chieuDaiBox - chieuDaiTieuDe - 42; 
+	const int cachLeInput = mxTieuDe + 20; 
+	const int cachLeTrenInput = cachLeTrenBox + 10; 
 	const int chieuCaoInput = 40; 
-	const int canLeInput = mxTieuDe + 20; 
 	
-	//ONhap nhapVT(canLeInput,canLeONhap + chieuCaoInput,chieuDaiInput,chieuCaoInput,"");   // x y w h tieuDe
-	 
-	//ONhap hieuChinhVT(canLeInput,canLeONhap + chieuCaoInput + 45,chieuDaiInput,chieuCaoInput,"");
+	ONhap nhapMaVT(cachLeInput,cachLeTrenInput,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ma",10);
+	ONhap nhapTenVT(cachLeInput,cachLeTrenInput  + chieuCaoInput+ 32,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ten",10);
 	
-	//nhapVT.veONhap(); 
-	//hieuChinhVT.veONhap(); 
+	ONhap nhapDVT(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*2,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"don vi tinh",10); 
+	ONhap nhapSLTon(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*3,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"so luong ton",10); 
+
+	// thiet ke them 1 btn nhap vao 
+	// ve 2 nut -> 1 nut nop va nut lam moi 
+	const int chieuDaiNutBam = 100; 
+
+	NutBam lamMoi(cachLeInput,cachLeTrenInput+(chieuCaoInput+ 32)*4,chieuDaiNutBam,chieuCaoInput,3,4,8,"lam moi");
+	NutBam luu(cachLeInput + 357 + 200,cachLeTrenInput+(chieuCaoInput+ 32)*4,chieuDaiNutBam,chieuCaoInput,3,4,8,"luu");
 	
 	
-	// ve ra 
 	tieuDe.veNut(); 
 	box.veNut();
+	nhapMaVT.veONhap(); 
+	nhapTenVT.veONhap(); 
+	nhapDVT.veONhap();
+	nhapSLTon.veONhap(); 
+	lamMoi.veNut(); 
+	luu.veNut(); 
 	
+	
+	// bac su kien nguoi dung click 
+	while(true) {
+		if (ismouseclick(WM_LBUTTONDOWN)) {  
+			int mx = -1;
+			int my = -1; 
+			getmouseclick(WM_LBUTTONDOWN, mx, my);
+			// kiem tra bac su kien nguoi dung 
+			if (hoaDon.isMouseHover(mx,my)) {
+				// nguoi dung chon vao tab khac roi. 
+				// ket thuc khong chay nua
+				index = ID_HD; 
+				return; 
+			}
+			else if (nhanVien.isMouseHover(mx,my)) {
+				index = ID_NV; 
+				return; 
+			}
+			else if (doanhThu.isMouseHover(mx,my)) {
+				index = ID_DT; 
+				return; 
+			}
+			// bac dieu kien tiep tuc 
+			else if (hieuChinhVT.isMouseHover(mx,my)) {
+				index = ID_HIEUCHINH_VT; 
+				// khong thuc hien ham nua -> vi nguoi dung chon cai khac. 
+				return; 
+			}
+			else if (inDSVT.isMouseHover(mx,my)) {
+			 	index = ID_IN_VT; 
+			 	return; 
+			}
+			else {
+				// truong hop nguoi dung dang nhap vao menu hien hanh
+				// tien hanh kiem tra 
+				if (nhapMaVT.isMouseHover(mx,my)) {
+					// cho nguoi dung tien hanh nhap 
+					nhapMaVT.NhapVao(kiTuChu); 
+				}
+				else if (nhapTenVT.isMouseHover(mx,my)) {
+					nhapTenVT.NhapVao(kiTuChu); 
+				}
+				else if (nhapSLTon.isMouseHover(mx,my)) {
+					nhapSLTon.NhapVao(kiTuSo); 
+				}
+				else if (nhapDVT.isMouseHover(mx,my)) {
+					nhapDVT.NhapVao(kiTuSo); 
+				}
+				// truong hop nguoi dung nhap vao nut new hoac nut luu 
+				else if (luu.isMouseHover(mx,my)) {
+					cout << "luu thanh cong"; 
+				}
+			}
+	} 
+		delay(1); 
+	}
 	
 }
 
 
 // =================================HIEN THI TINH NANG VAT TU=========================================
 void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu) {
-	// xoa di man hinh phia duoi va ve lai toan bo 
+	// xoa di man hinh phia duoi va ve lai toan bo
+	index = -1;  
 	TienIchDoHoa::xoaManHinhTheoToaDo(0,42,DODAIMANHINH,DORONGMANHINH,BACKGROUP);  // xoa di nua man hinh ben duoi. 
 	bool kiemTra[3] = {false};
 	bool kiemTraVT[3] = {false};  
@@ -376,9 +450,9 @@ void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doa
 	const int chieuCaoVT = 35;
 	const int cachLeNgang = 15; 
 	const int cachLeTren = 53 ;
-	NutBam themVT(cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"THEM VAT TU");
-	NutBam hieuChinhVT(chieuDaiVT + cachLeNgang*2 ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"HIEU CHINH VAT TU");
-	NutBam inDSVT((chieuDaiVT + cachLeNgang )*2 + cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_LIGHT,COLOR_TEXT,"IN DANH SACH VAT TU"); 
+	NutBam themVT(cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"THEM VAT TU");
+	NutBam hieuChinhVT(chieuDaiVT + cachLeNgang*2 ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"HIEU CHINH VAT TU");
+	NutBam inDSVT((chieuDaiVT + cachLeNgang )*2 + cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"IN DANH SACH VAT TU"); 
 	themVT.veNut(); 
 	hieuChinhVT.veNut() ; 
 	inDSVT.veNut(); 
@@ -388,8 +462,24 @@ void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doa
 	int mx = -1; 
 	int my = -1; 
 	while (true) {
-		// kiem tra xem co click
-		// kiem tra neu co duy chuyen chuoc 
+	
+		if (index != -1) {
+			// xy ly khi nguoi dung vua moi chon. 
+			// neu nhu index nam trong vung tu 0 -> 3 thi ta khong nhan xu ly 
+			if (index >= 0 && index <= 3) {  // thuoc vung menu to. 
+				// khong xu ly 
+				return; // di ra ngoai xu ly. 
+			}
+			else {
+				// co the xu ly. vi cung cap menu 
+				if (index == ID_HIEUCHINH_VT) {
+					// thuc hien hieu chinh VT
+				}
+				else if (index == ID_IN_VT) {
+					// thuc hien in DSVT. 
+				}
+			}
+		}
 		if (ismouseclick(WM_MOUSEMOVE)) {
 			getmouseclick(WM_MOUSEMOVE, mx, my);  
 			nhanVien.kiemTraVeLai(mx,my,kiemTra[0]); 
@@ -422,7 +512,10 @@ void hienThiTinhNangVatTu(int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doa
 				// hien thi ra cai form nhap. 
 				themVT.duocTroVao = true; 
 				themVT.veNut();
-				hienThiInputVatTu() ; 
+				// truyen ca
+				// truyen them 3 nut phia ben ngoai. 
+				
+				hienThiInputVatTu(index,nhanVien,hoaDon,doanhThu,hieuChinhVT,inDSVT); 
 				
 			}
 			
@@ -512,7 +605,6 @@ void menuCha() {
 				doanhThu.duocTroVao = true;
 				doanhThu.veNut();
 			}
-
 		}
 		 delay(1);  
 	}
