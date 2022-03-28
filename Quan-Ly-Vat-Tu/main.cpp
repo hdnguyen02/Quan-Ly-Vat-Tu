@@ -19,20 +19,20 @@ int main(int argc, char *argv[])
  	VatTu vt7("VT06","vat tu 6","kg",100);
 	BstVatTu dsVatTu; 
 	dsVatTu.themVT(vt1);
-//	dsVatTu.themVT(vt2); 
-//	dsVatTu.themVT(vt3); 
-//	dsVatTu.themVT(vt4); 
-//	dsVatTu.themVT(vt5);
-//	dsVatTu.themVT(vt6); 
-//	dsVatTu.themVT(vt7); 
+	dsVatTu.themVT(vt2); 
+	dsVatTu.themVT(vt3); 
+	dsVatTu.themVT(vt4); 
+	dsVatTu.themVT(vt5);
+	dsVatTu.themVT(vt6); 
+	dsVatTu.themVT(vt7); 
+	dsVatTu.duyetCay(); 
+	cout << endl<< "chinh sua vat Tu: " << endl; 
+	
 
-// insert tk root 
 	
 	
+	
 
-	 
-	 
-	// getch();   
 	system("pause"); 
 	
 	return 0;
