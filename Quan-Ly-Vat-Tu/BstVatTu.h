@@ -59,6 +59,14 @@ public:
 	
 	// ham lay ra so luongVT 
 	int soLuongVT() ;
+	
+	// viet ham in danh sach vat tu tang dan theo ten vattu 
+	void inTangDan() {  // truyen vao cai ma ban muon in ra. 
+		// tao ra 1 mang voi so luong bang so luong co trong node 
+		int slNode = soLuongVT(); 
+		// khai bao ra mang con tro  
+		 
+	}
 };
 
 int BstVatTu::soLuongVT() {

@@ -67,7 +67,7 @@ bool kiTuChu(char c) {
 		}
 		return false;  	
 	}
-bool kiTuChuHoacSo(char &c) {
+bool kiTuChuHoacSo(char c) {
 		if (kiTuChu(c) || kiTuSo(c)) {
 			return true; 
 		}
