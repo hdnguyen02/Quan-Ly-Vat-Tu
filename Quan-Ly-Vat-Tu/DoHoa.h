@@ -59,6 +59,20 @@ class TienIchDoHoa {
 		setfillstyle(SOLID_FILL, colorBack);   
 		bar(x, y, x + w, y + h); 
 	}
+	static string floatToString(float f) {
+		stringstream ss; 
+		ss << f; 
+		string temp; 
+		ss >> temp; 
+		return temp; 
+	}
+	static string itnToString(int n) {
+		stringstream ss; 
+		ss << n; 
+		string temp; 
+		ss >> temp; 
+		return temp; 
+	}
 };  
 
 
@@ -401,19 +415,11 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 	const int cachLeTrenInput = cachLeTrenBox + 10; 
 	const int chieuCaoInput = 40; 
 	const int slktMaVT = 10; 
-	
-	
 	ONhap nhapMaVT(cachLeInput,cachLeTrenInput,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ma",10);
-	
 	ONhap nhapTenVT(cachLeInput,cachLeTrenInput  + chieuCaoInput+ 32,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ten",10);
-	
 	ONhap nhapDVT(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*2,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"don vi tinh",10); 
 	ONhap nhapSLTon(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*3,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"so luong ton",10); 
-
-	// thiet ke them 1 btn nhap vao 
-	// ve 2 nut -> 1 nut nop va nut lam moi 
 	const int chieuDaiNutBam = 100; 
-
 	NutBam lamMoi(cachLeInput,cachLeTrenInput+(chieuCaoInput+ 32)*4,chieuDaiNutBam,chieuCaoInput,3,4,8,"lam moi");
 	NutBam luu(cachLeInput + 357 + 200,cachLeTrenInput+(chieuCaoInput+ 32)*4,chieuDaiNutBam,chieuCaoInput,3,4,8,"luu");
 	
@@ -426,9 +432,6 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 	nhapSLTon.veONhap(); 
 	lamMoi.veNut(); 
 	luu.veNut(); 
-	
-	
-	// bac su kien nguoi dung click 
 	while(true) {
 		if (ismouseclick(WM_LBUTTONDOWN)) {  
 			int mx = -1;
@@ -507,48 +510,53 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 	
 }
 
+// in ra len bang 
+void inDanhSachLenDoHoa(NodeVatTu **arrVT,int indexPage,int soLuongItemPage,int soLuongNode) {	
+	const int canLeY = 170;  // cach oVuong 110 va cach tieuDe 40
+	const int canLeX = DODAIMANHINH/2 - 1200/2 + 100; 
+	const int donViO = 1200 / 5; 
+	setbkcolor(BACKGROUP); 
+	const int cachNhau = 30; 
+	string tempDVT; 
+	// thuc hien xoa cai cu truoc do dua vao toa do 
+	 
+	setcolor(0); 
+	for (int i = 0;i < soLuongItemPage;i++) {
+		if (i + indexPage*soLuongItemPage < soLuongNode  ) {
+		tempDVT = TienIchDoHoa::floatToString(arrVT[i + indexPage*soLuongItemPage]->getInfo().soLuongTon); 
+		outtextxy(canLeX,           canLeY + cachNhau*i,arrVT[i + indexPage*soLuongItemPage]->getInfo().maVT.c_str());
+		outtextxy(canLeX + donViO*1,canLeY + cachNhau*i,arrVT[i + indexPage*soLuongItemPage]->getInfo().ten.c_str());
+		outtextxy(canLeX + donViO*3,canLeY + cachNhau*i,arrVT[i + indexPage*soLuongItemPage]->getInfo().donVi.c_str());
+		outtextxy(canLeX + donViO*4,canLeY + cachNhau*i,tempDVT.c_str());
+		}	
+	}	
+}
+
 // ===============================HIEN THI DANH SACH VAT TU==========================================
-void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam&hoaDon,NutBam &doanhThu) { 
-	index = -1; // dang dung noi khac. 
+void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam& themVT,NutBam& chinhSuaVT) { 
+	index = -1; 
 	int soLuongNode = dsVatTu.soLuongVT();  
 	NodeVatTu** arrVT = new NodeVatTu*[soLuongNode]; 
 	dsVatTu.inTangDan(arrVT);   
-	// thuc hien xoa man hinh 
 	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
-
+	
 
 	const int daiBox = 1200; 
 	const int caoBox = 600; 
 	int toaDoXBox = DODAIMANHINH/2 - daiBox/2; 
-
-	int indexTrang = 1; // hien dang la trang so 1. 
-	// ===================== BAC SU KIEN =====================
-	while(true) {
-		
-		if (ismouseclick(WM_LBUTTONDOWN)) { 
-			int mx = -1;
-			int my = -1; 
-			getmouseclick(WM_LBUTTONDOWN, mx, my);
-			
-		
-		}
-		delay(1); 
-	}
-	
-	
-	int doDaiCoBan = daiBox / 5; 
-	
-	
+	int doDaiCoBan = daiBox/5; 
 	const int widthTieuDeMaVT = doDaiCoBan; 
 	const int widthHoTenVT = doDaiCoBan*2; 
 	const int widthDVT = doDaiCoBan; 
-	const int widthSLT = doDaiCoBan; 
+	const int widthSLT = doDaiCoBan;
+
+	 
 	NutBam tieuDeMaVT(toaDoXBox,110,widthTieuDeMaVT,40,6,7,10,"ma vt"); 
-	NutBam tieuDeTenVT(toaDoXBox + widthTieuDeMaVT + 2,110,widthHoTenVT,40,6,7,10,"ma vt"); 
-	NutBam tieuDeDVT(toaDoXBox+doDaiCoBan*3 + 4,110,widthDVT,40,6,7,10,"ma vt"); 
-	NutBam tieuDeSLT(toaDoXBox + doDaiCoBan*4 +6,110,widthSLT -6,40,6,7,10,"ma vt"); 
-	NutBam tienToi(toaDoXBox,caoBox + 120,150,50,2,3,4,"tien len"); 
-	NutBam luiLai(toaDoXBox + daiBox -150 ,caoBox + 120,150,50,2,3,4,"lui lai"); 
+	NutBam tieuDeTenVT(toaDoXBox + widthTieuDeMaVT + 2,110,widthHoTenVT,40,6,7,10,"ten vt"); 
+	NutBam tieuDeDVT(toaDoXBox+doDaiCoBan*3 + 4,110,widthDVT,40,6,7,10,"don vi tinh"); 
+	NutBam tieuDeSLT(toaDoXBox + doDaiCoBan*4 +6,110,widthSLT -6,40,6,7,10,"so luong ton"); 
+	NutBam luiLai(toaDoXBox                 ,caoBox + 120,80,40,4,6,10,"<<"); 
+	NutBam tienLen(toaDoXBox + daiBox -80   ,caoBox + 120,80,40,4,6,10,">>"); 
 	setcolor(1); 
 	line(toaDoXBox + widthTieuDeMaVT ,110,toaDoXBox + widthTieuDeMaVT ,caoBox +110); 
 	line(toaDoXBox+doDaiCoBan*3 + 2 ,110,toaDoXBox+doDaiCoBan*3 + 2 ,caoBox +110);
@@ -559,8 +567,82 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam&hoaDon
 	tieuDeTenVT.veNut();
 	tieuDeDVT.veNut();
 	tieuDeSLT.veNut();
-	tienToi.veNut(); 
+	tienLen.veNut(); 
 	luiLai.veNut();
+	
+	// ===================== BAC SU KIEN =====================
+	int indexTrang = 0; // trang dau tien la so 0
+	int soLuongItemPage = 2;  // hien tai la 2 phan tu tren 1 trang 
+	int toiDaIndex = soLuongNode / soLuongItemPage; 
+	inDanhSachLenDoHoa(arrVT,indexTrang,2,soLuongNode); 
+	string temp; 
+	string stringToiDaIndex = TienIchDoHoa::itnToString(toiDaIndex); 
+	indexTrang++; 
+	temp = TienIchDoHoa::itnToString(indexTrang) + "/" + stringToiDaIndex; 
+	outtextxy(DODAIMANHINH/2,caoBox + 120,temp.c_str()); 
+	indexTrang--; 
+	while(true) {
+		
+		if (ismouseclick(WM_LBUTTONDOWN)) { 
+			int mx = -1;
+			int my = -1; 
+			getmouseclick(WM_LBUTTONDOWN, mx, my);
+			
+			if (hoaDon.isMouseHover(mx,my)) {
+				index = ID_HD; 
+				return;
+			}
+			else if (nhanVien.isMouseHover(mx,my)) {
+				index = ID_NV; 
+				return; 
+			}
+			else if (doanhThu.isMouseHover(mx,my)) {
+				index = ID_DT; 
+				return; 
+			}
+			else if (themVT.isMouseHover(mx,my)) {
+				index = ID_THEM_VT; 
+				return; 
+			}
+			else if (chinhSuaVT.isMouseHover(mx,my)) {
+				index = ID_HIEUCHINH_VT; 
+				return; 
+			}
+			// tiep theo la lap 
+			else if (tienLen.isMouseHover(mx,my)) {
+				if (indexTrang < toiDaIndex-1) {
+					indexTrang++;  
+					inDanhSachLenDoHoa(arrVT,indexTrang,soLuongItemPage,soLuongNode); 
+					// hien thi so trang hien tai va so phan tu cua danh sach 
+					indexTrang++; 
+					temp = TienIchDoHoa::itnToString(indexTrang) + "/" + stringToiDaIndex; 
+					outtextxy(DODAIMANHINH/2,caoBox + 120,temp.c_str()); 
+					indexTrang--; 
+				}
+			}
+			else if (luiLai.isMouseHover(mx,my)) {
+				
+				if (indexTrang > 0) {
+					indexTrang--; 
+					inDanhSachLenDoHoa(arrVT,indexTrang,soLuongItemPage,soLuongNode); 
+					indexTrang++; 
+					temp = TienIchDoHoa::itnToString(indexTrang) + "/" + stringToiDaIndex;  
+					outtextxy(DODAIMANHINH/2,caoBox + 120,temp.c_str()); 
+					indexTrang--; 
+					
+				} 
+				
+			}
+		}
+		delay(1); 
+	}
+	
+	
+	
+	
+	
+	 
+	
 	
 	// tao ra 2 nut  
 	
@@ -608,7 +690,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 					// thuc hien hieu chinh VT
 				}
 				else if (index == ID_IN_VT) {
-					inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu);
+					inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT,hieuChinhVT);
 					
 				}
 			}
@@ -648,7 +730,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 				hienThiInputVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,hieuChinhVT,inDSVT); 
 			}
 			else if (inDSVT.isMouseHover(xclick,yclick)) {  // HIEN THI RA TINH NANG IN DANH SACH. 
-				inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu); 
+				inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT,hieuChinhVT); 
 			}
 		}
 
