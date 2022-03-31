@@ -1,7 +1,6 @@
-.*o
-.*layout
-.*exe
-*.exe
-*.layout
-*.layout
 Quan-Ly-Vat-Tu/Quan-Ly-Vat-Tu.exe
+*.exe
+*.o
+*.layout
+
+

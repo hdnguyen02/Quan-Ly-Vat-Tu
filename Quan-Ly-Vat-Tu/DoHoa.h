@@ -379,10 +379,7 @@ void hienThiTinhNangHoaDon() {
 
 // ====================================HIEN THI INPUT VATTU==============================================
 void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam& hieuChinhVT,NutBam& inDSVT) {
-	
-	// truoc tien xoa man hinh
-	// xoa het man hinh di. 
-	// xoa het man hinh di. 
+	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
 	
 	const int chieuDaiBox = 700;
 	const int mxTieuDe = (DODAIMANHINH / 2 ) - (chieuDaiBox/2);
@@ -513,17 +510,48 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 // ===============================HIEN THI DANH SACH VAT TU==========================================
 void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam&hoaDon,NutBam &doanhThu) {
 	// phan khai bao  
+	index = -1; // dang dung noi khac. 
 	int soLuongNode = dsVatTu.soLuongVT();  
 	NodeVatTu** arrVT = new NodeVatTu*[soLuongNode]; 
 	dsVatTu.inTangDan(arrVT);   
 	// thuc hien xoa man hinh 
 	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
 	
-	// sau do ve ra
+	// ===================== THUC HIEN VE ========================
+	// Y TUONG : VE RA 4 CAI NUT TIEU DE 
+	// ve ra oVuong nam giua 
+	
+	// ==================== BIEN KICH THUOC===================
+	const int daiBox = 1200; 
+	const int caoBox = 600; 
+	int toaDoXBox = DODAIMANHINH/2 - daiBox/2; 
 	
 	
-	// y tuong: xoa het man hinh truoc khi vao tinh nang nay 
 	
+	// tong cong chia ra 5 phan
+	// maVT 1 phan 
+	// ho ten 2 phan 
+	// soLuongTon 1 phan
+	int doDaiCoBan = daiBox / 5; 
+	
+	
+	const int widthTieuDeMaVT = doDaiCoBan; 
+	const int widthHoTenVT = doDaiCoBan*2; 
+	const int widthDVT = doDaiCoBan; 
+	const int widthSLT = doDaiCoBan; 
+	NutBam tieuDeMaVT(toaDoXBox,110,widthTieuDeMaVT,40,2,3,4,"ma vt"); 
+	NutBam tieuDeTenVT(toaDoXBox + widthTieuDeMaVT + 2,110,widthHoTenVT,40,2,3,4,"ma vt"); 
+	NutBam tieuDeDVT(toaDoXBox+doDaiCoBan*3 + 4,110,widthDVT,40,2,3,4,"ma vt"); 
+	NutBam tieuDeSLT(toaDoXBox + doDaiCoBan*4 +6,110,widthSLT -6,40,2,3,4,"ma vt"); 
+	
+	setcolor(1);
+	
+	OVuong ovVatTu(toaDoXBox,110,daiBox,caoBox,1); 
+	ovVatTu.veOVuong(); 
+	tieuDeMaVT.veNut();
+	tieuDeTenVT.veNut();
+	tieuDeDVT.veNut();
+	tieuDeSLT.veNut();
 	
 	delete [] arrVT; 
 }			
@@ -568,7 +596,8 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 					// thuc hien hieu chinh VT
 				}
 				else if (index == ID_IN_VT) {
-					// thuc hien in DSVT. 
+					inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu);
+					
 				}
 			}
 		}
@@ -604,9 +633,6 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 				// hien thi ra cai form nhap. 
 				themVT.duocTroVao = true; 
 				themVT.veNut();
-				// truyen ca
-				// truyen them 3 nut phia ben ngoai. 
-				
 				hienThiInputVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,hieuChinhVT,inDSVT); 
 			}
 			else if (inDSVT.isMouseHover(xclick,yclick)) {  // HIEN THI RA TINH NANG IN DANH SACH. 
