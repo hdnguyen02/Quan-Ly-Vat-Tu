@@ -383,6 +383,7 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 	// truoc tien xoa man hinh
 	// xoa het man hinh di. 
 	// xoa het man hinh di. 
+	
 	const int chieuDaiBox = 700;
 	const int mxTieuDe = (DODAIMANHINH / 2 ) - (chieuDaiBox/2);
 	const int cachLeTrenTieuDe = 200;
@@ -509,8 +510,27 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 	
 }
 
+// ===============================HIEN THI DANH SACH VAT TU==========================================
+void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam&hoaDon,NutBam &doanhThu) {
+	// phan khai bao  
+	int soLuongNode = dsVatTu.soLuongVT();  
+	NodeVatTu** arrVT = new NodeVatTu*[soLuongNode]; 
+	dsVatTu.inTangDan(arrVT);   
+	// thuc hien xoa man hinh 
+	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
+	
+	// sau do ve ra
+	
+	
+	// y tuong: xoa het man hinh truoc khi vao tinh nang nay 
+	
+	
+	delete [] arrVT; 
+}			
 
-// =================================HIEN THI TINH NANG VAT TU=========================================
+
+
+// ============HIEN THI TINH NANG VAT TU MOI ==============
 void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu) {
 	// xoa di man hinh phia duoi va ve lai toan bo
 	index = -1;  
@@ -529,7 +549,6 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 	themVT.veNut(); 
 	hieuChinhVT.veNut() ; 
 	inDSVT.veNut(); 
-	
 	
 	// xet vong lap. kiem tra xem 
 	int mx = -1; 
@@ -590,16 +609,15 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 				
 				hienThiInputVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,hieuChinhVT,inDSVT); 
 			}
+			else if (inDSVT.isMouseHover(xclick,yclick)) {  // HIEN THI RA TINH NANG IN DANH SACH. 
+				inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu); 
+			}
 		}
 
 	delay(1); 
 	
 }
 }
-
-
-
-
 
 
 
@@ -628,15 +646,11 @@ void menuCha(BstVatTu &dsVatTu) {
 		if (index != -1) {
 			// kiem tra cu the 
 			if (index == 0) {
-				// nguoi dung chon lai menu vatTu 
-				// dieu chinh index lai 
 				index = -1 ; 
 				hienThiTinhNangVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu); 
 			}
 			else if (index == 1) {
-				hienThiTinhNangHoaDon(); 
-				index = -1; 
-				
+			
 			}
 			// nhung cai sau. 
 		}
@@ -654,7 +668,7 @@ void menuCha(BstVatTu &dsVatTu) {
 			if (vatTu.isMouseHover(xclick, yclick)) {
 				vatTu.duocTroVao = true; 
 				vatTu.veNut(); 
-				  hienThiTinhNangVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu);  
+				hienThiTinhNangVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu);  
 			}
 			else if (hoaDon.isMouseHover(xclick, yclick)) {
 				hoaDon.duocTroVao = true;
@@ -678,7 +692,7 @@ void menuCha(BstVatTu &dsVatTu) {
 
 // =================================MENU NHAN THAM SO==============================================
 void menuQuanLyVatTu(BstVatTu &dsVatTu) {  
-	 setfillstyle(SOLID_FILL, BACKGROUP);  
+	setfillstyle(SOLID_FILL, BACKGROUP);  
 	bar(0, 0, 3000, 3000);
 	menuCha(dsVatTu); 
 	

@@ -18,6 +18,10 @@ void VatTu::inVatTu() {
 	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon; 
 }
 
+class BstVatTu;   // khai bao nguyen mau. 
+
+
+
 class NodeVatTu {
 private:
     VatTu info;
@@ -28,6 +32,14 @@ public:
     NodeVatTu(): pLeft(NULL), pRight(NULL) {};  
     NodeVatTu(const VatTu& info) : info(info.maVT, info.ten, info.donVi, info.soLuongTon),
         pLeft(NULL), pRight(NULL) {}
+   
+   
+   // khai bao ham ban : 
+   // ham inVT can truy cap vao trong nay 
+   VatTu getInfo() {
+   		// tra ve info cua 1 thang
+   		return this->info; 
+   }
    
 
 };
@@ -40,6 +52,7 @@ class BstVatTu {
 private:
     NodeVatTu* root;
     int soLuong; // chua so luong node co trong 1 cay. 
+    VatTu *arrNode[300];  // xu dung luu tru dia chi cac node => sap xep cau b.
     
 public:
     BstVatTu() : root(NULL), soLuong(0) {};
@@ -61,12 +74,35 @@ public:
 	int soLuongVT() ;
 	
 	// viet ham in danh sach vat tu tang dan theo ten vattu 
-	void inTangDan() {  // truyen vao cai ma ban muon in ra. 
-		// tao ra 1 mang voi so luong bang so luong co trong node 
-		int slNode = soLuongVT(); 
-		// khai bao ra mang con tro  
+	void inTangDan(NodeVatTu** arrVT) {  // truyen vao cai ma ban muon in ra. 
+		int index = 0; 	
+		int soLuongVT = this->soLuongVT(); 
+		this->BstVatTuToArray(arrVT,index,root);   // bien doi cay sang mang/
+		for (int i = 0; i < soLuongVT - 1;i++) {
+			for(int j = i + 1;j < soLuongVT;j++) {
+				if (arrVT[i]->info.ten > arrVT[j]->info.ten) {
+					NodeVatTu* temp = arrVT[i];
+					arrVT[i] = arrVT[j]; 
+					arrVT[j] = temp;  		
+				}
+			}
+		}
+
+		// sau ham nay => ta da co duoc 1 mang da sap xep. 	 
 		 
 	}
+	
+	void BstVatTuToArray(NodeVatTu **arrVT,int &index,NodeVatTu* root) { 
+	
+	//  kiem tra xem khi nao tro den NULL thi dung 
+		if (root != NULL) {
+			BstVatTuToArray(arrVT,index,root->pLeft); 
+			arrVT[index++] = root; // gan gia tri node qua 
+			BstVatTuToArray(arrVT,index,root->pRight); 
+		}
+		// de quy qua no sau do gan tat ca gia tri con tro vao 
+		
+	} 
 };
 
 int BstVatTu::soLuongVT() {
@@ -134,7 +170,6 @@ bool BstVatTu::xoaVT(const string& key) {
 			if (previousNodeDelete->pLeft == nodeDelete) {
 				// node can xoa nam o phia ben tay phai so voi node do./ 
 				previousNodeDelete->pLeft = pTempDelete; 
-				
 			}
 			else {
 				previousNodeDelete->pRight= pTempDelete; 
