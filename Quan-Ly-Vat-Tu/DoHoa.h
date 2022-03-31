@@ -508,30 +508,34 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 }
 
 // ===============================HIEN THI DANH SACH VAT TU==========================================
-void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam&hoaDon,NutBam &doanhThu) {
-	// phan khai bao  
+void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam&hoaDon,NutBam &doanhThu) { 
 	index = -1; // dang dung noi khac. 
 	int soLuongNode = dsVatTu.soLuongVT();  
 	NodeVatTu** arrVT = new NodeVatTu*[soLuongNode]; 
 	dsVatTu.inTangDan(arrVT);   
 	// thuc hien xoa man hinh 
 	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
-	
-	// ===================== THUC HIEN VE ========================
-	// Y TUONG : VE RA 4 CAI NUT TIEU DE 
-	// ve ra oVuong nam giua 
-	
-	// ==================== BIEN KICH THUOC===================
+
+
 	const int daiBox = 1200; 
 	const int caoBox = 600; 
 	int toaDoXBox = DODAIMANHINH/2 - daiBox/2; 
+
+	int indexTrang = 1; // hien dang la trang so 1. 
+	// ===================== BAC SU KIEN =====================
+	while(true) {
+		
+		if (ismouseclick(WM_LBUTTONDOWN)) { 
+			int mx = -1;
+			int my = -1; 
+			getmouseclick(WM_LBUTTONDOWN, mx, my);
+			
+		
+		}
+		delay(1); 
+	}
 	
 	
-	
-	// tong cong chia ra 5 phan
-	// maVT 1 phan 
-	// ho ten 2 phan 
-	// soLuongTon 1 phan
 	int doDaiCoBan = daiBox / 5; 
 	
 	
@@ -539,19 +543,27 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam&hoaDon
 	const int widthHoTenVT = doDaiCoBan*2; 
 	const int widthDVT = doDaiCoBan; 
 	const int widthSLT = doDaiCoBan; 
-	NutBam tieuDeMaVT(toaDoXBox,110,widthTieuDeMaVT,40,2,3,4,"ma vt"); 
-	NutBam tieuDeTenVT(toaDoXBox + widthTieuDeMaVT + 2,110,widthHoTenVT,40,2,3,4,"ma vt"); 
-	NutBam tieuDeDVT(toaDoXBox+doDaiCoBan*3 + 4,110,widthDVT,40,2,3,4,"ma vt"); 
-	NutBam tieuDeSLT(toaDoXBox + doDaiCoBan*4 +6,110,widthSLT -6,40,2,3,4,"ma vt"); 
-	
-	setcolor(1);
-	
+	NutBam tieuDeMaVT(toaDoXBox,110,widthTieuDeMaVT,40,6,7,10,"ma vt"); 
+	NutBam tieuDeTenVT(toaDoXBox + widthTieuDeMaVT + 2,110,widthHoTenVT,40,6,7,10,"ma vt"); 
+	NutBam tieuDeDVT(toaDoXBox+doDaiCoBan*3 + 4,110,widthDVT,40,6,7,10,"ma vt"); 
+	NutBam tieuDeSLT(toaDoXBox + doDaiCoBan*4 +6,110,widthSLT -6,40,6,7,10,"ma vt"); 
+	NutBam tienToi(toaDoXBox,caoBox + 120,150,50,2,3,4,"tien len"); 
+	NutBam luiLai(toaDoXBox + daiBox -150 ,caoBox + 120,150,50,2,3,4,"lui lai"); 
+	setcolor(1); 
+	line(toaDoXBox + widthTieuDeMaVT ,110,toaDoXBox + widthTieuDeMaVT ,caoBox +110); 
+	line(toaDoXBox+doDaiCoBan*3 + 2 ,110,toaDoXBox+doDaiCoBan*3 + 2 ,caoBox +110);
+	line(toaDoXBox + doDaiCoBan*4 +4,110,toaDoXBox + doDaiCoBan*4 +4 ,caoBox +110);	
 	OVuong ovVatTu(toaDoXBox,110,daiBox,caoBox,1); 
 	ovVatTu.veOVuong(); 
 	tieuDeMaVT.veNut();
 	tieuDeTenVT.veNut();
 	tieuDeDVT.veNut();
 	tieuDeSLT.veNut();
+	tienToi.veNut(); 
+	luiLai.veNut();
+	
+	// tao ra 2 nut  
+	
 	
 	delete [] arrVT; 
 }			
@@ -645,8 +657,6 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 }
 }
 
-
-
 // ===================================MENU ROOT=========================================================
 void menuCha(BstVatTu &dsVatTu) {  
 	int index = -1;  
@@ -663,10 +673,7 @@ void menuCha(BstVatTu &dsVatTu) {
 	bool kiemTra[4] = { false }; 
 	int mx = -1;  
 	int my = -1;
-
-	// truoc khi thuc hien vong lap. index hien tai dang o dau 
-	
-	
+	// truoc khi thuc hien vong lap. index hien tai dang o dau 	
 	while (true) {
 		// kiem tra xem lan lap truoc nguoi dung co nhap chon vao cho khac hay khong 
 		if (index != -1) {
@@ -678,7 +685,6 @@ void menuCha(BstVatTu &dsVatTu) {
 			else if (index == 1) {
 			
 			}
-			// nhung cai sau. 
 		}
 		if (ismouseclick(WM_MOUSEMOVE)) {  // duy chuyen chuoc. 
 			getmouseclick(WM_MOUSEMOVE, mx, my);  
@@ -711,9 +717,7 @@ void menuCha(BstVatTu &dsVatTu) {
 			}
 		}
 		 delay(1);  
-	}
-
-	
+	}	
 }
 
 // =================================MENU NHAN THAM SO==============================================
@@ -721,10 +725,6 @@ void menuQuanLyVatTu(BstVatTu &dsVatTu) {
 	setfillstyle(SOLID_FILL, BACKGROUP);  
 	bar(0, 0, 3000, 3000);
 	menuCha(dsVatTu); 
-	
-	
-	
-
 }
 
 

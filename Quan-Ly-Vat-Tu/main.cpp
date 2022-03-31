@@ -26,5 +26,10 @@ int main(int argc, char *argv[])
 	StartBGI start; 
 	menuQuanLyVatTu(dsVatTu);
 	
+
+	
+   	
+   	
+	
 	return 0;
 }

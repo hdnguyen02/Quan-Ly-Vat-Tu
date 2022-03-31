@@ -77,7 +77,9 @@ bool kiTuChuHoacSo(char c) {
 	
 
 
-	
+// viet kieu du lieu ve duong thang 
+
+
 
 
 
