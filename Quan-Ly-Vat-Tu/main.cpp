@@ -1,12 +1,10 @@
 using namespace std;
 #include "autoLoad.h" 
 
-
-
 int main(int argc, char *argv[])
 {
 	
-	BstVatTu dsVatTu;  // truyen vao ben trong do hoa.
+	BstVatTu dsVatTu;  
 	VatTu vt1("VT05","ho duc nguyen","kg",100); 
 	VatTu vt2("VT02","vat tu 2","kg",100); 
  	VatTu vt3("VT07","vat tu 3","kg",100); 
@@ -29,14 +27,8 @@ int main(int argc, char *argv[])
 	dsVatTu.themVT(vt9); 
 	dsVatTu.themVT(vt10); 
 	
-	
 	StartBGI start; 
 	menuQuanLyVatTu(dsVatTu);
-	
 
-	
-   	
-   	
-	
 	return 0;
 }

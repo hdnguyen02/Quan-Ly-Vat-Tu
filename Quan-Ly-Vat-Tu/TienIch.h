@@ -2,9 +2,6 @@
 #include "autoLoad.h"
 using namespace std;
 
-// khai bao nguyen mau ham 
- 
-
 struct Date {
 	int ngay;
 	int thang;
@@ -48,7 +45,7 @@ bool kiTuChuHoa(char c) {
 			}
 			return false;   
 		}
-	bool kiTuChuThuong(char c) {
+bool kiTuChuThuong(char c) {
 		if (c >= 97 && c <=122) {
 			return true; 
 		}
@@ -75,9 +72,6 @@ bool kiTuChuHoacSo(char c) {
 }
 
 	
-
-
-// viet kieu du lieu ve duong thang 
 
 
 

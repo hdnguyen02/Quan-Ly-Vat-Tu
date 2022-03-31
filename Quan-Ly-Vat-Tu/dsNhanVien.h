@@ -2,7 +2,7 @@
 #include "autoLoad.h"
 using namespace std;
 
-const int NHANVIENTOIDA = 500;  // n 
+const int NHANVIENTOIDA = 500; 
 
 
 struct nhanVien {
@@ -19,7 +19,7 @@ struct nhanVien {
 class dsNhanVien {
 private:
 	int sl;  // so luong thuc te. 
-    nhanVien *nv[NHANVIENTOIDA];  // 
+    nhanVien *nv[NHANVIENTOIDA];  
 public:
 
 

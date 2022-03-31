@@ -22,7 +22,7 @@ public:
 
 
 
-// danh sách liên k?t don 
+
 
 class ListHoaDon {
 private: 

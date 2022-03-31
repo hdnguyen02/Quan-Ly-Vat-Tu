@@ -5,7 +5,7 @@ using namespace std;
 struct CThoaDon {
     string maVT;   
     float soLuong;
-    float donGia; // sai => so thuc 
+    float donGia; 
     float VAT;  // 10% 0,1 
     // constructor 
     CThoaDon(string maVT, float soLuong, float donGia, float VAT) :
