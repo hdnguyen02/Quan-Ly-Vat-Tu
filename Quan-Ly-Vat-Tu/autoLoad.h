@@ -9,6 +9,5 @@
 #include<winbgim.h>
 #include "BstVatTu.h"
 #include <sstream>
-#include <algorithm> // swap 
-
+#include <fstream>
 

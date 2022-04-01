@@ -1,6 +1,6 @@
 #pragma once
 #include "autoload.h"
-
+#include "DoHoa.h"
 using namespace std;
 struct VatTu {
     string maVT;    
@@ -29,7 +29,10 @@ public:
     NodeVatTu(): pLeft(NULL), pRight(NULL) {};  
     NodeVatTu(const VatTu& info) : info(info.maVT, info.ten, info.donVi, info.soLuongTon),
         pLeft(NULL), pRight(NULL) {}
-   
+   VatTu getInfo() {
+   		// tra ve info cua 1 thang
+   		return this->info; 
+   }
 
 };
 
@@ -64,16 +67,33 @@ public:
 	
 	// ham lay ra so luongVT 
 	int soLuongVT() ;
+	void BstVatTuToArray(NodeVatTu **arrVT,int &index,NodeVatTu* root) { 
 	
+	//  kiem tra xem khi nao tro den NULL thi dung 
+		if (root != NULL) {
+			BstVatTuToArray(arrVT,index,root->pLeft); 
+			arrVT[index++] = root; // gan gia tri node qua 
+			BstVatTuToArray(arrVT,index,root->pRight); 
+		}
+		// de quy qua no sau do gan tat ca gia tri con tro vao 
+		
+	} 
 	// viet ham in danh sach vat tu tang dan theo ten vattu 
-	void inTangDan() {  // truyen vao cai ma ban muon in ra. 
-		// tao ra 1 mang voi so luong bang so luong co trong node 
-		int slNode = soLuongVT(); 
-		// khai bao ra mang con tro  
-		 
+	void inTangDan(NodeVatTu** arrVT) {  // truyen vao cai ma ban muon in ra. 
+		int index = 0; 	
+		int soLuongVT = this->soLuongVT(); 
+		this->BstVatTuToArray(arrVT,index,root);   // bien doi cay sang mang/
+		for (int i = 0; i < soLuongVT - 1;i++) {
+			for(int j = i + 1;j < soLuongVT;j++) {
+				if (arrVT[i]->info.ten > arrVT[j]->info.ten) {
+					NodeVatTu* temp = arrVT[i];
+					arrVT[i] = arrVT[j]; 
+					arrVT[j] = temp;  		
+				}
+			}
+		}
 	}
 };
-
 int BstVatTu::soLuongVT() {
 		return this->soLuong; 
 	}
@@ -291,8 +311,8 @@ void BstVatTu::saveVatTu(int &soLuongVT)
 	if(root!=NULL)
 	{
 		ofstream fileOut;
-		fileOut.open("data/MaterialsInfo.txt",ios::out|ios::app);
-		fileOut <<soLuongVT;
+		fileOut.open("data/vatTu.txt",ios::out|ios::app);
+		fileOut <<soLuongVT<<endl;
 		saveVatTuSP(root,fileOut);
 		fileOut.close();
 	}
@@ -302,15 +322,19 @@ void BstVatTu::loadVatTu(int &soLuongVT)
 	if(root!=NULL)
 	{
 		ifstream fileIn;
-		fileIn.open("data/MaterialsInfo.txt",ios::in|ios::app);
+		fileIn.open("data/vatTu.txt",ios::in|ios::app);
 		fileIn>>soLuongVT;
 		for(int i=0;i<soLuongVT;i++)
 		{
 			VatTu tmp;
-			fileIn.getline(&tmp.maVT[0],sizeof(tmp.maVT));
-			fileIn.getline(&tmp.ten[0],sizeof(tmp.ten));
-			fileIn.getline(&tmp.donVi[0],sizeof(tmp.donVi));
-			fileIn>>tmp.soLuongTon;
+			fileIn.getline((char*)(tmp.maVT.c_str()),sizeof(tmp.maVT));
+			fileIn.getline((char*)(tmp.ten.c_str()),sizeof(tmp.ten));
+			fileIn.getline((char*)(tmp.donVi.c_str()),sizeof(tmp.donVi));
+			stringstream ss;
+			char arr[100];
+			ss<<tmp.soLuongTon;
+			ss>>arr;
+			fileIn.getline(arr,sizeof(arr));
 			this->themVT(tmp);
 		}
 		fileIn.close();	

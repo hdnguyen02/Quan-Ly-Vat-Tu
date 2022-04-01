@@ -90,6 +90,25 @@ struct Dates
 		return false;
 	}
 };
+ struct Date {
+	int ngay;
+	int thang;
+	int nam;
+	Date(int ngay, int thang, int nam) {
+		this->ngay = ngay; 
+		this->thang = thang; 
+		this->nam = nam; 
+	}
+		
+	
+	Date() {
+		this->ngay = 0; 
+		this->thang = 0; 
+		this->nam = 0; 
+	}
+
+	
+};
 
 class StartBGI {
 public:

@@ -10,7 +10,7 @@ struct NhanVien {
     string ho;
     string ten;
     int phai;   // 0. nam 1. nu 
-
+};
 //    NhanVien()
 //	{
 //		id = '\0';

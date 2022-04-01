@@ -187,11 +187,11 @@ struct ONhap {
 			int text_h; 
 			int toaDoTextY;
 			settextstyle(1, 0, 2);
-			text_h = textheight(boNhoDem.c_str());
+			text_h = textheight(&boNhoDem[0]);
 			toaDoTextY = y + (h - text_h) / 2;
 			setbkcolor(COLOR_BACKGROUP_INPUT);  // chung mau voi cai ma no ve
 			setcolor(COLOR_TEXT_INPUT); 
-			outtextxy (x + CACH_LE_O_NHAP + widthTitle,toaDoTextY, boNhoDem.c_str());
+			outtextxy (x + CACH_LE_O_NHAP + widthTitle,toaDoTextY, &boNhoDem[0]);
 	}
 	
 	// viet 1 hàm tat hien thi boder 
@@ -256,7 +256,7 @@ struct ONhap {
 				string str = ss.str();
 				string temp = "toi da " + str; 
 				settextstyle(TRIPLEX_FONT, HORIZ_DIR, 1);
-				outtextxy(x,y + h + 3,temp.c_str()); 
+				outtextxy(x,y + h + 3,&temp[0]); 
 			}
 			else if (!loaiKiTu(c)) {
 				// in ra ngay phia ben duoi dong chu không thoa 
@@ -264,7 +264,7 @@ struct ONhap {
 				this->xoaGoiY();
 				setcolor(4); 
 				settextstyle(TRIPLEX_FONT, HORIZ_DIR, 1);
-				outtextxy(x,y + h + 3,goiY.c_str()); 
+				outtextxy(x,y + h + 3,(char*) goiY.c_str()); 
 				
 			}					
 		} while (!the_end);
@@ -462,10 +462,10 @@ void inDanhSachLenDoHoa(NodeVatTu **arrVT,int indexPage,int soLuongItemPage,int 
 	for (int i = 0;i < soLuongItemPage;i++) {
 		if (i + indexPage*soLuongItemPage < soLuongNode  ) {
 		tempDVT = TienIchDoHoa::floatToString(arrVT[i + indexPage*soLuongItemPage]->getInfo().soLuongTon); 
-		outtextxy(canLeX,           canLeY + cachNhau*i,arrVT[i + indexPage*soLuongItemPage]->getInfo().maVT.c_str());
-		outtextxy(canLeX + donViO*1,canLeY + cachNhau*i,arrVT[i + indexPage*soLuongItemPage]->getInfo().ten.c_str());
-		outtextxy(canLeX + donViO*3,canLeY + cachNhau*i,arrVT[i + indexPage*soLuongItemPage]->getInfo().donVi.c_str());
-		outtextxy(canLeX + donViO*4,canLeY + cachNhau*i,tempDVT.c_str());
+		outtextxy(canLeX,           canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo().maVT.c_str()));
+		outtextxy(canLeX + donViO*1,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo().ten.c_str()));
+		outtextxy(canLeX + donViO*3,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo().donVi.c_str()));
+		outtextxy(canLeX + donViO*4,canLeY + cachNhau*i,(char*)(tempDVT.c_str()));
 		}	
 	}	
 }
@@ -517,7 +517,7 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDo
 	string stringToiDaIndex = TienIchDoHoa::itnToString(toiDaIndex); 
 	indexTrang++; 
 	temp = TienIchDoHoa::itnToString(indexTrang) + "/" + stringToiDaIndex; 
-	outtextxy(DODAIMANHINH/2,caoBox + 120,temp.c_str()); 
+	outtextxy(DODAIMANHINH/2,caoBox + 120,(char*)(temp.c_str())); 
 	indexTrang--; 
 	while(true) {
 		
@@ -554,7 +554,7 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDo
 					// hien thi so trang hien tai va so phan tu cua danh sach 
 					indexTrang++; 
 					temp = TienIchDoHoa::itnToString(indexTrang) + "/" + stringToiDaIndex; 
-					outtextxy(DODAIMANHINH/2,caoBox + 120,temp.c_str()); 
+					outtextxy(DODAIMANHINH/2,caoBox + 120,(char*)(temp.c_str())); 
 					indexTrang--; 
 				}
 			}
@@ -565,7 +565,7 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDo
 					inDanhSachLenDoHoa(arrVT,indexTrang,soLuongItemPage,soLuongNode); 
 					indexTrang++; 
 					temp = TienIchDoHoa::itnToString(indexTrang) + "/" + stringToiDaIndex;  
-					outtextxy(DODAIMANHINH/2,caoBox + 120,temp.c_str()); 
+					outtextxy(DODAIMANHINH/2,caoBox + 120,(char*)(temp.c_str())); 
 					indexTrang--; 
 					
 				} 

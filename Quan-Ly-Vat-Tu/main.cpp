@@ -26,9 +26,17 @@ int main(int argc, char *argv[])
 	dsVatTu.themVT(vt8); 
 	dsVatTu.themVT(vt9); 
 	dsVatTu.themVT(vt10); 
+	int sl=10;
+//	
+//	dsVatTu.saveVatTu(sl);
+//	dsVatTu.loadVatTu(sl);
+	dsVatTu.duyetCay();
+	//StartBGI start; 
+	//menuQuanLyVatTu(dsVatTu);
 	
-	StartBGI start; 
-	menuQuanLyVatTu(dsVatTu);
 
+	
+	
+	
 	return 0;
 }
