@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	int sl=10;
 //	
 //	dsVatTu.saveVatTu(sl);
-//	dsVatTu.loadVatTu(sl);
+	dsVatTu.loadVatTu(sl);
 	dsVatTu.duyetCay();
 	//StartBGI start; 
 	//menuQuanLyVatTu(dsVatTu);
