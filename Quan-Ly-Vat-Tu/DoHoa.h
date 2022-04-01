@@ -475,7 +475,7 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDo
 	index = -1; 
 	int soLuongNode = dsVatTu.soLuongVT();  
 	NodeVatTu** arrVT = new NodeVatTu*[soLuongNode]; 
-	dsVatTu.inTangDan(arrVT);   
+	dsVatTu.sapXepTangDanTheoTen(arrVT);   
 	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
 	
 
@@ -573,18 +573,7 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDo
 			}
 		}
 		delay(1); 
-	}
-	
-	
-	
-	
-	
-	 
-	
-	
-	// tao ra 2 nut  
-	
-	
+	}	
 	delete [] arrVT; 
 }			
 
@@ -619,8 +608,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 			// xy ly khi nguoi dung vua moi chon. 
 			// neu nhu index nam trong vung tu 0 -> 3 thi ta khong nhan xu ly 
 			if (index >= 0 && index <= 3) {  // thuoc vung menu to. 
-				// khong xu ly 
-				return; // di ra ngoai xu ly. 
+				return;
 			}
 			else {
 				// co the xu ly. vi cung cap menu 
