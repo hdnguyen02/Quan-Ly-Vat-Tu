@@ -1,5 +1,6 @@
 #pragma once
 #include "autoload.h"
+
 using namespace std;
 struct VatTu {
     string maVT;    
@@ -18,10 +19,6 @@ void VatTu::inVatTu() {
 	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon; 
 }
 
-class BstVatTu;   // khai bao nguyen mau. 
-
-
-
 class NodeVatTu {
 private:
     VatTu info;
@@ -32,14 +29,6 @@ public:
     NodeVatTu(): pLeft(NULL), pRight(NULL) {};  
     NodeVatTu(const VatTu& info) : info(info.maVT, info.ten, info.donVi, info.soLuongTon),
         pLeft(NULL), pRight(NULL) {}
-   
-   
-   // khai bao ham ban : 
-   // ham inVT can truy cap vao trong nay 
-   VatTu getInfo() {
-   		// tra ve info cua 1 thang
-   		return this->info; 
-   }
    
 
 };
@@ -52,18 +41,21 @@ class BstVatTu {
 private:
     NodeVatTu* root;
     int soLuong; // chua so luong node co trong 1 cay. 
-    VatTu *arrNode[300];  // xu dung luu tru dia chi cac node => sap xep cau b.
     
 public:
     BstVatTu() : root(NULL), soLuong(0) {};
     ~BstVatTu(); 
     void hoTroThemVT(NodeVatTu* root, const VatTu& info); 
     bool themVT(const VatTu& info); 
+    void loadVatTu(int &soLuongVT);
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
     void giaiPhong(NodeVatTu* root);
-	NodeVatTu* timKiemVT(const string& key);  // return ve NULL neu khong tim thay va vi tri cua no neu tim thay 
+	NodeVatTu* timKiemVT(const string& key);
+	void saveVatTuSP(NodeVatTu *root,ofstream &fileout);  
+	// return ve NULL neu khong tim thay va vi tri cua no neu tim thay 
 	bool isNULL(); 
+	void saveVatTu(int &soLuongVT);
 	// xoa xong thi giai phong cai node do luon 
 	bool xoaVT(const string& key); 
 	// ham chinh xua 1 vatTu 
@@ -74,35 +66,12 @@ public:
 	int soLuongVT() ;
 	
 	// viet ham in danh sach vat tu tang dan theo ten vattu 
-	void inTangDan(NodeVatTu** arrVT) {  // truyen vao cai ma ban muon in ra. 
-		int index = 0; 	
-		int soLuongVT = this->soLuongVT(); 
-		this->BstVatTuToArray(arrVT,index,root);   // bien doi cay sang mang/
-		for (int i = 0; i < soLuongVT - 1;i++) {
-			for(int j = i + 1;j < soLuongVT;j++) {
-				if (arrVT[i]->info.ten > arrVT[j]->info.ten) {
-					NodeVatTu* temp = arrVT[i];
-					arrVT[i] = arrVT[j]; 
-					arrVT[j] = temp;  		
-				}
-			}
-		}
-
-		// sau ham nay => ta da co duoc 1 mang da sap xep. 	 
+	void inTangDan() {  // truyen vao cai ma ban muon in ra. 
+		// tao ra 1 mang voi so luong bang so luong co trong node 
+		int slNode = soLuongVT(); 
+		// khai bao ra mang con tro  
 		 
 	}
-	
-	void BstVatTuToArray(NodeVatTu **arrVT,int &index,NodeVatTu* root) { 
-	
-	//  kiem tra xem khi nao tro den NULL thi dung 
-		if (root != NULL) {
-			BstVatTuToArray(arrVT,index,root->pLeft); 
-			arrVT[index++] = root; // gan gia tri node qua 
-			BstVatTuToArray(arrVT,index,root->pRight); 
-		}
-		// de quy qua no sau do gan tat ca gia tri con tro vao 
-		
-	} 
 };
 
 int BstVatTu::soLuongVT() {
@@ -170,6 +139,7 @@ bool BstVatTu::xoaVT(const string& key) {
 			if (previousNodeDelete->pLeft == nodeDelete) {
 				// node can xoa nam o phia ben tay phai so voi node do./ 
 				previousNodeDelete->pLeft = pTempDelete; 
+				
 			}
 			else {
 				previousNodeDelete->pRight= pTempDelete; 
@@ -303,7 +273,49 @@ bool BstVatTu::isNULL() {
 	}
 	return false; 
 }
-
+void BstVatTu::saveVatTuSP(NodeVatTu *root,ofstream &fileout)
+{
+	if(root !=NULL)
+	{
+		saveVatTuSP(root->pLeft,fileout);
+		fileout << root->info.maVT<<endl;
+		fileout << root->info.ten<<endl;
+		fileout << root->info.donVi<<endl;
+		fileout << root->info.soLuongTon<<endl;
+		saveVatTuSP(root->pRight,fileout);
+	}
+	else return;
+}
+void BstVatTu::saveVatTu(int &soLuongVT)
+{
+	if(root!=NULL)
+	{
+		ofstream fileOut;
+		fileOut.open("data/MaterialsInfo.txt",ios::out|ios::app);
+		fileOut <<soLuongVT;
+		saveVatTuSP(root,fileOut);
+		fileOut.close();
+	}
+}
+void BstVatTu::loadVatTu(int &soLuongVT)
+{
+	if(root!=NULL)
+	{
+		ifstream fileIn;
+		fileIn.open("data/MaterialsInfo.txt",ios::in|ios::app);
+		fileIn>>soLuongVT;
+		for(int i=0;i<soLuongVT;i++)
+		{
+			VatTu tmp;
+			fileIn.getline(&tmp.maVT[0],sizeof(tmp.maVT));
+			fileIn.getline(&tmp.ten[0],sizeof(tmp.ten));
+			fileIn.getline(&tmp.donVi[0],sizeof(tmp.donVi));
+			fileIn>>tmp.soLuongTon;
+			this->themVT(tmp);
+		}
+		fileIn.close();	
+	}
+}
 
 BstVatTu::~BstVatTu() {
      

@@ -4,7 +4,7 @@ using namespace std;
 
 struct HoaDon {
     string soHD;
-    Date date;
+    Dates date;
     string loai;   
     listCTHD dsctHD;  
     HoaDon(string soHD, Date date, string loai) : soHD(soHD), date(date.ngay, date.thang, date.nam), loai(loai) {}
@@ -22,7 +22,7 @@ public:
 
 
 
-
+// danh sách liên k?t don 
 
 class ListHoaDon {
 private: 
