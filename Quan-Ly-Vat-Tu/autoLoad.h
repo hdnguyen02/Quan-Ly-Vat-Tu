@@ -3,9 +3,13 @@
 #include<string.h>
 #include "DoHoa.h"
 #include "hoaDon.h"
-#include "Tienich.h"
 #include "dsNhanVien.h"
 #include "listCTHD.h"
 #include<winbgim.h>
+#include "BstVatTu.h"
+#include "Tienich.h"
+#include <sstream>
+#include <fstream>
+using namespace std; 
 
 

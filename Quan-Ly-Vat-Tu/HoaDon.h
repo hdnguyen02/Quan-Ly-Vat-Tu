@@ -23,10 +23,14 @@ public:
 
 
 // danh sách liên k?t don 
+
 class ListHoaDon {
 private: 
-    HoaDon* head; 
+    NodeHoaDon* head;  
 public: 
-    ListHoaDon() : head(NULL) {}
+    ListHoaDon() {
+		this->head = NULL;
+	}
 
 };
+
