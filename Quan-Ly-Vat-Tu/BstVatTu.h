@@ -1,5 +1,6 @@
 #pragma once
 #include "autoload.h"
+
 using namespace std;
 // ================================== CAU TRUC VAT TU ==================================
 struct VatTu {
@@ -43,6 +44,7 @@ public:
     // HAM CHUC NANG
     void hoTroThemVT(NodeVatTu* root, const VatTu& info); 
     bool themVT(const VatTu& info); 
+    void loadVatTu(int &soLuongVT);
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
     void giaiPhong(NodeVatTu* root);
@@ -248,6 +250,8 @@ bool BstVatTu::isNULL() {
 	}
 	return false; 
 }
+
+
 void BstVatTu::hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout) {
 	if(root != NULL) {
 		fileout << root->info.maVT<<"," << root->info.ten <<  "," << root->info.donVi<<","<< root->info.soLuongTon<<endl;
@@ -255,8 +259,6 @@ void BstVatTu::hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout) {
 		hoTroGhiVatTuFile(root->pRight,fileout);
 	}
 }
-
-
 
 void BstVatTu::ghiVatTuFile() {  // mo file ra va ghi du lieu vao.
 	ofstream fileout;  
@@ -284,6 +286,7 @@ void BstVatTu::docVatTuFile() {
 			}
 		filein.close(); 	
 }
+
 
 // ============================================ HAM HUY ============================================
 BstVatTu::~BstVatTu() {
