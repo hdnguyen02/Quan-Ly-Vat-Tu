@@ -1,8 +1,6 @@
 #pragma once
 #include "autoLoad.h"
-//using namespace std;
-
-// khai bao nguyen mau ham 
+using namespace std; 
  
 
 //struct Dates
@@ -116,7 +114,6 @@ public:
 		int y = GetSystemMetrics(SM_CYSCREEN);
 		int x = GetSystemMetrics(SM_CXSCREEN);
 		initwindow(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) - 40);
-
 	}
 	~StartBGI() {
 		closegraph();
@@ -158,6 +155,8 @@ bool kiTuChuHoacSo(char c) {
 		}
 		return false; 
 }
+
+
 
 	
 

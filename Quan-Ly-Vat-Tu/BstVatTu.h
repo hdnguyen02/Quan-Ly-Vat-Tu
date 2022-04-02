@@ -2,7 +2,6 @@
 #include "autoload.h"
 
 using namespace std;
-
 // ================================== CAU TRUC VAT TU ==================================
 struct VatTu {
     string maVT;    
@@ -13,9 +12,6 @@ struct VatTu {
     VatTu(string maVT, string ten, string donVi, float soLuongTon) : maVT(maVT), ten(ten),
         donVi(donVi), soLuongTon(soLuongTon) {};
     void inVatTu(); 
-	
-
-
 };
 void VatTu::inVatTu() {
 	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon; 
@@ -33,10 +29,7 @@ public:
     NodeVatTu(): pLeft(NULL), pRight(NULL) {};  
     NodeVatTu(const VatTu& info) : info(info.maVT, info.ten, info.donVi, info.soLuongTon),
         pLeft(NULL), pRight(NULL) {} 
-   VatTu getInfo() {
-   		return this->info; 
-   }
-
+   VatTu getInfo() {return this->info; }
 };
 
 // ==================================== BST VAT TU ====================================
@@ -44,17 +37,14 @@ class BstVatTu {
 private:
     NodeVatTu* root;
     int soLuong; 
-    
 public:
 	// HAM KHOI TAO, HAM HUY
-    BstVatTu() : root(NULL), soLuong(0) {
-		// this->docVatTuFile(); 
-	};
+    BstVatTu() : root(NULL), soLuong(0) { this->docVatTuFile(); };
     ~BstVatTu(); 
-    
     // HAM CHUC NANG
     void hoTroThemVT(NodeVatTu* root, const VatTu& info); 
     bool themVT(const VatTu& info); 
+    void loadVatTu(int &soLuongVT);
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
     void giaiPhong(NodeVatTu* root);
@@ -70,6 +60,7 @@ public:
 	void ghiVatTuFile();
 	void docVatTuFile();
 	void hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout);
+	
 };
 
 int BstVatTu::soLuongVT() {
@@ -109,6 +100,7 @@ bool BstVatTu::dieuChinhVT(const string& key,const string& tenVT,const string&do
 	}
 	nodeHieuChinh->info.ten = tenVT; 
 	nodeHieuChinh->info.donVi = donViVT;
+	this->ghiVatTuFile(); 
 	return true; 
 }
 
@@ -123,9 +115,7 @@ bool BstVatTu::xoaVT(const string& key) {
 			else {
 				nodeDelete = nodeDelete->pRight; 
 			}
-			
 		}
-		
 		if (nodeDelete == NULL) { // truong hop can tim thay node de xoa hoac cay dang rong
 			return false; 
 		}
@@ -138,36 +128,29 @@ bool BstVatTu::xoaVT(const string& key) {
 				pTempDelete = nodeDelete->pLeft;   // truong hop cay co 1 con va node con do la node left
 			}
 			
-			if (previousNodeDelete == NULL) { // node can xoa la node NULL. 
-				// mat ke la node do co 2 la hay 1 la tá : 
-				// truong hop ca 2 deu NULL => thi tk root bi xoa di song nó NULL 
-				// xoa di node root
+			if (previousNodeDelete == NULL) { 
 				delete root; 
 				root = pTempDelete; 
 				this->soLuong--;  
-				return true; // return tai de ham khong chay nua. 
+				this->ghiVatTuFile(); 
+				return true; 
 			}
-			if (previousNodeDelete->pLeft == nodeDelete) {
-				// node can xoa nam o phia ben tay phai so voi node do./ 
+			if (previousNodeDelete->pLeft == nodeDelete) { // node can xoa nam o phia ben tay phai so voi node do./ 
 				previousNodeDelete->pLeft = pTempDelete; 
 			}
 			else {
 				previousNodeDelete->pRight= pTempDelete; 
 			}
-			delete pTempDelete; // giai phong di node can xoa. 
+			delete nodeDelete; 
 		}
-		else if (nodeDelete->pLeft!=NULL && nodeDelete->pRight != NULL) { // truong hop cay con do co hai nut. 
-			// tim kiem node nho nhat phia ben phai cua node do 
-			NodeVatTu* parentNodeMin = NULL; // node phai truoc node Min ( node se ke vi node bi xoa )
+		else  { 
+			NodeVatTu* parentNodeMin = NULL; 
 			NodeVatTu* nodeMin = nodeDelete->pRight; 
 			while (nodeMin->pLeft != NULL) { // tim thang nho nhat ( va thang do la node cuoi cung phia ben tay phai 
-				// chua phai node cuoi cung
 				parentNodeMin = nodeMin; 
 				nodeMin = nodeMin->pLeft;
 			}
-			
-			// sau khi tim ra duoc node min nhat phia ben tay phai cua node can xoa. 
-			if (parentNodeMin != NULL) {
+			if (parentNodeMin != NULL) { // sau khi tim ra duoc node min nhat phia ben tay phai cua node can xoa. 
 				parentNodeMin->pLeft = nodeMin->pRight; 
 			}
 			else {
@@ -182,15 +165,14 @@ bool BstVatTu::xoaVT(const string& key) {
 			delete nodeMin; 
 		}
 		this->soLuong--; 
-		return true; 
-		
+		this->ghiVatTuFile(); 
+		return true; 	
 	}
 
 bool BstVatTu::themVT(const VatTu& info) {
 	if (this->timKiemVT(info.maVT) != NULL) { // khong tim thay.  
 		return false; // them khong thanh cong. 
 	}
-	
     if (root == NULL) { 
         root = new NodeVatTu(info); 
     }
@@ -198,6 +180,7 @@ bool BstVatTu::themVT(const VatTu& info) {
         hoTroThemVT(root, info); 
     }
     this->soLuong++; 
+    this->ghiVatTuFile(); 
     return true; 
 }
 
@@ -247,9 +230,7 @@ void BstVatTu::giaiPhong(NodeVatTu* root) {
 
 NodeVatTu* BstVatTu::timKiemVT(const string& key) {
 	NodeVatTu* temp = root;
-	// neu nhu moi voa ma temp == NULL => root nay rong => cha co node nay 
-	// hoac cai node nó bang => quy pham => cham duc => return ve chinh node nay. 
-	while (temp != NULL && temp->info.maVT != key) {
+	while (temp != NULL && temp->info.maVT != key) {  
 		if (key < temp->info.maVT) {
 			temp = temp->pLeft; 
 		}
@@ -262,61 +243,52 @@ NodeVatTu* BstVatTu::timKiemVT(const string& key) {
 	}
 	return temp; 
 }
-// hàm tra ve true neu nhu cay nay rong 
+
 bool BstVatTu::isNULL() {
 	if (root == NULL) {
 		return true; 
 	}
 	return false; 
 }
-//===========================GHI VAT TU VAO FILE===========================
+
+
 void BstVatTu::hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout) {
-	if(root !=NULL) {
+	if(root != NULL) {
+		fileout << root->info.maVT<<"," << root->info.ten <<  "," << root->info.donVi<<","<< root->info.soLuongTon<<endl;
 		hoTroGhiVatTuFile(root->pLeft,fileout);
-		fileout << root->info.maVT<<endl;
-		fileout << root->info.ten<<endl;
-		fileout << root->info.donVi<<endl;
-		fileout << root->info.soLuongTon<<endl;
 		hoTroGhiVatTuFile(root->pRight,fileout);
 	}
-	return; 
 }
-void BstVatTu::ghiVatTuFile() {
-	if(root!=NULL) {
-		ofstream fileOut;
-		fileOut.open("data/vatTu.txt",ios::out|ios::app);
-		fileOut <<this->soLuong<<endl;
-		hoTroGhiVatTuFile(root,fileOut);
-		fileOut.close();
-	}
+
+void BstVatTu::ghiVatTuFile() {  // mo file ra va ghi du lieu vao.
+	ofstream fileout;  
+	fileout.open("data/dataVatTu.txt",ios::out | ios::trunc ); // chi ghi file vao va xoa du lieu cu di. 
+	fileout << this->soLuong << endl; 
+	hoTroGhiVatTuFile(root,fileout); 
+	fileout.close(); 
 }
 
 // =================================== DOC VAT TU ( DOC TU FILE ) ===================================
-void BstVatTu::docVatTuFile()
-{
-		ifstream fileIn;
-		fileIn.open("data/vatTu.txt",ios::in|ios::app);
-		fileIn>>this->soLuong;
-
-		for(int i=0;i<this->soLuong;i++) {
-			VatTu tempVT;
-			fileIn.getline((char*)(tempVT.maVT.c_str()),sizeof(tempVT.maVT));
-			fileIn.getline((char*)(tempVT.ten.c_str()),sizeof(tempVT.ten));
-			fileIn.getline((char*)(tempVT.donVi.c_str()),sizeof(tempVT.donVi));
-			stringstream ss;  
-			char tempSLT[20]; 
-			ss<<tempVT.soLuongTon;
-			ss>>tempSLT;
-			fileIn.getline(tempSLT,sizeof(tempSLT));
-			this->themVT(tempVT);
-	}
-	fileIn.close();	
-	
+void BstVatTu::docVatTuFile() {
+		int soLuongVT; 
+		ifstream filein;
+		filein.open("data/dataVatTu.txt",ios::in);  
+		VatTu info;  
+		filein >> soLuongVT; 
+		filein.ignore();  
+		for (int i = 0; i < soLuongVT;i++) {
+				getline(filein,info.maVT,','); 
+				getline(filein,info.ten,','); 
+				getline(filein,info.donVi,',');
+				filein >> info.soLuongTon; 
+				filein.ignore(); 
+				this->themVT(info); 
+			}
+		filein.close(); 	
 }
 
 
 // ============================================ HAM HUY ============================================
 BstVatTu::~BstVatTu() {
-	 this->ghiVatTuFile(); 
      this->giaiPhong(root);
 }
