@@ -269,6 +269,7 @@ bool BstVatTu::isNULL() {
 	}
 	return false; 
 }
+//===========================GHI VAT TU VAO FILE===========================
 void BstVatTu::hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout) {
 	if(root !=NULL) {
 		hoTroGhiVatTuFile(root->pLeft,fileout);
@@ -293,14 +294,11 @@ void BstVatTu::ghiVatTuFile() {
 // =================================== DOC VAT TU ( DOC TU FILE ) ===================================
 void BstVatTu::docVatTuFile()
 {
-	 
-	if(root!=NULL)
-	{
 		ifstream fileIn;
 		fileIn.open("data/vatTu.txt",ios::in|ios::app);
 		fileIn>>this->soLuong;
 
-		for(int i=0;i<soLuong;i++) {
+		for(int i=0;i<this->soLuong;i++) {
 			VatTu tempVT;
 			fileIn.getline((char*)(tempVT.maVT.c_str()),sizeof(tempVT.maVT));
 			fileIn.getline((char*)(tempVT.ten.c_str()),sizeof(tempVT.ten));
@@ -311,9 +309,9 @@ void BstVatTu::docVatTuFile()
 			ss>>tempSLT;
 			fileIn.getline(tempSLT,sizeof(tempSLT));
 			this->themVT(tempVT);
-		}
-		fileIn.close();	
 	}
+	fileIn.close();	
+	
 }
 
 

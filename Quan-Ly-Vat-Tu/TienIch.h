@@ -5,91 +5,91 @@
 // khai bao nguyen mau ham 
  
 
-struct Dates
-{
-	int day;
-	int month;
-	int year;
-	
-	Dates()
-	{
-		day = 1;
-		month = 1;
-		year = 1;
-	}
-	bool isValid()
-	{
-		if(month<1 || month>12 || year<0 || day<0 || day>31)
-		{
-			return false;
-		}
-		
-		if (month==2 || month==4 || month==6 || month==9 || month == 11)
-		{
-			if (day > 30)
-				return false;
-			if (month == 2)
-			{
-				if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
-				{
-					if (day > 29)
-						return false;
-				}
-				else
-				{
-					if (day > 28)
-						return false;
-				}
-			}
-		}
-		return true;
-	}
-	
-	bool operator > (const struct Dates &other)
-	{
-		if (this->year > other.year)
-			return true;
-		else if (this->year == other.year) 
-		{
-			if(this->month > other.month)
-				return true;
-			else if (this->month == other.month)
-			{
-				if (this->day > other.day)
-					return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	bool operator < (const struct Dates &other)
-	{
-		if (this->year < other.year)
-			return true;
-		else if (this->year == other.year) 
-		{
-			if(this->month < other.month)
-				return true;
-			else if (this->month == other.month)
-			{
-				if (this->day < other.day)
-					return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	bool operator == (const struct Dates &other)
-	{
-		if (this->year == other.year)
-			if (this->month == other.month)
-				if (this->day == other.day)
-					return true;
-		return false;
-	}
-};
+//struct Dates
+//{
+//	int day;
+//	int month;
+//	int year;
+//	
+//	Dates()
+//	{
+//		day = 1;
+//		month = 1;
+//		year = 1;
+//	}
+//	bool isValid()
+//	{
+//		if(month<1 || month>12 || year<0 || day<0 || day>31)
+//		{
+//			return false;
+//		}
+//		
+//		if (month==2 || month==4 || month==6 || month==9 || month == 11)
+//		{
+//			if (day > 30)
+//				return false;
+//			if (month == 2)
+//			{
+//				if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
+//				{
+//					if (day > 29)
+//						return false;
+//				}
+//				else
+//				{
+//					if (day > 28)
+//						return false;
+//				}
+//			}
+//		}
+//		return true;
+//	}
+//	
+//	bool operator > (const struct Dates &other)
+//	{
+//		if (this->year > other.year)
+//			return true;
+//		else if (this->year == other.year) 
+//		{
+//			if(this->month > other.month)
+//				return true;
+//			else if (this->month == other.month)
+//			{
+//				if (this->day > other.day)
+//					return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
+//	
+//	bool operator < (const struct Dates &other)
+//	{
+//		if (this->year < other.year)
+//			return true;
+//		else if (this->year == other.year) 
+//		{
+//			if(this->month < other.month)
+//				return true;
+//			else if (this->month == other.month)
+//			{
+//				if (this->day < other.day)
+//					return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
+//	
+//	bool operator == (const struct Dates &other)
+//	{
+//		if (this->year == other.year)
+//			if (this->month == other.month)
+//				if (this->day == other.day)
+//					return true;
+//		return false;
+//	}
+//};
  struct Date {
 	int ngay;
 	int thang;

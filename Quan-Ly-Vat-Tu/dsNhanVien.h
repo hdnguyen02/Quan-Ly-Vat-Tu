@@ -2,114 +2,110 @@
 #include "autoLoad.h"
 using namespace std;
 
-#define NHANVIENTOIDA = 500;  // n //sua
+#define NHANVIENTOIDA 500 // n //sua
 
 
 struct NhanVien {
-    string ID;  // maNV
+    string maNV;  // maNV
     string ho;
     string ten;
     int phai;   // 0. nam 1. nu 
-};
-    NhanVien()
-	{
-		id = '\0';
-		ho = '\0';
-		ten= '\0';
-		phai = 1;
-	}
+
+	NhanVien() {};
+	NhanVien (string maNV,string ho,string ten,int phai):maNV(maNV),ho(ho),ten(ten),phai(phai) {};
 	
-	bool operator > (const struct NhanVien &other)
-	{
-		char thisFN[31] = "";
-		char thisLN[31] = "";
-		char otherFN[31] = "";
-		char otherLN[31] = "";
 	
-		//chuyen ten -> xoa dau cach + viet thuong
-		strcpy(thisFN, (char*)(this->ho.c_str()));
-		delBlank(thisFN);
-		for (int i = 0; i < strlen(thisFN); i++)
-			thisFN[i] = tolower(thisFN[i]);
-			
-		strcpy(thisLN, (char*)(this->ten.c_str()));
-		delBlank(thisLN);
-		for (int i = 0; i < strlen(thisLN); i++)
-			thisLN[i] = tolower(thisLN[i]);
-			
-		strcpy(otherFN, (char*)(other->ho.c_str()));
-		delBlank(otherFN);
-		for (int i = 0; i < strlen(otherFN); i++)
-			otherFN[i] = tolower(otherFN[i]);
-			
-		strcpy(otherLN, (char*)(other->ten.c_str()));
-		delBlank(otherLN);
-		for (int i = 0; i < strlen(otherLN); i++)
-			otherLN[i] = tolower(otherLN[i]);
-		
-		if (strcmp(thisFN, otherFN) > 0)
-		{
-			return true;
-		}
-		else if (strcmp(thisFN, otherFN) == 0)
-		{
-			if (strcmp(thisLN, otherLN) > 0)
-			{
-				return true;
-			}
-			else
-				return false;
-		}
-		else 
-			return false;
-	}
-	
-	bool operator < (const struct NhanVien &other)
-	{
-		char thisFN[31] = "";
-		char thisLN[31] = "";
-		char otherFN[31] = "";
-		char otherLN[31] = "";
-	
-		//chuyen ten -> xoa dau cach + viet thuong
-		//chuyen ten -> xoa dau cach + viet thuong
-			strcpy(thisFN, (char*)(this->ho.c_str()));
-		delBlank(thisFN);
-		for (int i = 0; i < strlen(thisFN); i++)
-			thisFN[i] = tolower(thisFN[i]);
-			
-		strcpy(thisLN, (char*)(this->ten.c_str()));
-		delBlank(thisLN);
-		for (int i = 0; i < strlen(thisLN); i++)
-			thisLN[i] = tolower(thisLN[i]);
-			
-		strcpy(otherFN, (char*)(other->ho.c_str()));
-		delBlank(otherFN);
-		for (int i = 0; i < strlen(otherFN); i++)
-			otherFN[i] = tolower(otherFN[i]);
-			
-		strcpy(otherLN, (char*)(other->ten.c_str()));
-		delBlank(otherLN);
-		for (int i = 0; i < strlen(otherLN); i++)
-			otherLN[i] = tolower(otherLN[i]);
-		
-		if (strcmp(thisFN, otherFN) < 0)
-		{
-			return true;
-		}
-		else if (strcmp(thisFN, otherFN) == 0)
-		{
-			if (strcmp(thisLN, otherLN) < 0)
-			{
-				return true;
-			}
-			else
-				return false;
-		}
-		else 
-			return false;
-	}
-	
+//	bool operator > (const struct NhanVien &other)
+//	{
+//		char thisFN[31] = "";
+//		char thisLN[31] = "";
+//		char otherFN[31] = "";
+//		char otherLN[31] = "";
+//	
+//		//chuyen ten -> xoa dau cach + viet thuong
+//		strcpy(thisFN, (char*)(this->ho.c_str()));
+//		delBlank(thisFN);
+//		for (int i = 0; i < strlen(thisFN); i++)
+//			thisFN[i] = tolower(thisFN[i]);
+//			
+//		strcpy(thisLN, (char*)(this->ten.c_str()));
+//		delBlank(thisLN);
+//		for (int i = 0; i < strlen(thisLN); i++)
+//			thisLN[i] = tolower(thisLN[i]);
+//			
+//		strcpy(otherFN, (char*)(other->ho.c_str()));
+//		delBlank(otherFN);
+//		for (int i = 0; i < strlen(otherFN); i++)
+//			otherFN[i] = tolower(otherFN[i]);
+//			
+//		strcpy(otherLN, (char*)(other->ten.c_str()));
+//		delBlank(otherLN);
+//		for (int i = 0; i < strlen(otherLN); i++)
+//			otherLN[i] = tolower(otherLN[i]);
+//		
+//		if (strcmp(thisFN, otherFN) > 0)
+//		{
+//			return true;
+//		}
+//		else if (strcmp(thisFN, otherFN) == 0)
+//		{
+//			if (strcmp(thisLN, otherLN) > 0)
+//			{
+//				return true;
+//			}
+//			else
+//				return false;
+//		}
+//		else 
+//			return false;
+//	}
+//	
+//	bool operator < (const struct NhanVien &other)
+//	{
+//		char thisFN[31] = "";
+//		char thisLN[31] = "";
+//		char otherFN[31] = "";
+//		char otherLN[31] = "";
+//	
+//		//chuyen ten -> xoa dau cach + viet thuong
+//		//chuyen ten -> xoa dau cach + viet thuong
+//			strcpy(thisFN, (char*)(this->ho.c_str()));
+//		delBlank(thisFN);
+//		for (int i = 0; i < strlen(thisFN); i++)
+//			thisFN[i] = tolower(thisFN[i]);
+//			
+//		strcpy(thisLN, (char*)(this->ten.c_str()));
+//		delBlank(thisLN);
+//		for (int i = 0; i < strlen(thisLN); i++)
+//			thisLN[i] = tolower(thisLN[i]);
+//			
+//		strcpy(otherFN, (char*)(other->ho.c_str()));
+//		delBlank(otherFN);
+//		for (int i = 0; i < strlen(otherFN); i++)
+//			otherFN[i] = tolower(otherFN[i]);
+//			
+//		strcpy(otherLN, (char*)(other->ten.c_str()));
+//		delBlank(otherLN);
+//		for (int i = 0; i < strlen(otherLN); i++)
+//			otherLN[i] = tolower(otherLN[i]);
+//		
+//		if (strcmp(thisFN, otherFN) < 0)
+//		{
+//			return true;
+//		}
+//		else if (strcmp(thisFN, otherFN) == 0)
+//		{
+//			if (strcmp(thisLN, otherLN) < 0)
+//			{
+//				return true;
+//			}
+//			else
+//				return false;
+//		}
+//		else 
+//			return false;
+//	}
+//	
 };
 //============CAU-TRUC-NGAY==================
 
@@ -204,201 +200,280 @@ struct Dates
 
 class dsNhanVien {
 private:
-	int n;  // so luong thuc te. 
+	int soLuong;  // so luong thuc te. 
     NhanVien *nv[NHANVIENTOIDA];  // 
 public:
 	dsNhanVien()
 	{
-		n = 0;
+		soLuong = 0;
 	}
 	bool cayRong();
 	bool cayDay();
-	void inNV(struct NhanVien *newNode);
-	void xoaNV(int pos);
-	void xoaNVtheoID(char tmpID[11]);
+	bool themNV(struct NhanVien *newNode);
+	bool xuatNV();
+	bool xoaNV(int pos);
 	void xoaCay();
 	int timViTriID(NhanVien *info);
 	NhanVien* timID(char tmpID[11]);
+	NhanVien *timNVtheoMa(string maCanTim,int &pos);
+	bool xoaNVtheoMa(const string &ma);
+	void docFileNhanVien();
+	void ghiFileNhanVien();
+	bool chinhSuaNV(const string &maCanTim,const string &hoNV,const string &tenNV,const int &phaiNV);
 };
 
-	
-	bool cayRong()
+	bool dsNhanVien::cayRong()
 	{
-		return (n==0);
+		return (soLuong==0);
 	}
 	
-	bool cayDay()
+	bool dsNhanVien::cayDay()
 	{
-		return (n == NHANVIENTOIDA);
+		return (soLuong == NHANVIENTOIDA);
 	}
 	
-	void inNV( NhanVien *newNode)		//push_back
+	bool dsNhanVien::themNV( NhanVien *info)		//push_back
 	{
-		nv[n++] = newNode;
-	}
-	
-	void xoaNV(int pos)
-	{
-		delete nv[pos];
-		for (int j = pos+1; j < n; j++)
+		int pos;
+		NhanVien *NV=this->timNVtheoMa(info->maNV,pos);
+		if(NV==NULL)
 		{
-			nv[j-1] = nv[j];
-		}
-		n--;
-	}
-	
-	void xoaNVtheoID(char tmpID[11])
-	{
-		for (int i = 0; i < n; i++)
-		{
-			if (strcmp(nv[i]->ID, tmpID) == 0)
-			{
-				this->Detele(i);
-				break;
-			}
-		}
-	}
-	
-	void xoaCay()
-	{
-		n = 0;
-	}
-	
-	int timViTriID(NhanVien *info)
-	{
-		for (int i = 0; i < n; i++)
-		{
-			if (strcmp(nv[i]->ID, info->ID) == 0)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	//check ID nhan vien, tra ve NULL neu k trung
-	NhanVien* timID(char tmpID[11])
-	{
-		for (int i = 0; i < n; i++)
-		{
-			if (strcmp(nodeListEmp[i]->ID, tmpID) == 0)
-			{
-				return nodeListEmp[i];
-			}
-		}
-		return NULL;
-	}
-	
-	//return false neu co ID trung
-	bool checkIDBill(char idBill[20])
-	{
-		for (int numE = 0; numE < n; numE++)
-		{
-			if (nodeListEmp[numE]->listBill.checkID(idBill) == false) // co ID trung
-				return false;
-		}
+		nv[soLuong++] = info;
 		return true;
-	}
-	
-	// check ID bill
-	Employee *FindEmp(char IDBill[20])
-	{
-		for (int numE = 0; numE < n; numE++)
-		{
-			if (nodeListEmp[numE]->listBill.checkID(IDBill) == false) // co ID trung
-				return nodeListEmp[numE];
 		}
+		return false;
+	}
+	bool dsNhanVien::xuatNV()
+	{
+		if(nv[0]!=NULL)
+		{
+			for(int i=0;i<soLuong;i++)
+			{
+				cout<< nv[i]->maNV<<" ";
+				cout<<nv[i]->ho<<" ";
+				cout<<nv[i]->ten<<" ";
+				cout<<nv[i]->phai<<endl;
+				
+			}
+			return true;
+		}
+		else return false;
+	}
+//	void xoaNV(int pos)
+//	{
+//		delete nv[pos];
+//		for (int j = pos+1; j < n; j++)
+//		{
+//			nv[j-1] = nv[j];
+//		}
+//		n--;
+//	}
+	NhanVien* dsNhanVien::timNVtheoMa(string maCanTim,int &pos)
+	{
+		if(nv[0]!=NULL)
+		{
+		
+		for(int i=0; i<soLuong ;i++)
+		{
+			if(maCanTim==nv[i]->maNV)
+			{
+				pos=i;
+				return nv[i];
+			}
+			
+		}
+	}
 		return NULL;
 	}
-	
-	
-	void addBill(char idEmp[11], Bills &newBill)
+	void dsNhanVien::xoaCay()
 	{
-		struct Employee* p = Search_ID(idEmp);
-		p->listBill.insertFirst(newBill);
-	}
-	
-};
-
-void sortEmp(struct Employee **arr, int left, int right)
-{
-	logs << "sort" << endl;
-	Employee *mid = arr[(left + right) / 2];
-	int i = left, j = right;
-	do
-	{
-		while(*arr[i] < *mid)
-			i++;
-		while(*arr[j] > *mid)
-			j--;
-		if(i <= j)
+		
+		for(int i=0;i<this->soLuong;i++)
 		{
-			if(i < j)
+			delete nv[i];
+		}
+		soLuong = 0;
+	}
+	bool dsNhanVien::xoaNVtheoMa(const string &ma)
+	{
+		int i;
+		NhanVien *NV;
+		NV=this->timNVtheoMa(ma,i);
+		if(NV!=NULL)
+		{
+			delete nv[i];
+			for(int j =i;j<soLuong;j++)
 			{
-				Employee *tmp;
-				tmp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = tmp;
+				nv[j]=nv[j+1];
 			}
-			i++; j--;
+			soLuong--;
+			return true;
 		}
-	} while(i<=j);
-	if(left < j)
-		sortEmp(arr, left, j);
-	if(right > i)
-		sortEmp(arr, i, right);
+		else return false;
+		delete NV;
+	}
+void dsNhanVien::docFileNhanVien()
+{
+	ifstream fileIn;
+	fileIn.open("data/nhanVien.txt",ios::in);
+	fileIn>>this->soLuong;
+	cin.ignore();
+	for(int i=0;i<this->soLuong;i++)
+	{
+		NhanVien tempNV;
+		getline(fileIn,tempNV.maNV,',');
+		getline(fileIn,tempNV.ho,',');
+		getline(fileIn,tempNV.ten,',');
+		fileIn>>tempNV.phai;
+		fileIn.ignore();
+		this->themNV(&tempNV);				
+	}
+	fileIn.close();
 }
-//=================================================
-//================================================
 
-
-//==========DANH-SACH-BILL-THEO-NGAY===============
-struct billDateNode
+void dsNhanVien::ghiFileNhanVien()
 {
-	struct Bills *info;
-	struct Employee *Emp;
-	struct billDateNode *next;
-};
-typedef struct billDateNode* NODE_BDate;
-
-
-struct listBillDate
+	ofstream fileOut;
+	fileOut.open("data/nhanVien.txt",ios::out|ios::trunc);
+		fileOut<<this->soLuong<<endl;
+		cin.ignore();
+	for(int i=0;i<this->soLuong;i++)
+	{
+		fileOut<<nv[i]->maNV<<","<<nv[i]->ho<<","
+		<<nv[i]->ten<<","<<nv[i]->phai<<endl;
+		
+	}
+	fileOut.close();
+}
+bool dsNhanVien::chinhSuaNV(const string &maCanTim,const string &hoNV,const string &tenNV,const int &phaiNV)
 {
-	int Size;
-	NODE_BDate firstNode;
-	
-	listBillDate()
+	int i;
+	NhanVien *NV;
+	NV=this->timNVtheoMa(maCanTim,i);
+	if(NV!=NULL)
 	{
-		Size = 0;
-		firstNode = NULL;
+		nv[i]->ho=hoNV;
+		nv[i]->ten=tenNV;
+		nv[i]->phai=phaiNV;
+		return 1;
 	}
-	
-	void insert(struct Bills &bill, struct Employee *Emp)
-	{
-		NODE_BDate newNode, before, after;
-		newNode = new billDateNode;
-		newNode->info = &bill;
-		newNode->Emp = Emp;
-		for (after = firstNode; 
-			after != NULL && after->info->date < newNode->info->date;
-			before = after, after = after->next);
-			
-		if (after == firstNode)
-		{
-			newNode->next = firstNode;
-			firstNode = newNode;
-		}
-		else
-		{
-			before->next = newNode;
-			newNode->next = after;
-		}
-		Size++;
-	}
-	
-	NODE_BDate index(int stt)
-	{
-		NODE_BDate newNode = firstNode;
-		for (int i = 0; i < stt; newNode = newNode->next, i++);
-		return newNode;
-	}
+	return 0;	
+}
+//	//check ID nhan vien, tra ve NULL neu k trung
+//	NhanVien* timID(string maCanTim)
+//	{
+//		for (int i = 0; i < n; i++)
+//		{
+//			if (nv[i]->maNV == maCanTim)
+//			{
+//				return nv[i];
+//			}
+//		}
+//		return NULL;
+//	}
+//	
+//	//return false neu co ID trung
+//	bool kiemTraIDTrongDS(char idBill[20])
+//	{
+//		for (int numE = 0; numE < n; numE++)
+//		{
+//			if (nodeListEmp[numE]->listBill.checkID(idBill) == false) // co ID trung
+//				return false;
+//		}
+//		return true;
+//	}
+//	
+//	// check ID bill
+//	
+//	
+//	void dsNhanVien::themNV(char idEmp[11])
+//	{
+//		NhanVien* p = timID(idEmp);
+//		p->dsNhanVien.insertFirst(newBill);
+//	}
+//	
+//
+//
+//
+//void sortEmp(struct Employee **arr, int left, int right)
+//{
+//	logs << "sort" << endl;
+//	Employee *mid = arr[(left + right) / 2];
+//	int i = left, j = right;
+//	do
+//	{
+//		while(*arr[i] < *mid)
+//			i++;
+//		while(*arr[j] > *mid)
+//			j--;
+//		if(i <= j)
+//		{
+//			if(i < j)
+//			{
+//				Employee *tmp;
+//				tmp = arr[i];
+//				arr[i] = arr[j];
+//				arr[j] = tmp;
+//			}
+//			i++; j--;
+//		}
+//	} while(i<=j);
+//	if(left < j)
+//		sortEmp(arr, left, j);
+//	if(right > i)
+//		sortEmp(arr, i, right);
+//}
+////=================================================
+////================================================
+//
+//
+////==========DANH-SACH-BILL-THEO-NGAY===============
+//struct billDateNode
+//{
+//	struct Bills *info;
+//	struct Employee *Emp;
+//	struct billDateNode *next;
+//};
+//typedef struct billDateNode* NODE_BDate;
+//
+//
+//struct listBillDate
+//{
+//	int Size;
+//	NODE_BDate firstNode;
+//	
+//	listBillDate()
+//	{
+//		Size = 0;
+//		firstNode = NULL;
+//	}
+//	
+//	void insert(struct Bills &bill, struct Employee *Emp)
+//	{
+//		NODE_BDate newNode, before, after;
+//		newNode = new billDateNode;
+//		newNode->info = &bill;
+//		newNode->Emp = Emp;
+//		for (after = firstNode; 
+//			after != NULL && after->info->date < newNode->info->date;
+//			before = after, after = after->next);
+//			
+//		if (after == firstNode)
+//		{
+//			newNode->next = firstNode;
+//			firstNode = newNode;
+//		}
+//		else
+//		{
+//			before->next = newNode;
+//			newNode->next = after;
+//		}
+//		Size++;
+//	}
+//	
+//	NODE_BDate index(int stt)
+//	{
+//		NODE_BDate newNode = firstNode;
+//		for (int i = 0; i < stt; newNode = newNode->next, i++);
+//		return newNode;
+//	}
