@@ -15,186 +15,99 @@ struct NhanVien {
 	NhanVien (string maNV,string ho,string ten,int phai):maNV(maNV),ho(ho),ten(ten),phai(phai) {};
 	
 	
-//	bool operator > (const struct NhanVien &other)
-//	{
-//		char thisFN[31] = "";
-//		char thisLN[31] = "";
-//		char otherFN[31] = "";
-//		char otherLN[31] = "";
-//	
-//		//chuyen ten -> xoa dau cach + viet thuong
-//		strcpy(thisFN, (char*)(this->ho.c_str()));
-//		delBlank(thisFN);
-//		for (int i = 0; i < strlen(thisFN); i++)
-//			thisFN[i] = tolower(thisFN[i]);
-//			
-//		strcpy(thisLN, (char*)(this->ten.c_str()));
-//		delBlank(thisLN);
-//		for (int i = 0; i < strlen(thisLN); i++)
-//			thisLN[i] = tolower(thisLN[i]);
-//			
-//		strcpy(otherFN, (char*)(other->ho.c_str()));
-//		delBlank(otherFN);
-//		for (int i = 0; i < strlen(otherFN); i++)
-//			otherFN[i] = tolower(otherFN[i]);
-//			
-//		strcpy(otherLN, (char*)(other->ten.c_str()));
-//		delBlank(otherLN);
-//		for (int i = 0; i < strlen(otherLN); i++)
-//			otherLN[i] = tolower(otherLN[i]);
-//		
-//		if (strcmp(thisFN, otherFN) > 0)
-//		{
-//			return true;
-//		}
-//		else if (strcmp(thisFN, otherFN) == 0)
-//		{
-//			if (strcmp(thisLN, otherLN) > 0)
-//			{
-//				return true;
-//			}
-//			else
-//				return false;
-//		}
-//		else 
-//			return false;
-//	}
-//	
-//	bool operator < (const struct NhanVien &other)
-//	{
-//		char thisFN[31] = "";
-//		char thisLN[31] = "";
-//		char otherFN[31] = "";
-//		char otherLN[31] = "";
-//	
-//		//chuyen ten -> xoa dau cach + viet thuong
-//		//chuyen ten -> xoa dau cach + viet thuong
-//			strcpy(thisFN, (char*)(this->ho.c_str()));
-//		delBlank(thisFN);
-//		for (int i = 0; i < strlen(thisFN); i++)
-//			thisFN[i] = tolower(thisFN[i]);
-//			
-//		strcpy(thisLN, (char*)(this->ten.c_str()));
-//		delBlank(thisLN);
-//		for (int i = 0; i < strlen(thisLN); i++)
-//			thisLN[i] = tolower(thisLN[i]);
-//			
-//		strcpy(otherFN, (char*)(other->ho.c_str()));
-//		delBlank(otherFN);
-//		for (int i = 0; i < strlen(otherFN); i++)
-//			otherFN[i] = tolower(otherFN[i]);
-//			
-//		strcpy(otherLN, (char*)(other->ten.c_str()));
-//		delBlank(otherLN);
-//		for (int i = 0; i < strlen(otherLN); i++)
-//			otherLN[i] = tolower(otherLN[i]);
-//		
-//		if (strcmp(thisFN, otherFN) < 0)
-//		{
-//			return true;
-//		}
-//		else if (strcmp(thisFN, otherFN) == 0)
-//		{
-//			if (strcmp(thisLN, otherLN) < 0)
-//			{
-//				return true;
-//			}
-//			else
-//				return false;
-//		}
-//		else 
-//			return false;
-//	}
-//	
-};
-//============CAU-TRUC-NGAY==================
-
-struct Dates
-{
-	int day;
-	int month;
-	int year;
+	bool operator > (const struct NhanVien &other)
+	{
+		char thisFN[31] = "";
+		char thisLN[31] = "";
+		char otherFN[31] = "";
+		char otherLN[31] = "";
 	
-	Dates()
-	{
-		day = 1;
-		month = 1;
-		year = 1;
-	}
-	bool isValid()
-	{
-		if(month<1 || month>12 || year<0 || day<0 || day>31)
-		{
-			return false;
-		}
+		//chuyen ten -> xoa dau cach + viet thuong
+		strcpy(thisFN, (char*)(this->ho.c_str()));
+		delBlank(thisFN);
+		for (int i = 0; i < strlen(thisFN); i++)
+			thisFN[i] = tolower(thisFN[i]);
+			
+		strcpy(thisLN, (char*)(this->ten.c_str()));
+		delBlank(thisLN);
+		for (int i = 0; i < strlen(thisLN); i++)
+			thisLN[i] = tolower(thisLN[i]);
+			
+		strcpy(otherFN, (char*)(other.ho.c_str()));
+		delBlank(otherFN);
+		for (int i = 0; i < strlen(otherFN); i++)
+			otherFN[i] = tolower(otherFN[i]);
+			
+		strcpy(otherLN, (char*)(other.ten.c_str()));
+		delBlank(otherLN);
+		for (int i = 0; i < strlen(otherLN); i++)
+			otherLN[i] = tolower(otherLN[i]);
 		
-		if (month==2 || month==4 || month==6 || month==9 || month == 11)
+		if (strcmp(thisFN, otherFN) > 0)
 		{
-			if (day > 30)
+			return true;
+		}
+		else if (strcmp(thisFN, otherFN) == 0)
+		{
+			if (strcmp(thisLN, otherLN) > 0)
+			{
+				return true;
+			}
+			else
 				return false;
-			if (month == 2)
-			{
-				if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
-				{
-					if (day > 29)
-						return false;
-				}
-				else
-				{
-					if (day > 28)
-						return false;
-				}
-			}
 		}
-		return true;
+		else 
+			return false;
 	}
 	
-	bool operator > (const struct Dates &other)
+	bool operator < (const struct NhanVien &other)
 	{
-		if (this->year > other.year)
-			return true;
-		else if (this->year == other.year) 
-		{
-			if(this->month > other.month)
-				return true;
-			else if (this->month == other.month)
-			{
-				if (this->day > other.day)
-					return true;
-			}
-		}
+		char thisFN[31] = "";
+		char thisLN[31] = "";
+		char otherFN[31] = "";
+		char otherLN[31] = "";
+	
+		//chuyen ten -> xoa dau cach + viet thuong
+		//chuyen ten -> xoa dau cach + viet thuong
+			strcpy(thisFN, (char*)(this->ho.c_str()));
+		delBlank(thisFN);
+		for (int i = 0; i < strlen(thisFN); i++)
+			thisFN[i] = tolower(thisFN[i]);
+			
+		strcpy(thisLN, (char*)(this->ten.c_str()));
+		delBlank(thisLN);
+		for (int i = 0; i < strlen(thisLN); i++)
+			thisLN[i] = tolower(thisLN[i]);
+			
+		strcpy(otherFN, (char*)(other.ho.c_str()));
+		delBlank(otherFN);
+		for (int i = 0; i < strlen(otherFN); i++)
+			otherFN[i] = tolower(otherFN[i]);
+			
+		strcpy(otherLN, (char*)(other.ten.c_str()));
+		delBlank(otherLN);
+		for (int i = 0; i < strlen(otherLN); i++)
+			otherLN[i] = tolower(otherLN[i]);
 		
-		return false;
-	}
-	
-	bool operator < (const struct Dates &other)
-	{
-		if (this->year < other.year)
-			return true;
-		else if (this->year == other.year) 
+		if (strcmp(thisFN, otherFN) < 0)
 		{
-			if(this->month < other.month)
-				return true;
-			else if (this->month == other.month)
-			{
-				if (this->day < other.day)
-					return true;
-			}
+			return true;
 		}
-		
-		return false;
+		else if (strcmp(thisFN, otherFN) == 0)
+		{
+			if (strcmp(thisLN, otherLN) < 0)
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+		else 
+			return false;
 	}
 	
-	bool operator == (const struct Dates &other)
-	{
-		if (this->year == other.year)
-			if (this->month == other.month)
-				if (this->day == other.day)
-					return true;
-		return false;
-	}
 };
-//============CAU-TRUC-NGAY==================
+
 
 
 
@@ -209,13 +122,11 @@ public:
 	}
 	bool cayRong();
 	bool cayDay();
-	bool themNV(struct NhanVien *newNode);
-	bool xuatNV();
-	bool xoaNV(int pos);
+	bool themNV(NhanVien info);
+	void xuatNV();
 	void xoaCay();
-	int timViTriID(NhanVien *info);
-	NhanVien* timID(char tmpID[11]);
-	NhanVien *timNVtheoMa(string maCanTim,int &pos);
+	NhanVien *timNVtheoMa(const string &maCanTim);
+	int timNV(const string &pos);
 	bool xoaNVtheoMa(const string &ma);
 	void docFileNhanVien();
 	void ghiFileNhanVien();
@@ -232,82 +143,79 @@ public:
 		return (soLuong == NHANVIENTOIDA);
 	}
 	
-	bool dsNhanVien::themNV( NhanVien *info)		//push_back
+	bool dsNhanVien::themNV( NhanVien info)		//push_back
 	{
-		int pos;
-		NhanVien *NV=this->timNVtheoMa(info->maNV,pos);
+		NhanVien *NV=this->timNVtheoMa(info.maNV);
 		if(NV==NULL)
 		{
-		nv[soLuong++] = info;
+		nv[soLuong++] = &info;
 		return true;
 		}
 		return false;
 	}
-	bool dsNhanVien::xuatNV()
+	void dsNhanVien::xuatNV()
 	{
-		if(nv[0]!=NULL)
-		{
-			for(int i=0;i<soLuong;i++)
+		for(int i=0;i<this->soLuong;i++)
 			{
 				cout<< nv[i]->maNV<<" ";
 				cout<<nv[i]->ho<<" ";
 				cout<<nv[i]->ten<<" ";
 				cout<<nv[i]->phai<<endl;
-				
 			}
-			return true;
-		}
-		else return false;
 	}
-//	void xoaNV(int pos)
-//	{
-//		delete nv[pos];
-//		for (int j = pos+1; j < n; j++)
-//		{
-//			nv[j-1] = nv[j];
-//		}
-//		n--;
-//	}
-	NhanVien* dsNhanVien::timNVtheoMa(string maCanTim,int &pos)
+
+	NhanVien* dsNhanVien::timNVtheoMa(const string &maCanTim)
 	{
 		if(nv[0]!=NULL)
 		{
-		
 		for(int i=0; i<soLuong ;i++)
 		{
 			if(maCanTim==nv[i]->maNV)
 			{
-				pos=i;
 				return nv[i];
-			}
-			
+			}	
 		}
 	}
 		return NULL;
 	}
+	int dsNhanVien::timNV(const string &maCanTim)
+	{
+		if(nv[0]!=NULL)
+		{
+		for(int i=0; i<soLuong ;i++)
+		{
+			if(maCanTim==nv[i]->maNV)
+			{
+				return i;
+			}	
+		}
+		return -1;
+	}
+}
 	void dsNhanVien::xoaCay()
 	{
-		
-		for(int i=0;i<this->soLuong;i++)
-		{
-			delete nv[i];
-		}
-		soLuong = 0;
+		this->soLuong = 0;
 	}
-	bool dsNhanVien::xoaNVtheoMa(const string &ma)
+	bool dsNhanVien::xoaNVtheoMa(const string &maCanXoa)
 	{
-		int i;
+		int pos;
+		pos=this->timNV(maCanXoa);
 		NhanVien *NV;
-		NV=this->timNVtheoMa(ma,i);
+		NV=this->timNVtheoMa(maCanXoa);
 		if(NV!=NULL)
 		{
-			delete nv[i];
-			for(int j =i;j<soLuong;j++)
+			if(pos!=this->soLuong)
+			{
+			
+			delete nv[pos];
+			for(int j =pos;j<soLuong;j++)
 			{
 				nv[j]=nv[j+1];
 			}
 			soLuong--;
 			return true;
+			}
+			else delete nv[pos];
 		}
 		else return false;
 		delete NV;
@@ -326,7 +234,7 @@ void dsNhanVien::docFileNhanVien()
 		getline(fileIn,tempNV.ten,',');
 		fileIn>>tempNV.phai;
 		fileIn.ignore();
-		this->themNV(&tempNV);				
+		this->themNV(tempNV);				
 	}
 	fileIn.close();
 }
@@ -348,16 +256,17 @@ void dsNhanVien::ghiFileNhanVien()
 bool dsNhanVien::chinhSuaNV(const string &maCanTim,const string &hoNV,const string &tenNV,const int &phaiNV)
 {
 	int i;
+	i=this->timNV(maCanTim);
 	NhanVien *NV;
-	NV=this->timNVtheoMa(maCanTim,i);
+	NV=this->timNVtheoMa(maCanTim);
 	if(NV!=NULL)
 	{
 		nv[i]->ho=hoNV;
 		nv[i]->ten=tenNV;
 		nv[i]->phai=phaiNV;
-		return 1;
+		return true;
 	}
-	return 0;	
+	return false;	
 }
 //	//check ID nhan vien, tra ve NULL neu k trung
 //	NhanVien* timID(string maCanTim)
