@@ -1,7 +1,12 @@
 #pragma once
-#include "autoLoad.h"
 using namespace std; 
- 
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <fstream>
+#include <sstream>
+#include<winbgim.h>
+#include <iostream>
 
 
  struct Date {
@@ -158,7 +163,42 @@ void delBlank(char *s)
 }
 
 
-	
+class TienichDoHoa {
+	// xu dung de xoa man hinh. 
+	public: 
+	static void xoaManHinhTheoToaDo(int x,int y,int w,int h,int colorBack) {
+		setfillstyle(SOLID_FILL, colorBack);   
+		bar(x, y, x + w, y + h); 
+	}
+	static string floatToString(float f) {
+		stringstream ss; 
+		ss << f; 
+		string temp; 
+		ss >> temp; 
+		return temp; 
+	}
+	static string intToString(int n) {
+		stringstream ss; 
+		ss << n; 
+		string temp; 
+		ss >> temp; 
+		return temp; 
+	}
+	static float stringToFloat(string s) {
+		stringstream ss; 
+		ss << s; 
+		float temp; 
+		ss >> temp;
+		return temp; 
+	}
+	static int stringToInt(string s){
+		stringstream ss; 
+		ss << s; 
+		int temp; 
+		ss >> temp; 
+		return temp; 
+	}
+};  
 
 
 	

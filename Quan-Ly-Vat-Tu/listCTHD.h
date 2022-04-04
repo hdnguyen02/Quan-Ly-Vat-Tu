@@ -1,7 +1,6 @@
 #pragma once
-#include "autoLoad.h"
 using namespace std;
-
+#include "Tienich.h"
 struct CThoaDon {
     string maVT;   
     float soLuong;
@@ -44,20 +43,21 @@ public:
 	NodeCTHD* timKiemCTHD(const string& maVT); 
 	bool xoaCTHD(const string& maVT);
 	void giaiPhongCTHD(); 
-	
-	// viet ham doc ghi file.  truyen file se doc 
-	void docFileCTHD(ifstream &filein,const string& duongDan) {
-		int soLuongCTHD; 
+	void docFileCTHD(ifstream &filein) {
 		CThoaDon info;  
+		int soLuongCTHD; 
 		filein >> soLuongCTHD; 
 		filein.ignore();  
+		string temp; 
 		for (int i = 0; i < soLuongCTHD;i++) {
 				getline(filein,info.maVT,','); 
-				getline(filein,info.ten,','); 
-				getline(filein,info.donVi,',');
-				filein >> info.soLuongTon; 
+				getline(filein,temp,','); 
+				info.soLuong = TienichDoHoa::stringToFloat(temp); 
+				getline(filein,temp,',');
+				info.donGia = TienichDoHoa::stringToFloat(temp);
+				filein >> info.VAT; 
 				filein.ignore(); 
-				this->themVT(info); 
+				this->themVaoCuoiCTHD(info); 
 			}
 		filein.close(); 
 	}
@@ -70,17 +70,17 @@ bool ListCTHD::isNull() {
 	return false; 
 }
 bool ListCTHD::themVaoDauCTHD(const CThoaDon &info) {  // tem vao dau CTHD 
-//	NodeCTHD* NodeTrung = this->timKiemCTHDTheoMaVT(info.maVT);  // neu node nay co ton tai -> khong duoc them. 
-//	if (NodeTrung) {
-//		return false; 
-//	}
+	NodeCTHD* NodeTrung = this->timKiemCTHD(info.maVT);  // neu node nay co ton tai -> khong duoc them. 
+	if (NodeTrung) {
+		return false; 
+	}
 	NodeCTHD* newNode = new NodeCTHD(info); 
 	newNode->pNext = head; // tro den node dau tien 
 	head = newNode;
+	return true;
 }
 
-bool ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {
-	
+bool ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {	
 	NodeCTHD* kiemTraNodeTrung = this->timKiemCTHD(info.maVT);  // neu node nay co ton tai -> khong duoc them. 
 	if (kiemTraNodeTrung) {
 		return false; 
@@ -92,14 +92,13 @@ bool ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {
 	}
 	
 	NodeCTHD* pTemp = head; 
-	while(pTemp->pNext != NULL) { // chua phai node cuoi cung. 
+	while(pTemp->pNext != NULL) {  
 		pTemp = pTemp->pNext;  
 	}
 	pTemp->pNext = newNode; 
 	return true; 
 }
 void ListCTHD::duyetCTHD() {
-	// duyet den cuoi 
 	NodeCTHD* pTemp = head;
 	while(pTemp != NULL) {
 		pTemp->info.inCTHD(); 
@@ -111,17 +110,13 @@ void ListCTHD::duyetCTHD() {
 // ta can phai lam them cac ham sau: ham tiem kiem theo maVT. ( tuc la trong CTHD khong có hai thu can luu y 
 // thu nhat la maVT do can phai ton tai va thu 2 la maVT do khong duoc trung truoc do. 
 NodeCTHD* ListCTHD::timKiemCTHD(const string& maVT) {
-	// tim kiem thay la return ve dia chi cua node do => khong co la ve NULL 
 	NodeCTHD* pTemp = head; 
 	while(pTemp != NULL) {
-		// kiem tra 
 		if (pTemp->info.maVT == maVT) {
-			// tra ve dia chi cua node dang dung 
 			return pTemp; 
 		}
 		pTemp = pTemp->pNext; 
 	}
-	// khong tim thay 
 	return NULL; 
 }
 
@@ -149,15 +144,11 @@ bool ListCTHD::xoaCTHD(const string& maVT) {
 	return true; 
 }
 
-// ham giai phong danh sach 
 void ListCTHD::giaiPhongCTHD() {
-	// giai phong tu node dau tien truoc => sau do den node sau cung 
-	// neu danh sach rong thi khong can lam gi ca 
  	NodeCTHD* pTemp; 
  	while(head != NULL) {
 	 	pTemp = head; 
 	 	head = head->pNext; 
-	 	cout << "delete : " << pTemp->info.maVT << endl; 
 	 	delete pTemp; 
 	 }
 	

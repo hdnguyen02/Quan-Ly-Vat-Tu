@@ -1,5 +1,5 @@
 #pragma once
-#include "autoLoad.h"
+#include "Tienich.h"
 using namespace std; 
 
 struct HoaDon {
