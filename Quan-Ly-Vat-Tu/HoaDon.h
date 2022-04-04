@@ -5,8 +5,8 @@ using namespace std;
 struct HoaDon {
     string soHD;
     Date date;
-    string loai;   
-    listCTHD dsctHD;  
+    string loai;     // chi nhan 2 gia tri : X ( XUAT ) va N ( NHAP )
+    ListCTHD dsCTHD;  
     HoaDon(string soHD, Date date, string loai) : soHD(soHD), date(date.ngay, date.thang, date.nam), loai(loai) {}
     HoaDon() {}
 };
@@ -31,6 +31,7 @@ public:
     ListHoaDon() {
 		this->head = NULL;
 	}
+	
 
 };
 

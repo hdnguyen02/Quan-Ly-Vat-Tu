@@ -288,6 +288,86 @@ void hienThiTinhNangHoaDon() {
 
 }
 
+// ======================================HIEU CHINH VAT TU===============================================
+void hienThiHieuChinhVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam& themVT,NutBam& inDSVT) {
+	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
+	const int chieuDaiBox = 700;
+	const int mxTieuDe = (DODAIMANHINH / 2 ) - (chieuDaiBox/2);
+	const int cachLeTrenTieuDe = 200;
+	const int chieuCaoTieuDe = 40; 
+	NutBam tieuDe(mxTieuDe,cachLeTrenTieuDe,chieuDaiBox,chieuCaoTieuDe,8,9,10,"HIEU CHINH VAT TU");
+	
+	// ==========BIEN O VUONG===========
+	const int chieuCaoBox = 250; 
+	const int cachLeTrenBox = cachLeTrenTieuDe + chieuCaoTieuDe + 5; 
+	NutBam box(mxTieuDe,cachLeTrenBox,chieuDaiBox,chieuCaoBox,15,3,4,""); // ve ra 1 cai hop trong
+	
+	
+	// ============BIEN O NHAP===========
+	const int chieuDaiTieuDe = 60; 
+	const int chieuDaiInput =  chieuDaiBox - chieuDaiTieuDe - 500; 
+	const int cachLeInput = mxTieuDe + 250; 
+	const int cachLeTrenInput = cachLeTrenBox + 100; 
+	const int chieuCaoInput = 40; 
+	const int slktMaVT = 10; 
+	ONhap nhapMaVT(cachLeInput,cachLeTrenInput,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ma",10);
+	NutBam timKiem(mxTieuDe,cachLeTrenBox + 256,chieuDaiBox,40,8,9,10,"tim kiem"); 
+	tieuDe.veNut(); 
+	box.veNut();
+	nhapMaVT.veONhap(); 
+	timKiem.veNut();
+	int mx = -1;
+	int my = -1; 
+	while(true) {
+		if (ismouseclick(WM_LBUTTONDOWN)) {  
+			
+			getmouseclick(WM_LBUTTONDOWN, mx, my);
+			if (nhapMaVT.isMouseHover(mx,my)) {
+				TienIchDoHoa::xoaManHinhTheoToaDo(mxTieuDe + 190,cachLeTrenBox + 310,1000,40,BACKGROUP); 
+				nhapMaVT.NhapVao(kiTuChuHoacSo,""); 
+			}
+			else if (timKiem.isMouseHover(mx,my)) {
+				string maVT = nhapMaVT.boNhoDem; // lay ra bo nho dem. 
+				NodeVatTu* pTempVT = dsVatTu.timKiemVT(maVT);   // tra ve NULL neu khong tim thay.
+				if (pTempVT != NULL) {
+					TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP);  // xoa het ( ve lai ) 
+					box.veNut(); // ve lai o Vuong
+					// hien thi ra 2 cai de co the chinh xua 
+					tieuDe.veNut(); 
+					ONhap dieuChinhTenVT(cachLeInput - 200,cachLeTrenInput - 80,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"ten",50);
+					ONhap dieuChinhDVT(cachLeInput - 200,cachLeTrenInput - 20,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"dvt",50);
+					
+					dieuChinhTenVT.boNhoDem = pTempVT->getInfo().ten; 
+					dieuChinhDVT.boNhoDem = pTempVT->getInfo().donVi; 
+					dieuChinhTenVT.veONhap();		
+					dieuChinhTenVT.inNoiDung(); 	
+					dieuChinhDVT.veONhap(); 
+					dieuChinhDVT.inNoiDung(); 
+					
+					
+					while(true) {
+						
+						delay(1); 
+					}
+					
+				}
+				else {
+					setbkcolor(BACKGROUP); 
+					setcolor(12); 
+					outtextxy(mxTieuDe + 190,cachLeTrenBox + 310,"khong tim thay vat tu nay!"); 
+				}
+			}
+			
+		}
+			
+		delay(1); 
+	}
+	
+
+	
+	
+}
+
 // ====================================HIEN THI INPUT VATTU==============================================
 void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam& hieuChinhVT,NutBam& inDSVT) {
 	TienIchDoHoa::xoaManHinhTheoToaDo(0,46 + 50,DODAIMANHINH,1000,BACKGROUP); 
@@ -600,6 +680,13 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 				themVT.duocTroVao = true; 
 				themVT.veNut();
 				hienThiInputVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,hieuChinhVT,inDSVT); 
+			}
+			
+			else if (hieuChinhVT.isMouseHover(xclick,yclick)) {
+				hieuChinhVT.duocTroVao = true;
+				themVT.veNut(); 
+				hienThiHieuChinhVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT,inDSVT); 
+				
 			}
 			else if (inDSVT.isMouseHover(xclick,yclick)) {  // HIEN THI RA TINH NANG IN DANH SACH. 
 				inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT,hieuChinhVT); 

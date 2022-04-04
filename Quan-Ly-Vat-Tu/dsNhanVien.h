@@ -10,6 +10,7 @@ struct NhanVien {
     string ho;
     string ten;
     int phai;   // 0. nam 1. nu 
+    ListHoaDon dsHoaDon; 
 
 	NhanVien() {};
 	NhanVien (string maNV,string ho,string ten,int phai):maNV(maNV),ho(ho),ten(ten),phai(phai) {};
