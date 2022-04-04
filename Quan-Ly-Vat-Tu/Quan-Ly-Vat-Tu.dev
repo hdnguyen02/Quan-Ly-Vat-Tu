@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
 CompilerSettings=0000000100000000000000000
-UnitCount=8
+UnitCount=10
 
 [VersionInfo]
 Major=1
@@ -71,7 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=TienIch.h
+FileName=Tienich.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -81,7 +81,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=DoHoa.h
+FileName=DoHoaVT.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=HoaDon.h
+FileName=ListHoaDon.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -111,7 +111,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit8]
-FileName=listCTHD.h
+FileName=MenuQLVT.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -121,7 +121,27 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit7]
-FileName=autoLoad.h
+FileName=ListCTHD.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit9]
+FileName=CoSoDoHoa.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit10]
+FileName=BienDoHoa.h
 CompileCpp=1
 Folder=
 Compile=1

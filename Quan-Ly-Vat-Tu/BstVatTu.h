@@ -1,6 +1,5 @@
 #pragma once
-#include "autoload.h"
-
+#include "Tienich.h"
 using namespace std;
 // ================================== CAU TRUC VAT TU ==================================
 struct VatTu {

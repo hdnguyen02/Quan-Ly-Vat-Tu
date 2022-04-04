@@ -1,15 +1,15 @@
 #pragma once
-#include "autoLoad.h"
 using namespace std;
-
-#define NHANVIENTOIDA 500 // n //sua
+#include "Tienich.h"
+#define NHANVIENTOIDA 500 
 
 
 struct NhanVien {
-    string maNV;  // maNV
+    string maNV;  
     string ho;
     string ten;
     int phai;   // 0. nam 1. nu 
+    ListHoaDon dsHoaDon; 
 
 	NhanVien() {};
 	NhanVien (string maNV,string ho,string ten,int phai):maNV(maNV),ho(ho),ten(ten),phai(phai) {};
@@ -113,8 +113,8 @@ struct NhanVien {
 
 class dsNhanVien {
 private:
-	int soLuong;  // so luong thuc te. 
-    NhanVien *nv[NHANVIENTOIDA];  // 
+	int soLuong;  
+    NhanVien *nv[NHANVIENTOIDA]; 
 public:
 	dsNhanVien()
 	{
