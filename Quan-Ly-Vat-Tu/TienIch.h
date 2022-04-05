@@ -146,6 +146,7 @@ bool kiTuChuHoacSo(char c) {
 		}
 		return false; 
 }
+//ham chuan hoa
 void delBlank(char *s)
 {
 	for(int i = 0; i < strlen(s); i++)
