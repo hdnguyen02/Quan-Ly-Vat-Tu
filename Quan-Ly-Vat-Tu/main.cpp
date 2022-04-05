@@ -97,17 +97,25 @@ int main(int argc, char *argv[]) {
 //	   
 //	  }
   	
-	ListCTHD dscthd; 
-	ifstream filein; 
-	filein.open("data/dataCTHD.txt",ios::in); 
-	dscthd.docFileCTHD(filein); 
-	filein.close();   	
-	
-	dscthd.duyetCTHD(); 
-  
-	
+//	ListCTHD dscthd; 
+//	ifstream filein; 
+//	filein.open("data/dataCTHD.txt",ios::in); 
+//	dscthd.docFileCTHD(filein); 
+//	filein.close();   	
+//	dscthd.duyetCTHD(); 
+//	cout << endl << "so luong node : " << dscthd.soLuongCTHD(); 
+//	
+//	// them vao 
+//	CThoaDon cthd6("VT06",1,1,1); 
+// 	CThoaDon cthd7("VT07",1,1,1); 
+//	dscthd.themVaoCuoiCTHD(cthd6); 
+//	dscthd.themVaoCuoiCTHD(cthd7); 
+//	
+//	ofstream fileout; 
+//  	fileout.open("data/dataCTHD.txt",ios::out | ios::trunc);
+//  	dscthd.ghiFileCTHD(fileout); 
+//  	fileout.close(); 
   	
-  	
-  	
+
 	return 0;
 }
