@@ -14,15 +14,17 @@ struct HoaDon {
 void HoaDon::inHD()
 {
 	cout<<this->soHD<<" "<<this->date.ngay<<"/"<<this->date.thang
-	<<"/"<<this->date.nam<<" "<<this->loai<<" "<<this->dsCTHD.duyetCTHD();
+	<<"/"<<this->date.nam<<" "<<this->loai<<" "; 
+	this->dsCTHD.duyetCTHD(); 
 }
 class NodeHoaDon {
 private:
     HoaDon info;
     NodeHoaDon* pNext;
 public:
+	friend class ListHoaDon; 
     NodeHoaDon() : pNext(NULL) {};
-    NodeHoaDon(string soHD, Date date, string loai) : info(soHD, date, loai), pNext(NULL) {}
+    NodeHoaDon(HoaDon info) : info(info.soHD, info.date, info.loai), pNext(NULL) {}
 };
 
 
@@ -37,7 +39,7 @@ public:
 		this->head = NULL;
 	}
 	
-	HoaDon *timKiemHoaDon(const string &soHD);
+	NodeHoaDon *timKiemHoaDon(const string &soHD);
 	bool themVaoDauHD(const HoaDon &info);
 	bool themVaoCuoiHD(const HoaDon &info);
 	void duyetDSHD();
@@ -45,11 +47,11 @@ public:
 	void giaiPhongHD();
 
 };
-HoaDon ListHoaDon::timKiemHoaDon(const string &soHD)
+NodeHoaDon* ListHoaDon::timKiemHoaDon(const string &soHD)
 {
 	NodeHoaDon* pTemp = head; 
 	while(pTemp != NULL) {
-		if (pTemp->info->soHD == soHD) {
+		if (pTemp->info.soHD == soHD) {
 			return pTemp; 
 		}
 		pTemp = pTemp->pNext; 
@@ -58,7 +60,7 @@ HoaDon ListHoaDon::timKiemHoaDon(const string &soHD)
 }
 bool ListHoaDon::themVaoDauHD(const HoaDon &info)
 {
-	NodeHoaDon* TempNode = this->timKiemCTHD(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
+	NodeHoaDon* TempNode = this->timKiemHoaDon(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
 	if (TempNode!=NULL) {
 		return false; 
 		}
@@ -69,7 +71,7 @@ bool ListHoaDon::themVaoDauHD(const HoaDon &info)
 }
 bool ListHoaDon::themVaoCuoiHD(const HoaDon &info)
 {
-	NodeCTHD* TempNode = this->timKiemCTHD(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
+	NodeHoaDon* TempNode = this->timKiemHoaDon(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
 	if (TempNode!=NULL) {
 		return false; 
 	}
@@ -89,7 +91,7 @@ void ListHoaDon::duyetDSHD()
 {
 	NodeHoaDon* pTemp = head;
 	while(pTemp != NULL) {
-		pTemp->info.inHoaDon(); 
+		pTemp->info.inHD(); 
 		cout << endl; 
 		pTemp = pTemp->pNext; 
 	}
