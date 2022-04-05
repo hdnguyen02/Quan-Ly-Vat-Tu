@@ -161,6 +161,23 @@ bool kiTuChuHoacSo(char c) {
 		return false; 
 }
 
+//ham chuan hoa
+void delBlank(char *s)
+{
+	for(int i = 0; i < strlen(s); i++)
+	{
+		if(s[i]==' ')
+		{
+			s[i] = s[i+1];
+			for(int j = i+1;j<strlen(s)-1;j++)
+			{
+				s[j] = s[j+1];
+			}
+			s[strlen(s)-1] = '\0';
+		}
+	}
+}
+
 
 
 class TienichDoHoa {
