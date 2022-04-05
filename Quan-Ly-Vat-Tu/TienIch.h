@@ -8,7 +8,91 @@ using namespace std;
 #include<winbgim.h>
 #include <iostream>
 
-
+struct Dates
+{
+	int day;
+	int month;
+	int year;
+	
+	Dates()
+	{
+		day = 1;
+		month = 1;
+		year = 1;
+	}
+	bool isValid()
+	{
+		if(month<1 || month>12 || year<0 || day<0 || day>31)
+		{
+			return false;
+		}
+		
+		if (month==2 || month==4 || month==6 || month==9 || month == 11)
+		{
+			if (day > 30)
+				return false;
+			if (month == 2)
+			{
+				if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
+				{
+					if (day > 29)
+						return false;
+				}
+				else
+				{
+					if (day > 28)
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	bool operator > (const struct Dates &other)
+	{
+		if (this->year > other.year)
+			return true;
+		else if (this->year == other.year) 
+		{
+			if(this->month > other.month)
+				return true;
+			else if (this->month == other.month)
+			{
+				if (this->day > other.day)
+					return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	bool operator < (const struct Dates &other)
+	{
+		if (this->year < other.year)
+			return true;
+		else if (this->year == other.year) 
+		{
+			if(this->month < other.month)
+				return true;
+			else if (this->month == other.month)
+			{
+				if (this->day < other.day)
+					return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	bool operator == (const struct Dates &other)
+	{
+		if (this->year == other.year)
+			if (this->month == other.month)
+				if (this->day == other.day)
+					return true;
+		return false;
+	}
+};
  struct Date {
 	int ngay;
 	int thang;
@@ -25,78 +109,8 @@ using namespace std;
 		this->thang = 0; 
 		this->nam = 0; 
 	}
-	bool choPhepDate()
-	{
-		if(thang<1 || thang>12 || nam<0 || ngay<0 || ngay>31)
-		{
-			return false;
-		}
-		
-		if (thang==2 || thang==4 || thang==6 || thang==9 || thang == 11)
-		{
-			if (ngay > 30)
-				return false;
-			if (thang == 2)
-			{
-				if ((nam%4 == 0 && nam%100 != 0) || nam%400 == 0)
-				{
-					if (ngay > 29)
-						return false;
-				}
-				else
-				{
-					if (ngay > 28)
-						return false;
-				}
-			}
-		}
-		return true;
-	}
+
 	
-	bool operator > (const struct Date &other)
-	{
-		if (this->nam > other.nam)
-			return true;
-		else if (this->nam == other.nam) 
-		{
-			if(this->thang > other.thang)
-				return true;
-			else if (this->thang == other.thang)
-			{
-				if (this->ngay > other.ngay)
-					return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	bool operator < (const struct Date &other)
-	{
-		if (this->nam < other.nam)
-			return true;
-		else if (this->nam == other.nam) 
-		{
-			if(this->thang < other.thang)
-				return true;
-			else if (this->thang == other.thang)
-			{
-				if (this->ngay < other.ngay)
-					return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	bool operator == (const struct Date &other)
-	{
-		if (this->nam == other.nam)
-			if (this->thang == other.thang)
-				if (this->ngay == other.ngay)
-					return true;
-		return false;
-	}
 };
 
 class StartBGI {
@@ -146,21 +160,7 @@ bool kiTuChuHoacSo(char c) {
 		}
 		return false; 
 }
-void delBlank(char *s)
-{
-	for(int i = 0; i < strlen(s); i++)
-	{
-		if(s[i]==' ')
-		{
-			s[i] = s[i+1];
-			for(int j = i+1;j<strlen(s)-1;j++)
-			{
-				s[j] = s[j+1];
-			}
-			s[strlen(s)-1] = '\0';
-		}
-	}
-}
+
 
 
 class TienichDoHoa {

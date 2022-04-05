@@ -22,6 +22,7 @@ class NodeCTHD {
 private:
     CThoaDon info;
     NodeCTHD* pNext;
+    
 public:
 	friend class ListCTHD; 
     NodeCTHD() : pNext(NULL) { }
@@ -30,8 +31,7 @@ public:
 
 class ListCTHD {
 private:
-    NodeCTHD* head;
-    
+    NodeCTHD* head;   
 public:
     ListCTHD() : head(NULL) {} // khoi tao.
     ~ListCTHD();    
@@ -43,7 +43,33 @@ public:
 	NodeCTHD* timKiemCTHD(const string& maVT); 
 	bool xoaCTHD(const string& maVT);
 	void giaiPhongCTHD(); 
-	void docFileCTHD(ifstream &filein) {
+	void docFileCTHD(ifstream &filein); 
+	void ghiFileCTHD(ofstream &fileout); 
+	int soLuongCTHD(); 
+};
+
+int ListCTHD::soLuongCTHD() {
+	int dem = 0; 
+	NodeCTHD* pTemp = head; 
+	while(pTemp != NULL) {
+		dem++; 
+		pTemp = pTemp->pNext;
+	} 
+	return dem; 
+}
+void ListCTHD::ghiFileCTHD(ofstream &fileout) {
+	fileout << this->soLuongCTHD() << endl;  
+	// lap den cuoi danh sach 
+	NodeCTHD* pTemp = head; 
+	while(pTemp != NULL) {
+		fileout << pTemp->info.maVT << "," << pTemp->info.soLuong << "," << pTemp->info.donGia <<
+		"," << pTemp->info.VAT << endl; 
+		pTemp = pTemp->pNext; 
+	}
+	 
+}
+
+void ListCTHD::docFileCTHD(ifstream &filein) {
 		CThoaDon info;  
 		int soLuongCTHD; 
 		filein >> soLuongCTHD; 
@@ -58,10 +84,9 @@ public:
 				filein >> info.VAT; 
 				filein.ignore(); 
 				this->themVaoCuoiCTHD(info); 
+				
 			}
-		filein.close(); 
 	}
-};
 
 bool ListCTHD::isNull() {
 	if (head == NULL) {
@@ -70,8 +95,7 @@ bool ListCTHD::isNull() {
 	return false; 
 }
 bool ListCTHD::themVaoDauCTHD(const CThoaDon &info) {  // tem vao dau CTHD 
-	NodeCTHD* NodeTrung = this->timKiemCTHD(info.maVT);  // neu node nay co ton tai -> khong duoc them. 
-	if (NodeTrung) {
+	if (this->timKiemCTHD(info.maVT)) {
 		return false; 
 	}
 	NodeCTHD* newNode = new NodeCTHD(info); 
@@ -81,8 +105,7 @@ bool ListCTHD::themVaoDauCTHD(const CThoaDon &info) {  // tem vao dau CTHD
 }
 
 bool ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {	
-	NodeCTHD* kiemTraNodeTrung = this->timKiemCTHD(info.maVT);  // neu node nay co ton tai -> khong duoc them. 
-	if (kiemTraNodeTrung) {
+	if (this->timKiemCTHD(info.maVT)) {
 		return false; 
 	}
 	NodeCTHD* newNode = new NodeCTHD(info); 
@@ -151,7 +174,6 @@ void ListCTHD::giaiPhongCTHD() {
 	 	head = head->pNext; 
 	 	delete pTemp; 
 	 }
-	
 }
 
  ListCTHD::~ListCTHD(){
