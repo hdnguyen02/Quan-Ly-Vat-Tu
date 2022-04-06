@@ -13,8 +13,8 @@ struct HoaDon {
 };
 void HoaDon::inHD()
 {
-	cout<<this->soHD<<" "<<this->date.ngay<<"/"<<this->date.thang
-	<<"/"<<this->date.nam<<" "<<this->loai<<" "; 
+	cout<<"ma: " <<this->soHD<<" "<<"ngay: "<<this->date.ngay<<"/"<<this->date.thang
+	<<"/"<<this->date.nam<<" loai: "<<this->loai<<endl <<"hoa don chi tiet"<<endl; 
 	this->dsCTHD.duyetCTHD(); 
 }
 class NodeHoaDon {
@@ -38,15 +38,42 @@ public:
     ListHoaDon() {
 		this->head = NULL;
 	}
-	
+	int soLuongHD(); 
 	NodeHoaDon *timKiemHoaDon(const string &soHD);
 	bool themVaoDauHD(const HoaDon &info);
 	bool themVaoCuoiHD(const HoaDon &info);
 	void duyetDSHD();
 	bool xoaHD(const string &soHD );
 	void giaiPhongHD();
-
+	void docFileHoaDon(ifstream &filein); 
+	void ghiFileHoaDon();  
+	
+	
 };
+int ListHoaDon::soLuongHD() {
+	int dem = 0; 
+	NodeHoaDon* pTemp = head; 
+	while(pTemp != NULL) {
+		dem++; 
+		pTemp = pTemp->pNext; 
+	}
+	return dem; 
+}
+void ListHoaDon::docFileHoaDon(ifstream &filein) {
+	int soLuongHD; 
+	filein >> soLuongHD;
+	filein.ignore();
+	HoaDon temp;  
+	for (int i = 0; i < soLuongHD;i++) {
+		getline(filein,temp.soHD,','); 
+		getline(filein,temp.loai,','); 
+		filein.ignore(); 
+		temp.dsCTHD.docFileCTHD(filein); 	  // doc sogn da tui dong xuong dong. 
+		this->themVaoCuoiHD(temp); 
+	}
+}
+
+
 NodeHoaDon* ListHoaDon::timKiemHoaDon(const string &soHD)
 {
 	NodeHoaDon* pTemp = head; 
@@ -58,19 +85,17 @@ NodeHoaDon* ListHoaDon::timKiemHoaDon(const string &soHD)
 	}
 	return NULL; 
 }
-bool ListHoaDon::themVaoDauHD(const HoaDon &info)
-{
+bool ListHoaDon::themVaoDauHD(const HoaDon &info) {
 	NodeHoaDon* TempNode = this->timKiemHoaDon(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
 	if (TempNode!=NULL) {
 		return false; 
-		}
+	}
 	NodeHoaDon* newNode = new NodeHoaDon(info); 
 	newNode->pNext = head; // tro den node dau tien 
 	head = newNode;
 	return true;
 }
-bool ListHoaDon::themVaoCuoiHD(const HoaDon &info)
-{
+bool ListHoaDon::themVaoCuoiHD(const HoaDon &info) {
 	NodeHoaDon* TempNode = this->timKiemHoaDon(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
 	if (TempNode!=NULL) {
 		return false; 
@@ -87,8 +112,7 @@ bool ListHoaDon::themVaoCuoiHD(const HoaDon &info)
 	pTemp->pNext = newNode; 
 	return true; 
 }
-void ListHoaDon::duyetDSHD()
-{
+void ListHoaDon::duyetDSHD() {
 	NodeHoaDon* pTemp = head;
 	while(pTemp != NULL) {
 		pTemp->info.inHD(); 
@@ -96,8 +120,7 @@ void ListHoaDon::duyetDSHD()
 		pTemp = pTemp->pNext; 
 	}
 }
-bool ListHoaDon::xoaHD(const string &soHD)
-{
+bool ListHoaDon::xoaHD(const string &soHD) {
 	NodeHoaDon* nodeDelete = head;  
 	NodeHoaDon* previousNodeDelete = NULL; // node phia truoc node can delete 
 	while (nodeDelete != NULL && nodeDelete->info.soHD != soHD) {

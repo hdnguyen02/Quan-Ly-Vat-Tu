@@ -8,6 +8,45 @@ using namespace std;
 #include<winbgim.h>
 #include <iostream>
 
+
+class TienichDoHoa {
+	// xu dung de xoa man hinh. 
+	public: 
+	static void xoaManHinhTheoToaDo(int x,int y,int w,int h,int colorBack) {
+		setfillstyle(SOLID_FILL, colorBack);   
+		bar(x, y, x + w, y + h); 
+	}
+	static string floatToString(float f) {
+		stringstream ss; 
+		ss << f; 
+		string temp; 
+		ss >> temp; 
+		return temp; 
+	}
+	static string intToString(int n) {
+		stringstream ss; 
+		ss << n; 
+		string temp; 
+		ss >> temp; 
+		return temp; 
+	}
+	static float stringToFloat(string s) {
+		stringstream ss; 
+		ss << s; 
+		float temp; 
+		ss >> temp;
+		return temp; 
+	}
+	static int stringToInt(string s){
+		stringstream ss; 
+		ss << s; 
+		int temp; 
+		ss >> temp; 
+		return temp; 
+	}
+};  
+
+
 struct Dates
 {
 	int day;
@@ -109,6 +148,19 @@ struct Dates
 		this->thang = 0; 
 		this->nam = 0; 
 	}
+	
+	// viet ham doc vao ngay tu file 
+	void docFile(ifstream &filein) { 
+		// doc toi dau / thi dung 
+		string temp; 
+		
+		getline(filein,temp,'/'); 
+		ngay = TienichDoHoa::stringToInt(temp); 
+		getline(filein,temp,'/'); 
+		thang = TienichDoHoa::stringToInt(temp); 
+		getline(filein,temp); 
+		nam = TienichDoHoa::stringToInt(temp); 
+	}
 
 	
 };
@@ -180,50 +232,74 @@ void delBlank(char *s)
 
 
 
-class TienichDoHoa {
-	// xu dung de xoa man hinh. 
-	public: 
-	static void xoaManHinhTheoToaDo(int x,int y,int w,int h,int colorBack) {
-		setfillstyle(SOLID_FILL, colorBack);   
-		bar(x, y, x + w, y + h); 
-	}
-	static string floatToString(float f) {
-		stringstream ss; 
-		ss << f; 
-		string temp; 
-		ss >> temp; 
-		return temp; 
-	}
-	static string intToString(int n) {
-		stringstream ss; 
-		ss << n; 
-		string temp; 
-		ss >> temp; 
-		return temp; 
-	}
-	static float stringToFloat(string s) {
-		stringstream ss; 
-		ss << s; 
-		float temp; 
-		ss >> temp;
-		return temp; 
-	}
-	static int stringToInt(string s){
-		stringstream ss; 
-		ss << s; 
-		int temp; 
-		ss >> temp; 
-		return temp; 
-	}
-};  
-
 
 	
 
 
 
 
+void xoaKhoangTrangThua(string &s) {
+	int length = s.length();
+	do
+	{
+		if (s[0] == 32)
+		{
+			s.erase(0, 1);
+			length--;
+		}
+	} while (s[0] == 32);
 
+	do {
+		if (s[length - 1] == 32)
+		{
+			s.erase(length - 1, 1); 
+			length--; 
+		}
+	} while (s[length - 1] == 32);
+
+	for (int i = 1; i < length - 1; i++)
+	{
+		if (s[i] == 32 && s[i + 1] == 32)
+		{
+			s.erase(i, 1);
+			length--;
+			i--;
+		}
+	}
+}
+
+
+
+void chuanHoaTen(string &s) {
+
+	xoaKhoangTrangThua(s);
+	int index = 1;
+	int n = s.length();
+	if (s[0] >= 97 && s[0] <= 122) 
+	{
+		s[0] = s[0] - 32;
+	}
+	while (index < n)
+	{
+		if (s[index] == 32   ) 
+		{
+				if (s[index + 1] >= 97 && s[index + 1] <= 122) 
+				{
+					s[index + 1] = s[index + 1] - 32;
+					index++;
+					
+				}
+		}
+		
+		else if (s[index] >= 65 && s[index] <= 90)
+			{
+				s[index] = s[index] + 32;
+			}
+		
+		index++;
+	}
+		
+}
 
 
 
