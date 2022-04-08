@@ -4,215 +4,151 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	
-//	int lc; 
-//	CThoaDon cthd1("VT01",1,1,1);
-//  	CThoaDon cthd2("VT02",1,1,1); 
-//  	CThoaDon cthd3("VT03",1,1,1); 
-//  	CThoaDon cthd4("VT04",1,1,1); 
-//  	CThoaDon cthd5("VT05",1,1,1); 
-//  	CThoaDon cthd6("VT06",1,1,1); 
-//  	CThoaDon cthd7("VT07",1,1,1); 
-//  	
-//  	ListCTHD CTHD; 
-//  	
-// 	CTHD.themVaoCuoiCTHD(cthd1); 
-// 	CTHD.themVaoCuoiCTHD(cthd2); 
-//  	CTHD.themVaoCuoiCTHD(cthd3); 
-//  	CTHD.themVaoCuoiCTHD(cthd4); 
-//  	CTHD.themVaoCuoiCTHD(cthd5); 
-//  	CTHD.themVaoCuoiCTHD(cthd6); 
-//  	CTHD.themVaoCuoiCTHD(cthd7); 
-//  	
-//  	while(true) {
-//			   system("cls"); 
-//			   cout << "1.Nhap hoa don"<< endl; 
-//			   cout << "2.Xoa hoa don"<< endl;
-//			   cout << "3.Tim kiem hoa don"<< endl; 
-//			   cout << "4.ket thuc"<< endl;
-//			   cout <<"nhap vao lc : "; 
-//			   cin >> lc; 
-//			   if (lc == 1) { 
-//			   	  string ma; 
-//			   	  float sl; 
-//			   	  float donGia; 
-//			   	  float VAT; 
-//			   	 bool checkMaTrung; 
-//			   	  do {
-//			   	  	
-//					 	 cout << "ma VT: "; 
-//					 	 cin >> ma; 
-//					 	 checkMaTrung = CTHD.timKiemCTHD(ma); 
-//				  }
-//				while(checkMaTrung);  // tra ve neu da tim thay ma nay => 
-//			   	  cout  << "don gia : "; 
-//			   	  cin >> donGia; 
-//			   	  cout  << "so luong: "; 
-//			   	  cin >> sl; 
-//			   	  cout << "VAT: "; 
-//			   	  cin >> VAT; 
-//			   	  CThoaDon temp(ma,sl,donGia,VAT); 
-//			   	  // kiem tra xem su ton tai 
-//			   	  if (CTHD.themVaoCuoiCTHD(temp)) {
-//					 	cout << endl << "them than cong!" << endl; 
+	// khai bao ra 1 chi tiet hoa don 
+	ListCTHD cthd;
+	ifstream filein; 
+	filein.open("data/dataCTHD.txt",ios::in); 
+	cthd.docFileCTHD(filein); 
+	filein.close(); 
+	Date date(1,1,1); 
+	HoaDon hd("hd1",date,"X",cthd); // da tro vao 
+	
+	// sau do ta tao ra 1 dsCTHD 
+	ListHoaDon listHD; 
+	listHD.themVaoDauHD(hd); 
+	listHD.duyetDSHD(); 
+	
+	// chang han nhu bay gio cai hoa don Do muon them hoa don di thi phai lam sao 
+	// tao ra 1 hoa Don tam 
+	
+	CThoaDon temp("duc nguyen",1,1,1); 
+	// tiep tuc them vao tk hd
+	hd.dsCTHD->themVaoDauCTHD(temp); 
+	cout << endl << "thuc hien duyet cthd thong qua hd" << endl; 
+	hd.inHD(); 
+	cout << endl << "thuc hien duyet cthd thong qua danh hd" << endl; 
+	listHD.duyetDSHD(); 
+	
+	cout <<endl << "them vao 1 hoa don nua" << endl; 
+	
+	
+	ListCTHD cthd1;
+	ifstream filein1; 
+	filein1.open("data/CTHD1.txt",ios::in); 
+	cthd1.docFileCTHD(filein1); 
+	filein1.close();
+	// khoi tao 1 tk hoaDon 
+	HoaDon hd1("hd2",date,"L",cthd1); 
+	
+	listHD.themVaoCuoiHD(hd1); 
+	listHD.duyetDSHD(); 
+	
+	
+	
+	// viet chuong trinh nhap 1 dsct hoa don 
+//	ListHoaDon dshd; // danh sach hoa don. 
+//	// trong moi hoa don lai co 1 chi tiet hoa don. 
+//	int lc;
+//	while(true) {
+//	  system("cls"); 
+//	  cout << "1.Nhap hoa don" << endl; 
+//	  cout << "2.Xuat ds hoa don" << endl; 
+//	  cout <<"3.Tim kiem hoa don" << endl; 
+//	  cout <<"4.Xoa hoa don" << endl; 
+//	  cout << "nhap vao lua chon : " ; 
+//	  cin >> lc; 
+//	  
+//	  if (lc == 1) {
+//	  	system("cls"); 
+//	  	int lc1;
+//	  	while(true) {
+//	  		system("cls"); 
+//		  	cout << "1.Nhap hoa don" << endl; 
+//		  	cout << "2.Ket thuc" << endl; 
+//		  	do {
+//				cout << endl << "Nhap vao lua chon: "; 
+//		  		cin >> lc1;
+//		  		cin.ignore(); 
+//			} while(lc1 != 1 && lc1 != 2); 
+//			
+//			string soHD,loai;
+//			if (lc1 == 1) {  
+//				string soHD,loai; 
+//				Date date;
+//				cout << "\nNhap vao so hoa don : ";
+//				getline(cin,soHD); 
+//				date.nhap(); 
+//				cout << "\nNhap vao loai hoa don : "; 
+//				getline(cin,loai); 
+//				system("cls"); 
+//				
+//				cout << endl << "thong tin hoa don" << endl;
+//				cout << "so hoa don: " << soHD << endl; 
+//				cout << "loai hoa don: " << loai  << endl; 
+//				cout << "ngay lap hoa don: "; 
+//				date.hienThiConsole(); 
+//				// nhap xuong toi day tuc la da thoa man roi => them vao 
+//				ListCTHD cthd; 
+//				HoaDon temp(soHD,date,loai,cthd);  // tao ra cthd. 
+//				// them luon thang hoaDon nay vao dsHoaDon 
+//				dshd.themVaoDauHD(temp); 
+//				// ================== NHAP CTHD ===================
+//				int lc11; 
+//				while(true) {
+//					cout <<endl <<  "1.Nhap vao chi tiet hoa don";
+//					cout <<endl << "2.Thoat" <<endl; 
+//					do {
+//						cout << "nhap vao lua chon: "; 
+//						cin >> lc11;
+//						cin.ignore(); 
+//					} while (lc11 != 1 && lc11 != 2);  
 //					
-//				  }
-//				  else {
-//				  	cout << "them that bai! ma VT da ton tai"; 
-//				  }
-//			   	  system("pause"); 
-//			   	  	
-//			   	 
-//			   }
-//			   else if (lc == 2) {
-//			   	 cout << "nhap vao hoa don muon xoa: "; 
-//			   	 string temp; 
-//			   	 cin >> temp; 
-//			   	 if (CTHD.xoaCTHD(temp)) {
-//						cout << endl << "xoa thanh cong"; 
-//				}
-//				else {
-//					cout << endl << "xoa that bai"; 
-//				}
-//				system("pause"); 
-//			   }
-//			   else if (lc == 3) {
-//			   cout << "nhap vao hoa don chi tiet muon tim kiem: "; 
-//			   	 string temp; 
-//			   	 cin >> temp; 
-//			   	 if (CTHD.timKiemCTHD(temp)) {
-//						cout << endl << "co ton tai"; 
-//				}
-//				else {
-//					cout << endl << "khong ton tai!"; 
-//				}
-//				system("pause"); 
-//			 }
-//			 else if (lc == 4) {
-//				break; 
-//			 }
-//			 else if (lc == 5) {
-//			 	CTHD.duyetCTHD(); 
-//			 	system("pause"); 
-//			 }
-//	   
+//					
+//					//  NHAP VAO CHI TIET HOA DON
+//					if (lc11 == 1) {
+//						// nhap vao cthd. 
+//						CThoaDon cthdTemp; 
+//						cout << "nhap vao maVT: "; 
+//						getline(cin,cthdTemp.maVT);
+//						cout << "nhapv so luong: "; 
+//						cin >> cthdTemp.soLuong; 
+//						cout << "nhap vao don gia: "; 
+//						cin >> cthdTemp.donGia;
+//						cout << "nhap vao VAT : "; 
+//						cin >> cthdTemp.VAT; 
+//						temp.dsCTHD->themVaoCuoiCTHD(cthdTemp);  
+//					}
+//					else if (lc11 == 2) {  // NGUNG VIEC CHI TIET HOA DON. 
+//						cout << endl << "chi tiet hoa don 1" << endl; 
+//						dshd.duyetDSHD(); 
+//						system("pause"); 
+//						break; 
+//					}		 
+//				}	
+//			}  
+//		  	else if (lc1 == 2) {   // NGUNG VIET LAP HOA DON. 
+//			  	break; 
+//			  }
+//			   
+//		  }
 //	  }
-  	
-//	ListCTHD dscthd; 
-//	ifstream filein; 
-//	filein.open("data/dataCTHD.txt",ios::in); 
-//	dscthd.docFileCTHD(filein); 
-//	filein.close();   	
-//	dscthd.duyetCTHD(); 
-//	cout << endl << "so luong node : " << dscthd.soLuongCTHD(); 
-//	
-//	// them vao 
-//	CThoaDon cthd6("VT06",1,1,1); 
-// 	CThoaDon cthd7("VT07",1,1,1); 
-//	dscthd.themVaoCuoiCTHD(cthd6); 
-//	dscthd.themVaoCuoiCTHD(cthd7); 
-//	
-//	ofstream fileout; 
-//  	fileout.open("data/dataCTHD.txt",ios::out | ios::trunc);
-//  	dscthd.ghiFileCTHD(fileout); 
-//  	fileout.close(); 
-	
-	// khai bao 1 danh sach nhan vien 
-//	dsNhanVien ds;
-//	// tao them ra nhan vien
-//	NhanVien NV01("NV01","duc","nguyen",1); 
-//	NhanVien NV02("NV02","duc","nguyen",1); 
-//	NhanVien NV03("NV03","duc","nguyen",1); 
-//	NhanVien NV04("NV04","duc","nguyen",1); 
-//	NhanVien NV05("NV05","duc","nguyen",1); 
-//	
-//	// goi toi ham them 
-//	ds.themNV(NV01);
-//	ds.themNV(NV02);
-//	ds.themNV(NV03);
-//	ds.themNV(NV04);
-//	ds.themNV(NV05);
-//	
-//	// duyet code
-//	ds.duyetDSNV(); 
-//	
-//	// tim kiem 
-//	int viTri = ds.timKiemNV("NV06"); 
-//	if ( viTri != -1 ) {
-//		cout << "co tim thay va tai vi tri : " << viTri << endl;
+//	  else if (lc == 2) {
+//		dshd.duyetDSHD(); 
+//		system("pause"); 
+//	  }
+//	  else if (lc == 4) {   // NGUNG
+//	  	break; 
+//	  }
+//	  
 //	}
-//	else {
-//		 cout <<endl<< "khong tim thay!"; 
-//	}
-//	cout << endl << "xoa nv02" << endl; 
-//	if (ds.xoaNV("NV01")) {
-//		cout << "xoa thanh cong" << endl;
-//		ds.duyetDSNV(); 
-//	}
-// 	else {
-//	 	cout << "xoa that bai!"; 
-//	 }
-//	 
-//	 cout << endl << "them nhan vien vao : "<< endl; 
-//	 NhanVien NV06("NV06","duc","nguyen",1);
-//	 if (ds.themNV(NV06)) {
-//	 	cout << endl << "them thanh cong" << endl; 
-//	 	ds.duyetDSNV(); 
-//	 } 
-//	 cout << "so luong nhan vien :" << ds.soLuongNV(); 
+//
 
-	// thu nghiem voi hoa don 
-	
-	// thu nghiem them vai hoaDon Xem sao 
-	Date date(1,2,3); 
-	
-//	HoaDon hd1("HD01",date,"X");
-	HoaDon hd2("HD02",date,"X");
-	HoaDon hd3("HD03",date,"N");
-	HoaDon hd4("HD04",date,"X");
-	HoaDon hd5("HD05",date,"N"); 
-	
-	
-	ListHoaDon hd; 
-	
-	
-//	hd.themVaoCuoiHD(hd1); 
-//	hd.themVaoCuoiHD(hd2); 
-//	hd.themVaoCuoiHD(hd3); 
-//	hd.themVaoCuoiHD(hd4); 
-//	hd.themVaoCuoiHD(hd5); 
-
-//	ifstream filein; 
-//	filein.open("data/dataHoaDon.txt",ios_base::in); 
-//	
-//	hd.docFileHoaDon(filein); 
-//	
-//	filein.close(); 
-//	
-//	hd.duyetDSHD(); 
-
-	Date test(0,0,0); 
-	HoaDon hd1("1",test,"X"); 
-// them chi tiet hoa don vao hoa don 	
-
-	
-	// thuc hien ham xoa
-	// them vao chi tiet hoa don 
-	 CThoaDon ct1("VT01",1,1,1); 
-	 CThoaDon ct2("VT02",2,2,2); 
-	 
-	 
-	  
-	 hd1.dsCTHD.themVaoCuoiCTHD(ct1); 
-	 
-	 hd1.dsCTHD.themVaoCuoiCTHD(ct2); 
-	 
-	
    
-     hd.themVaoCuoiHD(hd1); 
 	
-     
+	
+	
 	 
-	hd.duyetDSHD(); 
+   
 
 	return 0;
 }

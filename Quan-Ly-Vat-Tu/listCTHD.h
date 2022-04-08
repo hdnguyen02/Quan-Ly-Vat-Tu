@@ -11,7 +11,9 @@ struct CThoaDon {
         maVT(maVT), soLuong(soLuong), donGia(donGia), VAT(VAT) {}
     CThoaDon() {} 
     void inCTHD(); 
+
 };
+
 
 
 void CThoaDon::inCTHD() {
@@ -178,6 +180,7 @@ void ListCTHD::giaiPhongCTHD() {
 
  ListCTHD::~ListCTHD(){
  	this->giaiPhongCTHD(); 
+ 	cout << "giai phong cthd"; 
  }
 
 
