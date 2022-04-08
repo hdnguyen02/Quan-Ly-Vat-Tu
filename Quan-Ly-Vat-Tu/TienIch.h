@@ -149,6 +149,17 @@ struct Dates
 		this->nam = 0; 
 	}
 	
+	// viet ra phuong thuc nhap ngay thang nam 
+	void nhap() {
+		cout << "nhap ngay: "; 
+		cin >> this->ngay; 
+		cout << "nhap thang: "; 
+		cin >> this->thang; 
+		cout <<"nhap nam: "; 
+		cin >> this->nam; 
+		cin.ignore(); // xoa di bo nho dem. 
+	}
+	
 	// viet ham doc vao ngay tu file 
 	void docFile(ifstream &filein) { 
 		// doc toi dau / thi dung 
@@ -161,7 +172,11 @@ struct Dates
 		getline(filein,temp); 
 		nam = TienichDoHoa::stringToInt(temp); 
 	}
-
+	
+	// viet ham hien thi ra 
+	void hienThiConsole() {
+		cout << this->ngay << "/" << this->thang << "/"  << this->nam; 
+	}
 	
 };
 
