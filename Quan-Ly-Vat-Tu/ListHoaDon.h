@@ -6,39 +6,42 @@ struct HoaDon {
     string soHD;
     Date date;
     string loai;     // chi nhan 2 gia tri : X ( XUAT ) va N ( NHAP )
-    ListCTHD *dsCTHD; 
-    void inHD();
-    
-    HoaDon() {
-		this->soHD = this->loai = ""; 
-		dsCTHD = new ListCTHD;  
-	}
-//	~HoaDon() {
-//			cout << endl << "giai phong cthd"<< endl; 
-//			delete dsCTHD; 
-//	}
-	
-	HoaDon(string &soHD,Date &date,string &loai,ListCTHD *dsCTHD) : soHD(soHD), date(date), loai(loai),dsCTHD(dsCTHD)
-	{}
+    ListCTHD dsCTHD; 
 };
-void HoaDon::inHD() {
-	cout<<"ma: " <<this->soHD<<" "<<"ngay: "<<this->date.ngay<<"/"<<this->date.thang
-	<<"/"<<this->date.nam<<" loai: "<<this->loai<<endl <<"hoa don chi tiet"<<endl; 
-	this->dsCTHD->duyetCTHD(); 
-}
+
 class NodeHoaDon {
-private:
+	private:
     HoaDon info;
     NodeHoaDon* pNext;
-public:
+	public: 
 	friend class ListHoaDon; 
-    NodeHoaDon() : pNext(NULL) {};
-    NodeHoaDon(HoaDon &info) : info(info.soHD,info.date,info.loai,info.dsCTHD), pNext(NULL) {}
+	NodeHoaDon() : pNext(NULL) {} 
+
+    void themCTHD(const CThoaDon& cthd) {
+		this->info.dsCTHD.themVaoCuoiCTHD(cthd); 
+	}
+
+	void setinfo(string soHD,Date date,string loai) {
+		this->info.soHD = soHD; 
+		this->info.date = date;
+		this->info.loai = loai; 
+	}
+	
+	// lay ra thong tin. 
+	string getSoHD() {
+		return info.soHD; 
+	}
+    void inHD() {
+		cout << "so HD: " << this->info.soHD << endl; 
+		cout << "ngay lap hoa don: "; 
+		this->info.date.hienThiConsole(); 
+		cout << endl << "loai hoa don : "  << this->info.loai << endl; 
+		cout << "hoa don chi tiet: "; 
+		this->info.dsCTHD.duyetCTHD(); 
+	}
 };
 
 
-
-// danh sách liên ket don 
 
 class ListHoaDon {
 private: 
@@ -49,18 +52,21 @@ public:
 	}
 	int soLuongHD(); 
 	NodeHoaDon *timKiemHoaDon(const string &soHD);
-	bool themVaoDauHD(HoaDon &info);
-	bool themVaoCuoiHD(HoaDon &info);
 	void duyetDSHD();
 	bool xoaHD(const string &soHD );
 	void giaiPhongHD();
-	void docFileHoaDon(ifstream &filein); 
-	void ghiFileHoaDon();  
+//	void docFileHoaDon(ifstream &filein); 
+//	void ghiFileHoaDon();  
 	
 	
-	
-	
-	
+	// viet ham themHoaDo 
+	bool themHD(NodeHoaDon *&newNode) {
+		newNode->pNext = head;   
+		head = newNode;
+		return true; 
+		
+	}
+ 
 	
 	
 };
@@ -103,39 +109,40 @@ NodeHoaDon* ListHoaDon::timKiemHoaDon(const string &soHD)
 	}
 	return NULL; 
 }
-bool ListHoaDon::themVaoDauHD(HoaDon &info) {
-	NodeHoaDon* TempNode = this->timKiemHoaDon(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
-	if (TempNode!=NULL) {
-		return false; 
-	}
-	NodeHoaDon* newNode = new NodeHoaDon(info);
-	
-	
-	newNode->pNext = head; // tro den node dau tien 
-	head = newNode;
-	return true;
-}
-bool ListHoaDon::themVaoCuoiHD(HoaDon &info) {
-	NodeHoaDon* TempNode = this->timKiemHoaDon(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
-	if (TempNode!=NULL) {
-		return false; 
-	}
-	NodeHoaDon* newNode = new NodeHoaDon(info); 
-	if (head==NULL) {
-		head = newNode;
-		return true; 
-	}
-	NodeHoaDon* pTemp = head; 
-	while(pTemp->pNext != NULL) {  
-		pTemp = pTemp->pNext;  
-	}
-	pTemp->pNext = newNode; 
-	return true; 
-}
+
+
+//bool ListHoaDon::themVaoDauHD(HoaDon &info) {
+//	
+//	NodeHoaDon* TempNode = this->timKiemHoaDon(soHD);  // neu node nay co ton tai -> khong duoc them. 
+//	if (TempNode!=NULL) {
+//		return false; 
+//	}
+//	NodeHoaDon* newNode = new NodeHoaDon;
+//	newNode->pNext = head; // tro den node dau tien 
+//	head = newNode;
+//	return true;
+//}
+//bool ListHoaDon::themVaoCuoiHD(HoaDon &info) {
+//	NodeHoaDon* TempNode = this->timKiemHoaDon(info.soHD);  // neu node nay co ton tai -> khong duoc them. 
+//	if (TempNode!=NULL) {
+//		return false; 
+//	}
+//	NodeHoaDon* newNode = new NodeHoaDon(); 
+//	if (head==NULL) {
+//		head = newNode;
+//		return true; 
+//	}
+//	NodeHoaDon* pTemp = head; 
+//	while(pTemp->pNext != NULL) {  
+//		pTemp = pTemp->pNext;  
+//	}
+//	pTemp->pNext = newNode; 
+//	return true; 
+//}
 void ListHoaDon::duyetDSHD() {
 	NodeHoaDon* pTemp = head;
 	while(pTemp != NULL) {
-		pTemp->info.inHD(); 
+		pTemp->inHD(); 
 		cout << endl; 
 		pTemp = pTemp->pNext; 
 	}
