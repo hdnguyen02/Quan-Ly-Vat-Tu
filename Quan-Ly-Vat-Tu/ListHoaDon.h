@@ -10,28 +10,16 @@ struct HoaDon {
     void inHD();
     
     HoaDon() {
-//		this->soHD = this->loai = ""; 
-//		dsCTHD = new ListCTHD;  
-//		this->kiemTraNew = true; 
+		this->soHD = this->loai = ""; 
+		dsCTHD = new ListCTHD;  
 	}
-    HoaDon(string soHD,Date date,string loai,ListCTHD &dsCTHD) {
-    	this->soHD = soHD; 
-    	this->date = date; 
-    	this->loai = loai; 
-    	this->dsCTHD = &dsCTHD;
-	}
-
 //	~HoaDon() {
-//		if (kiemTraNew) {
-//			cout <<endl << "giai phong ds" << endl; 
+//			cout << endl << "giai phong cthd"<< endl; 
 //			delete dsCTHD; 
-//		}
 //	}
-//	private:
-//	bool kiemTraNew;
-    
-
-
+	
+	HoaDon(string &soHD,Date &date,string &loai,ListCTHD *dsCTHD) : soHD(soHD), date(date), loai(loai),dsCTHD(dsCTHD)
+	{}
 };
 void HoaDon::inHD() {
 	cout<<"ma: " <<this->soHD<<" "<<"ngay: "<<this->date.ngay<<"/"<<this->date.thang
@@ -45,20 +33,7 @@ private:
 public:
 	friend class ListHoaDon; 
     NodeHoaDon() : pNext(NULL) {};
-    NodeHoaDon(HoaDon &info) {
-		this->info.soHD = info.soHD; 
-		this->info.date = info.date; 
-		this->info.loai = info.loai; 
-		this->info.dsCTHD = info.dsCTHD; 
-		this->pNext = NULL; 
-	}
-
-	
-	// NodeHoaDon (HoaDon &info) : info(info.soHD,info.date,info.loai,info.dsCTHD) , pNext(NULL) {}
-
-   
-	
-	
+    NodeHoaDon(HoaDon &info) : info(info.soHD,info.date,info.loai,info.dsCTHD), pNext(NULL) {}
 };
 
 
@@ -82,8 +57,6 @@ public:
 	void docFileHoaDon(ifstream &filein); 
 	void ghiFileHoaDon();  
 	
-	// viet ham nhap chi tiet hoa don 
-	// viet ham them tao ra 1 node hoa don 
 	
 	
 	
