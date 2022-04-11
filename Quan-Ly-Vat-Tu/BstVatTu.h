@@ -39,13 +39,13 @@ private:
 public:
 	// HAM KHOI TAO, HAM HUY
     BstVatTu() : root(NULL), soLuong(0) { this->docVatTuFile(); };
-    ~BstVatTu(); 
+    ~BstVatTu() { this->giaiPhongVT(root); }; 
     // HAM CHUC NANG
     void hoTroThemVT(NodeVatTu* root, const VatTu& info); 
     bool themVT(const VatTu& info); 
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
-    void giaiPhong(NodeVatTu* root);
+    void giaiPhongVT(NodeVatTu* root);
 	NodeVatTu* timKiemVT(const string& key);
 	bool xoaVT(const string& key); 
 	bool dieuChinhVT(const string& key,const string& tenVT,const string&donViVT) ;
@@ -215,12 +215,12 @@ void BstVatTu::hoTroDuyetCay(NodeVatTu* root) {
 	cout << endl; 
 	hoTroDuyetCay(root->pRight); 
 }	
-void BstVatTu::giaiPhong(NodeVatTu* root) {
+void BstVatTu::giaiPhongVT(NodeVatTu* root) {
 	if (root == NULL) {
 		return; 
 	}
-	giaiPhong(root->pLeft); 
-	giaiPhong(root->pRight); 
+	giaiPhongVT(root->pLeft); 
+	giaiPhongVT(root->pRight); 
 	delete root; 
 }
 
@@ -286,6 +286,4 @@ void BstVatTu::docVatTuFile() {
 }
 
 // ============================================ HAM HUY ============================================
-BstVatTu::~BstVatTu() {
-     this->giaiPhong(root);
-}
+

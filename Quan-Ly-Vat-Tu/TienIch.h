@@ -47,107 +47,15 @@ class TienichDoHoa {
 };  
 
 
-struct Dates
-{
-	int day;
-	int month;
-	int year;
-	
-	Dates()
-	{
-		day = 1;
-		month = 1;
-		year = 1;
-	}
-	bool isValid()
-	{
-		if(month<1 || month>12 || year<0 || day<0 || day>31)
-		{
-			return false;
-		}
-		
-		if (month==2 || month==4 || month==6 || month==9 || month == 11)
-		{
-			if (day > 30)
-				return false;
-			if (month == 2)
-			{
-				if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
-				{
-					if (day > 29)
-						return false;
-				}
-				else
-				{
-					if (day > 28)
-						return false;
-				}
-			}
-		}
-		return true;
-	}
-	
-	bool operator > (const struct Dates &other)
-	{
-		if (this->year > other.year)
-			return true;
-		else if (this->year == other.year) 
-		{
-			if(this->month > other.month)
-				return true;
-			else if (this->month == other.month)
-			{
-				if (this->day > other.day)
-					return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	bool operator < (const struct Dates &other)
-	{
-		if (this->year < other.year)
-			return true;
-		else if (this->year == other.year) 
-		{
-			if(this->month < other.month)
-				return true;
-			else if (this->month == other.month)
-			{
-				if (this->day < other.day)
-					return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	bool operator == (const struct Dates &other)
-	{
-		if (this->year == other.year)
-			if (this->month == other.month)
-				if (this->day == other.day)
-					return true;
-		return false;
-	}
-};
+
  struct Date {
 	int ngay;
 	int thang;
 	int nam;
-	Date(int ngay, int thang, int nam) {
-		this->ngay = ngay; 
-		this->thang = thang; 
-		this->nam = nam; 
-	}
-		
+	Date(int ngay, int thang, int nam) : ngay(ngay), thang(thang), nam(nam) {}
+	Date() : ngay(0) , thang(0) , nam(0) {}
 	
-	Date() {
-		this->ngay = 0; 
-		this->thang = 0; 
-		this->nam = 0; 
-	}
+	
 	
 	// viet ra phuong thuc nhap ngay thang nam 
 	void nhap() {
@@ -162,9 +70,7 @@ struct Dates
 	
 	// viet ham doc vao ngay tu file 
 	void docFile(ifstream &filein) { 
-		// doc toi dau / thi dung 
 		string temp; 
-		
 		getline(filein,temp,'/'); 
 		ngay = TienichDoHoa::stringToInt(temp); 
 		getline(filein,temp,'/'); 
@@ -228,35 +134,10 @@ bool kiTuChuHoacSo(char c) {
 		return false; 
 }
 
-//ham chuan hoa
-void delBlank(char *s)
-{
-	for(int i = 0; i < strlen(s); i++)
-	{
-		if(s[i]==' ')
-		{
-			s[i] = s[i+1];
-			for(int j = i+1;j<strlen(s)-1;j++)
-			{
-				s[j] = s[j+1];
-			}
-			s[strlen(s)-1] = '\0';
-		}
-	}
-}
-
-
-
-
-	
-
-
-
 
 void xoaKhoangTrangThua(string &s) {
 	int length = s.length();
-	do
-	{
+	do {
 		if (s[0] == 32)
 		{
 			s.erase(0, 1);
@@ -265,15 +146,13 @@ void xoaKhoangTrangThua(string &s) {
 	} while (s[0] == 32);
 
 	do {
-		if (s[length - 1] == 32)
-		{
+		if (s[length - 1] == 32) {
 			s.erase(length - 1, 1); 
 			length--; 
 		}
 	} while (s[length - 1] == 32);
 
-	for (int i = 1; i < length - 1; i++)
-	{
+	for (int i = 1; i < length - 1; i++) {
 		if (s[i] == 32 && s[i + 1] == 32)
 		{
 			s.erase(i, 1);
@@ -286,37 +165,115 @@ void xoaKhoangTrangThua(string &s) {
 
 
 void chuanHoaTen(string &s) {
-
 	xoaKhoangTrangThua(s);
 	int index = 1;
 	int n = s.length();
-	if (s[0] >= 97 && s[0] <= 122) 
-	{
+	if (s[0] >= 97 && s[0] <= 122) {
 		s[0] = s[0] - 32;
 	}
-	while (index < n)
-	{
-		if (s[index] == 32   ) 
-		{
-				if (s[index + 1] >= 97 && s[index + 1] <= 122) 
-				{
+	while (index < n) {
+		if (s[index] == 32  ) {
+				if (s[index + 1] >= 97 && s[index + 1] <= 122) {
 					s[index + 1] = s[index + 1] - 32;
-					index++;
-					
+					index++;	
 				}
 		}
 		
-		else if (s[index] >= 65 && s[index] <= 90)
-			{
+		else if (s[index] >= 65 && s[index] <= 90) {
 				s[index] = s[index] + 32;
 			}
-		
 		index++;
 	}
 		
 }
 
 
+
+//struct Dates
+//{
+//	int day;
+//	int month;
+//	int year;
+//	
+//	Dates()
+//	{
+//		day = 1;
+//		month = 1;
+//		year = 1;
+//	}
+//	bool isValid()
+//	{
+//		if(month<1 || month>12 || year<0 || day<0 || day>31)
+//		{
+//			return false;
+//		}
+//		
+//		if (month==2 || month==4 || month==6 || month==9 || month == 11)
+//		{
+//			if (day > 30)
+//				return false;
+//			if (month == 2)
+//			{
+//				if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
+//				{
+//					if (day > 29)
+//						return false;
+//				}
+//				else
+//				{
+//					if (day > 28)
+//						return false;
+//				}
+//			}
+//		}
+//		return true;
+//	}
+//	
+//	bool operator > (const struct Dates &other)
+//	{
+//		if (this->year > other.year)
+//			return true;
+//		else if (this->year == other.year) 
+//		{
+//			if(this->month > other.month)
+//				return true;
+//			else if (this->month == other.month)
+//			{
+//				if (this->day > other.day)
+//					return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
+//	
+//	bool operator < (const struct Dates &other)
+//	{
+//		if (this->year < other.year)
+//			return true;
+//		else if (this->year == other.year) 
+//		{
+//			if(this->month < other.month)
+//				return true;
+//			else if (this->month == other.month)
+//			{
+//				if (this->day < other.day)
+//					return true;
+//			}
+//		}
+//		
+//		return false;
+//	}
+//	
+//	bool operator == (const struct Dates &other)
+//	{
+//		if (this->year == other.year)
+//			if (this->month == other.month)
+//				if (this->day == other.day)
+//					return true;
+//		return false;
+//	}
+//};
 
 
 

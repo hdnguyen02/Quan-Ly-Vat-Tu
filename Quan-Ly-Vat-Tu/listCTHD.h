@@ -6,8 +6,8 @@ struct CThoaDon {
     float soLuong;
     float donGia; 
     float VAT;  // 10% 0,1 
-    // constructor 
-    CThoaDon(string maVT, float soLuong, float donGia, float VAT) :
+
+    CThoaDon(const string& maVT,const float& soLuong,const float& donGia,const float &VAT) :
         maVT(maVT), soLuong(soLuong), donGia(donGia), VAT(VAT) {}
     CThoaDon() {} 
     void inCTHD(); 
@@ -28,7 +28,7 @@ private:
 public:
 	friend class ListCTHD; 
     NodeCTHD() : pNext(NULL) { }
-    NodeCTHD(CThoaDon info) : info(info.maVT, info.soLuong, info.donGia, info.VAT), pNext(NULL) {}
+    NodeCTHD(const CThoaDon &info) : info(info.maVT, info.soLuong, info.donGia, info.VAT), pNext(NULL) {}
 };
 
 class ListCTHD {
@@ -36,11 +36,10 @@ private:
     NodeCTHD* head;   
 public:
     ListCTHD() : head(NULL) {} // khoi tao.
-    ~ListCTHD();    
+    ~ListCTHD() {this->giaiPhongCTHD();}; 
     bool isNull(); 
-    // viet ham push 
-    bool themVaoDauCTHD(const CThoaDon &info);  // return ve true neu them thanh cong  
- 	bool themVaoCuoiCTHD(const CThoaDon &info); 
+    NodeCTHD* themVaoDauCTHD(const CThoaDon &info);  // return ve true neu them thanh cong  
+ 	NodeCTHD* themVaoCuoiCTHD(const CThoaDon &info); 
  	void duyetCTHD(); 
 	NodeCTHD* timKiemCTHD(const string& maVT); 
 	bool xoaCTHD(const string& maVT);
@@ -61,7 +60,6 @@ int ListCTHD::soLuongCTHD() {
 }
 void ListCTHD::ghiFileCTHD(ofstream &fileout) {
 	fileout << this->soLuongCTHD() << endl;  
-	// lap den cuoi danh sach 
 	NodeCTHD* pTemp = head; 
 	while(pTemp != NULL) {
 		fileout << pTemp->info.maVT << "," << pTemp->info.soLuong << "," << pTemp->info.donGia <<
@@ -96,24 +94,24 @@ bool ListCTHD::isNull() {
 	}
 	return false; 
 }
-bool ListCTHD::themVaoDauCTHD(const CThoaDon &info) {  // tem vao dau CTHD 
+NodeCTHD* ListCTHD::themVaoDauCTHD(const CThoaDon &info) {  // tem vao dau CTHD 
 	if (this->timKiemCTHD(info.maVT)) {
-		return false; 
+		return NULL; 
 	}
 	NodeCTHD* newNode = new NodeCTHD(info); 
 	newNode->pNext = head; // tro den node dau tien 
 	head = newNode;
-	return true;
+	return newNode;
 }
 
-bool ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {	
+NodeCTHD* ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {	
 	if (this->timKiemCTHD(info.maVT)) {
-		return false; 
+		return NULL; 
 	}
 	NodeCTHD* newNode = new NodeCTHD(info); 
 	if (this->isNull()) {
 		head = newNode;
-		return true; 
+		return newNode; 
 	}
 	
 	NodeCTHD* pTemp = head; 
@@ -121,7 +119,7 @@ bool ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {
 		pTemp = pTemp->pNext;  
 	}
 	pTemp->pNext = newNode; 
-	return true; 
+	return newNode; 
 }
 void ListCTHD::duyetCTHD() {
 	NodeCTHD* pTemp = head;
@@ -132,8 +130,7 @@ void ListCTHD::duyetCTHD() {
 	}
 }
 
-// ta can phai lam them cac ham sau: ham tiem kiem theo maVT. ( tuc la trong CTHD khong có hai thu can luu y 
-// thu nhat la maVT do can phai ton tai va thu 2 la maVT do khong duoc trung truoc do. 
+
 NodeCTHD* ListCTHD::timKiemCTHD(const string& maVT) {
 	NodeCTHD* pTemp = head; 
 	while(pTemp != NULL) {
@@ -178,9 +175,6 @@ void ListCTHD::giaiPhongCTHD() {
 	 }
 }
 
- ListCTHD::~ListCTHD(){
- 	this->giaiPhongCTHD(); 
- 	cout << "giai phong cthd"; 
- }
+
 
 
