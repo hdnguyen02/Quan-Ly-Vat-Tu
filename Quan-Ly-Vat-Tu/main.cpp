@@ -1,121 +1,140 @@
 #include "MenuQLVT.h"
 using namespace std;
 
+ 
+void themHoaDon(ListHoaDon &DSHD) {	
+			string soHD,loai; 
+			Date date; 
+			cout << "nhap vao so HD: "; 
+			getline(cin,soHD); 
+			cout <<"nhap vao loai HD: "; 
+			getline(cin,loai);
+			date.nhap(); 
+			NodeHoaDon* newHoaDon = DSHD.themVaoCuoiHD(soHD,date,loai);  // da tu NEW RA. 
+			while(true) {
+				cout << endl << "1.nhap vao CTHD" << endl; 
+				cout << "2.Ket thuc" << endl;
+				int lc1; 
+				cout << "nhap vao lc: "; cin >> lc1; cin.ignore(); 
+				if (lc1 == 1) {
+					CThoaDon temp; 
+					cout << "nhap vao maVT: "; 
+					getline(cin,temp.maVT); 
+					cout << "nhap vao so luong don gia VAT: "; 
+					cin >> temp.donGia >> temp.soLuong >> temp.VAT; 
+					newHoaDon->themCTHD(temp); 
+				}
+				else if (lc1 == 2) {
+					break; 
+				}
+			} 
+}
+ 
+void nhapNV() {
+	dsNhanVien DSNV; 
+	while(true) {
+		system("cls"); 
+		cout << "1.Nhap nhan vien" << endl; 
+		cout <<"2.Xuat ds nhan vien" << endl; 
+		cout << "3.Them hoa don vao nhan vien" << endl; 
+		cout <<"4.Xuat hoa don do nv nhap vao" << endl; 
+		cout << "5.ket thuc" << endl;
+		
+		int lc; cout << "nhap vao lua chon : ";  
+		cin >> lc; 
+		cin.ignore();
+		if (lc == 1) {
+			string maNV,ho,ten; 
+			int phai = 0 ;
+			cout << endl << "nhap vao maNV: "; 
+			getline(cin,maNV); 
+			cout << "nhap vao ho: ";
+			getline(cin,ho); 
+			cout << "nhap vao ten : "; 
+			getline(cin,ten); 
+			DSNV.themNV(maNV,ho,ten,phai); 
+		}
+		else if (lc == 2) {
+			cout << endl << "ds nhan vien: " << endl; 
+			DSNV.duyetDSNV(); 
+			system("pause"); 
+		}
+		else if (lc == 3) {
+			system("cls"); 
+			cout << "nhap vao ma nv can lap hoa don: "; 
+			string temp; 
+			getline(cin,temp); 
+			NhanVien* tempNV = DSNV.timKiemNVTraVeDiaChi(temp);  // tim Kiem. 
+			if (tempNV) {
+				themHoaDon(tempNV->dsHoaDon);
+			}
+			else {
+				cout << endl << "khong ton tai nhan vien nay!"; 
+				
+			}
+			
+		}
+		
+		else if (lc == 4) {
+			string soNV;
+			
+			cout << "nhap vao soNV: "; 
+			getline(cin,soNV); 
+			NhanVien* tempNV = DSNV.timKiemNVTraVeDiaChi(soNV); 
+			if (tempNV) {
+				// thuc hien in ra 
+				tempNV->dsHoaDon.duyetDSHD(); 
+			}
+			else {
+				 cout << endl << "khong ton tai nhan vien nay!"; 
+			}	
+			system("pause"); 
+		}	
+		else if (lc == 5) {
+			break; 
+		}
+		
+	}
+	
+}
+
 
 int main(int argc, char *argv[]) {
 	
-//	int lc; 
-//	CThoaDon cthd1("VT01",1,1,1);
-//  	CThoaDon cthd2("VT02",1,1,1); 
-//  	CThoaDon cthd3("VT03",1,1,1); 
-//  	CThoaDon cthd4("VT04",1,1,1); 
-//  	CThoaDon cthd5("VT05",1,1,1); 
-//  	CThoaDon cthd6("VT06",1,1,1); 
-//  	CThoaDon cthd7("VT07",1,1,1); 
-//  	
-//  	ListCTHD CTHD; 
-//  	
-// 	CTHD.themVaoCuoiCTHD(cthd1); 
-// 	CTHD.themVaoCuoiCTHD(cthd2); 
-//  	CTHD.themVaoCuoiCTHD(cthd3); 
-//  	CTHD.themVaoCuoiCTHD(cthd4); 
-//  	CTHD.themVaoCuoiCTHD(cthd5); 
-//  	CTHD.themVaoCuoiCTHD(cthd6); 
-//  	CTHD.themVaoCuoiCTHD(cthd7); 
-//  	
-//  	while(true) {
-//			   system("cls"); 
-//			   cout << "1.Nhap hoa don"<< endl; 
-//			   cout << "2.Xoa hoa don"<< endl;
-//			   cout << "3.Tim kiem hoa don"<< endl; 
-//			   cout << "4.ket thuc"<< endl;
-//			   cout <<"nhap vao lc : "; 
-//			   cin >> lc; 
-//			   if (lc == 1) { 
-//			   	  string ma; 
-//			   	  float sl; 
-//			   	  float donGia; 
-//			   	  float VAT; 
-//			   	 bool checkMaTrung; 
-//			   	  do {
-//			   	  	
-//					 	 cout << "ma VT: "; 
-//					 	 cin >> ma; 
-//					 	 checkMaTrung = CTHD.timKiemCTHD(ma); 
-//				  }
-//				while(checkMaTrung);  // tra ve neu da tim thay ma nay => 
-//			   	  cout  << "don gia : "; 
-//			   	  cin >> donGia; 
-//			   	  cout  << "so luong: "; 
-//			   	  cin >> sl; 
-//			   	  cout << "VAT: "; 
-//			   	  cin >> VAT; 
-//			   	  CThoaDon temp(ma,sl,donGia,VAT); 
-//			   	  // kiem tra xem su ton tai 
-//			   	  if (CTHD.themVaoCuoiCTHD(temp)) {
-//					 	cout << endl << "them than cong!" << endl; 
-//					
-//				  }
-//				  else {
-//				  	cout << "them that bai! ma VT da ton tai"; 
-//				  }
-//			   	  system("pause"); 
-//			   	  	
-//			   	 
-//			   }
-//			   else if (lc == 2) {
-//			   	 cout << "nhap vao hoa don muon xoa: "; 
-//			   	 string temp; 
-//			   	 cin >> temp; 
-//			   	 if (CTHD.xoaCTHD(temp)) {
-//						cout << endl << "xoa thanh cong"; 
-//				}
-//				else {
-//					cout << endl << "xoa that bai"; 
-//				}
-//				system("pause"); 
-//			   }
-//			   else if (lc == 3) {
-//			   cout << "nhap vao hoa don chi tiet muon tim kiem: "; 
-//			   	 string temp; 
-//			   	 cin >> temp; 
-//			   	 if (CTHD.timKiemCTHD(temp)) {
-//						cout << endl << "co ton tai"; 
-//				}
-//				else {
-//					cout << endl << "khong ton tai!"; 
-//				}
-//				system("pause"); 
-//			 }
-//			 else if (lc == 4) {
-//				break; 
-//			 }
-//			 else if (lc == 5) {
-//			 	CTHD.duyetCTHD(); 
-//			 	system("pause"); 
-//			 }
-//	   
-//	  }
-  	
-//	ListCTHD dscthd; 
-//	ifstream filein; 
-//	filein.open("data/dataCTHD.txt",ios::in); 
-//	dscthd.docFileCTHD(filein); 
-//	filein.close();   	
-//	dscthd.duyetCTHD(); 
-//	cout << endl << "so luong node : " << dscthd.soLuongCTHD(); 
-//	
-//	// them vao 
-//	CThoaDon cthd6("VT06",1,1,1); 
-// 	CThoaDon cthd7("VT07",1,1,1); 
-//	dscthd.themVaoCuoiCTHD(cthd6); 
-//	dscthd.themVaoCuoiCTHD(cthd7); 
-//	
-//	ofstream fileout; 
-//  	fileout.open("data/dataCTHD.txt",ios::out | ios::trunc);
-//  	dscthd.ghiFileCTHD(fileout); 
-//  	fileout.close(); 
-  	
-
+	
+	system("pause"); 
 	return 0;
 }
+
+
+//void themHoaDon(ListHoaDon &DSHD) {	
+//			string soHD,loai; 
+//			Date date; 
+//			cout << "nhap vao so HD: "; 
+//			getline(cin,soHD); 
+//			cout <<"nhap vao loai HD: "; 
+//			getline(cin,loai); 
+//			NodeHoaDon* newHoaDon = new NodeHoaDon(soHD,date,loai); 
+//			while(true) {
+//				cout << endl << "1.nhap vao CTHD" << endl; 
+//				cout << "2.Ket thuc" << endl;
+//				int lc1; 
+//				cout << "nhap vao lc: "; cin >> lc1; cin.ignore(); 
+//				if (lc1 == 1) {
+//					// tao ra 1 thang CTHD 
+//					CThoaDon temp; 
+//					// nhap vaoCTHD
+//					cout << "nhap vao maVT: "; 
+//					getline(cin,temp.maVT); 
+//					cout << "nhap vao so luong don gia VAT: "; 
+//					cin >> temp.donGia >> temp.soLuong >> temp.VAT; 
+//					// them thang hoa Don nay Vao 
+//					newHoaDon->themCTHD(temp); 
+//				}
+//				else if (lc1 == 2) {
+//					break; 
+//				}
+//			} 
+//			// them thang Node này vao 
+//			DSHD.themHD(newHoaDon); 
+//}
