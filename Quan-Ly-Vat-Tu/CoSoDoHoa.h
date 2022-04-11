@@ -205,6 +205,7 @@ struct OVuong {
 	 	this->w = w; 
 	 	this->h = h; 
 	 	this->mauOVuong = mauOVuong; 
+	 	this->veOVuong(); 
 	 	
 	 }
 	OVuong() {
@@ -212,6 +213,7 @@ struct OVuong {
 		y = 0; 
 	}
 	void veOVuong() {
+		setcolor(mauOVuong);
 		rectangle(x, y, x + w, y + h);
 	}
 };

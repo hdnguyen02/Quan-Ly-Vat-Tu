@@ -7,6 +7,9 @@ using namespace std;
 #include <sstream>
 #include<winbgim.h>
 #include <iostream>
+#include <windows.h>
+#include <ctime>
+
 
 
 class TienichDoHoa {
@@ -82,6 +85,15 @@ class TienichDoHoa {
 	// viet ham hien thi ra 
 	void hienThiConsole() {
 		cout << this->ngay << "/" << this->thang << "/"  << this->nam; 
+	}
+	
+
+    void setDateNow() {
+		time_t t = time(0);
+		 tm* now = localtime(&t);
+		 this->nam = now->tm_year + 1900; 
+		 this->thang = now->tm_mon + 1; 
+		 this->ngay = now->tm_mday; 
 	}
 	
 };

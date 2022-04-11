@@ -99,10 +99,19 @@ void nhapNV() {
 }
 
 
+
 int main(int argc, char *argv[]) {
+	StartBGI start; 
+	dsNhanVien DSNV;  
+	BstVatTu dsVatTu; // danh sach vat tu 
+	menuQuanLyVatTu(dsVatTu,DSNV); 
+
+    // thu nghiem tao mess bõx 
+    
 	
 	
-	system("pause"); 
+	
+	
 	return 0;
 }
 
