@@ -7,6 +7,9 @@ using namespace std;
 #include <sstream>
 #include<winbgim.h>
 #include <iostream>
+#include <windows.h>
+#include <ctime>
+
 
 
 class TienichDoHoa {
@@ -75,13 +78,49 @@ class TienichDoHoa {
 		ngay = TienichDoHoa::stringToInt(temp); 
 		getline(filein,temp,'/'); 
 		thang = TienichDoHoa::stringToInt(temp); 
-		getline(filein,temp); 
+		getline(filein,temp,','); 
 		nam = TienichDoHoa::stringToInt(temp); 
 	}
 	
+	void ghiFile(ofstream &fileout) {
+		// ghi vao ngay/thang/nam kem theo dau / 
+		fileout << ngay << "/" << thang << "/" << nam; // chi nen ghi toi day thoi. con nhieu de do phia kia xu ly.
+	}
 	// viet ham hien thi ra 
 	void hienThiConsole() {
 		cout << this->ngay << "/" << this->thang << "/"  << this->nam; 
+	}
+	
+
+    void setDateNow() {
+		time_t t = time(0);
+		 tm* now = localtime(&t);
+		 this->nam = now->tm_year + 1900; 
+		 this->thang = now->tm_mon + 1; 
+		 this->ngay = now->tm_mday; 
+	}
+	
+	// viet ham kiem tra su dung dang cua ngay thang nam 
+	static bool hopLeNgay(int ngay) {
+		if (ngay > 0 && ngay <=31) {
+			// duoc cho la ngay hop le! 
+			return true; 
+		}
+		return false; 
+	}
+	// kiemTra Tinh Hop Le Cua thang 
+	static bool hopLeThang(int thang) {
+		if (thang > 0 && thang <= 12) {
+			return true ;
+		}
+		return false; 
+	}
+	static bool hopLeNam(int nam) {
+		string tempNam = TienichDoHoa::intToString(nam); 
+		if (tempNam.length() == 4 ) {
+			return true; 
+		} 
+		return false; 
 	}
 	
 };
@@ -133,7 +172,25 @@ bool kiTuChuHoacSo(char c) {
 		}
 		return false; 
 }
+//bool kiTuSoKhongCach(char c) {
+//	if (kiTuSo(c) && khongPhaiKhoanCach(c)) {
+//		
+//	}
+//}
+// viet ham kiemTra khong phai kiTu khoan cach 
+bool khongPhaiKhoanCach(char c) {
+	if (c != 32) {
+		return true; 
+	}
+	return false; 
+} 
 
+bool kiTuChuHoacSoKhongCach(char c) {
+	if ((kiTuChu(c) || kiTuSo(c)) && khongPhaiKhoanCach(c) ) {
+		return true; 
+	}
+	return false; 
+}
 
 void xoaKhoangTrangThua(string &s) {
 	int length = s.length();
@@ -161,6 +218,9 @@ void xoaKhoangTrangThua(string &s) {
 		}
 	}
 }
+
+// viet ham chi nhap so khong nhan khoanTrang 
+
 
 
 

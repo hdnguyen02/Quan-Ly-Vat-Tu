@@ -6,12 +6,15 @@ using namespace std;
 #include "dsNhanVien.h"
 #include "CoSoDoHoa.h"
 #include "DoHoaVT.h"
+#include "DoHoaHD.h"
+
+
 
 
 
 
 // ===================================MENU ROOT=========================================================
-void menuCha(BstVatTu &dsVatTu) {  
+void menuCha(BstVatTu &dsVatTu,dsNhanVien &DSNV) {  
 	int index = -1;  
 	int doDai = DODAIMANHINH / 4 - 16; 
 	const int chieuCaoMenuCap1 = 40;  
@@ -28,12 +31,13 @@ void menuCha(BstVatTu &dsVatTu) {
 	int my = -1;
 	while (true) {
 		if (index != -1) {
-			if (index == 0) {
+			if (index == ID_VT) {
 				index = -1 ; 
 				hienThiTinhNangVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu); 
 			}
-			else if (index == 1) {
-			
+			else if (index == ID_HD) {
+				index = -1; 
+				hienThiTinhNangHoaDon(dsVatTu,DSNV,index,vatTu,nhanVien,doanhThu); 
 			}
 		}
 		if (ismouseclick(WM_MOUSEMOVE)) {
@@ -55,6 +59,7 @@ void menuCha(BstVatTu &dsVatTu) {
 			else if (hoaDon.isMouseHover(xclick, yclick)) {
 				hoaDon.duocTroVao = true;
 				hoaDon.veNut(); 
+				hienThiTinhNangHoaDon(dsVatTu,DSNV,index,vatTu,nhanVien,doanhThu); 
 			}
 			else if (nhanVien.isMouseHover(xclick, yclick)) {
 				nhanVien.duocTroVao = true;
@@ -70,10 +75,10 @@ void menuCha(BstVatTu &dsVatTu) {
 }
 
 // =================================MENU NHAN THAM SO==============================================
-void menuQuanLyVatTu(BstVatTu &dsVatTu) {  
+void menuQuanLyVatTu(BstVatTu &dsVatTu,dsNhanVien &DSNV) {  
 	setfillstyle(SOLID_FILL, BACKGROUP);  
 	bar(0, 0, 3000, 3000);
-	menuCha(dsVatTu); 
+	menuCha(dsVatTu,DSNV); 
 }
 
 

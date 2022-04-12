@@ -77,10 +77,10 @@ struct NutBam {
 struct ONhap {
 	int x,y, w, h,SLKTTD;
 	string boNhoDem; 
-	int widthTitle;  
+	int widthTitle,colorTitle,colorBgoiY; 
 	string tieuDe; 
 	ONhap() {}	
-	ONhap(int x,int y,int w,int h,int widthTitle,string tieuDe,int SLKTTD) { 
+	ONhap(int x,int y,int w,int h,int widthTitle,string tieuDe,int colorTitle,int colorBgoiY,int SLKTTD) { 
 		this->x= x; 
 		this->y = y; 
 		this->w = w; 
@@ -89,10 +89,12 @@ struct ONhap {
 		this->widthTitle = widthTitle;  
 		this->boNhoDem = ""; 
 		this->SLKTTD = SLKTTD;  // so luong ki tu duoc nhap. 	
+		this->colorTitle = colorTitle; 
+		this->colorBgoiY = colorBgoiY; 
 	}
 
 	void veONhap() {
-		NutBam boxTieuDe(x,y,widthTitle,h,2,3,7,tieuDe); 
+		NutBam boxTieuDe(x,y,widthTitle,h,colorTitle,3,7,tieuDe); 
 		boxTieuDe.veNut(); 		
 		setfillstyle(SOLID_FILL,COLOR_BACKGROUP_INPUT); 
 		bar(x + widthTitle,y, x+ widthTitle + w , y+h);  
@@ -153,9 +155,9 @@ struct ONhap {
 			else if (SLKTTD <= boNhoDem.length()) {
 				this->xoaGoiY(); 
 				setcolor(4);
-				setbkcolor(15);
+				setbkcolor(colorBgoiY);
 				string temp = "toi da " + TienichDoHoa::intToString(SLKTTD) + " ki tu!"; 
-				settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
 				outtextxy(x,y + h + 3,&temp[0]); 
 			}
  			else if (c == SPACE ) {
@@ -169,14 +171,15 @@ struct ONhap {
 			else if (!loaiKiTu(c)) {
 				this->xoaGoiY();
 				setcolor(4); 
-				settextstyle(TRIPLEX_FONT, HORIZ_DIR, 1);
+				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
+				setbkcolor(colorBgoiY); 
 				outtextxy(x,y + h + 3,(char*) goiY.c_str()); 	
 			}					
 		} while (!the_end);
 	}
 	
 	void xoaGoiY() {
-		TienichDoHoa::xoaManHinhTheoToaDo(x -2,y+ 1 + h,w,25,15); 	
+		TienichDoHoa::xoaManHinhTheoToaDo(x -2,y+ 1 + h,w + 40,25,colorBgoiY); 	
 	}
 	void resetBoNhoDem() {
 		this->boNhoDem = ""; 
@@ -205,6 +208,7 @@ struct OVuong {
 	 	this->w = w; 
 	 	this->h = h; 
 	 	this->mauOVuong = mauOVuong; 
+	 	this->veOVuong(); 
 	 	
 	 }
 	OVuong() {
@@ -212,6 +216,7 @@ struct OVuong {
 		y = 0; 
 	}
 	void veOVuong() {
+		setcolor(mauOVuong);
 		rectangle(x, y, x + w, y + h);
 	}
 };

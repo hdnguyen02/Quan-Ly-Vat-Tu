@@ -93,15 +93,33 @@ void nhapNV() {
 		else if (lc == 5) {
 			break; 
 		}
-		
 	}
-	
 }
 
 
+
 int main(int argc, char *argv[]) {
+//	StartBGI start; 
+//	dsNhanVien DSNV;  
+//	BstVatTu dsVatTu; // danh sach vat tu 
+//	menuQuanLyVatTu(dsVatTu,DSNV); 
+//	ifstream filein; 
+//	filein.open("data/dataNhanVien.txt",ios::in); 
+//	NhanVien temp; 
+//	temp.docFileNV(filein); 
+//	filein.close(); 
+//	temp.inNV(); 
+
+	// khai bao ra 1 dsNV 
+	dsNhanVien DSNV; 
+	
+	// xoa 1 thang nv chang han 
+	DSNV.xoaNV("nv2"); // xoa di thang nv1 
 	
 	
+	
+	
+	 
 	system("pause"); 
 	return 0;
 }

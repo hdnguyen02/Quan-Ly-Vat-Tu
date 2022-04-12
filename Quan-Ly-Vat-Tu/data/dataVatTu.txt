@@ -1,4 +1,4 @@
-10
+16
 VT05,Vat tu 0,kg,12
 VT02,Vat tu 0,kg,12
 VT01,Vat tu 0,kg,12
@@ -9,3 +9,9 @@ VT11,Vat tu 0,kg,12
 VT33,Vat tu 0,kg,12
 VT22,Vat tu 0,kg,12
 VT98,Vat tu 0,kg,12
+fdf,fgf,gf,455
+dfdfdf,dfdf,sdsd,6565
+fgfgf,fgf,dfdf,565
+fg,ghg,fgf,56
+fgfg,fgf,fgfg,45
+gfg,gf,hfg,45
