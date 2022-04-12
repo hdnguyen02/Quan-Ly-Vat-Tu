@@ -78,10 +78,14 @@ class TienichDoHoa {
 		ngay = TienichDoHoa::stringToInt(temp); 
 		getline(filein,temp,'/'); 
 		thang = TienichDoHoa::stringToInt(temp); 
-		getline(filein,temp); 
+		getline(filein,temp,','); 
 		nam = TienichDoHoa::stringToInt(temp); 
 	}
 	
+	void ghiFile(ofstream &fileout) {
+		// ghi vao ngay/thang/nam kem theo dau / 
+		fileout << ngay << "/" << thang << "/" << nam; // chi nen ghi toi day thoi. con nhieu de do phia kia xu ly.
+	}
 	// viet ham hien thi ra 
 	void hienThiConsole() {
 		cout << this->ngay << "/" << this->thang << "/"  << this->nam; 
