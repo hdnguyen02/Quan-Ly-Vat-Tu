@@ -96,6 +96,29 @@ class TienichDoHoa {
 		 this->ngay = now->tm_mday; 
 	}
 	
+	// viet ham kiem tra su dung dang cua ngay thang nam 
+	static bool hopLeNgay(int ngay) {
+		if (ngay > 0 && ngay <=31) {
+			// duoc cho la ngay hop le! 
+			return true; 
+		}
+		return false; 
+	}
+	// kiemTra Tinh Hop Le Cua thang 
+	static bool hopLeThang(int thang) {
+		if (thang > 0 && thang <= 12) {
+			return true ;
+		}
+		return false; 
+	}
+	static bool hopLeNam(int nam) {
+		string tempNam = TienichDoHoa::intToString(nam); 
+		if (tempNam.length() == 4 ) {
+			return true; 
+		} 
+		return false; 
+	}
+	
 };
 
 class StartBGI {
@@ -145,7 +168,25 @@ bool kiTuChuHoacSo(char c) {
 		}
 		return false; 
 }
+//bool kiTuSoKhongCach(char c) {
+//	if (kiTuSo(c) && khongPhaiKhoanCach(c)) {
+//		
+//	}
+//}
+// viet ham kiemTra khong phai kiTu khoan cach 
+bool khongPhaiKhoanCach(char c) {
+	if (c != 32) {
+		return true; 
+	}
+	return false; 
+} 
 
+bool kiTuChuHoacSoKhongCach(char c) {
+	if ((kiTuChu(c) || kiTuSo(c)) && khongPhaiKhoanCach(c) ) {
+		return true; 
+	}
+	return false; 
+}
 
 void xoaKhoangTrangThua(string &s) {
 	int length = s.length();
@@ -173,6 +214,9 @@ void xoaKhoangTrangThua(string &s) {
 		}
 	}
 }
+
+// viet ham chi nhap so khong nhan khoanTrang 
+
 
 
 

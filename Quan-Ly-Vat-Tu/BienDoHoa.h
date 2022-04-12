@@ -36,7 +36,7 @@ const int COLOR_HIGHT_BTN_SUB = 8;
 // dinh nghia mau nen o Nhap 
 const int COLOR_BACKGROUP_INPUT = 7;
 const int CACH_LE_O_NHAP = 10;   // cach cai thanh o nhap ra bao nhieu px
-const int COLOR_TEXT_INPUT = 2;
+const int COLOR_TEXT_INPUT = 4;
 
 
 // bien mau khi in ra  

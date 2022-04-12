@@ -28,7 +28,7 @@ void hienThiHieuChinhVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam 
 	const int cachLeTrenInput = cachLeTrenBox + 100; 
 	const int chieuCaoInput = 40; 
 	const int slktMaVT = 10; 
-	ONhap nhapMaVT(cachLeInput,cachLeTrenInput,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ma",10);
+	ONhap nhapMaVT(cachLeInput,cachLeTrenInput,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ma",2,15,10);
 	NutBam timKiem(mxTieuDe,cachLeTrenBox + 256,chieuDaiBox,40,8,9,10,"tim kiem"); 
 	tieuDe.veNut(); 
 	box.veNut();
@@ -52,8 +52,8 @@ void hienThiHieuChinhVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam 
 					box.veNut(); // ve lai o Vuong
 					// hien thi ra 2 cai de co the chinh xua 
 					tieuDe.veNut(); 
-					ONhap dieuChinhTenVT(cachLeInput - 200,cachLeTrenInput - 80,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"ten",50);
-					ONhap dieuChinhDVT(cachLeInput - 200,cachLeTrenInput - 20,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"dvt",50);
+					ONhap dieuChinhTenVT(cachLeInput - 200,cachLeTrenInput - 80,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"ten",2,15,50);
+					ONhap dieuChinhDVT(cachLeInput - 200,cachLeTrenInput - 20,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"dvt",2,15,50);
 					
 					dieuChinhTenVT.boNhoDem = pTempVT->getInfo().ten; 
 					dieuChinhDVT.boNhoDem = pTempVT->getInfo().donVi; 
@@ -108,10 +108,10 @@ void hienThiInputVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoa
 	const int cachLeTrenInput = cachLeTrenBox + 10; 
 	const int chieuCaoInput = 40; 
 	const int slktMaVT = 10; 
-	ONhap nhapMaVT(cachLeInput,cachLeTrenInput,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ma",10);
-	ONhap nhapTenVT(cachLeInput,cachLeTrenInput  + chieuCaoInput+ 32,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ten",10);
-	ONhap nhapDVT(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*2,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"don vi tinh",10); 
-	ONhap nhapSLTon(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*3,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"so luong ton",10); 
+	ONhap nhapMaVT(cachLeInput,cachLeTrenInput,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ma",2,15,10);
+	ONhap nhapTenVT(cachLeInput,cachLeTrenInput  + chieuCaoInput+ 32,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"ten",2,15,10);
+	ONhap nhapDVT(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*2,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"don vi tinh",2,15,10); 
+	ONhap nhapSLTon(cachLeInput,cachLeTrenInput  + (chieuCaoInput+ 32)*3,chieuDaiInput,chieuCaoInput,chieuDaiTieuDe,"so luong ton",2,15,10); 
 	const int chieuDaiNutBam = 100; 
 	NutBam lamMoi(cachLeInput,cachLeTrenInput+(chieuCaoInput+ 32)*4,chieuDaiNutBam,chieuCaoInput,3,4,8,"lam moi");
 	NutBam luu(cachLeInput + 357 + 200,cachLeTrenInput+(chieuCaoInput+ 32)*4,chieuDaiNutBam,chieuCaoInput,3,4,8,"luu");

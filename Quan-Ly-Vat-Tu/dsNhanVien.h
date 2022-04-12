@@ -94,7 +94,6 @@ public:
 		if (this->dsRong() || viTriXoa == -1 ) {
 			return false; 
 		}
-		
 		for (int i = viTriXoa;i < this->soLuong;i++ ) {
 			nv[i] = nv[i + 1]; 
 		}

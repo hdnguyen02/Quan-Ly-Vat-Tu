@@ -105,13 +105,6 @@ int main(int argc, char *argv[]) {
 	dsNhanVien DSNV;  
 	BstVatTu dsVatTu; // danh sach vat tu 
 	menuQuanLyVatTu(dsVatTu,DSNV); 
-
-    // thu nghiem tao mess bõx 
-    
-	
-	
-	
-	
 	return 0;
 }
 

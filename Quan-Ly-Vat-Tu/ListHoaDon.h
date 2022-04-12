@@ -52,7 +52,7 @@ public:
 	void giaiPhongHD();
 	NodeHoaDon* themVaoDauHD(const string &soHD,const Date &date,const string& loai); 
 	NodeHoaDon* themVaoCuoiHD(const string &soHD,const Date &date,const string& loai); 
-//	void docFileHoaDon(ifstream &filein); 
+	void docFileHoaDon(ifstream &filein); 
 //	void ghiFileHoaDon();  
 	
 	
@@ -74,19 +74,19 @@ int ListHoaDon::soLuongHD() {
 	}
 	return dem; 
 }
-//void ListHoaDon::docFileHoaDon(ifstream &filein) {
-//	int soLuongHD; 
-//	filein >> soLuongHD;
-//	filein.ignore();
-//	HoaDon temp;  
-//	for (int i = 0; i < soLuongHD;i++) {
-//		getline(filein,temp.soHD,','); 
-//		getline(filein,temp.loai,','); 
-//		filein.ignore(); 
-//		temp.dsCTHD.docFileCTHD(filein); 	  // doc sogn da tui dong xuong dong. 
-//		this->themVaoCuoiHD(temp); 
-//	}
-//}
+void ListHoaDon::docFileHoaDon(ifstream &filein) {
+	int soLuongHD; 
+	filein >> soLuongHD;
+	filein.ignore();
+	HoaDon temp;  
+	for (int i = 0; i < soLuongHD;i++) {
+		getline(filein,temp.soHD,','); 
+		getline(filein,temp.loai,','); 
+		filein.ignore(); 
+		temp.dsCTHD.docFileCTHD(filein); 	  // doc sogn da tui dong xuong dong. 
+		this->themVaoCuoiHD(temp); 
+	}
+}
 
 // khi truyen vao constructor hay truyen vao thang
 
