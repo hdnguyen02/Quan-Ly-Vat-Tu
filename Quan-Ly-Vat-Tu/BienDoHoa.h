@@ -42,3 +42,17 @@ const int COLOR_TEXT_INPUT = 4;
 // bien mau khi in ra  
 const int CinputText = 14; 
 const int colorLight = 15; 
+
+
+
+// bien lam viec voi hoa don
+const int canLeTrenHD = 120; 
+	const int canLeNgangHD = 16;
+	const int WHD = 90; 
+	const int HHD = 46;
+	const int mauNhapXuat = 14; 
+	const int mauHightNhapXuat = 14;
+	const int doDaiCoban = DODAIMANHINH/9 - 15; 
+	const int colorTieuDe = 15; 
+	const int conlorTextTieuDe = 0; 
+	const int margin = 60; 

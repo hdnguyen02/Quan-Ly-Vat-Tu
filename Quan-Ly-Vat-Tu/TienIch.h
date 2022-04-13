@@ -47,6 +47,58 @@ class TienichDoHoa {
 		ss >> temp; 
 		return temp; 
 	}
+	
+	
+	static void xoaKhoangTrangThua(string &s) {
+	int length = s.length();
+	do {
+		if (s[0] == 32)
+		{
+			s.erase(0, 1);
+			length--;
+		}
+	} while (s[0] == 32);
+
+	do {
+		if (s[length - 1] == 32) {
+			s.erase(length - 1, 1); 
+			length--; 
+		}
+	} while (s[length - 1] == 32);
+
+	for (int i = 1; i < length - 1; i++) {
+		if (s[i] == 32 && s[i + 1] == 32)
+		{
+			s.erase(i, 1);
+			length--;
+			i--;
+		}
+	}
+}
+
+
+static void chuanHoaTen(string &s) {
+	xoaKhoangTrangThua(s);
+	int index = 1;
+	int n = s.length();
+	if (s[0] >= 97 && s[0] <= 122) {
+		s[0] = s[0] - 32;
+	}
+	while (index < n) {
+		if (s[index] == 32  ) {
+				if (s[index + 1] >= 97 && s[index + 1] <= 122) {
+					s[index + 1] = s[index + 1] - 32;
+					index++;	
+				}
+		}
+		
+		else if (s[index] >= 65 && s[index] <= 90) {
+				s[index] = s[index] + 32;
+			}
+		index++;
+	}
+		
+}
 };  
 
 
@@ -192,60 +244,7 @@ bool kiTuChuHoacSoKhongCach(char c) {
 	return false; 
 }
 
-void xoaKhoangTrangThua(string &s) {
-	int length = s.length();
-	do {
-		if (s[0] == 32)
-		{
-			s.erase(0, 1);
-			length--;
-		}
-	} while (s[0] == 32);
 
-	do {
-		if (s[length - 1] == 32) {
-			s.erase(length - 1, 1); 
-			length--; 
-		}
-	} while (s[length - 1] == 32);
-
-	for (int i = 1; i < length - 1; i++) {
-		if (s[i] == 32 && s[i + 1] == 32)
-		{
-			s.erase(i, 1);
-			length--;
-			i--;
-		}
-	}
-}
-
-// viet ham chi nhap so khong nhan khoanTrang 
-
-
-
-
-void chuanHoaTen(string &s) {
-	xoaKhoangTrangThua(s);
-	int index = 1;
-	int n = s.length();
-	if (s[0] >= 97 && s[0] <= 122) {
-		s[0] = s[0] - 32;
-	}
-	while (index < n) {
-		if (s[index] == 32  ) {
-				if (s[index + 1] >= 97 && s[index + 1] <= 122) {
-					s[index + 1] = s[index + 1] - 32;
-					index++;	
-				}
-		}
-		
-		else if (s[index] >= 65 && s[index] <= 90) {
-				s[index] = s[index] + 32;
-			}
-		index++;
-	}
-		
-}
 
 
 

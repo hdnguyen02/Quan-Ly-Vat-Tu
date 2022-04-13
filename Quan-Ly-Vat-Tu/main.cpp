@@ -99,60 +99,26 @@ void nhapNV() {
 
 
 int main(int argc, char *argv[]) {
-//	StartBGI start; 
-//	dsNhanVien DSNV;  
-//	BstVatTu dsVatTu; // danh sach vat tu 
-//	menuQuanLyVatTu(dsVatTu,DSNV); 
-//	ifstream filein; 
-//	filein.open("data/dataNhanVien.txt",ios::in); 
-//	NhanVien temp; 
-//	temp.docFileNV(filein); 
-//	filein.close(); 
-//	temp.inNV(); 
+	StartBGI start; 
+	dsNhanVien DSNV;  
+	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
+	BstVatTu dsVatTu; 
+	menuQuanLyVatTu(dsVatTu,DSNV); 
+	
+	
+	
+    
+	
 
-	// khai bao ra 1 dsNV 
-	dsNhanVien DSNV; 
 	
-	// xoa 1 thang nv chang han 
-	DSNV.xoaNV("nv2"); // xoa di thang nv1 
+
 	
 	
+
 	
-	
-	 
 	system("pause"); 
 	return 0;
 }
 
 
-//void themHoaDon(ListHoaDon &DSHD) {	
-//			string soHD,loai; 
-//			Date date; 
-//			cout << "nhap vao so HD: "; 
-//			getline(cin,soHD); 
-//			cout <<"nhap vao loai HD: "; 
-//			getline(cin,loai); 
-//			NodeHoaDon* newHoaDon = new NodeHoaDon(soHD,date,loai); 
-//			while(true) {
-//				cout << endl << "1.nhap vao CTHD" << endl; 
-//				cout << "2.Ket thuc" << endl;
-//				int lc1; 
-//				cout << "nhap vao lc: "; cin >> lc1; cin.ignore(); 
-//				if (lc1 == 1) {
-//					// tao ra 1 thang CTHD 
-//					CThoaDon temp; 
-//					// nhap vaoCTHD
-//					cout << "nhap vao maVT: "; 
-//					getline(cin,temp.maVT); 
-//					cout << "nhap vao so luong don gia VAT: "; 
-//					cin >> temp.donGia >> temp.soLuong >> temp.VAT; 
-//					// them thang hoa Don nay Vao 
-//					newHoaDon->themCTHD(temp); 
-//				}
-//				else if (lc1 == 2) {
-//					break; 
-//				}
-//			} 
-//			// them thang Node này vao 
-//			DSHD.themHD(newHoaDon); 
-//}
+

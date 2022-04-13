@@ -30,7 +30,7 @@ private:
 	int soLuong;   
     NhanVien *nv[MAX]; 
 public:
-	dsNhanVien() : soLuong(0) {this->docFileDSNV();}   // moi vao doc file !
+	dsNhanVien() : soLuong(0) {}  
     ~dsNhanVien() { this->giaiPhongNV();  }
 	bool dsRong();
 	bool dsDay();
@@ -41,15 +41,27 @@ public:
 	bool xoaNV(const string& maVT);
 	int soLuongNV();
 	void giaiPhongNV();
-	void docFileDSNV();   
-	void ghiFileDSNV(); 
+	void docFileDSNV(string link);   
+	void ghiFileDSNV(string link); 
+	
+	// tra ve true neu ton tai! va nguoc lai
+	bool timKiemHD(const string& soHD) {
+		NodeHoaDon* tempTimKiem; 
+		for (int i = 0; i < this->soLuong;i++) {
+			tempTimKiem = nv[i]->dsHoaDon.timKiemHoaDon(soHD); 
+			if (tempTimKiem != NULL) {
+				return true; 
+			}
+		}
+		return false; 
+	}
 	
 };
 
 // 	VOID CLASS DANH SACH NHAN VIEN
-	void dsNhanVien::ghiFileDSNV() {  // ham nay se duoc goi khi them xoa sua. 
+	void dsNhanVien::ghiFileDSNV(string link) {  // ham nay se duoc goi khi them xoa sua. 
 		ofstream fileout; 
-		fileout.open("data/dataNhanVien.txt",ios::out | ios::trunc); // mo ra chi ghi va xoa het
+		fileout.open(link.c_str(),ios::out | ios::trunc); // mo ra chi ghi va xoa het
 		fileout << this->soLuong << endl; 
 		for (int i = 0; i < this->soLuong;i++) {
 			nv[i]->ghiFileNhanVien(fileout); 
@@ -57,11 +69,9 @@ public:
 		fileout.close(); 		
 	}
 
-	void dsNhanVien::docFileDSNV() {
-		// truoc tien doc vao soNV 
-		// tao ra 1 bien filein 
+	void dsNhanVien::docFileDSNV(string link) {
 		ifstream filein;
-		filein.open("data/dataNhanVien.txt",ios::in); 
+		filein.open(link.c_str(),ios::in); 
 		int soLuongNV;  
 		filein >> soLuongNV; 
 		filein.ignore(); 
@@ -76,7 +86,6 @@ public:
 			NhanVien* newNhanVien = this->themNV(maNV,ho,ten,phai); 
 			newNhanVien->dsHoaDon.docFileDSHD(filein);  // doc vao file dsHD. 	
 		}
-		// doc song thi dong file lai 
 		filein.close(); 
 	}
 
@@ -105,9 +114,8 @@ public:
 	NhanVien* dsNhanVien::themNV(const string &maNV,const string &ho,const string &ten,const int &phai) {
 		int timKiemTrung = this->timKiemNVTraVeViTri(maNV); 
 		if (!this->dsDay() && timKiemTrung == -1) { 
-			nv[soLuong++] = new NhanVien(maNV,ho,ten,phai); 
-			// da them tc thang nhan vien vao  
-			this->ghiFileDSNV(); 
+			nv[soLuong] = new NhanVien(maNV,ho,ten,phai); 
+			this->soLuong++; 
 			return nv[soLuong - 1]; // vi tri cua thang vua moi them vao!.  
 		} 
 		return NULL; // them that bai ! 
@@ -141,7 +149,6 @@ public:
 			nv[i] = nv[i + 1]; 
 		}
 		this->soLuong--; 
-		this->ghiFileDSNV(); 
 		return true;
 	}
 	
