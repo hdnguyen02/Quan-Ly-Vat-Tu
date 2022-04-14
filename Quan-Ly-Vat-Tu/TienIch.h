@@ -224,12 +224,7 @@ bool kiTuChuHoacSo(char c) {
 		}
 		return false; 
 }
-//bool kiTuSoKhongCach(char c) {
-//	if (kiTuSo(c) && khongPhaiKhoanCach(c)) {
-//		
-//	}
-//}
-// viet ham kiemTra khong phai kiTu khoan cach 
+
 bool khongPhaiKhoanCach(char c) {
 	if (c != 32) {
 		return true; 

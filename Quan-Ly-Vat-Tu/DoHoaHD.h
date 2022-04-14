@@ -67,7 +67,7 @@ void hienThiThemHoaDonNhap(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
    	nhapThang.veONhap(); 
    	nhapNgay.boNhoDem = TienichDoHoa::intToString(tempDate.ngay);
    	nhapThang.boNhoDem = TienichDoHoa::intToString(tempDate.thang);
-   	nhapNam.boNhoDem = TienichDoHoa::intToString(tempDate.nam); 
+   	nhapNam.boNhoDem = TienichDoHoa::intToString(tempDate.nam);
    	nhapNgay.inNoiDung(); 
    	nhapThang.inNoiDung(); 
    	nhapNam.inNoiDung(); 
@@ -153,7 +153,10 @@ void hienThiThemHoaDonNhap(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 				
 				
 			}
-			else if (maVT.isMouseHover(xclick,yclick)) {  
+			else if (btnThemHD.isMouseHover(xclick,yclick)) {
+				
+			}
+ 			else if (maVT.isMouseHover(xclick,yclick)) {  
 				maVT.NhapVao(kiTuChuHoacSo,""); 
 				NodeVatTu* pTempMaVT = dsVatTu.timKiemVT(maVT.boNhoDem); 
 				if (pTempMaVT == NULL && maVT.boNhoDem != "")  { 

@@ -65,8 +65,7 @@ void ListCTHD::ghiFileCTHD(ofstream &fileout) {
 		fileout << pTemp->info.maVT << "," << pTemp->info.soLuong << "," << pTemp->info.donGia <<
 		"," << pTemp->info.VAT << endl; 
 		pTemp = pTemp->pNext; 
-	}
-	 
+	}	 
 }
 
 void ListCTHD::docFileCTHD(ifstream &filein) {
@@ -84,7 +83,6 @@ void ListCTHD::docFileCTHD(ifstream &filein) {
 				filein >> info.VAT; 
 				filein.ignore(); 
 				this->themVaoCuoiCTHD(info); 
-				
 			}
 	}
 

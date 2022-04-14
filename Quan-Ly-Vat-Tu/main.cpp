@@ -81,8 +81,7 @@ void nhapNV() {
 			cout << "nhap vao soNV: "; 
 			getline(cin,soNV); 
 			NhanVien* tempNV = DSNV.timKiemNVTraVeDiaChi(soNV); 
-			if (tempNV) {
-				// thuc hien in ra 
+			if (tempNV) { 
 				tempNV->dsHoaDon.duyetDSHD(); 
 			}
 			else {
@@ -103,20 +102,7 @@ int main(int argc, char *argv[]) {
 	dsNhanVien DSNV;  
 	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
 	BstVatTu dsVatTu; 
-	menuQuanLyVatTu(dsVatTu,DSNV); 
-	
-	
-	
-    
-	
-
-	
-
-	
-	
-
-	
-	system("pause"); 
+	menuQuanLyVatTu(dsVatTu,DSNV); 	
 	return 0;
 }
 

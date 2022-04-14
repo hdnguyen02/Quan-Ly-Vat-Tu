@@ -10,9 +10,6 @@ using namespace std;
 
 
 
-
-
-
 // ===================================MENU ROOT=========================================================
 void menuCha(BstVatTu &dsVatTu,dsNhanVien &DSNV) {  
 	int index = -1;  
