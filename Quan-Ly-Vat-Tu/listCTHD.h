@@ -29,6 +29,19 @@ public:
 	friend class ListCTHD; 
     NodeCTHD() : pNext(NULL) { }
     NodeCTHD(const CThoaDon &info) : info(info.maVT, info.soLuong, info.donGia, info.VAT), pNext(NULL) {}
+	string getmaVT() {
+		return info.maVT; 
+	}
+	float getSoLuong() {
+		return info.soLuong; 
+	}
+	float getDonGia() {
+		return info.donGia;  
+	}
+	float getVAT() {
+		return info.VAT; 
+	}
+	
 };
 
 class ListCTHD {
@@ -36,7 +49,6 @@ private:
     NodeCTHD* head;   
 public:
     ListCTHD() : head(NULL) {} // khoi tao.
-    ~ListCTHD() {this->giaiPhongCTHD();}; 
     bool isNull(); 
     NodeCTHD* themVaoDauCTHD(const CThoaDon &info);  // return ve true neu them thanh cong  
  	NodeCTHD* themVaoCuoiCTHD(const CThoaDon &info); 
@@ -47,7 +59,16 @@ public:
 	void docFileCTHD(ifstream &filein); 
 	void ghiFileCTHD(ofstream &fileout); 
 	int soLuongCTHD(); 
+	void listToArray(NodeCTHD **arrCTHD) {  
+		NodeCTHD* pTemp = head; 
+		int index = 0; 
+		while(pTemp != NULL) {
+			arrCTHD[index++] = pTemp; 
+			pTemp = pTemp->pNext; 
+		}
+	}
 };
+
 
 int ListCTHD::soLuongCTHD() {
 	int dem = 0; 
@@ -103,9 +124,6 @@ NodeCTHD* ListCTHD::themVaoDauCTHD(const CThoaDon &info) {  // tem vao dau CTHD
 }
 
 NodeCTHD* ListCTHD::themVaoCuoiCTHD(const CThoaDon &info) {	
-	if (this->timKiemCTHD(info.maVT)) {
-		return NULL; 
-	}
 	NodeCTHD* newNode = new NodeCTHD(info); 
 	if (this->isNull()) {
 		head = newNode;

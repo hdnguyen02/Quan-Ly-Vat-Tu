@@ -110,7 +110,12 @@ static void chuanHoaTen(string &s) {
 	Date(int ngay, int thang, int nam) : ngay(ngay), thang(thang), nam(nam) {}
 	Date() : ngay(0) , thang(0) , nam(0) {}
 	
-	
+	Date(string ngay,string thang,string nam) {
+		// do toi ham  
+		ngay = TienichDoHoa::stringToInt(ngay);  
+		thang = TienichDoHoa::stringToFloat(thang); 
+		nam = TienichDoHoa::stringToInt(nam); 
+	}
 	
 	// viet ra phuong thuc nhap ngay thang nam 
 	void nhap() {
@@ -239,7 +244,12 @@ bool kiTuChuHoacSoKhongCach(char c) {
 	return false; 
 }
 
-
+bool kiemTraSoNguyen(string str) {
+   for (int i = 0; i < str.length(); i++)
+   if (isdigit(str[i]) == false)
+      return false;
+      return true;
+}
 
 
 

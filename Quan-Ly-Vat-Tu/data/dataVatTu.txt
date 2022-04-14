@@ -1,17 +1,21 @@
-16
-VT05,Vat tu 0,kg,12
-VT02,Vat tu 0,kg,12
+20
 VT01,Vat tu 0,kg,12
-VT09,Vat tu 0,kg,12
-VT08,Vat tu 0,kg,12
+VT02,Vat tu 0,kg,12
+VT03,Vat tu 0,kg,12
+VT04,Vat tu 0,kg,12
+VT05,Vat tu 0,kg,12
+VT06,Vat tu 0,kg,12
 VT07,Vat tu 0,kg,12
+VT08,Vat tu 0,kg,12
+VT09,Vat tu 0,kg,12
+VT10,Vat tu 0,kg,12
 VT11,Vat tu 0,kg,12
-VT33,Vat tu 0,kg,12
-VT22,Vat tu 0,kg,12
-VT98,Vat tu 0,kg,12
-fdf,fgf,gf,455
-dfdfdf,dfdf,sdsd,6565
-fgfgf,fgf,dfdf,565
-fg,ghg,fgf,56
-fgfg,fgf,fgfg,45
-gfg,gf,hfg,45
+VT12,Vat tu 0,kg,12
+VT13,Vat tu 0,kg,12
+VT14,Vat tu 0,kg,12
+VT15,Vat tu 0,kg,12
+VT16,Vat tu 0,kg,12
+VT17,Vat tu 0,kg,12
+VT18,Vat tu 0,kg,12
+VT19,Vat tu 0,kg,12
+VT20,Vat tu 0,kg,12

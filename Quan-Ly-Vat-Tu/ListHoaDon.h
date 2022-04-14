@@ -37,6 +37,11 @@ class NodeHoaDon {
 			filein.ignore();  
 			info.dsCTHD.docFileCTHD(filein); 	
 	}
+	
+	// viet ham giai phong CTHD cua hoa don 
+	void giaiPhongListCTHD() {
+		this->info.dsCTHD.giaiPhongCTHD(); 
+	}
 };
 
 ListCTHD* NodeHoaDon::getdsCTHD() {
@@ -60,19 +65,18 @@ class ListHoaDon {
 private: 
     NodeHoaDon* head;  
 public: 
-	
-    ListHoaDon() : head(NULL) {}
-    ~ListHoaDon() {this->giaiPhongHD();}; 
+    ListHoaDon() : head(NULL) {} 
 	int soLuongHD(); 
 	NodeHoaDon *timKiemHoaDon(const string &soHD);
 	void duyetDSHD();
 	bool xoaHD(const string &soHD );
-	void giaiPhongHD();
+	void giaiPhongListHoaDon();
 	NodeHoaDon* themVaoDauHD(const string &soHD,const Date &date,const string& loai); 
 	NodeHoaDon* themVaoCuoiHD(const string &soHD,const Date &date,const string& loai); 
 	void docFileDSHD(ifstream &filein); 
 	void ghiFileDSHD(ofstream &fileout); 
-	int soHD(); 	
+	int soHD(); 
+		
 	
 };
 
@@ -140,11 +144,6 @@ NodeHoaDon* ListHoaDon::timKiemHoaDon(const string &soHD)
 
 
 NodeHoaDon* ListHoaDon::themVaoDauHD(const string &soHD,const Date &date,const string& loai) {
-	
-	NodeHoaDon* TempNode = this->timKiemHoaDon(soHD);  // neu node nay co ton tai -> khong duoc them. 
-	if (TempNode!=NULL) {
-		return NULL; 
-	}
 	NodeHoaDon* newNode = new NodeHoaDon(soHD,date,loai);  
 	newNode->pNext = head; // tro den node dau tien 
 	head = newNode;
@@ -154,10 +153,6 @@ NodeHoaDon* ListHoaDon::themVaoDauHD(const string &soHD,const Date &date,const s
 
 
 NodeHoaDon* ListHoaDon::themVaoCuoiHD(const string &soHD,const Date &date,const string& loai) {
-	NodeHoaDon* TempNode = this->timKiemHoaDon(soHD);  // neu node nay co ton tai -> khong duoc them. 
-	if (TempNode!=NULL) {
-		return NULL; 
-	}
 	NodeHoaDon* newNode = new NodeHoaDon(soHD,date,loai); 
 	if (head==NULL) {
 		head = newNode;
@@ -200,11 +195,13 @@ bool ListHoaDon::xoaHD(const string &soHD) {
 	}
 	return true; 
 }
-void ListHoaDon::giaiPhongHD() {
+void ListHoaDon::giaiPhongListHoaDon() {
 	NodeHoaDon* pTemp; 
  	while(head != NULL) {
 	 	pTemp = head; 
-	 	head = head->pNext; 
+	 	head = head->pNext;
+	 	pTemp->giaiPhongListCTHD(); 
 	 	delete pTemp; 
+	 	 
 	 }
 }

@@ -23,6 +23,10 @@ void themHoaDon(ListHoaDon &DSHD) {
 					cout << "nhap vao so luong don gia VAT: "; 
 					cin >> temp.donGia >> temp.soLuong >> temp.VAT; 
 					newHoaDon->themCTHD(temp); 
+					
+					
+					// ghi lai file vi co them hoaDon moi.
+					
 				}
 				else if (lc1 == 2) {
 					break; 
@@ -95,6 +99,10 @@ void nhapNV() {
 	}
 }
 
+// viet 1 ham con tro ham 
+// chi in ra thoi
+
+
 
 
 int main(int argc, char *argv[]) {
@@ -103,6 +111,17 @@ int main(int argc, char *argv[]) {
 	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
 	BstVatTu dsVatTu; 
 	menuQuanLyVatTu(dsVatTu,DSNV); 	
+	
+	
+	
+	DSNV.giaiPhongDSNV(); 
+
+
+
+
+	
+
+
 	return 0;
 }
 

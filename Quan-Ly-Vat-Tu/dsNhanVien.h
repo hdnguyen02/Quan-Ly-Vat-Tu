@@ -31,7 +31,6 @@ private:
     NhanVien *nv[MAX]; 
 public:
 	dsNhanVien() : soLuong(0) {}  
-    ~dsNhanVien() { this->giaiPhongNV();  }
 	bool dsRong();
 	bool dsDay();
 	void duyetDSNV();
@@ -40,9 +39,10 @@ public:
 	NhanVien* timKiemNVTraVeDiaChi(const string& maVT);
 	bool xoaNV(const string& maVT);
 	int soLuongNV();
-	void giaiPhongNV();
+	void giaiPhongDSNV();  // giai phong danh sach nhanvien. 
 	void docFileDSNV(string link);   
 	void ghiFileDSNV(string link); 
+	//
 	
 	// tra ve true neu ton tai! va nguoc lai
 	bool timKiemHD(const string& soHD) {
@@ -112,8 +112,7 @@ public:
 	
 	// ham them nv => tra ve dia chi vua moi them vao. 
 	NhanVien* dsNhanVien::themNV(const string &maNV,const string &ho,const string &ten,const int &phai) {
-		int timKiemTrung = this->timKiemNVTraVeViTri(maNV); 
-		if (!this->dsDay() && timKiemTrung == -1) { 
+		if (!this->dsDay()) { 
 			nv[soLuong] = new NhanVien(maNV,ho,ten,phai); 
 			this->soLuong++; 
 			return nv[soLuong - 1]; // vi tri cua thang vua moi them vao!.  
@@ -156,8 +155,9 @@ public:
 		return this->soLuong;
 	}
 	
-	void dsNhanVien::giaiPhongNV() {
+	void dsNhanVien::giaiPhongDSNV() {
 		for (int i = 0;i < this->soLuong;i++) {
+			nv[i]->dsHoaDon.giaiPhongListHoaDon(); // truoc tien can goi toi ham giai phong 
 			delete nv[i]; 
 		}
 	}

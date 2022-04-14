@@ -13,6 +13,7 @@ struct NutBam {
 	int colorBack,colorHight,colorText; 
 	string tieuDe;
 	bool duocTroVao;
+
 	
 	NutBam( int x, int y, int w, int h,int colorBack,int colorHight,int colorText,string tieuDe) {
 		this->x = x; 
@@ -79,6 +80,7 @@ struct ONhap {
 	string boNhoDem; 
 	int widthTitle,colorTitle,colorBgoiY; 
 	string tieuDe; 
+	bool khongDuocNhap; 
 	ONhap() {}	
 	ONhap(int x,int y,int w,int h,int widthTitle,string tieuDe,int colorTitle,int colorBgoiY,int SLKTTD) { 
 		this->x= x; 
@@ -91,6 +93,7 @@ struct ONhap {
 		this->SLKTTD = SLKTTD;  // so luong ki tu duoc nhap. 	
 		this->colorTitle = colorTitle; 
 		this->colorBgoiY = colorBgoiY; 
+		this->khongDuocNhap = false; 
 	}
 
 	void veONhap() {
@@ -126,6 +129,10 @@ struct ONhap {
 		rectangle(x + widthTitle,y,x + w + widthTitle ,y + h); // hien thi thanh sang cai boder len. 
 	}
 	void NhapVao(bool(*loaiKiTu)(char),const string& goiY) {
+		// ham nay se thuc hien khi thang khong duoc nhap = false 
+		if (khongDuocNhap ) {
+			return; 
+		}
 		this->hienThiBoder(); 
 		int the_end = 0;
 		char c; 
