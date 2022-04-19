@@ -10,7 +10,14 @@ struct CThoaDon {
     CThoaDon(const string& maVT,const float& soLuong,const float& donGia,const float &VAT) :
         maVT(maVT), soLuong(soLuong), donGia(donGia), VAT(VAT) {}
     CThoaDon() {} 
-    void inCTHD(); 
+    void inCTHD(); 	
+    float tinhTien() {  
+    if (VAT != 0) {
+		return soLuong * donGia * VAT/100; 
+	}
+	return soLuong * donGia ; // VAT = 0 => khong co the => tren kia la co the 
+		
+	}
 
 };
 
@@ -42,6 +49,10 @@ public:
 		return info.VAT; 
 	}
 	
+	// tinh tien
+	float getTongTien() {
+		return info.tinhTien(); 
+	}
 };
 
 class ListCTHD {
@@ -66,6 +77,16 @@ public:
 			arrCTHD[index++] = pTemp; 
 			pTemp = pTemp->pNext; 
 		}
+	}
+	// viet ham tinh Tien Tong BILL 
+	float tinhTongTien() {
+		NodeCTHD* pTemp = head; 
+		double tongTien = 0; 
+		while(pTemp != NULL) {
+			tongTien = tongTien + pTemp->info.tinhTien(); 
+			pTemp = pTemp->pNext; 
+		}
+		return tongTien; 
 	}
 };
 

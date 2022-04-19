@@ -13,12 +13,13 @@ using namespace std;
 // ===================================MENU ROOT=========================================================
 void menuCha(BstVatTu &dsVatTu,dsNhanVien &DSNV) {  
 	int index = -1;  
-	int doDai = DODAIMANHINH / 4 - 16; 
-	const int chieuCaoMenuCap1 = 40;  
-	NutBam vatTu(0,0, doDai,chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT,"VAT TU");
-	NutBam nhanVien(doDai, 0, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "NHAN VIEN");
-	NutBam hoaDon( doDai*2 , 0, doDai , chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "HOA DON");
-	NutBam doanhThu( doDai * 3, 0, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "DOANH THU");
+	const int cachLeTrenMeNu = 16; 
+	int doDai = DODAIMANHINH / 4 - 29; 
+	const int chieuCaoMenuCap1 = 40 ;  
+	NutBam vatTu(0 + 56,cachLeTrenMeNu, doDai,chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT,"VAT TU");
+	NutBam nhanVien(doDai + 56 + 2, cachLeTrenMeNu, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "NHAN VIEN");
+	NutBam hoaDon( doDai*2 + 56 + 4, cachLeTrenMeNu, doDai , chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "HOA DON");
+	NutBam doanhThu( doDai * 3 + 56 + 6,  cachLeTrenMeNu, doDai, chieuCaoMenuCap1,COLOR_MENU_CAP1,COLOR_HIGHT_LIGHT,COLOR_TEXT, "DOANH THU");
 	vatTu.veNut(); 
 	nhanVien.veNut(); 
 	hoaDon.veNut(); 

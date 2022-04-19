@@ -12,6 +12,7 @@ using namespace std;
 
 
 
+
 class TienichDoHoa {
 	// xu dung de xoa man hinh. 
 	public: 
@@ -47,7 +48,21 @@ class TienichDoHoa {
 		ss >> temp; 
 		return temp; 
 	}
+	static string doubleToString(double s) {
+		stringstream ss; 
+		ss << s; 
+		string temp; 
+		ss >> temp; 
+		return temp; 
+	}
 	
+	static double stringToDoble(string s) {
+		stringstream ss; 
+		ss << s; 
+		double temp; 
+		ss >> temp ; 
+		return temp; 
+	}
 	
 	static void xoaKhoangTrangThua(string &s) {
 	int length = s.length();
@@ -250,6 +265,17 @@ bool kiemTraSoNguyen(string str) {
       return false;
       return true;
 }
+
+
+bool kiemTraSoThuc(char c) {
+	// chap nhan la ki tu so va dau . 
+	if (kiTuSo(c) || c == 46) {
+		return true;
+	}
+}
+
+
+// viet mot ham cho phep nhap vao float => tuc la cho phep dau . 
 
 
 

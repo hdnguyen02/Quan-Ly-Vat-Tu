@@ -329,18 +329,16 @@ void inDanhSachVatTu(BstVatTu& dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDo
 void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu) {
 	// xoa di man hinh phia duoi va ve lai toan bo
 	index = -1;  
-	TienichDoHoa::xoaManHinhTheoToaDo(0,42,DODAIMANHINH,DORONGMANHINH,BACKGROUP);  // xoa di nua man hinh ben duoi. 
+	TienichDoHoa::xoaManHinhTheoToaDo(0,62,DODAIMANHINH,DORONGMANHINH,BACKGROUP);  // xoa di nua man hinh ben duoi. 
 	bool kiemTra[3] = {false};
 	bool kiemTraVT[3] = {false};  
-	OVuong ovVatTu(5,45,DODAIMANHINH - 12,50,2); 
-	ovVatTu.veOVuong(); 
 	const int chieuDaiVT = 230; 
 	const int chieuCaoVT = 35;
-	const int cachLeNgang = 15; 
-	const int cachLeTren = 53 ;
-	NutBam themVT(cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"THEM VAT TU");
-	NutBam hieuChinhVT(chieuDaiVT + cachLeNgang*2 ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"HIEU CHINH VAT TU");
-	NutBam inDSVT((chieuDaiVT + cachLeNgang )*2 + cachLeNgang ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"IN DANH SACH VAT TU"); 
+	const int cachLeNgang = 56; 
+	const int cachLeTren = 62 ;
+	NutBam themVT(cachLeNgang  ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"THEM VAT TU");
+	NutBam hieuChinhVT(chieuDaiVT + cachLeNgang + 2 ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"HIEU CHINH VAT TU");
+	NutBam inDSVT(chieuDaiVT*2 + cachLeNgang + 4 ,cachLeTren,chieuDaiVT,chieuCaoVT,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"IN DANH SACH VAT TU"); 
 	themVT.veNut(); 
 	hieuChinhVT.veNut() ; 
 	inDSVT.veNut(); 
