@@ -133,6 +133,9 @@ struct ONhap {
 		if (khongDuocNhap ) {
 			return; 
 		}
+		while(kbhit()) {
+			getch();
+		}
 		this->hienThiBoder(); 
 		int the_end = 0;
 		char c; 

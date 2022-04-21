@@ -173,8 +173,7 @@ static void chuanHoaTen(string &s) {
 	}
 	
 	// viet ham kiem tra su dung dang cua ngay thang nam 
-	static bool hopLeNgay(int ngay) {
-		if (ngay > 0 && ngay <=31) {
+	static bool hopLeNgay(int ngay) {		if (ngay > 0 && ngay <=31) {
 			// duoc cho la ngay hop le! 
 			return true; 
 		}

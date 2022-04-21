@@ -25,7 +25,7 @@ const int ID_HIEUCHINH_VT= 5;
 const int ID_IN_VT = 6 ;
 
 // ID cua cac menu con cua ID_HD 
-const int ID_THEM_HD = 12; 
+const int ID_THEM_HD_XUAT = 12; // them hd xuat => 
 const int ID_IN_HD = 13; 
 
 // mau cho cac nut con 
@@ -56,3 +56,10 @@ const int colorLight = 15;
 	const int colorTieuDe = 15; 
 	const int conlorTextTieuDe = 0; 
 	const int margin = 60; 
+
+
+// nut bam mess box 
+
+const int OK = 1; 
+const int CANCEL = 2; 
+

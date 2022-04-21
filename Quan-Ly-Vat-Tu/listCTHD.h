@@ -49,6 +49,10 @@ public:
 		return info.VAT; 
 	}
 	
+	CThoaDon* getinfo() {
+		return &info; 
+	}
+		
 	// tinh tien
 	float getTongTien() {
 		return info.tinhTien(); 
@@ -87,6 +91,38 @@ public:
 			pTemp = pTemp->pNext; 
 		}
 		return tongTien; 
+	}
+	
+	// viet ham cap nhap lai soLuongVT
+	void capNhapSoLuongVatTu(BstVatTu &dsVatTu,string loaiHD) {
+		NodeCTHD* pTemp = head; 
+		NodeVatTu* tempVT;
+		while (pTemp != NULL) {
+			tempVT = dsVatTu.timKiemVT(pTemp->getmaVT()); // tim Kiem thang HD nay!
+			if (tempVT) { 
+				tempVT->getInfo()->capNhapSoLuongTon(loaiHD,pTemp->getSoLuong());
+			}
+			pTemp = pTemp->pNext; 
+		}
+	}
+	NodeCTHD* traVeCTHDTheoindex(int index) {
+		// lay ra so luong CTHD 
+		if (this->isNull()) {
+			return NULL; // vi la rong hoac so luong qua lon! khong ton tai index!
+		}
+		int soLuongNode = this->soLuongCTHD(); 
+		if (index < 0 || index >= soLuongNode) {
+			return NULL; 
+		}
+		int dem = 0; 
+		NodeCTHD* pTemp = head; 
+		while(pTemp != NULL) {
+			if (dem == index) { 
+				return pTemp; 
+			}
+			pTemp = pTemp->pNext; 
+			dem++; 
+		}
 	}
 };
 

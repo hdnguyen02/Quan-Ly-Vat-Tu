@@ -11,6 +11,27 @@ struct VatTu {
     VatTu(string maVT, string ten, string donVi, float soLuongTon) : maVT(maVT), ten(ten),
         donVi(donVi), soLuongTon(soLuongTon) {};
     void inVatTu(); 
+    // viet ham cap nhap lai so luonng VT trong => dua vao so Luong capNhap 
+    // kiemTraHang doi voi hd Xuat 
+    bool kiemTraDuHang(float soLuongHangCanXuat) {
+		if (soLuongHangCanXuat > soLuongTon) {
+			return false;  
+		}
+		return true; 
+	}
+	// viet ham cap nhap lai so Luong 
+	void capNhapSoLuongTon(string loaiHD,float soLuongCapNhap ) { 
+		if (loaiHD == "X") {
+			// la hoaDonXuat 
+			// kiemTra xem co thoa man hay khong!
+			this->soLuongTon = this->soLuongTon - soLuongCapNhap; 
+		}
+		else if (loaiHD == "N") {
+			// la hoaDonNhap
+			this->soLuongTon = this->soLuongTon + soLuongCapNhap; 
+		}
+		
+	}
 };
 void VatTu::inVatTu() {
 	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon; 
@@ -28,7 +49,7 @@ public:
     NodeVatTu(): pLeft(NULL), pRight(NULL) {};  
     NodeVatTu(const VatTu& info) : info(info.maVT, info.ten, info.donVi, info.soLuongTon),
         pLeft(NULL), pRight(NULL) {} 
-   VatTu getInfo() {return this->info; }
+   VatTu* getInfo() {return &info; }
 };
 
 // ==================================== BST VAT TU ====================================
@@ -58,7 +79,6 @@ public:
 	void ghiVatTuFile();
 	void docVatTuFile();
 	void hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout);
-	
 };
 
 int BstVatTu::soLuongVT() {

@@ -116,12 +116,10 @@ int main(int argc, char *argv[]) {
 	
 	
 	
-	DSNV.giaiPhongDSNV(); 
+ DSNV.giaiPhongDSNV(); 
 
 
-
-
-	
+    
 
 
 	return 0;

@@ -6,7 +6,7 @@ struct HoaDon {
     string soHD;
     Date date;
     string loai;     // chi nhan 2 gia tri : X ( XUAT ) va N ( NHAP )
-    ListCTHD dsCTHD; 
+    ListCTHD dsCTHD; // 1 danh sach lien ket don
     HoaDon() {}
     HoaDon(const string &soHD,const Date &date,const string &loai) : date(date.ngay,date.thang,date.nam) , 
 	soHD(soHD) , loai(loai) {}

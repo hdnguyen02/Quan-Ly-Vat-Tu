@@ -55,8 +55,8 @@ void hienThiHieuChinhVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam 
 					ONhap dieuChinhTenVT(cachLeInput - 200,cachLeTrenInput - 80,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"ten",2,15,50);
 					ONhap dieuChinhDVT(cachLeInput - 200,cachLeTrenInput - 20,chieuDaiInput + 400,chieuCaoInput,chieuDaiTieuDe,"dvt",2,15,50);
 					
-					dieuChinhTenVT.boNhoDem = pTempVT->getInfo().ten; 
-					dieuChinhDVT.boNhoDem = pTempVT->getInfo().donVi; 
+					dieuChinhTenVT.boNhoDem = pTempVT->getInfo()->ten; 
+					dieuChinhDVT.boNhoDem = pTempVT->getInfo()->donVi; 
 					dieuChinhTenVT.veONhap();		
 					dieuChinhTenVT.inNoiDung(); 	
 					dieuChinhDVT.veONhap(); 
@@ -213,10 +213,10 @@ void inDanhSachLenDoHoa(NodeVatTu **arrVT,int indexPage,int soLuongItemPage,int 
 	setcolor(CinputText); 
 	for (int i = 0;i < soLuongItemPage;i++) {
 		if (i + indexPage*soLuongItemPage < soLuongNode  ) {
-		tempDVT = TienichDoHoa::floatToString(arrVT[i + indexPage*soLuongItemPage]->getInfo().soLuongTon); 
-		outtextxy(canLeX,           canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo().maVT.c_str()));
-		outtextxy(canLeX + donViO*1,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo().ten.c_str()));
-		outtextxy(canLeX + donViO*3,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo().donVi.c_str()));
+		tempDVT = TienichDoHoa::floatToString(arrVT[i + indexPage*soLuongItemPage]->getInfo()->soLuongTon); 
+		outtextxy(canLeX,           canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo()->maVT.c_str()));
+		outtextxy(canLeX + donViO*1,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo()->ten.c_str()));
+		outtextxy(canLeX + donViO*3,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo()->donVi.c_str()));
 		outtextxy(canLeX + donViO*4,canLeY + cachNhau*i,(char*)(tempDVT.c_str()));
 		}	
 	}	

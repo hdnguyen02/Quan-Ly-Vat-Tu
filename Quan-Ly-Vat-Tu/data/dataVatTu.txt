@@ -1,9 +1,9 @@
-20
-VT01,Vat tu 0,kg,12
+22
+VT01,Vat tu 0,kg,1
 VT02,Vat tu 0,kg,12
 VT03,Vat tu 0,kg,12
-VT04,Vat tu 0,kg,12
-VT05,Vat tu 0,kg,12
+VT04,Vat tu 0,kg,10
+VT05,Vat tu 0,kg,0
 VT06,Vat tu 0,kg,12
 VT07,Vat tu 0,kg,12
 VT08,Vat tu 0,kg,12
@@ -12,10 +12,12 @@ VT10,Vat tu 0,kg,12
 VT11,Vat tu 0,kg,12
 VT12,Vat tu 0,kg,12
 VT13,Vat tu 0,kg,12
-VT14,Vat tu 0,kg,12
-VT15,Vat tu 0,kg,12
+VT14,Vat tu 0,kg,9
+VT15,Vat tu 0,kg,1
 VT16,Vat tu 0,kg,12
 VT17,Vat tu 0,kg,12
 VT18,Vat tu 0,kg,12
 VT19,Vat tu 0,kg,12
 VT20,Vat tu 0,kg,12
+hdnguyen,duc nguyen,kg,233
+VT34,sat,tan,10
