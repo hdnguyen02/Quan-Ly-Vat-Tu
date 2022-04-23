@@ -14,6 +14,32 @@ using namespace std;
 // cac thong tin can in => chang han nhu moi dau vao ta KT 
 
 
+// ============================= DO HOA IN HOA DON DUA VAO MA HOA DON ================================ 
+
+// TIM VA IN RA THONG TIN HOA DON ! 
+// IN RA HOA DON DUA VAO SO HOA DON DO TA NHAP VAO 
+// BAC DIEU KIEN KHI NGUOI DUNG CLICK VAO THI HIEN THI RA FORM NHAP => SAU KHI NHAP -> IN RA HOA DON 
+// BAO GOM CAC TRUONG -> NGUOI DA LAP HOA DON VA SO HD, NGAY LAP HD, ... LOAI HOA DON 
+void hienThiXuatHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vatTu
+,NutBam &nhanVien ,NutBam &doanhThu ,NutBam &themHDNhap,NutBam &ThemHDXuat) {
+	// moi ban da vao -> xoa di man hinh di 
+	TienichDoHoa::xoaManHinhTheoToaDo(0,canLeTrenHD,1600,1600,BACKGROUP);
+	// tiep tuc ve ra cai ma minh muon 
+	// bao gom 1 cai form 
+	int w = 600;  
+	int h = 300; 
+	int y = 300;
+	int x = DODAIMANHINH /2 - w/2;
+	NutBam Box(x,y,w,h,15,3,4,""); 
+	// ve ra titile 
+	NutBam title(x,y - 40,w,40,2,0,0,"XUAT HOA DON");
+	title.veNut(); 
+	 
+	Box.veNut(); 
+	
+}
+
+
 // ============================= HIEN THI HAM CHINH SUA CTHD ============================
 void hienThiChinhSuaCTHD(NodeCTHD* tempCTHD,ListCTHD* dsCTHD,BstVatTu &dsVatTu,string loaiHD) { 
  	  int w = 540; 
@@ -230,7 +256,7 @@ int hienThiCTHDLenTable(int indexPage,int soLuongItemPage,ListCTHD *dsCTHD,BstVa
 	 
 }
 
-void hienThiThemHoaDonNhap(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vatTu
+void hienThiThemHoaDonXuat(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vatTu
 ,NutBam &nhanVien ,NutBam &doanhThu ,NutBam &inHD) {
 	TienichDoHoa::xoaManHinhTheoToaDo(margin,canLeTrenHD,1600,1600,BACKGROUP); 
 	NhanVien* tempNV; 
@@ -608,6 +634,8 @@ void hienThiThemHoaDonNhap(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 	
 }
 
+
+// =================================== HAM HIEN THI TINH NANG HOA DON ================================
 void hienThiTinhNangHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vatTu
 ,NutBam &nhanVien ,NutBam &doanhThu)                                                        {
 	TienichDoHoa::xoaManHinhTheoToaDo(0,56,DODAIMANHINH,DORONGMANHINH,BACKGROUP);
@@ -618,9 +646,11 @@ void hienThiTinhNangHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 	const int HMenuSub = 35;
 	const int marginLeftSub = 56; 
 	const int marginTopSub = 62 ;
-	NutBam themHDNhap(marginLeftSub ,marginTopSub,WMenuSub,HMenuSub,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"Them Hoa Don Nhap");
+	NutBam themHDXuat(marginLeftSub ,marginTopSub,WMenuSub,HMenuSub,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"Them Hoa Don Xuat");
+	// NUT BAM THEM HOA DON XUAT ( CHUA LAM ) 
+	NutBam themHDNhap(marginLeftSub ,marginTopSub,WMenuSub,HMenuSub,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"Them Hoa Don Xuat"); 
 	NutBam inHD(WMenuSub + marginLeftSub + 2 ,marginTopSub,WMenuSub,HMenuSub,COLOR_BTN_SUB,COLOR_HIGHT_BTN_SUB,COLOR_TEXT_BTN_SUB,"In Hoa Don");
-	themHDNhap.veNut(); 
+	themHDXuat.veNut(); 
 	inHD.veNut() ; 
 
 	
@@ -633,10 +663,10 @@ void hienThiTinhNangHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 			}
 			else {
 				if (index == ID_THEM_HD_XUAT) {
-					hienThiThemHoaDonNhap(dsVatTu,DSNV,index,vatTu,nhanVien ,doanhThu ,inHD);
+					hienThiThemHoaDonXuat(dsVatTu,DSNV,index,vatTu,nhanVien ,doanhThu ,inHD);
 				}
 				else if (index == ID_IN_HD) {
-					// thuc hien goi ham in hoa don. 
+					hienThiXuatHoaDon(dsVatTu,DSNV,index,vatTu,nhanVien,doanhThu,themHDNhap,themHDXuat); 
 					
 				}
 			}
@@ -647,7 +677,7 @@ void hienThiTinhNangHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 			nhanVien.kiemTraVeLai(mx,my,kiemTra[1]);
 			doanhThu.kiemTraVeLai(mx,my,kiemTra[2]);
 
-			themHDNhap.kiemTraVeLai(mx,my,kiemTraHD[0]); 
+			themHDXuat.kiemTraVeLai(mx,my,kiemTraHD[0]); 
 			inHD.kiemTraVeLai(mx,my,kiemTraHD[1]); 
 			
 			
@@ -668,13 +698,13 @@ void hienThiTinhNangHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 					index = ID_DT;   
 					return; 
 			}
-			else if (themHDNhap.isMouseHover(xclick,yclick)) { 
-				hienThiThemHoaDonNhap(dsVatTu,DSNV,index,vatTu,nhanVien ,doanhThu ,inHD);
+			else if (themHDXuat.isMouseHover(xclick,yclick)) { 
+				hienThiThemHoaDonXuat(dsVatTu,DSNV,index,vatTu,nhanVien ,doanhThu ,inHD);
 			}
 			
 			else if (inHD.isMouseHover(xclick,yclick)) {
 				
-				
+				hienThiXuatHoaDon(dsVatTu,DSNV,index,vatTu,nhanVien,doanhThu,themHDNhap,themHDXuat);
 			}
 		}
 	delay(1);
