@@ -80,7 +80,7 @@ struct ONhap {
 	string boNhoDem; 
 	int widthTitle,colorTitle,colorBgoiY; 
 	string tieuDe; 
-	bool khongDuocNhap; 
+	bool khongDuocNhap,daNhapDauCham; 
 	ONhap() {}	
 	ONhap(int x,int y,int w,int h,int widthTitle,string tieuDe,int colorTitle,int colorBgoiY,int SLKTTD) { 
 		this->x= x; 
@@ -94,6 +94,7 @@ struct ONhap {
 		this->colorTitle = colorTitle; 
 		this->colorBgoiY = colorBgoiY; 
 		this->khongDuocNhap = false; 
+		this->daNhapDauCham = false; // chua he nhap dau . nao =>  su dung cho ham nhap KiTu
 	}
 
 	void veONhap() {
@@ -107,7 +108,7 @@ struct ONhap {
 		this->boNhoDem.erase(this->boNhoDem.size() - 1); // xoa di ki tu cuoi cung. 
 	}
 	
-	void xoaNoiDungONhap() {  // hàm xoa het tat ca nhung gi nam ben trong o nhap
+	void xoaNoiDungONhap() {  
 		TienichDoHoa::xoaManHinhTheoToaDo(x + widthTitle,y,w,h,COLOR_BACKGROUP_INPUT);  // xoa song ve lai 
 		this->veONhap();
 		this->hienThiBoder(); 
@@ -128,12 +129,22 @@ struct ONhap {
 		setcolor(COLOR_BACKGROUP_INPUT); 
 		rectangle(x + widthTitle,y,x + w + widthTitle ,y + h); // hien thi thanh sang cai boder len. 
 	}
+	
+	// viet 1 ham chuan xoa di khoan trang 
+	void chuanHoaXoaKhoanTrang() {
+		TienichDoHoa::xoaKhoangTrangThua(this->boNhoDem); 
+		this->xoaNoiDungONhap(); 
+		this->inNoiDung(); 
+		this->tatHienThiBoder(); 
+	}
+	
+	
+	
 	void NhapVao(bool(*loaiKiTu)(char),const string& goiY) {
-		// ham nay se thuc hien khi thang khong duoc nhap = false 
-		if (khongDuocNhap ) {
+		if (khongDuocNhap == true) {
 			return; 
 		}
-		while(kbhit()) {
+		while(kbhit()) {  // xoa di bo nho dem!
 			getch();
 		}
 		this->hienThiBoder(); 
@@ -153,11 +164,14 @@ struct ONhap {
 			if (c == ENTER || c == ESC) {
 				this->xoaGoiY();
 				the_end = 1;  
+				TienichDoHoa::xoaKhoangTrangThua(this->boNhoDem); 
 				this->xoaNoiDungONhap();
 				this->inNoiDung(); 
 				this->tatHienThiBoder(); 		
 			}
 			else if (c == BACK_SPACE && !boNhoDem.empty() ) {
+					// kiem tra xem neu da xoa di dau . thi bat lai trang thai cho nhap vao dau . tiep tuc 
+					
 					this->xoaGoiY();
 					boNhoDem.erase(boNhoDem.size() - 1); 
 					kiemTraBackSpace = true; 			
@@ -188,6 +202,77 @@ struct ONhap {
 		} while (!the_end);
 	}
 	
+	void nhapSoThuc(const string& goiY) {
+		if (khongDuocNhap == true) {
+			return; 
+		}
+		while(kbhit()) {  // xoa di bo nho dem!
+			getch();
+		}
+		this->hienThiBoder(); 
+		int the_end = 0;
+		char c; 
+		bool kiemTraBackSpace = false; 
+		do
+		{
+			boNhoDem = boNhoDem + "_"; // them dau gach nhay. 
+			if (kiemTraBackSpace) {
+				this->xoaNoiDungONhap();  
+				kiemTraBackSpace = false;  
+			}
+		   	this->inNoiDung(); 
+			this->xoaKiTuCuoi(); 
+		   	c = getch();
+			if (c == ENTER || c == ESC) {
+				if (boNhoDem[boNhoDem.length() - 1] == 46) {
+					this->xoaKiTuCuoi(); 
+				}
+				this->xoaGoiY();
+				the_end = 1;  
+				TienichDoHoa::xoaKhoangTrangThua(this->boNhoDem); 
+				this->xoaNoiDungONhap();
+				this->inNoiDung(); 
+				this->tatHienThiBoder(); 		
+			}
+			else if (c == BACK_SPACE && !boNhoDem.empty() ) {
+					if (boNhoDem[boNhoDem.length()-1] == 46) {
+						daNhapDauCham = false; 
+					}
+					this->xoaGoiY();
+					boNhoDem.erase(boNhoDem.size() - 1); 
+					kiemTraBackSpace = true; 			
+			}
+			else if (SLKTTD <= boNhoDem.length()) {
+				this->xoaGoiY(); 
+				setcolor(4);
+				setbkcolor(colorBgoiY);
+				string temp = "toi da " + TienichDoHoa::intToString(SLKTTD) + " ki tu!"; 
+				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
+				outtextxy(x,y + h + 3,&temp[0]); 
+			}
+ 			else if (c == SPACE ) {
+ 				this->xoaGoiY();
+				boNhoDem = boNhoDem + " " ; 	
+			}
+			else if (c == 46 && daNhapDauCham == false && boNhoDem.length() != 0) { // la dau .
+				boNhoDem = boNhoDem + "."; 
+				daNhapDauCham = true; 	
+			}	
+			else if (kiTuSo(c)) {  
+				this->xoaGoiY();
+				boNhoDem = boNhoDem + c; 
+			}	
+			else if (!kiTuSo(c)) {
+				this->xoaGoiY();
+				setcolor(4); 
+				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
+				setbkcolor(colorBgoiY); 
+				outtextxy(x,y + h + 3,goiY.c_str()); 	
+			}
+									
+		} while (!the_end);
+	}
+	
 	void xoaGoiY() {
 		TienichDoHoa::xoaManHinhTheoToaDo(x -2,y+ 1 + h,w + 40,25,colorBgoiY); 	
 	}
@@ -202,7 +287,7 @@ struct ONhap {
 	}
 	
 	bool isMouseHover(int mx, int my) {   
-		if (mx >= x && mx <= x + w && my >= y && my <= y + h) {
+		if (mx >= x && mx <= x + w + widthTitle && my >= y && my <= y + h) {
 			return true;
 		}
 		return false;

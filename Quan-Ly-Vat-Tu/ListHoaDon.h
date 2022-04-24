@@ -23,6 +23,9 @@ class NodeHoaDon {
 	void themCTHD(const CThoaDon& cthd);
     void inHD() ;
     ListCTHD* getdsCTHD(); 
+    HoaDon* getinfo() {
+		return &info; // tra ve dia chi !.
+	}
     void ghiFileHD(ofstream &fileout) {
 		fileout << info.soHD << ","; 
 		info.date.ghiFile(fileout); 
@@ -76,6 +79,21 @@ public:
 	void docFileDSHD(ifstream &filein); 
 	void ghiFileDSHD(ofstream &fileout); 
 	int soHD(); 
+	string ghepSoHD() {
+		// lap qua va noi chuoi lai bang 1 dau , 
+		string tempSoHD; 
+		NodeHoaDon* pTemp = head; 
+		while (pTemp != NULL) {
+			tempSoHD =tempSoHD + pTemp->info.soHD + ", "; 
+			pTemp = pTemp->pNext; 
+			
+		}
+		// loai bo di dau cham o phia cuoi 
+		tempSoHD.erase(tempSoHD.begin() + tempSoHD.length() - 2); // xoa di ki tu cuoi cung => dai ,
+		return tempSoHD; 
+		// co nen in ra cai le hay khong. 
+		
+	} 
 		
 	
 };

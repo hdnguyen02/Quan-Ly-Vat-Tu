@@ -8,12 +8,12 @@ VT06,Vat tu 0,kg,12
 VT07,Vat tu 0,kg,12
 VT08,Vat tu 0,kg,12
 VT09,Vat tu 0,kg,12
-VT10,Vat tu 0,kg,12
+VT10,Vat tu 0,kg,11
 VT11,Vat tu 0,kg,12
-VT12,Vat tu 0,kg,12
+VT12,Vat tu 0,kg,5.8
 VT13,Vat tu 0,kg,12
-VT14,Vat tu 0,kg,9
-VT15,Vat tu 0,kg,1
+VT14,Vat tu 0,kg,8
+VT15,Vat tu 0,kg,0
 VT16,Vat tu 0,kg,12
 VT17,Vat tu 0,kg,12
 VT18,Vat tu 0,kg,12
