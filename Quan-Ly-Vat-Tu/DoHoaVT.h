@@ -295,7 +295,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 
 				}
 				else if (index == ID_IN_VT) {
-					inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT);
+//					inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT);
 					
 				}
 			}
@@ -332,7 +332,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 			}
 			
 			else if (inDSVT.isMouseHover(xclick,yclick)) {  // HIEN THI RA TINH NANG IN DANH SACH. 
-				inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT); 
+//				inDanhSachVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,themVT); 
 			}
 		}
 	delay(1);

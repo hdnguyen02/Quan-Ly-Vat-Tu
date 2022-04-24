@@ -22,12 +22,9 @@ struct VatTu {
 	// viet ham cap nhap lai so Luong 
 	void capNhapSoLuongTon(string loaiHD,float soLuongCapNhap ) { 
 		if (loaiHD == "X") {
-			// la hoaDonXuat 
-			// kiemTra xem co thoa man hay khong!
 			this->soLuongTon = this->soLuongTon - soLuongCapNhap; 
 		}
 		else if (loaiHD == "N") {
-			// la hoaDonNhap
 			this->soLuongTon = this->soLuongTon + soLuongCapNhap; 
 		}
 		
@@ -72,43 +69,58 @@ public:
 	bool dieuChinhVT(const string& key,const string& tenVT,const string&donViVT) ;
 	bool isNULL();  
 	int soLuongVT();
-	void BstVatTuToArray(NodeVatTu **arrVT,int &index,NodeVatTu* root);  
-	void sapXepTangDanTheoTen(NodeVatTu** arrVT); 
+	void hoTroBstVatTuToArray(VatTu **arrVT,int &index,NodeVatTu* root) ;
+	void BstVatTuToArray(VatTu **arrVT,int index); 
+	
+	void sapXepTangDanTheoTen(NodeVatTu** arrVT);   //  ham nay chi dang sap xep tang dan theo ten ma thoi !
 	
 	// XU LY FILE
 	void ghiVatTuFile();
 	void docVatTuFile();
 	void hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout);
+	
+	// viet ham sap xep dua tren con tro 
+	void sapXepVatTu(VatTu** arrVT,bool(*khoaSapXep)) { // doi so Nhan Vao la 1 mang sau nay thay doi mang do.
+		
+	}
+	
+	
 };
 
 int BstVatTu::soLuongVT() {
 		return this->soLuong; 
 }
 
-void BstVatTu::sapXepTangDanTheoTen(NodeVatTu** arrVT) {  
-		int index = 0; 	
-		int soLuongVT = this->soLuongVT(); 
-		this->BstVatTuToArray(arrVT,index,root);   
-		for (int i = 0; i < soLuongVT - 1;i++) {
-			for(int j = i + 1;j < soLuongVT;j++) {
-				if (arrVT[i]->info.ten > arrVT[j]->info.ten) {
-					NodeVatTu* temp = arrVT[i];
-					arrVT[i] = arrVT[j]; 
-					arrVT[j] = temp;  		
-				}
-			}
-		}
-}
+//void BstVatTu::sapXepTangDanTheoTen(NodeVatTu** arrVT) {  
+//		int index = 0; 	
+//		int soLuongVT = this->soLuongVT(); 
+//		this->BstVatTuToArray(arrVT,index,root);   
+//		for (int i = 0; i < soLuongVT - 1;i++) {
+//			for(int j = i + 1;j < soLuongVT;j++) {
+//				if (arrVT[i]->info.ten > arrVT[j]->info.ten) {
+//					NodeVatTu* temp = arrVT[i];
+//					arrVT[i] = arrVT[j]; 
+//					arrVT[j] = temp;  		
+//				}
+//			}
+//		}
+//}
+
+// 
 
 
-void BstVatTu::BstVatTuToArray(NodeVatTu **arrVT,int &index,NodeVatTu* root) { 
+void BstVatTu::hoTroBstVatTuToArray(VatTu **arrVT,int &index,NodeVatTu* root) { // new o ben ngoai truoc khi chay!
 		if (root != NULL) {
-			BstVatTuToArray(arrVT,index,root->pLeft); 
-			arrVT[index++] = root; 
-			BstVatTuToArray(arrVT,index,root->pRight); 
+			hoTroBstVatTuToArray(arrVT,index,root->pLeft); 
+			arrVT[index++] = root->getInfo(); // chi lay dia chi phan info. 
+			hoTroBstVatTuToArray(arrVT,index,root->pRight); 
 		}	
 	} 
 
+
+void BstVatTu::BstVatTuToArray(VatTu **arrVT,int index) {
+	hoTroBstVatTuToArray(arrVT,index,root); 
+}
 
 // return ve true neu dieu chinh thanh cong va false neu dieu chinh that bai ( vi key khong ton tai ) 
 bool BstVatTu::dieuChinhVT(const string& key,const string& tenVT,const string&donViVT) {

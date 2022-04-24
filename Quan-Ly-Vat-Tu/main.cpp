@@ -106,17 +106,39 @@ void nhapNV() {
 
 
 int main(int argc, char *argv[]) {
-	StartBGI start; 
-	dsNhanVien DSNV;  
-	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
-	BstVatTu dsVatTu; 
-	menuQuanLyVatTu(dsVatTu,DSNV); 	
-	
-	
-	
-	
-	
- DSNV.giaiPhongDSNV(); 
+//	StartBGI start; 
+//	dsNhanVien DSNV;  
+//	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
+//	BstVatTu dsVatTu; 
+//	menuQuanLyVatTu(dsVatTu,DSNV); 	
+//	
+//	
+//	
+//	
+//	
+// DSNV.giaiPhongDSNV(); 
+
+
+// thu nghiem voi thuat toan so sanh => xu dung con tro chuoc de co the so sanh -> lua chon quickSort 
+// viet ham so sanh lay ra 
+BstVatTu dsVatTu; 
+// tiep theo la doc file => doc file ne 
+// khai bao ra 1 mang chua info 
+int soLuongVT = dsVatTu.soLuongVT();  
+// khai bao 1 mang 
+VatTu** arrVT = new VatTu*[soLuongVT];
+dsVatTu.BstVatTuToArray(arrVT,0); 
+
+// lap qua 
+for (int i = 0; i < soLuongVT;i++) {
+	arrVT[i]->inVatTu(); 
+	cout << endl;
+}
+
+
+
+
+
 
 
 
