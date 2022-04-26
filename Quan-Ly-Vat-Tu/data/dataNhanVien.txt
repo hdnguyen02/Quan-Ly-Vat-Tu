@@ -1,4 +1,8 @@
-2
+6
+nv6,minh,thao,0,
+0
+nv9,thanh,van,0,
+0
 nv1,ho,duc,1,
 15
 nguyen,1/1/2023,X,
@@ -105,3 +109,10 @@ hd100,12/3/2022,X,
 2
 VT10,1,2,1
 VT12,2,3,23
+nv5,thanh,nhat,1,
+0
+nv4,xuan,hanh,1,
+0
+
+
+

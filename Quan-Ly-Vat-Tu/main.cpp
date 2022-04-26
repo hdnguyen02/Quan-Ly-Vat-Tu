@@ -104,42 +104,62 @@ void nhapNV() {
 
 
 
+// viet ham tim Kiem pivot
 
-int main(int argc, char *argv[]) {
-//	StartBGI start; 
-//	dsNhanVien DSNV;  
-//	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
-//	BstVatTu dsVatTu; 
-//	menuQuanLyVatTu(dsVatTu,DSNV); 	
-//	
-//	
-//	
-//	
-//	
-// DSNV.giaiPhongDSNV(); 
-
-
-// thu nghiem voi thuat toan so sanh => xu dung con tro chuoc de co the so sanh -> lua chon quickSort 
-// viet ham so sanh lay ra 
-BstVatTu dsVatTu; 
-// tiep theo la doc file => doc file ne 
-// khai bao ra 1 mang chua info 
-int soLuongVT = dsVatTu.soLuongVT();  
-// khai bao 1 mang 
-VatTu** arrVT = new VatTu*[soLuongVT];
-dsVatTu.BstVatTuToArray(arrVT,0); 
-
-// lap qua 
-for (int i = 0; i < soLuongVT;i++) {
-	arrVT[i]->inVatTu(); 
-	cout << endl;
+// viet ham hoanDoi 
+void hoanDoiVatTu(VatTu* &vti,VatTu* &vtj) {
+	VatTu* pTemp = vti;
+	vti = vtj; 
+	vtj = pTemp;  // thanh cong!
 }
 
+// viet 1 vai truong so sanh 
+bool soSanhTheoTen(VatTu* vt1,VatTu* vt2) {
+	if (vt1->ten < vt2->ten) {
+		return true;
+	}
+	return false; 
+}
+
+int partition(VatTu** arrVT,int low,int high,bool(*khoaSapXep)(VatTu*,VatTu*)) {
+	VatTu* pivot = arrVT[high];   // chon pivot lam phan tu cuoi cung ! 
+	int i = ( low - 1 ); // khoi tao vi tri -> luc nay la -1 neu la lan dau -> de ti vao ++ 
+	for (int j = low; j < high - 1 ;j++) { // lan l'
+		if (khoaSapXep(arrVT[j],pivot)) {  // dua vao khoa ma tuy co sap Xep!
+			i++;
+			hoanDoiVatTu(arrVT[i],arrVT[j]);  
+		
+		}
+	}
+	hoanDoiVatTu(arrVT[i + 1],arrVT[high]);  
+	return (i + 1); 
+}
+
+// viet ham quicksort 
+void quickSort(VatTu** arrVT,int low,int high,bool(*khoaSoSanh)(VatTu*,VatTu*)) {
+	if (low < high) {
+		int pi = partition(arrVT,low,high,khoaSoSanh);
+		quickSort(arrVT,low,pi-1,khoaSoSanh);
+		quickSort(arrVT,pi + 1,high,khoaSoSanh);
+	}
+}
+
+int main(int argc, char *argv[]) {
+	StartBGI start; 
+	dsNhanVien DSNV;  
+	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
+	BstVatTu dsVatTu; 
+	menuQuanLyVatTu(dsVatTu,DSNV); 	
+	
+ 	DSNV.giaiPhongDSNV(); 
+
+// kiem nghiem thuat toan ! 
 
 
+	
 
 
-
+	system("pause"); 
 
 
 

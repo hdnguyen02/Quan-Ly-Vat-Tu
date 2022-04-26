@@ -12,8 +12,8 @@ struct NhanVien {
 	NhanVien() {};
 	void inNV() {
 		cout << maNV << "  " << ho << "  " << ten << "  " << phai == 0 ? "nam":"nu" ; 
-		cout << endl << "HOA DON" << endl; 
-		dsHoaDon.duyetDSHD(); 
+		// cout << endl << "HOA DON" << endl; 
+		// dsHoaDon.duyetDSHD(); 
 	}
 	NhanVien(string maNV,string ho,string ten,int phai) : maNV(maNV) , ho(ho) , ten(ten) , phai(phai) {}
 	void ghiFileNhanVien(ofstream &fileout) {
@@ -23,6 +23,21 @@ struct NhanVien {
 	
 	string getHoTen() {
 		return ho + " " + ten; // tat ca da duoc chuan Hoa!
+	}
+	
+	// viet ham so sanh theo ten nhu sau
+	static bool soSanhTheoTen(NhanVien* nv1,NhanVien* nv2) { 
+		if (nv1->ten != nv2->ten) {
+			return nv1->ten > nv2->ten; 
+		}
+		else {
+			return nv1->ho > nv2->ho; 
+		}
+	}
+	
+	// ngoai ra con so sanh theo maNV 
+	static bool soSanhTheoMaNV(NhanVien* nv1,NhanVien* nv2) {
+		return nv1->ten > nv2->ten; 
 	}
 };
 
@@ -81,6 +96,11 @@ public:
 		return NULL; 
 	}
 	
+	// viet ham tra ve mang -> 
+	NhanVien** getDSNV() {
+		return &nv[0]; 
+	}
+	
 	// viet ham tra ve vi tri thu i 
 	NhanVien* getNhanVien(int index) {
 		if (this->dsRong() || index < 0 || index >= this->soLuong) {
@@ -106,6 +126,20 @@ public:
 	 	
 	}
 	
+	// viet ham tao sap xep -> sap xep theo nhieu truong ( ho ten hoac la maNV ) 
+	void insertionSort(bool(*khoaSoSanh)(NhanVien*,NhanVien*)) {
+		int i, j;
+		NhanVien* key;
+	    for (i = 1; i < soLuong; i++) {
+	        key = nv[i];
+	        j = i - 1;
+	        while (j >= 0 && khoaSoSanh(nv[j],key) ) {
+	            nv[j + 1] = nv[j];
+	            j = j - 1;
+	        }
+	        nv[j + 1] = key;
+	    }	
+	}
 };
 
 // 	VOID CLASS DANH SACH NHAN VIEN

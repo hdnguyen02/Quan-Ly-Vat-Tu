@@ -29,6 +29,31 @@ struct VatTu {
 		}
 		
 	}
+	
+	// viet hamKiemTraTangDan hoac giamDan 
+	static bool soSanhTheoTen(VatTu* vt1,VatTu* vt2) {
+		return vt1->ten > vt2->ten; 
+	}
+	
+	static bool soSanhTheoMaVT(VatTu* vt1,VatTu* vt2) {
+		return vt1->maVT > vt2->maVT; 
+	}
+	
+	static bool soSanhTheoSoLuongTon(VatTu* vt1,VatTu* vt2) {
+		return vt1->soLuongTon > vt2->soLuongTon; 
+	}
+	
+	static bool soSanhTheoDonViTinh(VatTu* vt1,VatTu* vt2) {
+		return vt1->donVi > vt2->donVi;
+	}
+	
+	// viet ham hoan Doi dia Chi 
+	static void hoanDoiDiaChiVatTu(VatTu* &vt1,VatTu* &vt2) {
+		VatTu* tempVT= vt1;
+		vt1 = vt2;
+		vt2 = tempVT; 
+	}
+
 };
 void VatTu::inVatTu() {
 	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon; 
@@ -73,19 +98,32 @@ public:
 	void BstVatTuToArray(VatTu **arrVT,int index); 
 	
 	void sapXepTangDanTheoTen(NodeVatTu** arrVT);   //  ham nay chi dang sap xep tang dan theo ten ma thoi !
-	
+	void insertionSort(VatTu** arrVT,int soLuongVT,bool(*khoaSoSanh)(VatTu*,VatTu*));  // ham sap xep ( theo truong ) 
 	// XU LY FILE
 	void ghiVatTuFile();
 	void docVatTuFile();
 	void hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout);
 	
-	// viet ham sap xep dua tren con tro 
-	void sapXepVatTu(VatTu** arrVT,bool(*khoaSapXep)) { // doi so Nhan Vao la 1 mang sau nay thay doi mang do.
-		
-	}
 	
-	
+
+
+
+
 };
+
+void BstVatTu::insertionSort(VatTu** arrVT,int soLuongVT,bool(*khoaSoSanh)(VatTu*,VatTu*)) {  // truyen vao 1 mang chua gia tri.
+	int i, j;
+	VatTu* key;
+    for (i = 1; i < soLuongVT; i++) {
+        key = arrVT[i];
+        j = i - 1;
+        while (j >= 0 && khoaSoSanh(arrVT[j],key)) {
+            arrVT[j + 1] = arrVT[j];
+            j = j - 1;
+        }
+        arrVT[j + 1] = key;
+    }	
+}
 
 int BstVatTu::soLuongVT() {
 		return this->soLuong; 
@@ -318,4 +356,30 @@ void BstVatTu::docVatTuFile() {
 }
 
 // ============================================ HAM HUY ============================================
+
+	// viet ham sap xep thoi ! => nhiem vu ngay mai -> ve ra giao dien sap xep theo. 
+	// viet ra friend -> tai ham nay khong thuoc pham vi nay 
+//	int partition(VatTu** arrVT,int low,int high,bool(*khoaSapXep)(VatTu*,VatTu*)) {
+//	VatTu* pivot = arrVT[high];   // chon pivot lam phan tu cuoi cung ! 
+//	int i = ( low - 1 ); // khoi tao vi tri -> luc nay la -1 neu la lan dau -> de ti vao ++ 
+//	for (int j = low; j < high - 1 ;j++) { // lan l'
+//		if (khoaSapXep(arrVT[j],pivot)) {  // dua vao khoa ma tuy co sap Xep!
+//			i++;
+//			VatTu::hoanDoiDiaChiVatTu(arrVT[i],arrVT[j]);  
+//		}
+//	}
+//	VatTu::hoanDoiDiaChiVatTu(arrVT[i + 1],arrVT[high]);  
+//	return (i + 1); 
+//}
+
+
+//void quickSort(VatTu** arrVT,int low,int high,bool(*khoaSoSanh)(VatTu*,VatTu*)) {
+//	if (low < high) {
+//		int pi = partition(arrVT,low,high,khoaSoSanh);
+//		quickSort(arrVT,low,pi-1,khoaSoSanh);
+//		quickSort(arrVT,pi + 1,high,khoaSoSanh);
+//	}
+//}
+
+// viet ham sap xep chen ( nhan vao doi so sap xep 
 
