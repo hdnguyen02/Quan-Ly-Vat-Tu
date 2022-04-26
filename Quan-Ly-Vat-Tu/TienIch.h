@@ -163,6 +163,11 @@ static void chuanHoaTen(string &s) {
 		cout << this->ngay << "/" << this->thang << "/"  << this->nam; 
 	}
 	
+	// tra ve string date  
+	string getStringDate() {  // chuyen doi ve string het va noi chuoi ! lai ! 
+		return "ngay " + TienichDoHoa::intToString(ngay) + " thang " + TienichDoHoa::intToString(thang) + " nam " + TienichDoHoa::intToString(nam);
+	}
+	
 
     void setDateNow() {
 		time_t t = time(0);

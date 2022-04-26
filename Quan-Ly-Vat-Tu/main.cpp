@@ -104,6 +104,45 @@ void nhapNV() {
 
 
 
+// viet ham tim Kiem pivot
+
+// viet ham hoanDoi 
+void hoanDoiVatTu(VatTu* &vti,VatTu* &vtj) {
+	VatTu* pTemp = vti;
+	vti = vtj; 
+	vtj = pTemp;  // thanh cong!
+}
+
+// viet 1 vai truong so sanh 
+bool soSanhTheoTen(VatTu* vt1,VatTu* vt2) {
+	if (vt1->ten < vt2->ten) {
+		return true;
+	}
+	return false; 
+}
+
+int partition(VatTu** arrVT,int low,int high,bool(*khoaSapXep)(VatTu*,VatTu*)) {
+	VatTu* pivot = arrVT[high];   // chon pivot lam phan tu cuoi cung ! 
+	int i = ( low - 1 ); // khoi tao vi tri -> luc nay la -1 neu la lan dau -> de ti vao ++ 
+	for (int j = low; j < high - 1 ;j++) { // lan l'
+		if (khoaSapXep(arrVT[j],pivot)) {  // dua vao khoa ma tuy co sap Xep!
+			i++;
+			hoanDoiVatTu(arrVT[i],arrVT[j]);  
+		
+		}
+	}
+	hoanDoiVatTu(arrVT[i + 1],arrVT[high]);  
+	return (i + 1); 
+}
+
+// viet ham quicksort 
+void quickSort(VatTu** arrVT,int low,int high,bool(*khoaSoSanh)(VatTu*,VatTu*)) {
+	if (low < high) {
+		int pi = partition(arrVT,low,high,khoaSoSanh);
+		quickSort(arrVT,low,pi-1,khoaSoSanh);
+		quickSort(arrVT,pi + 1,high,khoaSoSanh);
+	}
+}
 
 int main(int argc, char *argv[]) {
 	StartBGI start; 
@@ -112,16 +151,20 @@ int main(int argc, char *argv[]) {
 	BstVatTu dsVatTu; 
 	menuQuanLyVatTu(dsVatTu,DSNV); 	
 	
+ 	DSNV.giaiPhongDSNV(); 
+
+// kiem nghiem thuat toan ! 
+
+
 	
-	
-	
-	
- DSNV.giaiPhongDSNV(); 
+
+
+	system("pause"); 
+
+
 
 
     
-
-
 	return 0;
 }
 

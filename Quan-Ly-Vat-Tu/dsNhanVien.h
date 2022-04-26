@@ -12,16 +12,56 @@ struct NhanVien {
 	NhanVien() {};
 	void inNV() {
 		cout << maNV << "  " << ho << "  " << ten << "  " << phai == 0 ? "nam":"nu" ; 
-		cout << endl << "HOA DON" << endl; 
-		dsHoaDon.duyetDSHD(); 
+		// cout << endl << "HOA DON" << endl; 
+		// dsHoaDon.duyetDSHD(); 
 	}
 	NhanVien(string maNV,string ho,string ten,int phai) : maNV(maNV) , ho(ho) , ten(ten) , phai(phai) {}
 	void ghiFileNhanVien(ofstream &fileout) {
 		fileout << maNV << "," << ho << "," << ten << "," << phai << "," << endl; 
 		dsHoaDon.ghiFileDSHD(fileout); 
 	}
+	
+	string getHoTen() {
+		return ho + " " + ten; // tat ca da duoc chuan Hoa!
+	}
+	
+	// viet ham so sanh theo ten nhu sau
+	static bool soSanhTheoTen(NhanVien* nv1,NhanVien* nv2) { 
+		if (nv1->ten != nv2->ten) {
+			return nv1->ten > nv2->ten; 
+		}
+		else {
+			return nv1->ho > nv2->ho; 
+		}
+	}
+	
+	// ngoai ra con so sanh theo maNV 
+	static bool soSanhTheoMaNV(NhanVien* nv1,NhanVien* nv2) {
+		return nv1->maNV > nv2->maNV; 
+	}
 };
 
+
+// tao ra 1 kieu cau truc ho tro : chua 1 con tro HoaDon ( hoaDon ma NV do lap va thong tin cua HD do ) 
+struct NhanVienLapHD {
+	NhanVien* ptrNhanVien; 
+	NodeHoaDon* ptrHoaDon; 
+	NhanVienLapHD() {
+		ptrHoaDon = NULL; 
+		ptrNhanVien = NULL;  	
+	}
+	NhanVienLapHD(NhanVien* NhanVien,NodeHoaDon* HoaDon) {
+		ptrNhanVien = NhanVien; 
+		ptrHoaDon = HoaDon; 
+	}
+	bool isNull() {
+		if (ptrNhanVien == NULL && ptrHoaDon == NULL ) {
+			return true; 
+		}
+		return false; // co chua du lieu!
+	}
+	
+}; 
 
 
 
@@ -45,17 +85,61 @@ public:
 	//
 	
 	// tra ve true neu ton tai! va nguoc lai
-	bool timKiemHD(const string& soHD) {
+	NodeHoaDon* timKiemHD(const string& soHD) {  // tra ve NhanVien nam du hoa don do!
 		NodeHoaDon* tempTimKiem; 
 		for (int i = 0; i < this->soLuong;i++) {
 			tempTimKiem = nv[i]->dsHoaDon.timKiemHoaDon(soHD); 
 			if (tempTimKiem != NULL) {
-				return true; 
+				return tempTimKiem; // tu nv van co the truy cap ra.  
 			}
 		}
-		return false; 
+		return NULL; 
 	}
 	
+	// viet ham tra ve mang -> 
+	NhanVien** getDSNV() {
+		return &nv[0]; 
+	}
+	
+	// viet ham tra ve vi tri thu i 
+	NhanVien* getNhanVien(int index) {
+		if (this->dsRong() || index < 0 || index >= this->soLuong) {
+			return NULL; 
+		}
+		// khong quy pham -> co the lay ve dia chi thu i 
+		return nv[index]; // tra ve dia Chi. 
+ 	}
+ 	
+ 	// viet 1 ham tim tra ve 1 thang NV co chua HD do  
+ 	NhanVienLapHD timKiemNhanVienLapHD(const string& soHD) {
+	 	NodeHoaDon* tempTimKiem; 
+	 	NhanVienLapHD tempNVlapHD; 
+		for (int i = 0; i < this->soLuong;i++) {
+			tempTimKiem = nv[i]->dsHoaDon.timKiemHoaDon(soHD); 
+			if (tempTimKiem != NULL) {	 
+				 tempNVlapHD.ptrNhanVien = nv[i]; 
+				 tempNVlapHD.ptrHoaDon = tempTimKiem;
+				 return tempNVlapHD;  
+			}
+		}
+		return tempNVlapHD; 
+	 	
+	}
+	
+	// viet ham tao sap xep -> sap xep theo nhieu truong ( ho ten hoac la maNV ) 
+	void insertionSort(bool(*khoaSoSanh)(NhanVien*,NhanVien*)) {
+		int i, j;
+		NhanVien* key;
+	    for (i = 1; i < soLuong; i++) {
+	        key = nv[i];
+	        j = i - 1;
+	        while (j >= 0 && khoaSoSanh(nv[j],key) ) {
+	            nv[j + 1] = nv[j];
+	            j = j - 1;
+	        }
+	        nv[j + 1] = key;
+	    }	
+	}
 };
 
 // 	VOID CLASS DANH SACH NHAN VIEN

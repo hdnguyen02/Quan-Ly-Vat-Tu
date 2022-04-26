@@ -1,23 +1,24 @@
-22
-VT01,Vat tu 0,kg,1
-VT02,Vat tu 0,kg,12
-VT03,Vat tu 0,kg,12
-VT04,Vat tu 0,kg,10
-VT05,Vat tu 0,kg,0
-VT06,Vat tu 0,kg,12
-VT07,Vat tu 0,kg,12
-VT08,Vat tu 0,kg,12
-VT09,Vat tu 0,kg,12
-VT10,Vat tu 0,kg,12
-VT11,Vat tu 0,kg,12
-VT12,Vat tu 0,kg,12
-VT13,Vat tu 0,kg,12
-VT14,Vat tu 0,kg,9
-VT15,Vat tu 0,kg,1
-VT16,Vat tu 0,kg,12
-VT17,Vat tu 0,kg,12
-VT18,Vat tu 0,kg,12
-VT19,Vat tu 0,kg,12
-VT20,Vat tu 0,kg,12
-hdnguyen,duc nguyen,kg,233
-VT34,sat,tan,10
+23
+VT12,xi mang,kg,5.8
+VT08,cac trang,kg,12
+VT06,ngu nguoi,kg,12
+VT02,da,kg,12
+VT05,gang,kg,0
+VT04,thep,kg,10
+VT03,sat,kg,12
+VT07,da hoa,kg,12
+VT11,xa beng,kg,12
+VT10,ong cap thoat nuoc,kg,11
+VT09,be tong,kg,12
+VT17,xa ban,kg,12
+VT15,day thung,kg,0
+VT14,day dien,kg,8
+VT13,thang da den,kg,72
+VT125,lmao,kg,34
+VT1455,VT2332,fdf,3343
+VT16,cao xu,kg,12
+VT20,cac bien,kg,12
+VT18,dinh thep,kg,12
+VT19,may tron be tong,kg,12
+VT88,nguyen bro,tan,23
+VT77,duc nguyen,yen,22
