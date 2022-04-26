@@ -57,6 +57,11 @@ struct NutBam {
 		outtextxy(toaDoTextX, toaDoTextY, arr);
 	}
 	
+	// viet ham ve lai 
+	void khongDuocChon() {
+		this->duocTroVao = false; 
+		this->veNut(); 
+	}	
 	// ham kiem tra xem co nen ve lai mot nut hay khong ( hover thi ve lai hoac co the khong ) 
 	void kiemTraVeLai(int &mx,int &my,bool &kiemTra) { 
 		if (this->isMouseHover(mx,my)) { 

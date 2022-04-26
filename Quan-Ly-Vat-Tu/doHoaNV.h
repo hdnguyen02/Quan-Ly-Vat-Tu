@@ -10,135 +10,146 @@ using namespace std;
 // chua sua !
 
 
-//void chinhSuaNV(NhanVien &DSNV,NhanVien* nhanVienCT) {  
-//	OVuong them(margin + doDaiCoban*6 - 60,canLeTrenHD + 140 ,margin + doDaiCoban*3 + 30,400,15); 
-//	NutBam titleCSVT(margin + doDaiCoban*6 - 60,canLeTrenHD + 140,margin + doDaiCoban*3 + 30,40,15,0,0,"Hieu Chinh Vat Tu");
-//	 
-//	titleCSVT.veNut();  
-//	ONhap nhapMaVT(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 30,doDaiCoban*3 - 100,40,60,"ma: ",0,0,10); 
-//	ONhap nhapTenVT(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 100,doDaiCoban*3 - 100,40,60,"ten: ",0,0,50);
-//	ONhap nhapSoLuong(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 70 * 2 + 30,doDaiCoban*3 - 100,40,60,"sl: ",0,0,10);
-//	ONhap nhapDVT(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 50 + 70 * 2 + 50,doDaiCoban*3 - 100,40,60,"dvt: ",0,0,30);
-//	nhapMaVT.boNhoDem = vatTuCT->maVT; // lay ra maVT 
-//	nhapTenVT.boNhoDem = vatTuCT->ten; 
-//	nhapSoLuong.boNhoDem = TienichDoHoa::floatToString(vatTuCT->soLuongTon);
-//	nhapDVT.boNhoDem =  vatTuCT->donVi;
-//	
-//	// tiep theo la bac dieu kien thoi => cho nguoi dung chinh sua nhung truoc tien can lay ra gia tri truoc khi chinh sua 
-//	string maVTCu = vatTuCT->maVT; 
-//	string tenVTCu = vatTuCT->ten; 
-//	string dvtCu  = vatTuCT->donVi; 
-//	// ngoai ra con ve 1 cai nut thoat cho nguoi dung nua => sau khi nhap nut thoat thi ket thuc ham va ve lai  
-//
-//	 
-//	
-//	
-//	nhapMaVT.veONhap(); 
-//	nhapTenVT.veONhap(); 
-//	nhapSoLuong.veONhap(); 
-//	nhapDVT.veONhap(); 
-//	
-//	nhapMaVT.inNoiDung(); 
-//	nhapTenVT.inNoiDung(); 
-//	nhapSoLuong.inNoiDung(); 
-//	nhapDVT.inNoiDung(); 
-//	
-//	NutBam saveVT(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,margin + doDaiCoban*3 + 30,40,0,2,0,"");
-//	saveVT.veNut(); 
-//	NutBam xoa(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2 - 1,40,13,2,0,"xoa");
-//	xoa.veNut(); 
-//	
-//	NutBam hieuChinh(margin +doDaiCoban*6 - 60 + (margin + doDaiCoban*3 + 30) /2 + 1,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2,40,13,2,0,"hieu chinh"); 
-//	hieuChinh.veNut(); 
-//	
-//	// tao them 1 nut tac
-//	NutBam thoat(margin + doDaiCoban*6 - 60 + (margin + doDaiCoban*3 + 30 - 40 ) ,canLeTrenHD + 140,40,40,4,0,15,"X"); 
-//	thoat.veNut(); 
-//	int xclick = -1; 
-//	int yclick = -1; 
-//	while (true) {
-//		if (ismouseclick(WM_LBUTTONDOWN)) {  
-//			getmouseclick(WM_LBUTTONDOWN, xclick, yclick); 
-//			if (nhapMaVT.isMouseHover(xclick,yclick)) {
-//				nhapMaVT.NhapVao(kiTuChuHoacSo,""); 
-//				// sau khi nhap song kiem tra xem co trung hay khong ! 
-//				if (nhapMaVT.boNhoDem != "" && nhapMaVT.boNhoDem != maVTCu) {
-//
-//					if (dsVatTu.timKiemVT(nhapMaVT.boNhoDem) != NULL) { // da ton tai roi -> nen moi tim thay!
-//						MessageBox(NULL, "Da Ton Tai Ma Vat Tu Nay!", "thong bao", MB_ICONINFORMATION | MB_OK);
-//						nhapMaVT.resetBoNhoDem();
-//					}
-//				}
-//				
-// 			}
-// 			
-//				else if (nhapTenVT.isMouseHover(xclick,yclick)) {
-//					nhapTenVT.NhapVao(kiTuChuHoacSo,""); 
-//				}
-//				else if (nhapDVT.isMouseHover(xclick,yclick)) {
-//					nhapDVT.NhapVao(kiTuChu,""); 
-//				}
-//				else if (hieuChinh.isMouseHover(xclick,yclick)) { // nhap vao !
-//					if (nhapTenVT.boNhoDem == "" || nhapMaVT.boNhoDem == "" || nhapDVT.boNhoDem == "") {
-//						MessageBox(NULL, "Khong Duoc Bo Trong!", "thong ba", MB_ICONINFORMATION | MB_OK);
-//					}
-//					else if (nhapMaVT.boNhoDem != maVTCu || nhapTenVT.boNhoDem != tenVTCu || nhapDVT.boNhoDem != dvtCu) { // phai co thang nao thay doi thi moi chinh sua !
-//						vatTuCT->maVT = nhapMaVT.boNhoDem; 
-//						vatTuCT->ten = nhapTenVT.boNhoDem; 
-//						vatTuCT->donVi = nhapDVT.boNhoDem; 
-//						MessageBox(NULL, "Hieu Chinh Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK); 
-//						break; 	
-//					}
-//				
-//				}
-// 		
-// 				
-//				else if (thoat.isMouseHover(xclick,yclick)) {
-//					break; 
-//				}
-//				else if (xoa.isMouseHover(xclick,yclick)) {
-//					if (nhapMaVT.boNhoDem == maVTCu && nhapTenVT.boNhoDem == tenVTCu && nhapDVT.boNhoDem == dvtCu) {
-//						int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
-//						if (luaChon == OK) { // xoa di !
-//							dsVatTu.xoaVT(nhapMaVT.boNhoDem); 
-//							MessageBox(NULL, "Xoa Vat Tu Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK); 
-//							break;  
-//						}
-//					}
-//					
-//				}
-//			
-//			
-//			
-//		}
-//		delay(1); 
-//	}
-//	
-//
-//	
-//}
+void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien* nhanVienCT) {
+	OVuong themNV(margin + doDaiCoban*6 - 60,canLeTrenHD + 140 ,margin + doDaiCoban*3 + 30,400,15); 
+	NutBam titleHCNV(margin + doDaiCoban*6 - 60,canLeTrenHD + 140,margin + doDaiCoban*3 + 30,40,15,0,0,"HIEU CHINH NHAN VIEN"); 
+	titleHCNV.veNut();  
+	ONhap nhapMaNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 30,doDaiCoban*3 - 100,40,60,"MA: ",0,0,10); 
+	ONhap nhapHoNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 100,doDaiCoban*3 - 100,40,60,"HO: ",0,0,20);
+	ONhap nhapTenNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 70 * 2 + 30,doDaiCoban*3 - 100,40,60,"TEN: ",0,0,10);
+	
+	// tao ra 2 nut bam Nam Nu 
+	NutBam nam(margin + doDaiCoban*6 + 60,canLeTrenHD + 170 + 70 * 2 + 30 + 70,60,40,11,13,0,"NAM"); 
+	NutBam nu(margin + doDaiCoban*6 + 364,canLeTrenHD + 170 + 70 * 2 + 30 + 70,60,40,11,13,0,"NU"); 
+	nam.veNut(); 
+	nu.veNut(); 
+	nhapMaNV.veONhap(); 
+	nhapHoNV.veONhap(); 
+	nhapTenNV.veONhap(); 
+	
+	
+	
 
 
-//void inDanhSachLenDoHoa(NodeVatTu **arrVT,int indexPage,int soLuongItemPage,int soLuongNode) {	
-//	const int canLeY = 170;  // cach oVuong 110 va cach tieuDe 40
-//	const int canLeX = DODAIMANHINH/2 - 1200/2 + 100; 
-//	const int donViO = 1200 / 5; 
-//	setbkcolor(BACKGROUP); 
-//	const int cachNhau = 30; 
-//	string tempDVT; 
-//	// =================== CHUA VIET HAM XOA DI DU LIEU CU =================== 
-//	 
-//	setcolor(CinputText); 
-//	for (int i = 0;i < soLuongItemPage;i++) {
-//		if (i + indexPage*soLuongItemPage < soLuongNode  ) {
-//		tempDVT = TienichDoHoa::floatToString(arrVT[i + indexPage*soLuongItemPage]->getInfo()->soLuongTon); 
-//		outtextxy(canLeX,           canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo()->maVT.c_str()));
-//		outtextxy(canLeX + donViO*1,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo()->ten.c_str()));
-//		outtextxy(canLeX + donViO*3,canLeY + cachNhau*i,(char*)(arrVT[i + indexPage*soLuongItemPage]->getInfo()->donVi.c_str()));
-//		outtextxy(canLeX + donViO*4,canLeY + cachNhau*i,(char*)(tempDVT.c_str()));
-//		}	
-//	}	
-//}
+
+	NutBam saveNV(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,margin + doDaiCoban*3 + 30,40,0,2,0,"");
+	saveNV.veNut(); 
+	
+	NutBam xoa(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2 - 1,40,13,2,0,"xoa");
+	xoa.veNut(); 
+	
+	NutBam hieuChinh(margin +doDaiCoban*6 - 60 + (margin + doDaiCoban*3 + 30) /2 + 1,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2,40,13,2,0,"hieu chinh"); 
+	hieuChinh.veNut(); 
+	NutBam thoat(margin + doDaiCoban*6 - 60 + (margin + doDaiCoban*3 + 30 - 40 ) ,canLeTrenHD + 140,40,40,4,0,15,"X"); 
+	thoat.veNut(); 
+	
+	int xclick = -1; 
+	int yclick = -1; 
+	
+	string maNVCu = nhanVienCT->maNV; 
+	string hoNVCu = nhanVienCT->ho; 
+	string tenNVCu = nhanVienCT->ten; 
+	int phaiCu = nhanVienCT->phai; 
+	
+	nhapMaNV.boNhoDem = nhanVienCT->maNV; 
+	nhapTenNV.boNhoDem = nhanVienCT->ten; 
+	nhapHoNV.boNhoDem = nhanVienCT->ho; 
+	
+	// khai bao 1 bien phai
+	int phai = nhanVienCT->phai; 
+	if (phai == 0) {
+		nam.duocChon(); 
+		nu.khongDuocChon(); 
+	}
+	else {
+		nam.khongDuocChon(); 
+		nu.duocChon(); 
+	}
+	
+	// do du lieu len! 
+	nhapTenNV.inNoiDung(); 
+	nhapHoNV.inNoiDung(); 
+	nhapMaNV.inNoiDung(); 
+	
+	
+	while (true) {
+		if (ismouseclick(WM_LBUTTONDOWN)) {  
+			getmouseclick(WM_LBUTTONDOWN, xclick, yclick); 
+			if (nhapMaNV.isMouseHover(xclick,yclick)) {
+				nhapMaNV.NhapVao(kiTuChuHoacSo,""); 
+				if (nhapMaNV.boNhoDem != "" && nhapMaNV.boNhoDem != maNVCu) {
+
+					if (DSNV.timKiemNVTraVeDiaChi(nhapMaNV.boNhoDem) != NULL) { // da ton tai roi -> nen moi tim thay!
+						MessageBox(NULL, "Da Ton Tai Ma Vat Tu Nay!", "thong bao", MB_ICONINFORMATION | MB_OK);
+						nhapMaNV.resetBoNhoDem();
+					}
+				}
+				
+ 			}
+ 			
+				else if (nhapTenNV.isMouseHover(xclick,yclick)) {
+					nhapTenNV.NhapVao(kiTuChuHoacSo,""); 
+				}
+				else if (nhapHoNV.isMouseHover(xclick,yclick)) {
+					nhapHoNV.NhapVao(kiTuChu,""); 
+				}
+				else if (nam.isMouseHover(xclick,yclick)) {
+					nam.duocChon();  
+					nu.khongDuocChon(); 
+				}
+				else if (nu.isMouseHover(xclick,yclick)) {
+					nam.khongDuocChon(); 
+					nu.duocChon(); 
+				}
+				else if (hieuChinh.isMouseHover(xclick,yclick)) { // nhap vao !
+					if (nam.duocTroVao = true) {
+						phai = 0; 
+					}
+					else {
+						phai = 1; 
+					}
+					if (nhapTenNV.boNhoDem == "" || nhapMaNV.boNhoDem == "" || nhapHoNV.boNhoDem == ""  ) {
+						MessageBox(NULL, "Khong Duoc Bo Trong!", "thong bao", MB_ICONINFORMATION | MB_OK);
+					}
+					else if (nhapMaNV.boNhoDem != maNVCu || nhapTenNV.boNhoDem != tenNVCu || nhapHoNV.boNhoDem != hoNVCu || phai != phaiCu) { // phai co thang nao thay doi thi moi chinh sua !
+						nhanVienCT->maNV = nhapMaNV.boNhoDem; 
+						nhanVienCT->ten = nhapTenNV.boNhoDem; 
+						nhanVienCT->ho = nhapHoNV.boNhoDem; 
+						nhanVienCT->phai = phai; 
+						MessageBox(NULL, "Hieu Chinh Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK); 
+						DSNV.ghiFileDSNV("data/dataNhanVien.txt"); 
+						break; 	
+					}
+				
+				}
+ 		
+ 				
+				else if (thoat.isMouseHover(xclick,yclick)) {
+					break; 
+				}
+				else if (xoa.isMouseHover(xclick,yclick)) {
+					if (nhapMaNV.boNhoDem == maNVCu && nhapTenNV.boNhoDem == tenNVCu && nhapHoNV.boNhoDem == hoNVCu) {
+						int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK) { // xoa di !
+							DSNV.xoaNV(nhapMaNV.boNhoDem); 
+							MessageBox(NULL, "Xoa nhan vien Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+							DSNV.ghiFileDSNV("data/dataNhanVien.txt");  
+							break;  
+						}
+					}
+					
+				}
+				
+			
+			
+			
+		}
+		delay(1); 
+	}
+	
+}
+
+
 
 
 
@@ -180,9 +191,15 @@ int hienThiDuLieuLenTableNV(int indexPage,int soLuongPhanTuTrenMotPage,dsNhanVie
 		settextstyle(6, 0, 1);
 		if ( i + indexPage*soLuongPhanTuTrenMotPage < soLuongNV) {
 			 index =  i + indexPage * soLuongPhanTuTrenMotPage; 
-			 temp = TienichDoHoa::floatToString(arrVT[index]->soLuongTon); 
-			 outtextxy(margin + 30,marginTop + khoanCach*i,arrVT[index]->maVT.c_str());  // hien thi ra maVT 
-			 outtextxy(margin + 186,marginTop + khoanCach*i,arrVT[index]->ten.c_str());  // hien thi ra maVT
+			 outtextxy(margin + 30,marginTop + khoanCach*i,arrNV[index]->maNV.c_str());  // hien thi ra maVT 
+			 outtextxy(margin + 186,marginTop + khoanCach*i,arrNV[index]->getHoTen().c_str());  // hien thi ra maVT
+			 // kiem tra xem la 0 hay 1 
+			 if (arrNV[index]->phai == 0) {
+			 	temp = "Nam";
+			 }
+			 else {
+			 	temp = "Nu"; 
+			 }
 			 outtextxy(margin + 600,marginTop + khoanCach*i,temp.c_str());  // hien thi ra maVT
 			 line(margin,marginTop + khoanCach*i + 32,margin + 830,marginTop + khoanCach*i + 32); 
 			 NutBam hieuChinh(margin + 760,marginTop + khoanCach*i -4,60,28,11,0,0,"sua"); 
@@ -199,7 +216,7 @@ int hienThiDuLieuLenTableNV(int indexPage,int soLuongPhanTuTrenMotPage,dsNhanVie
 //	                                      HIEN THI TINH NANG VAT TU MOI                                                   //                
 //                                                                                                                        //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &VatTu,NutBam &hoaDon,NutBam &doanhThu,bool(*khoaSapXep)(NhanVien*,NhanVien*)) {
+void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &hoaDon,NutBam &doanhThu,bool(*khoaSapXep)(NhanVien*,NhanVien*)) {
 	
 	
 	
@@ -210,6 +227,8 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &VatTu,NutBam &h
 	int toaDoChiMucX = DODAIMANHINH/2 -110; 
 	NhanVien *tempNV; 
 	int soLuongNV = DSNV.soLuongNV(); 
+	
+	int soLuongNhanVienTrenTable = 0;
 
 	int soLuongPage = soLuongNV  / itemTrenMotPage; 
 	float toiDaPage = (float)soLuongNV / (float)itemTrenMotPage; 
@@ -233,29 +252,244 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &VatTu,NutBam &h
 	ONhap nhapTenNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 70 * 2 + 30,doDaiCoban*3 - 100,40,60,"TEN: ",0,0,10);
 	
 	// tao ra 2 nut bam Nam Nu 
-	NutBam nam(margin + doDaiCoban*6 + 60,canLeTrenHD + 170 + 70 * 2 + 30 + 70,60,40,11,0,0,"NAM"); 
+	NutBam nam(margin + doDaiCoban*6 + 60,canLeTrenHD + 170 + 70 * 2 + 30 + 70,60,40,11,13,0,"NAM"); 
+	nam.duocTroVao = true;
 	nam.veNut(); 
 	
-	NutBam nu(margin + doDaiCoban*6 + 364,canLeTrenHD + 170 + 70 * 2 + 30 + 70,60,40,11,0,0,"NU"); 
+	NutBam nu(margin + doDaiCoban*6 + 364,canLeTrenHD + 170 + 70 * 2 + 30 + 70,60,40,11,13,0,"NU"); 
 	nu.veNut(); 
 	nhapMaNV.veONhap(); 
 	nhapHoNV.veONhap(); 
 	nhapTenNV.veONhap(); 
 	
 	// ve ra o Vuong ngan cach nam nu 
-	line(margin + doDaiCoban*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 60,margin + doDaiCoban*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 120);
+//	line(margin + doDaiCoban*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 60,margin + doDaiCoban*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 120);
 
-	NutBam saveVT(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,margin + doDaiCoban*3 + 30,40,14,2,0,"SAVE");
-	saveVT.veNut(); 
+	NutBam saveNV(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,margin + doDaiCoban*3 + 30,40,14,2,0,"SAVE");
+	saveNV.veNut(); 
 	
-	
+	DSNV.insertionSort(NhanVien::soSanhTheoTen); 
 	
 	veTableNV();
+	
+	soLuongNhanVienTrenTable = hienThiDuLieuLenTableNV(indexPage,itemTrenMotPage,DSNV); 
+	hienThiChiMuc(430,740,indexPage,toiDaPage);
+	
+	// ve ra sap xep theo 
+	setcolor(CinputText); 
+	setbkcolor(0); 
+	settextstyle(6, 0, 1);
+	outtextxy(59,106,"Sap xep theo: "); 
+	
+	NutBam theoTen(62 + 160,96,100,40,11,13,0,"ho ten");
+	NutBam theoMaNV(62 + 160 + 120,96,100,40,11,13,0,"ma");
+	theoTen.duocChon(); 
+	theoMaNV.veNut(); 
+	
+	
+	int marginTop = canLeTrenHD + 170 - 70; 
+	int khoanCach = 46; 
+	NutBam hieuChinh1(margin + 760, marginTop+ khoanCach*0 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh2(margin + 760, marginTop+ khoanCach*1 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh3(margin + 760, marginTop+ khoanCach*2 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh4(margin + 760, marginTop+ khoanCach*3 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh5(margin + 760, marginTop+ khoanCach*4 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh6(margin + 760, marginTop+ khoanCach*5 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh7(margin + 760, marginTop+ khoanCach*6 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh8(margin + 760, marginTop+ khoanCach*7 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh9(margin + 760, marginTop+ khoanCach*8 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh10(margin + 760, marginTop+ khoanCach*9 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh11(margin + 760, marginTop+ khoanCach*10 -4,60,28,13,0,0,"sua");
+	
 	
 	NutBam btnLui(margin,730,100,40,15,0,0,"<<");
 	NutBam btnTien(margin + 730,730,100,40,15,0,0,">>");
 	btnLui.veNut(); 	
 	btnTien.veNut(); 
+	// bat su kien nhap vao nv 
+	int xclick = -1; 
+	int yclick = -1; 
+	while(true) {
+		 if (ismouseclick(WM_LBUTTONDOWN)) {  
+		 getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
+		 if (nhapMaNV.isMouseHover(xclick,yclick)) {  // hien thi 
+			 nhapMaNV.NhapVao(kiTuChuHoacSo,""); 
+			 // sau khi nhap song kiem tra xem co trung hay khong 
+			 tempNV = DSNV.timKiemNVTraVeDiaChi(nhapMaNV.boNhoDem); 
+			 if (tempNV != NULL) {
+			 	MessageBox(NULL, "da ton ma nhan vien nay", "thong bao", MB_ICONINFORMATION | MB_OK);
+				nhapMaNV.resetBoNhoDem(); 
+			 }
+			 
+ 		} 
+ 		else if ( nhapHoNV.isMouseHover(xclick,yclick) ) {
+			 	nhapHoNV.NhapVao(kiTuChu,"chi nhap chu!"); 
+			 }
+			 else if (nhapTenNV.isMouseHover(xclick,yclick)) {
+			 	nhapTenNV.NhapVao(kiTuChu,"chu nhap chu!"); 
+			 }
+			 else if (nam.isMouseHover(xclick,yclick)) {
+			 	// phat sang no len ! 
+			 	nam.duocTroVao = true; 
+			 	nam.veNut(); 
+			 	nu.duocTroVao = false; 
+			 	nu.veNut(); 
+			 }
+			 else if (nu.isMouseHover(xclick,yclick)) {
+				nam.duocTroVao = false; 
+			 	nam.veNut(); 
+			 	nu.duocTroVao = true; 
+			 	nu.veNut(); 
+			 }
+			 else if (saveNV.isMouseHover(xclick,yclick)) {
+			 	if (nhapMaNV.boNhoDem == "" || nhapHoNV.boNhoDem == "" || nhapTenNV.boNhoDem == "") {
+				 	MessageBox(NULL, "khong duoc bo trong!", "thong bao", MB_ICONINFORMATION | MB_OK);
+				 }
+				 else {
+				 	
+				 	int phai; 
+				 	if (nam.duocTroVao == true) {
+					 	phai = 0; 
+					}
+					else {
+						phai = 1;
+					}
+					DSNV.themNV(nhapMaNV.boNhoDem,nhapHoNV.boNhoDem,nhapTenNV.boNhoDem,phai); 
+					DSNV.ghiFileDSNV("data/dataNhanVien.txt"); 
+					MessageBox(NULL, "Them thanh cong!", "thong bao", MB_ICONINFORMATION | MB_OK);
+				 	index = ID_NV; 
+				 	return; 
+				 }
+			 }
+			else if (btnTien.isMouseHover(xclick,yclick)) {
+				if (indexPage < toiDaPage - 1) {
+					indexPage++; // nhay qua page khac ! 
+					veTableNV();
+	
+					soLuongNhanVienTrenTable = hienThiDuLieuLenTableNV(indexPage,itemTrenMotPage,DSNV); 
+					hienThiChiMuc(430,740,indexPage,toiDaPage); 
+										
+				}
+			}
+			else if (btnLui.isMouseHover(xclick,yclick)) { 
+				if (indexPage > 0) {
+					indexPage--; 
+					veTableNV();
+	
+					soLuongNhanVienTrenTable = hienThiDuLieuLenTableNV(indexPage,itemTrenMotPage,DSNV);  
+					hienThiChiMuc(430,740,indexPage,toiDaPage); 
+				}
+			}
+			else if (theoTen.isMouseHover(xclick,yclick)) {
+				// ve lai bang thoi ! 
+				theoTen.duocChon(); 
+				theoMaNV.khongDuocChon(); 
+				DSNV.insertionSort(NhanVien::soSanhTheoTen); 
+				veTableNV();
+				soLuongNhanVienTrenTable = hienThiDuLieuLenTableNV(indexPage,itemTrenMotPage,DSNV);
+				hienThiChiMuc(430,740,indexPage,toiDaPage);   
+			}
+			else if (theoMaNV.isMouseHover(xclick,yclick)) {
+				theoMaNV.duocChon(); 
+				theoTen.khongDuocChon(); 
+				DSNV.insertionSort(NhanVien::soSanhTheoMaNV); 
+				veTableNV();
+				soLuongNhanVienTrenTable = hienThiDuLieuLenTableNV(indexPage,itemTrenMotPage,DSNV);  
+				hienThiChiMuc(430,740,indexPage,toiDaPage); 
+			}
+			else if (hieuChinh1.isMouseHover(xclick,yclick)){
+				if (soLuongNhanVienTrenTable != 0) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(itemTrenMotPage * indexPage)); 
+					index = ID_NV; 
+					return; 
+				}
+			}
+			else if (hieuChinh2.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 2) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(1 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return;  
+				}
+			}
+			else if (hieuChinh3.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 3) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(2 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return;  
+				}
+			}
+			else if (hieuChinh4.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 4) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(3 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return; 
+				}
+			}
+			else if (hieuChinh5.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 5) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(4 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return; 
+				}
+			}
+			else if (hieuChinh6.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 6) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(5 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return;  
+				}
+			}
+			else if (hieuChinh7.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 7) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(6 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return;   
+				}
+			}
+			else if (hieuChinh8.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 8) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(7 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return;
+				}
+			}
+			else if (hieuChinh9.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 9 ) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(8 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return;
+				}
+			}
+			else if (hieuChinh10.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 10) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(9 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return;
+				}
+			}
+			else if (hieuChinh11.isMouseHover(xclick,yclick)) { 
+				if (soLuongNhanVienTrenTable >= 11) {
+					hienThiChinhSuaNV(DSNV,DSNV.getNhanVien(9 + itemTrenMotPage * indexPage));
+					index = ID_NV; 
+					return; 
+				}
+			}
+			else if (vatTu.isMouseHover(xclick,yclick)) {
+				index = ID_VT; 
+				return; 
+			}
+			else if (hoaDon.isMouseHover(xclick,yclick)) {
+				index = ID_HD; 
+				return; 
+			}
+			else if (doanhThu.isMouseHover(xclick,yclick)) {
+				index = ID_DT; 
+				return; 
+			}
+			
+ 		}
+	delay(1); 
+	}
 	
 	
 	

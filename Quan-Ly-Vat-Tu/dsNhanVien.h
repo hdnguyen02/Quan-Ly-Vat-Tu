@@ -37,7 +37,7 @@ struct NhanVien {
 	
 	// ngoai ra con so sanh theo maNV 
 	static bool soSanhTheoMaNV(NhanVien* nv1,NhanVien* nv2) {
-		return nv1->ten > nv2->ten; 
+		return nv1->maNV > nv2->maNV; 
 	}
 };
 
