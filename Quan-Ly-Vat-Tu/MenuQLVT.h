@@ -24,7 +24,6 @@ void menuCha(BstVatTu &dsVatTu,dsNhanVien &DSNV) {
 	nhanVien.veNut(); 
 	hoaDon.veNut(); 
 	doanhThu.veNut(); 
-	bool kiemTra[4] = { false }; 
 	int mx = -1;  
 	int my = -1;
 	while (true) {
@@ -40,13 +39,6 @@ void menuCha(BstVatTu &dsVatTu,dsNhanVien &DSNV) {
 				index = -1; 
 				hienThiTinhNangHoaDon(dsVatTu,DSNV,index,vatTu,nhanVien,doanhThu); 
 			}
-		}
-		if (ismouseclick(WM_MOUSEMOVE)) {
-			getmouseclick(WM_MOUSEMOVE, mx, my);  
-			vatTu.kiemTraVeLai(mx,my,kiemTra[0]);   
-			nhanVien.kiemTraVeLai(mx,my,kiemTra[1]); 
-			hoaDon.kiemTraVeLai(mx,my,kiemTra[2]); 
-			doanhThu.kiemTraVeLai(mx,my,kiemTra[3]); 
 		}
 		else if (ismouseclick(WM_LBUTTONDOWN)) {  
 			int xclick = -1;

@@ -63,18 +63,18 @@ struct NutBam {
 		this->veNut(); 
 	}	
 	// ham kiem tra xem co nen ve lai mot nut hay khong ( hover thi ve lai hoac co the khong ) 
-	void kiemTraVeLai(int &mx,int &my,bool &kiemTra) { 
-		if (this->isMouseHover(mx,my)) { 
-				this->duocTroVao = true; 
-				this->veNut(); 
-				kiemTra = true; 
-			}
-		else if (kiemTra == true) {
-				this->duocTroVao = false; 
-				this->veNut(); 
-				kiemTra = false; 
-			}
-		}
+//	void kiemTraVeLai(int &mx,int &my,bool &kiemTra) { 
+//		if (this->isMouseHover(mx,my)) { 
+//				this->duocTroVao = true; 
+//				this->veNut(); 
+//				kiemTra = true; 
+//			}
+//		else if (kiemTra == true) {
+//				this->duocTroVao = false; 
+//				this->veNut(); 
+//				kiemTra = false; 
+//			}
+//		}
 
 };
 

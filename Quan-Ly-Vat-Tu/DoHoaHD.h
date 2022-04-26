@@ -1141,17 +1141,7 @@ void hienThiTinhNangHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 				}
 	
 		}
-		if (ismouseclick(WM_MOUSEMOVE)) {
-			getmouseclick(WM_MOUSEMOVE, mx, my);  
-			vatTu.kiemTraVeLai(mx,my,kiemTra[0]); 
-			nhanVien.kiemTraVeLai(mx,my,kiemTra[1]);
-			doanhThu.kiemTraVeLai(mx,my,kiemTra[2]);
-
-			themHDXuat.kiemTraVeLai(mx,my,kiemTraHD[0]); 
-			inHD.kiemTraVeLai(mx,my,kiemTraHD[1]); 
-			
-			
-		}  // xu kien nguoi dung click. 
+		
 		else if (ismouseclick(WM_LBUTTONDOWN)) {  
 			int xclick = -1;
 			int yclick = -1; 
