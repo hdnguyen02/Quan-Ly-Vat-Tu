@@ -22,7 +22,6 @@ void chinhSuaVT(BstVatTu &dsVatTu,VatTu* vatTuCT) {
 	nhapDVT.boNhoDem =  vatTuCT->donVi;
 	
 	// tiep theo la bac dieu kien thoi => cho nguoi dung chinh sua nhung truoc tien can lay ra gia tri truoc khi chinh sua 
-	string maVTCu = vatTuCT->maVT; 
 	string tenVTCu = vatTuCT->ten; 
 	string dvtCu  = vatTuCT->donVi; 
 	// ngoai ra con ve 1 cai nut thoat cho nguoi dung nua => sau khi nhap nut thoat thi ket thuc ham va ve lai  
@@ -56,30 +55,17 @@ void chinhSuaVT(BstVatTu &dsVatTu,VatTu* vatTuCT) {
 	while (true) {
 		if (ismouseclick(WM_LBUTTONDOWN)) {  
 			getmouseclick(WM_LBUTTONDOWN, xclick, yclick); 
-			if (nhapMaVT.isMouseHover(xclick,yclick)) {
-				nhapMaVT.NhapVao(kiTuChuHoacSo,""); 
-				// sau khi nhap song kiem tra xem co trung hay khong ! 
-				if (nhapMaVT.boNhoDem != "" && nhapMaVT.boNhoDem != maVTCu) {
-
-					if (dsVatTu.timKiemVT(nhapMaVT.boNhoDem) != NULL) { // da ton tai roi -> nen moi tim thay!
-						MessageBox(NULL, "Da Ton Tai Ma Vat Tu Nay!", "thong bao", MB_ICONINFORMATION | MB_OK);
-						nhapMaVT.resetBoNhoDem();
-					}
-				}
-				
- 			}
- 			
-				else if (nhapTenVT.isMouseHover(xclick,yclick)) {
+				if (nhapTenVT.isMouseHover(xclick,yclick)) {
 					nhapTenVT.NhapVao(kiTuChuHoacSo,""); 
 				}
 				else if (nhapDVT.isMouseHover(xclick,yclick)) {
 					nhapDVT.NhapVao(kiTuChu,""); 
 				}
 				else if (hieuChinh.isMouseHover(xclick,yclick)) { // nhap vao !
-					if (nhapTenVT.boNhoDem == "" || nhapMaVT.boNhoDem == "" || nhapDVT.boNhoDem == "") {
+					if (nhapTenVT.boNhoDem == ""  || nhapDVT.boNhoDem == "") {
 						MessageBox(NULL, "Khong Duoc Bo Trong!", "thong ba", MB_ICONINFORMATION | MB_OK);
 					}
-					else if (nhapMaVT.boNhoDem != maVTCu || nhapTenVT.boNhoDem != tenVTCu || nhapDVT.boNhoDem != dvtCu) { // phai co thang nao thay doi thi moi chinh sua !
+					else if (nhapTenVT.boNhoDem != tenVTCu || nhapDVT.boNhoDem != dvtCu) { // phai co thang nao thay doi thi moi chinh sua !
 						vatTuCT->maVT = nhapMaVT.boNhoDem; 
 						vatTuCT->ten = nhapTenVT.boNhoDem; 
 						vatTuCT->donVi = nhapDVT.boNhoDem; 
@@ -94,7 +80,7 @@ void chinhSuaVT(BstVatTu &dsVatTu,VatTu* vatTuCT) {
 					break; 
 				}
 				else if (xoa.isMouseHover(xclick,yclick)) {
-					if (nhapMaVT.boNhoDem == maVTCu && nhapTenVT.boNhoDem == tenVTCu && nhapDVT.boNhoDem == dvtCu) {
+					if (nhapTenVT.boNhoDem == tenVTCu && nhapDVT.boNhoDem == dvtCu) {
 						int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
 						if (luaChon == OK) { // xoa di !
 							dsVatTu.xoaVT(nhapMaVT.boNhoDem); 
