@@ -77,9 +77,6 @@ void hienThiHoaDon(NhanVienLapHD &nvLapHD,BstVatTu &dsVatTu,int &index,NutBam &v
 	
 	int toaDoChiMucX = DODAIMANHINH/2 -110; 
 	int toaDoChiMucY = 720; 
-//	ONhap timKiemHD(56 ,117,200,40,130,"tim kiem HD",2,0,10);
-//	timKiemHD.veONhap(); 
-	
 	
 	
 	int soLuongCTHD =  nvLapHD.ptrHoaDon->getdsCTHD()->soLuongCTHD(); 
@@ -409,8 +406,6 @@ void hienThiXuatHoaDon(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vat
 // ============================= HIEN THI HAM CHINH SUA CTHD ============================
 void hienThiChinhSuaCTHD(NodeCTHD* tempCTHD,ListCTHD* dsCTHD,BstVatTu &dsVatTu,string loaiHD) { 
 	  // khai bao cac thong so 
-	 
-	  
  	  int w = 540; 
  	  int h = 358; 
  	  int x = DODAIMANHINH/2 - w/2; // in r o nua man hinh 
@@ -496,30 +491,43 @@ void hienThiChinhSuaCTHD(NodeCTHD* tempCTHD,ListCTHD* dsCTHD,BstVatTu &dsVatTu,s
 					if (maVT.boNhoDem == "" || soLuong.boNhoDem == "" || donGia.boNhoDem == "" || VAT.boNhoDem == "") {
 						MessageBox(NULL, "thong bao", "khong duoc bo trong!", MB_ICONINFORMATION | MB_OK);
 					}
-					else {
-						if (donGia.boNhoDem != donGiaCu || VAT.boNhoDem != VATCu || maVT.boNhoDem != maVTCu || soLuong.boNhoDem != soLuongCu) {
-							NodeVatTu* tempVT = dsVatTu.timKiemVT(maVT.boNhoDem); 
-							if (!tempVT->getInfo()->kiemTraDuHang(TienichDoHoa::stringToFloat(soLuong.boNhoDem))) {
-								string thongBao = "khong du so luong! so luong trong kho : " + TienichDoHoa::floatToString(tempVT->getInfo()->soLuongTon); 
-					 			MessageBox(NULL, thongBao.c_str(),"thong bao", MB_ICONINFORMATION | MB_OK);
-					 			soLuong.resetBoNhoDem(); 
-							}
-							else { 
+					else if (maVT.boNhoDem != maVTCu || soLuong.boNhoDem != soLuongCu || donGia.boNhoDem != donGiaCu || VAT.boNhoDem != VATCu) {
+						// thuc hien chinh sua ! -> phai khac 
+						// lay ra thang VT moi ra - kiem tra so Luonh
+						NodeVatTu* tempVT = dsVatTu.timKiemVT(maVT.boNhoDem); 
+						if (!tempVT->getInfo()->kiemTraDuHang(TienichDoHoa::stringToFloat(soLuong.boNhoDem))) {
+							string thongBao = "khong du so luong! so luong trong kho : " + TienichDoHoa::floatToString(tempVT->getInfo()->soLuongTon); 
+					 		MessageBox(NULL, thongBao.c_str(),"thong bao", MB_ICONINFORMATION | MB_OK);
+					 		soLuong.resetBoNhoDem(); 
+						} 
+						else {
+								// kiem tra xem thang maVT co khac thang maVT cu hay khong
+								if (maVT.boNhoDem != maVTCu) {
+									// so Luong LapCTHD cua maVT cu da thay doi 
+									NodeVatTu* vatTuCu = dsVatTu.timKiemVT(maVTCu); 
+									vatTuCu->getInfo()->soLanTaoCTHD--;  // giam di so lan tao CTHD, tang do Lan Tao CTHD len 
+									tempVT->getInfo()->soLanTaoCTHD++; // tang len so lan hien tai !
+								}
+								// khong co gi thay doi!
 								tempCTHD->getinfo()->maVT = maVT.boNhoDem; 
 								tempCTHD->getinfo()->soLuong = TienichDoHoa::stringToFloat(soLuong.boNhoDem); 
 								tempCTHD->getinfo()->donGia = TienichDoHoa::stringToFloat(donGia.boNhoDem);
 								tempCTHD->getinfo()->VAT = TienichDoHoa::stringToFloat(VAT.boNhoDem); 
+							
 								 MessageBox(NULL, "thong bao", "cap nhap thanh cong!", MB_ICONINFORMATION | MB_OK);
 								 break;
-							}
 						}
-					}			
 					}
+
+				}
 				
 				
 				else if (xoa.isMouseHover(xclick,yclick)) {
 					int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
 					if (luaChon == OK) {
+						// tim kiem VT do 
+						NodeVatTu* vatTuDelete = dsVatTu.timKiemVT(maVTCu); 
+						vatTuDelete->getInfo()->soLanTaoCTHD--; // giam di so Lan Tao HD. Vi khong tao HD nay nua !
 						if (dsCTHD->xoaCTHD(maVT.boNhoDem) == true) {
 							MessageBox(NULL, "thong bao", "xoa vat tu thanh cong!", MB_ICONINFORMATION | MB_OK);
 							break; 
@@ -619,6 +627,7 @@ void hienThiThemHoaDonXuat(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 	NhanVien* tempNV; 
 	NodeHoaDon* tempHD; 
 	NodeCTHD* pointerCTHD; 
+	NodeVatTu* tempVT; 
 	bool daThemHD = false;  
 	int indexPage = 0; 
 	int soPhanTuTrenMotPage = 9; 
@@ -884,13 +893,11 @@ void hienThiThemHoaDonXuat(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 						nhapNgay.khongDuocNhap = true; 
 						nhapThang.khongDuocNhap = true; 
 						nhapNam.khongDuocNhap = true; 
-						
-						
-						
+	
 						tempHD = tempNV->dsHoaDon.themVaoCuoiHD(soHD.boNhoDem,tempDate,"X"); 
 						daThemHD = true;
 					}
-					NodeVatTu* tempVT = dsVatTu.timKiemVT(maVT.boNhoDem); // chan chac tim thay -> vi tren kia da bac dieu kien 
+					tempVT = dsVatTu.timKiemVT(maVT.boNhoDem); // chan chac tim thay -> vi tren kia da bac dieu kien 
 					
 				
 					if (!tempVT->getInfo()->kiemTraDuHang(tempSL)) {
@@ -899,6 +906,8 @@ void hienThiThemHoaDonXuat(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam 
 						soLuongVT.resetBoNhoDem(); 
 					}
 					else {
+					// da thoa man -> khong cho xoa HD kia 
+					tempVT->getInfo()->soLanTaoCTHD++; // tang len vi da Them CTHD!
 					CThoaDon tempCTHD(maVT.boNhoDem,tempSL,tempdonGia,tempVAT); // khi tat ca da thoa dieu kien. 
 					tempHD->themCTHD(tempCTHD);
 					int soLuongCTHD =  tempHD->getdsCTHD()->soLuongCTHD(); 

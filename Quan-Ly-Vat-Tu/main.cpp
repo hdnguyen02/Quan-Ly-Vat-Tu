@@ -149,11 +149,24 @@ int main(int argc, char *argv[]) {
 	dsNhanVien DSNV;  
 	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
 	BstVatTu dsVatTu; 
+	dsVatTu.docVatTuFile(); 
 	menuQuanLyVatTu(dsVatTu,DSNV); 	
 	
  	DSNV.giaiPhongDSNV(); 
 
 // kiem nghiem thuat toan ! 
+	
+	// thu nghiem ! => kiem tra doc ghi file 
+//	BstVatTu dsVatTu; 
+//	
+//	dsVatTu.docVatTuFile(); 
+//	dsVatTu.themVT("VT02","xi Mang den","kg",22.3,false); 
+//	
+//	dsVatTu.duyetCay(); 
+//	
+//	dsVatTu.ghiVatTuFile(); 
+	
+	
 
 
 	

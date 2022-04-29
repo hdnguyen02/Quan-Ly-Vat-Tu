@@ -7,9 +7,10 @@ struct VatTu {
     string ten;   
     string donVi;   
     float soLuongTon;  
+    int soLanTaoCTHD;  // cho biet so Lan taoCTHD 
     VatTu() {}; 
-    VatTu(string maVT, string ten, string donVi, float soLuongTon) : maVT(maVT), ten(ten),
-        donVi(donVi), soLuongTon(soLuongTon) {};
+    VatTu(string maVT, string ten, string donVi, float soLuongTon,int soLanTaoCTHD) : maVT(maVT), ten(ten),
+        donVi(donVi), soLuongTon(soLuongTon), soLanTaoCTHD(soLanTaoCTHD) {};
     void inVatTu(); 
     // viet ham cap nhap lai so luonng VT trong => dua vao so Luong capNhap 
     // kiemTraHang doi voi hd Xuat 
@@ -56,7 +57,7 @@ struct VatTu {
 
 };
 void VatTu::inVatTu() {
-	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon; 
+	cout << this->maVT << "  " << this->ten  << "  " << this->donVi << "  " << this->soLuongTon << " " << this->soLanTaoCTHD; 
 }
 
 
@@ -69,7 +70,7 @@ private:
 public:
     friend class BstVatTu; 
     NodeVatTu(): pLeft(NULL), pRight(NULL) {};  
-    NodeVatTu(const VatTu& info) : info(info.maVT, info.ten, info.donVi, info.soLuongTon),
+    NodeVatTu(string maVT,string ten,string donVi,float soLuongTon,bool daThemCTHD) : info(maVT, ten, donVi, soLuongTon,daThemCTHD),
         pLeft(NULL), pRight(NULL) {} 
    VatTu* getInfo() {return &info; }
 };
@@ -84,8 +85,8 @@ public:
     BstVatTu() : root(NULL), soLuong(0) { this->docVatTuFile(); };
     ~BstVatTu() { this->giaiPhongVT(root); }; 
     // HAM CHUC NANG
-    void hoTroThemVT(NodeVatTu* root, const VatTu& info); 
-    bool themVT(const VatTu& info); 
+    void hoTroThemVT(NodeVatTu* root,string maVT,string ten,string donVi,float soLuongTon,int soLanTaoCTHD);
+    bool themVT(string maVT,string ten,string donVi,float soLuongTon,int soLanTaoCTHD);
     void duyetCay();
     void hoTroDuyetCay(NodeVatTu* root); 
     void giaiPhongVT(NodeVatTu* root);
@@ -187,6 +188,9 @@ bool BstVatTu::xoaVT(const string& key) {
 		if (nodeDelete == NULL) { // truong hop can tim thay node de xoa hoac cay dang rong
 			return false; 
 		}
+		if (nodeDelete->getInfo()->soLanTaoCTHD != 0) {  // vat tu nay da tao HD roi !. khong duoc quyen xoa !
+			return false; 
+		}
 		if (nodeDelete->pLeft == NULL || nodeDelete->pRight == NULL) { // truong hop node co 1 con hoac node la
 			NodeVatTu* pTempDelete ; 
 			if (nodeDelete->pLeft == NULL) {
@@ -233,41 +237,39 @@ bool BstVatTu::xoaVT(const string& key) {
 			delete nodeMin; 
 		}
 		this->soLuong--; 
-		this->ghiVatTuFile(); 
 		return true; 	
 	}
 
-bool BstVatTu::themVT(const VatTu& info) {
-	if (this->timKiemVT(info.maVT) != NULL) { // khong tim thay.  
-		return false; // them khong thanh cong. 
+bool BstVatTu::themVT(string maVT,string ten,string donVi,float soLuongTon,int soLanTaoCTHD) {
+	if (this->timKiemVT(maVT) != NULL) { // khong tim thay.  
+		return false; 
 	}
     if (root == NULL) { 
-        root = new NodeVatTu(info); 
+        root = new NodeVatTu(maVT,ten,donVi,soLuongTon,soLanTaoCTHD); 
     }
     else {
-        hoTroThemVT(root, info); 
+        hoTroThemVT(root, maVT,ten,donVi,soLuongTon,soLanTaoCTHD); 
     }
     this->soLuong++; 
-    this->ghiVatTuFile(); 
     return true; 
 }
 
 
-void BstVatTu::hoTroThemVT(NodeVatTu* root,const VatTu& info) {
-    if (info.maVT < root->info.maVT ) {
+void BstVatTu::hoTroThemVT(NodeVatTu* root,string maVT,string ten,string donVi,float soLuongTon,int soLanTaoCTHD) {
+    if (maVT < root->info.maVT ) {
         if (root->pLeft == NULL) {
-            root->pLeft = new NodeVatTu(info); 
+            root->pLeft = new NodeVatTu(maVT,ten,donVi,soLuongTon,soLanTaoCTHD); 
         }
         else {
-            hoTroThemVT(root->pLeft, info); 
+            hoTroThemVT(root->pLeft, maVT,ten,donVi,soLuongTon,soLanTaoCTHD); 
         }
     }
     else {
         if (root->pRight == NULL) {
-            root->pRight = new NodeVatTu(info); 
+            root->pRight = new NodeVatTu(maVT,ten,donVi,soLuongTon,soLanTaoCTHD); 
         }
         else {
-            hoTroThemVT(root->pRight, info);
+            hoTroThemVT(root->pRight, maVT,ten,donVi,soLuongTon,soLanTaoCTHD);
         }
     }
 }
@@ -320,7 +322,7 @@ bool BstVatTu::isNULL() {
 }
 void BstVatTu::hoTroGhiVatTuFile(NodeVatTu *root,ofstream &fileout) {
 	if(root != NULL) {
-		fileout << root->info.maVT<<"," << root->info.ten <<  "," << root->info.donVi<<","<< root->info.soLuongTon<<endl;
+		fileout << root->info.maVT<<"," << root->info.ten <<  "," << root->info.donVi<<","<< root->info.soLuongTon<<","<<root->info.soLanTaoCTHD<<endl;
 		hoTroGhiVatTuFile(root->pLeft,fileout);
 		hoTroGhiVatTuFile(root->pRight,fileout);
 	}
@@ -341,16 +343,21 @@ void BstVatTu::docVatTuFile() {
 		int soLuongVT; 
 		ifstream filein;
 		filein.open("data/dataVatTu.txt",ios::in);  
-		VatTu info;  
-		filein >> soLuongVT; 
+		string maVT,ten,donVi; 
+		float soLuongTon; 
+		string tempSoLuongTon;
+		int soLanTaoCTHD; 
+		filein >> soLuongVT;   // quy uoc 1 true  
 		filein.ignore();  
 		for (int i = 0; i < soLuongVT;i++) {
-				getline(filein,info.maVT,','); 
-				getline(filein,info.ten,','); 
-				getline(filein,info.donVi,',');
-				filein >> info.soLuongTon; 
+				getline(filein,maVT,','); 
+				getline(filein,ten,','); 
+				getline(filein,donVi,',');
+				getline(filein,tempSoLuongTon,',');
+				filein >> soLanTaoCTHD; 
 				filein.ignore(); 
-				this->themVT(info); 
+				soLuongTon = TienichDoHoa::stringToFloat(tempSoLuongTon); 
+				this->themVT(maVT,ten,donVi,soLuongTon,soLanTaoCTHD); 
 			}
 		filein.close(); 	
 }
