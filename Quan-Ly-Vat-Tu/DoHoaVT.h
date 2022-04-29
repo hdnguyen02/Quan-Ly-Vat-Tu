@@ -83,9 +83,17 @@ void chinhSuaVT(BstVatTu &dsVatTu,VatTu* vatTuCT) {
 					if (nhapTenVT.boNhoDem == tenVTCu && nhapDVT.boNhoDem == dvtCu) {
 						int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
 						if (luaChon == OK) { // xoa di !
-							dsVatTu.xoaVT(nhapMaVT.boNhoDem); 
-							MessageBox(NULL, "Xoa Vat Tu Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK); 
-							break;  
+							bool checkKiemTra = dsVatTu.xoaVT(nhapMaVT.boNhoDem); 
+							if (checkKiemTra == false) {
+								MessageBox(NULL, "Khong Duoc Phep Xoa Vat Tu da duoc lap CTHD!", "Thong Bao", MB_ICONINFORMATION | MB_OK); 
+							}
+							else {
+								MessageBox(NULL, "Xoa Vat Tu Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK); 
+								dsVatTu.ghiVatTuFile(); 
+								break;  
+							}
+							
+							
 						}
 					}
 					
@@ -362,13 +370,6 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 			}
 			else if (nhapMaVT.isMouseHover(xclick,yclick)) {
 				nhapMaVT.NhapVao(kiTuChuHoacSo,""); // sau khi nhap roi 
-				if (nhapMaVT.boNhoDem != "") {
-					tempVT = dsVatTu.timKiemVT(nhapMaVT.boNhoDem); 
-					if (tempVT != NULL) {
-						MessageBox(NULL, "da ton vat tu nay!", "thong bao", MB_ICONINFORMATION | MB_OK);
-						nhapMaVT.resetBoNhoDem(); 
-					}
-				}
 			}
 			else if (nhapTenVT.isMouseHover(xclick,yclick)) { 
 				nhapTenVT.NhapVao(kiTuChuHoacSo,""); // ten vt co the co chu hoac ca so !  
@@ -384,12 +385,18 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu,int &index,NutBam &nhanVien,NutBam &
 					MessageBox(NULL, "khong duoc bo trong!", "thong bao", MB_ICONINFORMATION | MB_OK);
 				}
 				else {
-					VatTu temp(nhapMaVT.boNhoDem,nhapTenVT.boNhoDem,nhapDVT.boNhoDem,TienichDoHoa::stringToFloat(nhapSoLuong.boNhoDem));
-					dsVatTu.themVT(temp); 
-					MessageBox(NULL, "Them thanh cong!", "thong bao", MB_ICONINFORMATION | MB_OK);
-					
-					index = ID_VT;
-					return; 					
+					// duoc quyen them Vao VatTu 
+					// kiem tra xem VT do co duoc quyen them vao hay khong 
+					if (dsVatTu.themVT(nhapMaVT.boNhoDem,nhapTenVT.boNhoDem,nhapDVT.boNhoDem,TienichDoHoa::stringToFloat(nhapSoLuong.boNhoDem),0)) {
+						MessageBox(NULL, "Them thanh cong!", "thong bao", MB_ICONINFORMATION | MB_OK);
+						dsVatTu.ghiVatTuFile(); 
+						index = ID_VT; 
+						return; 
+					}
+					else {
+						MessageBox(NULL, "Khong Thanh Cong!,Ma Vat Tu da ton tai", "thong bao", MB_ICONINFORMATION | MB_OK);
+						nhapMaVT.resetBoNhoDem(); 
+					}				
 				}
 			}
 			// bac su kien nguoi dung click vao thang nao 
