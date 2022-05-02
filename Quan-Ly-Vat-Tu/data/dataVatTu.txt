@@ -1,4 +1,4 @@
 3
-VT12,xi mang,kg,1.8,1
-VT02,Cat Trang,Xe,69.9,1
-VT03,2,kg,1,1
+VT05,Xi Mang,kg,0,2
+VT02,Cat Trang,khoi,73,1
+VT07,Gach,khoi sua,88,1

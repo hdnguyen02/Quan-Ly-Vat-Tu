@@ -1,3 +1,0 @@
-2
-VT12,xi mang,kg,5.8,0
-VT08,cac trang,kg,12,1

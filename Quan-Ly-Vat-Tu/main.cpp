@@ -56,7 +56,7 @@ void nhapNV() {
 			getline(cin,ho); 
 			cout << "nhap vao ten : "; 
 			getline(cin,ten); 
-			DSNV.themNV(maNV,ho,ten,phai); 
+			DSNV.themNV(maNV,ho,ten,phai,0); 
 		}
 		else if (lc == 2) {
 			cout << endl << "ds nhan vien: " << endl; 
@@ -147,13 +147,15 @@ void quickSort(VatTu** arrVT,int low,int high,bool(*khoaSoSanh)(VatTu*,VatTu*)) 
 int main(int argc, char *argv[]) {
 	StartBGI start; 
 	dsNhanVien DSNV;  
-	DSNV.docFileDSNV("data/dataNhanVien.txt"); 
+	DSNV.docFileDSNV();
 	BstVatTu dsVatTu; 
 	dsVatTu.docVatTuFile(); 
 	menuQuanLyVatTu(dsVatTu,DSNV); 	
 	
  	DSNV.giaiPhongDSNV(); 
 
+	
+	
 // kiem nghiem thuat toan ! 
 	
 	// thu nghiem ! => kiem tra doc ghi file 
@@ -167,12 +169,12 @@ int main(int argc, char *argv[]) {
 //	dsVatTu.ghiVatTuFile(); 
 	
 	
-
+	getch(); 
 
 	
 
 
-	system("pause"); 
+	// system("pause"); 
 
 
 

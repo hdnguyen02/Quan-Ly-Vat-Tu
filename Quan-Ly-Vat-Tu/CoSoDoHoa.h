@@ -105,8 +105,16 @@ struct ONhap {
 	void veONhap() {
 		NutBam boxTieuDe(x,y,widthTitle,h,colorTitle,3,7,tieuDe); 
 		boxTieuDe.veNut(); 		
-		setfillstyle(SOLID_FILL,COLOR_BACKGROUP_INPUT); 
+		setfillstyle(SOLID_FILL,khongDuocNhap ? 8 :COLOR_BACKGROUP_INPUT); 
 		bar(x + widthTitle,y, x+ widthTitle + w , y+h);  
+	}
+	
+	// viet mot ham chuan hoa -> ho ten 
+	void chuanHoa() {
+		TienichDoHoa::chuanHoaTen(this->boNhoDem); 
+		this->xoaNoiDungONhap(); 
+		this->inNoiDung(); 
+		this->tatHienThiBoder(); 
 	}
 	
 	void xoaKiTuCuoi() {
@@ -125,7 +133,7 @@ struct ONhap {
 			settextstyle(1, 0, 2);
 			text_h = textheight(&boNhoDem[0]);
 			toaDoTextY = y + (h - text_h) / 2;
-			setbkcolor(COLOR_BACKGROUP_INPUT);  // chung mau voi cai ma no ve
+			setbkcolor(khongDuocNhap ? 8 :COLOR_BACKGROUP_INPUT);  // chung mau voi cai ma no ve
 			setcolor(COLOR_TEXT_INPUT); 
 			outtextxy (x + CACH_LE_O_NHAP + widthTitle,toaDoTextY, &boNhoDem[0]);
 	}
@@ -145,6 +153,7 @@ struct ONhap {
 	
 	
 	
+	
 	void NhapVao(bool(*loaiKiTu)(char),const string& goiY) {
 		if (khongDuocNhap == true) {
 			return; 
@@ -158,7 +167,7 @@ struct ONhap {
 		bool kiemTraBackSpace = false; 
 		do
 		{
-			boNhoDem = boNhoDem + "|"; // them dau gach nhay. 
+			boNhoDem = boNhoDem + "_"; // them dau gach nhay. 
 			if (kiemTraBackSpace) {
 				this->xoaNoiDungONhap();  
 				kiemTraBackSpace = false;  
@@ -287,7 +296,8 @@ struct ONhap {
 		this->tatHienThiBoder(); 
 	}	
 	void hienThiBoder() {
-		setcolor(COLOR_BODER_INPUT); 
+		setcolor(14); 
+		settextstyle(5,0,14);
 		rectangle(x + widthTitle,y,x + w + widthTitle ,y + h); 
 	}
 	

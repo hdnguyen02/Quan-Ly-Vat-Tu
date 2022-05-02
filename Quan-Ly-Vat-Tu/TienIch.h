@@ -125,6 +125,51 @@ static void chuanHoaTen(string &s) {
 	Date(int ngay, int thang, int nam) : ngay(ngay), thang(thang), nam(nam) {}
 	Date() : ngay(0) , thang(0) , nam(0) {}
 	
+	
+	static bool ngayThangNamHopLe(int ngay,int thang,int nam)
+	{
+		if(thang<1 || thang>12 || nam<0 || ngay<0 || ngay>31)
+		{
+			return false;
+		}
+		
+		if (thang==2 || thang==4 || thang==6 || thang==9 || thang == 11)
+		{
+			if (ngay > 30)
+				return false;
+			if (thang == 2)
+			{
+				if ((nam%4 == 0 && nam%100 != 0) || nam%400 == 0)
+				{
+					if (ngay > 29)
+						return false;
+				}
+				else
+				{
+					if (ngay > 28)
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+	bool operator > (const struct Date &other)
+	{
+		if (this->nam > other.nam)
+			return true;
+		else if (this->nam == other.nam) 
+		{
+			if(this->thang > other.thang)
+				return true;
+			else if (this->thang == other.thang)
+			{
+				if (this->ngay > other.ngay)
+					return true;
+			}
+		}
+		
+		return false;
+	}
 	Date(string ngay,string thang,string nam) {
 		// do toi ham  
 		ngay = TienichDoHoa::stringToInt(ngay);  
@@ -178,14 +223,14 @@ static void chuanHoaTen(string &s) {
 	}
 	
 	// viet ham kiem tra su dung dang cua ngay thang nam 
-	static bool hopLeNgay(int ngay) {		if (ngay > 0 && ngay <=31) {
-			// duoc cho la ngay hop le! 
+	static bool hopLeNgay(int ngay) {	
+		if (ngay > 0 && ngay <=31) { 		// duoc cho la ngay hop le! 
 			return true; 
 		}
 		return false; 
 	}
-	// kiemTra Tinh Hop Le Cua thang 
-	static bool hopLeThang(int thang) {
+
+	static bool hopLeThang(int thang) { 	// kiemTra Tinh Hop Le Cua thang 
 		if (thang > 0 && thang <= 12) {
 			return true ;
 		}
@@ -193,7 +238,7 @@ static void chuanHoaTen(string &s) {
 	}
 	static bool hopLeNam(int nam) {
 		string tempNam = TienichDoHoa::intToString(nam); 
-		if (tempNam.length() == 4 ) {
+		if (tempNam.length() == 4 && TienichDoHoa::stringToInt(tempNam) <= 2022 ) {
 			return true; 
 		} 
 		return false; 

@@ -30,14 +30,33 @@ void menuCha(BstVatTu &dsVatTu,dsNhanVien &DSNV) {
 		if (index != -1) {
 			if (index == ID_VT) {
 				index = -1 ; 
+				vatTu.duocChon();
+				nhanVien.khongDuocChon(); 
+				hoaDon.khongDuocChon(); 
+				doanhThu.khongDuocChon();
 				hienThiTinhNangVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,VatTu::soSanhTheoTen); 
 			}
 			else if (index == ID_NV) {
+				nhanVien.duocChon(); 
+				vatTu.khongDuocChon(); 
+				hoaDon.khongDuocChon(); 
+				doanhThu.khongDuocChon(); 
 				hienThiTinhNangNhanVien(DSNV,index,vatTu,hoaDon,doanhThu,NhanVien::soSanhTheoTen); 
 			}
 			else if (index == ID_HD) {
+				hoaDon.duocChon(); 
+				vatTu.khongDuocChon(); 
+				nhanVien.khongDuocChon(); 
+				doanhThu.khongDuocChon(); 
 				index = -1; 
 				hienThiTinhNangHoaDon(dsVatTu,DSNV,index,vatTu,nhanVien,doanhThu); 
+			}
+			else if (index == ID_DT) {
+				vatTu.khongDuocChon(); 
+				doanhThu.duocChon(); 
+				nhanVien.khongDuocChon();
+				hoaDon.khongDuocChon(); 
+				// GOI TOI HAM DOANH THU O DAY !
 			}
 		}
 		else if (ismouseclick(WM_LBUTTONDOWN)) {  
@@ -45,16 +64,32 @@ void menuCha(BstVatTu &dsVatTu,dsNhanVien &DSNV) {
 			int yclick = -1; 
 			getmouseclick(WM_LBUTTONDOWN, xclick, yclick);  
 			if (vatTu.isMouseHover(xclick, yclick)) {
+				vatTu.duocChon();
+				nhanVien.khongDuocChon(); 
+				hoaDon.khongDuocChon(); 
+				doanhThu.khongDuocChon();
 				hienThiTinhNangVatTu(dsVatTu,index,nhanVien,hoaDon,doanhThu,VatTu::soSanhTheoTen); 
 			}
 			else if (hoaDon.isMouseHover(xclick, yclick)) { 
+				hoaDon.duocChon(); 
+				vatTu.khongDuocChon(); 
+				nhanVien.khongDuocChon(); 
+				doanhThu.khongDuocChon(); 
 				hienThiTinhNangHoaDon(dsVatTu,DSNV,index,vatTu,nhanVien,doanhThu); 
 			}
 			else if (nhanVien.isMouseHover(xclick, yclick)) {
+				nhanVien.duocChon(); 
+				vatTu.khongDuocChon(); 
+				hoaDon.khongDuocChon(); 
+				doanhThu.khongDuocChon();
 				hienThiTinhNangNhanVien(DSNV,index,vatTu,hoaDon,doanhThu,NhanVien::soSanhTheoTen); 
 			}
 			else if (doanhThu.isMouseHover(xclick,yclick)) {
-
+				// 	BO HAM DOANH THU O DAY !
+				vatTu.khongDuocChon(); 
+				doanhThu.duocChon(); 
+				nhanVien.khongDuocChon();
+				hoaDon.khongDuocChon(); 
 			}
 		}
 		 delay(1);  

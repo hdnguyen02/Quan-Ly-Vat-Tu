@@ -5,17 +5,15 @@ struct CThoaDon {
     string maVT;   
     float soLuong;
     float donGia; 
-    float VAT;  // 10% 0,1 
+    float VAT;  // nhap tu 0 -> 100
 
     CThoaDon(const string& maVT,const float& soLuong,const float& donGia,const float &VAT) :
         maVT(maVT), soLuong(soLuong), donGia(donGia), VAT(VAT) {}
     CThoaDon() {} 
     void inCTHD(); 	
     float tinhTien() {  
-    if (VAT != 0) {
-		return soLuong * donGia * VAT/100; 
-	}
-	return soLuong * donGia ; // VAT = 0 => khong co the => tren kia la co the 
+   
+		return soLuong * donGia * ( 1 + VAT/100) ; // VAT = 0 => khong co the => tren kia la co the 
 		
 	}
 

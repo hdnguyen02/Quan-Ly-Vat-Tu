@@ -8,16 +8,19 @@ struct NhanVien {
     string ho;
     string ten;
     int phai;   // 0. nam 1. nu 
+    int soLanTaoHD; // so lan tao HD cua nhan vien ( ) -> khi tao hoa don thanh cong -> ghi lai file!
     ListHoaDon dsHoaDon; 
 	NhanVien() {};
 	void inNV() {
-		cout << maNV << "  " << ho << "  " << ten << "  " << phai == 0 ? "nam":"nu" ; 
+		cout << maNV << "  " << ho << "  " << ten << "  " << phai == 0 ? "nam":"nu"  ;
+		cout << " so lan tao HD: " << this->soLanTaoHD;  
 		// cout << endl << "HOA DON" << endl; 
 		// dsHoaDon.duyetDSHD(); 
 	}
-	NhanVien(string maNV,string ho,string ten,int phai) : maNV(maNV) , ho(ho) , ten(ten) , phai(phai) {}
+	NhanVien(string maNV,string ho,string ten,int phai,int soLanTaoHD) : maNV(maNV) , ho(ho) , 
+	ten(ten) , phai(phai), soLanTaoHD(soLanTaoHD) {}
 	void ghiFileNhanVien(ofstream &fileout) {
-		fileout << maNV << "," << ho << "," << ten << "," << phai << "," << endl; 
+		fileout << maNV << "," << ho << "," << ten << "," << phai << "," << soLanTaoHD << endl; 
 		dsHoaDon.ghiFileDSHD(fileout); 
 	}
 	
@@ -74,14 +77,14 @@ public:
 	bool dsRong();
 	bool dsDay();
 	void duyetDSNV();
-	NhanVien* themNV(const string &maNV,const string &ho,const string &ten,const int &phai);
+	NhanVien* themNV(const string &maNV,const string &ho,const string &ten,const int &phai,int soLanTaoHD);
 	int timKiemNVTraVeViTri(const string& maVT);
 	NhanVien* timKiemNVTraVeDiaChi(const string& maVT);
 	bool xoaNV(const string& maVT);
 	int soLuongNV();
 	void giaiPhongDSNV();  // giai phong danh sach nhanvien. 
-	void docFileDSNV(string link);   
-	void ghiFileDSNV(string link); 
+	void docFileDSNV();   
+	void ghiFileDSNV(); 
 	//
 	
 	// tra ve true neu ton tai! va nguoc lai
@@ -143,9 +146,9 @@ public:
 };
 
 // 	VOID CLASS DANH SACH NHAN VIEN
-	void dsNhanVien::ghiFileDSNV(string link) {  // ham nay se duoc goi khi them xoa sua. 
+	void dsNhanVien::ghiFileDSNV() {  // ham nay se duoc goi khi them xoa sua. 
 		ofstream fileout; 
-		fileout.open(link.c_str(),ios::out | ios::trunc); // mo ra chi ghi va xoa het
+		fileout.open("data/dataNhanVien.txt",ios::out | ios::trunc); // mo ra chi ghi va xoa het
 		fileout << this->soLuong << endl; 
 		for (int i = 0; i < this->soLuong;i++) {
 			nv[i]->ghiFileNhanVien(fileout); 
@@ -153,21 +156,25 @@ public:
 		fileout.close(); 		
 	}
 
-	void dsNhanVien::docFileDSNV(string link) {
+	void dsNhanVien::docFileDSNV() {
 		ifstream filein;
-		filein.open(link.c_str(),ios::in); 
+		filein.open("data/dataNhanVien.txt",ios::in); 
 		int soLuongNV;  
 		filein >> soLuongNV; 
 		filein.ignore(); 
 		for (int i = 0; i < soLuongNV;i++) {
 			string maNV,ho,ten,tempPhai; 
-			int phai; 
+			int phai,soLanTaoHD;
 			getline(filein,maNV,','); 
 			getline(filein,ho,','); 
 			getline(filein,ten,','); 
 			getline(filein,tempPhai,','); 
+			filein >> soLanTaoHD; 
 			phai = TienichDoHoa::stringToInt(tempPhai);
-			NhanVien* newNhanVien = this->themNV(maNV,ho,ten,phai); 
+			
+			// xuong dong -> khong doc nua 
+			filein.ignore(); 
+			NhanVien* newNhanVien = this->themNV(maNV,ho,ten,phai,soLanTaoHD); 
 			newNhanVien->dsHoaDon.docFileDSHD(filein);  // doc vao file dsHD. 	
 		}
 		filein.close(); 
@@ -195,9 +202,9 @@ public:
 	
 	
 	// ham them nv => tra ve dia chi vua moi them vao. 
-	NhanVien* dsNhanVien::themNV(const string &maNV,const string &ho,const string &ten,const int &phai) {
+	NhanVien* dsNhanVien::themNV(const string &maNV,const string &ho,const string &ten,const int &phai,int soLanTaoHD) {
 		if (!this->dsDay()) { 
-			nv[soLuong] = new NhanVien(maNV,ho,ten,phai); 
+			nv[soLuong] = new NhanVien(maNV,ho,ten,phai,soLanTaoHD); 
 			this->soLuong++; 
 			return nv[soLuong - 1]; // vi tri cua thang vua moi them vao!.  
 		} 
@@ -227,6 +234,9 @@ public:
 		int viTriXoa = this->timKiemNVTraVeViTri(maVT);   
 		if (this->dsRong() || viTriXoa == -1 ) {
 			return false; 
+		}
+		if (this->getNhanVien(viTriXoa)->soLanTaoHD != 0) {  // da lap HD -> khong duoc phep xoa !
+			return false;
 		}
 		for (int i = viTriXoa;i < this->soLuong;i++ ) {
 			nv[i] = nv[i + 1]; 

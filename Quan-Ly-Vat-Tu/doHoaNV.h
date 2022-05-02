@@ -15,6 +15,7 @@ void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien* nhanVienCT) {
 	NutBam titleHCNV(margin + doDaiCoban*6 - 60,canLeTrenHD + 140,margin + doDaiCoban*3 + 30,40,15,0,0,"HIEU CHINH NHAN VIEN"); 
 	titleHCNV.veNut();  
 	ONhap nhapMaNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 30,doDaiCoban*3 - 100,40,60,"MA: ",0,0,10); 
+	nhapMaNV.khongDuocNhap = true; 
 	ONhap nhapHoNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 100,doDaiCoban*3 - 100,40,60,"HO: ",0,0,20);
 	ONhap nhapTenNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 70 * 2 + 30,doDaiCoban*3 - 100,40,60,"TEN: ",0,0,10);
 	
@@ -35,10 +36,10 @@ void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien* nhanVienCT) {
 	NutBam saveNV(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,margin + doDaiCoban*3 + 30,40,0,2,0,"");
 	saveNV.veNut(); 
 	
-	NutBam xoa(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2 - 1,40,13,2,0,"xoa");
+	NutBam xoa(margin +doDaiCoban*6 - 60,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2 - 1,40,14,2,1,"XOA");
 	xoa.veNut(); 
 	
-	NutBam hieuChinh(margin +doDaiCoban*6 - 60 + (margin + doDaiCoban*3 + 30) /2 + 1,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2,40,13,2,0,"hieu chinh"); 
+	NutBam hieuChinh(margin +doDaiCoban*6 - 60 + (margin + doDaiCoban*3 + 30) /2 + 1,canLeTrenHD + 170 + 50 + 160 + 120,(margin + doDaiCoban*3 + 30) /2,40,14,2,1,"HIEU CHINH"); 
 	hieuChinh.veNut(); 
 	NutBam thoat(margin + doDaiCoban*6 - 60 + (margin + doDaiCoban*3 + 30 - 40 ) ,canLeTrenHD + 140,40,40,4,0,15,"X"); 
 	thoat.veNut(); 
@@ -75,23 +76,15 @@ void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien* nhanVienCT) {
 	while (true) {
 		if (ismouseclick(WM_LBUTTONDOWN)) {  
 			getmouseclick(WM_LBUTTONDOWN, xclick, yclick); 
-			if (nhapMaNV.isMouseHover(xclick,yclick)) {
-				nhapMaNV.NhapVao(kiTuChuHoacSo,""); 
-				if (nhapMaNV.boNhoDem != "" && nhapMaNV.boNhoDem != maNVCu) {
-
-					if (DSNV.timKiemNVTraVeDiaChi(nhapMaNV.boNhoDem) != NULL) { // da ton tai roi -> nen moi tim thay!
-						MessageBox(NULL, "Da Ton Tai Ma Vat Tu Nay!", "thong bao", MB_ICONINFORMATION | MB_OK);
-						nhapMaNV.resetBoNhoDem();
-					}
-				}
-				
- 			}
+			
  			
-				else if (nhapTenNV.isMouseHover(xclick,yclick)) {
+				if (nhapTenNV.isMouseHover(xclick,yclick)) {
 					nhapTenNV.NhapVao(kiTuChuHoacSo,""); 
+					nhapTenNV.chuanHoa(); 
 				}
 				else if (nhapHoNV.isMouseHover(xclick,yclick)) {
 					nhapHoNV.NhapVao(kiTuChu,""); 
+					nhapHoNV.chuanHoa(); 
 				}
 				else if (nam.isMouseHover(xclick,yclick)) {
 					nam.duocChon();  
@@ -117,13 +110,11 @@ void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien* nhanVienCT) {
 						nhanVienCT->ho = nhapHoNV.boNhoDem; 
 						nhanVienCT->phai = phai; 
 						MessageBox(NULL, "Hieu Chinh Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK); 
-						DSNV.ghiFileDSNV("data/dataNhanVien.txt"); 
+						DSNV.ghiFileDSNV(); 
 						break; 	
 					}
 				
 				}
- 		
- 				
 				else if (thoat.isMouseHover(xclick,yclick)) {
 					break; 
 				}
@@ -131,18 +122,17 @@ void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien* nhanVienCT) {
 					if (nhapMaNV.boNhoDem == maNVCu && nhapTenNV.boNhoDem == tenNVCu && nhapHoNV.boNhoDem == hoNVCu) {
 						int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
 						if (luaChon == OK) { // xoa di !
-							DSNV.xoaNV(nhapMaNV.boNhoDem); 
+							if (DSNV.xoaNV(nhapMaNV.boNhoDem) == false ) {
+								MessageBox(NULL, "Khong Duoc Phep Xoa! Nhan Vien da tao Hoa Don!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+							} 
+							else {
 							MessageBox(NULL, "Xoa nhan vien Thanh Cong!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
-							DSNV.ghiFileDSNV("data/dataNhanVien.txt");  
-							break;  
+							DSNV.ghiFileDSNV();  
+							break; 
+							} 
 						}
-					}
-					
+					}		
 				}
-				
-			
-			
-			
 		}
 		delay(1); 
 	}
@@ -202,7 +192,7 @@ int hienThiDuLieuLenTableNV(int indexPage,int soLuongPhanTuTrenMotPage,dsNhanVie
 			 }
 			 outtextxy(margin + 600,marginTop + khoanCach*i,temp.c_str());  // hien thi ra maVT
 			 line(margin,marginTop + khoanCach*i + 32,margin + 830,marginTop + khoanCach*i + 32); 
-			 NutBam hieuChinh(margin + 760,marginTop + khoanCach*i -4,60,28,11,0,0,"sua"); 
+			 NutBam hieuChinh(margin + 746,marginTop + khoanCach*i -4,60,28,11,0,0,"sua"); 
 			 hieuChinh.veNut(); 
 			 dem++; 
 		}
@@ -249,7 +239,7 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &h
 	titleThemNV.veNut();  
 	ONhap nhapMaNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 30,doDaiCoban*3 - 100,40,60,"MA: ",0,0,10); 
 	ONhap nhapHoNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 100,doDaiCoban*3 - 100,40,60,"HO: ",0,0,20);
-	ONhap nhapTenNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 70 * 2 + 30,doDaiCoban*3 - 100,40,60,"TEN: ",0,0,10);
+	ONhap nhapTenNV(margin + doDaiCoban*6 ,canLeTrenHD + 170 + 70 * 2 + 30,doDaiCoban*3 - 100,40,60,"TEN: ",0,0,20);
 	
 	// tao ra 2 nut bam Nam Nu 
 	NutBam nam(margin + doDaiCoban*6 + 60,canLeTrenHD + 170 + 70 * 2 + 30 + 70,60,40,11,13,0,"NAM"); 
@@ -279,27 +269,27 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &h
 	setcolor(CinputText); 
 	setbkcolor(0); 
 	settextstyle(6, 0, 1);
-	outtextxy(59,106,"Sap xep theo: "); 
+	outtextxy(59,106,"SAP XEP THEO: "); 
 	
-	NutBam theoTen(62 + 160,96,100,40,11,13,0,"ho ten");
-	NutBam theoMaNV(62 + 160 + 120,96,100,40,11,13,0,"ma");
+	NutBam theoTen(62 + 160 + 40,96,100,40,11,13,0,"HO TEN");
+	NutBam theoMaNV(62 + 160 + 120 + 40,96,100,40,11,13,0,"MA");
 	theoTen.duocChon(); 
 	theoMaNV.veNut(); 
 	
 	
 	int marginTop = canLeTrenHD + 170 - 70; 
 	int khoanCach = 46; 
-	NutBam hieuChinh1(margin + 760, marginTop+ khoanCach*0 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh2(margin + 760, marginTop+ khoanCach*1 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh3(margin + 760, marginTop+ khoanCach*2 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh4(margin + 760, marginTop+ khoanCach*3 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh5(margin + 760, marginTop+ khoanCach*4 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh6(margin + 760, marginTop+ khoanCach*5 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh7(margin + 760, marginTop+ khoanCach*6 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh8(margin + 760, marginTop+ khoanCach*7 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh9(margin + 760, marginTop+ khoanCach*8 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh10(margin + 760, marginTop+ khoanCach*9 -4,60,28,13,0,0,"sua");
-	NutBam hieuChinh11(margin + 760, marginTop+ khoanCach*10 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh1(margin + 746, marginTop+ khoanCach*0 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh2(margin + 746, marginTop+ khoanCach*1 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh3(margin + 746, marginTop+ khoanCach*2 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh4(margin + 746, marginTop+ khoanCach*3 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh5(margin + 746, marginTop+ khoanCach*4 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh6(margin + 746, marginTop+ khoanCach*5 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh7(margin + 746, marginTop+ khoanCach*6 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh8(margin + 746, marginTop+ khoanCach*7 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh9(margin + 746, marginTop+ khoanCach*8 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh10(margin + 746, marginTop+ khoanCach*9 -4,60,28,13,0,0,"sua");
+	NutBam hieuChinh11(margin + 746, marginTop+ khoanCach*10 -4,60,28,13,0,0,"sua");
 	
 	
 	NutBam btnLui(margin,730,100,40,15,0,0,"<<");
@@ -324,9 +314,11 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &h
  		} 
  		else if ( nhapHoNV.isMouseHover(xclick,yclick) ) {
 			 	nhapHoNV.NhapVao(kiTuChu,"chi nhap chu!"); 
+			 	nhapHoNV.chuanHoa(); 
 			 }
 			 else if (nhapTenNV.isMouseHover(xclick,yclick)) {
 			 	nhapTenNV.NhapVao(kiTuChu,"chu nhap chu!"); 
+			 	nhapTenNV.chuanHoa(); 
 			 }
 			 else if (nam.isMouseHover(xclick,yclick)) {
 			 	// phat sang no len ! 
@@ -354,8 +346,8 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &h
 					else {
 						phai = 1;
 					}
-					DSNV.themNV(nhapMaNV.boNhoDem,nhapHoNV.boNhoDem,nhapTenNV.boNhoDem,phai); 
-					DSNV.ghiFileDSNV("data/dataNhanVien.txt"); 
+					DSNV.themNV(nhapMaNV.boNhoDem,nhapHoNV.boNhoDem,nhapTenNV.boNhoDem,phai,0); 
+					DSNV.ghiFileDSNV(); 
 					MessageBox(NULL, "Them thanh cong!", "thong bao", MB_ICONINFORMATION | MB_OK);
 				 	index = ID_NV; 
 				 	return; 
