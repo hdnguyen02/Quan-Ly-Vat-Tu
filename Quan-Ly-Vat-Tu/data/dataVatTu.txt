@@ -1,4 +1,16 @@
-3
-VT12,xi mang,kg,1.8,1
-VT02,Cat Trang,Xe,69.9,1
-VT03,2,kg,1,1
+15
+VT06,Kim Cuong,Vien,725,1
+VT02,Cat Trang,Khoi,911,2
+VT01,Cai Loa,Cap,745,0
+VT05,May Tinh,Cai,345,0
+VT04,Dien Thoai,Cai,231,0
+VT07,Gach Men,Cai,2470,1
+VT09,Cat Bien,Xe,51,1
+VT13,Vang,Cay,232,0
+VT12,Cat Den,Khoi,306,1
+VT99,Dinh,Cai,2356,0
+VT23,Khau Trang,Hop,2614,1
+VT14,Cat Bien,Khoi,2365,1
+VT33,Day Dien,Kg,3330,1
+VT44,Kinh lup,Cai,289,1
+VT77,Giay Dep,Doi,347,1
