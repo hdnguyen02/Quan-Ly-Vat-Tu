@@ -1,4 +1,6 @@
-13
+12
+nv07,Huynh ngoc,Anh,1,0
+0
 nv11,Nguyen kieu the,Bao,1,0
 0
 nv14,Ho thai,Danh,0,0
@@ -27,13 +29,9 @@ nv12,Vu trong,Lan,1,0
 0
 nv08,Nguyen nhu,Ngoc,1,0
 0
-nv10,Nguyen nhu,Ngoc,1,0
-0
 nv01,Ho duc,Nguyen,0,0
 0
 nv06,Tu Thi Thao,Nguyen,1,0
 0
 nv02,Ho thanh,Nhat,0,0
-0
-nv07,Huynh ngoc,Anh,1,0
 0

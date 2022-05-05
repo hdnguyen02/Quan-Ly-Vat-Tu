@@ -1,7 +1,6 @@
-15
+14
 VT06,Kim Cuong,Vien,725,1
-VT02,Cat Trang,Khoi,911,2
-VT01,Cai Loa,Cap,745,0
+VT02,Cat Trang,Khoi,911,1
 VT05,May Tinh,Cai,345,0
 VT04,Dien Thoai,Cai,231,0
 VT07,Gach Men,Cai,2470,1
