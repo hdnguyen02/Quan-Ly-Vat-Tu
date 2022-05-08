@@ -8,13 +8,14 @@ using namespace std;
 #include "DoHoaVT.h"
 #include "DoHoaHD.h"
 #include "DoHoaNV.h"
+#include "DoHoaDT.h"
 
 // ===================================MENU ROOT=========================================================
 void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 {
 	int index = -1;
 	const int cachLeTrenMeNu = 16;
-	int doDai = DODAIMANHINH / 4 - 29;
+	int doDai = DODAIMANHINH / 5 - 29;
 	const int chieuCaoMenuCap1 = 40;
 	NutBam vatTu(0 + 56, cachLeTrenMeNu, doDai, chieuCaoMenuCap1, COLOR_MENU_CAP1, COLOR_HIGHT_LIGHT, COLOR_TEXT, "VAT TU");
 	NutBam nhanVien(doDai + 56 + 2, cachLeTrenMeNu, doDai, chieuCaoMenuCap1, COLOR_MENU_CAP1, COLOR_HIGHT_LIGHT, COLOR_TEXT, "NHAN VIEN");
@@ -32,7 +33,6 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 		{
 			if (index == ID_VT)
 			{
-				index = -1;
 				vatTu.duocChon();
 				nhanVien.khongDuocChon();
 				hoaDon.khongDuocChon();
@@ -53,15 +53,16 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 				vatTu.khongDuocChon();
 				nhanVien.khongDuocChon();
 				doanhThu.khongDuocChon();
-				index = -1;
 				hienThiTinhNangHoaDon(dsVatTu, DSNV, index, vatTu, nhanVien, doanhThu);
 			}
 			else if (index == ID_DT)
 			{
+				
 				vatTu.khongDuocChon();
 				doanhThu.duocChon();
 				nhanVien.khongDuocChon();
 				hoaDon.khongDuocChon();
+				hienThiTinhNangDoanhThu(dsVatTu,DSNV,index,vatTu,nhanVien,hoaDon,doanhThu); 
 				// GOI TOI HAM DOANH THU O DAY !
 			}
 		}
@@ -96,7 +97,7 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 			}
 			else if (doanhThu.isMouseHover(xclick, yclick))
 			{
-				// 	BO HAM DOANH THU O DAY !
+				hienThiTinhNangDoanhThu(dsVatTu,DSNV,index,vatTu,nhanVien,hoaDon,doanhThu); 
 				vatTu.khongDuocChon();
 				doanhThu.duocChon();
 				nhanVien.khongDuocChon();

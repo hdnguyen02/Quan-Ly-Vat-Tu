@@ -2,7 +2,7 @@
 using namespace std;
 #include "Tienich.h"
 #define MAX 500
-
+#include "ListHoaDon.h"
 struct NhanVien
 {
 	string maNV;
@@ -96,11 +96,43 @@ public:
 	void giaiPhongDSNV(); // giai phong danh sach nhanvien.
 	void docFileDSNV();
 	void ghiFileDSNV();
+	
 	//
+	
+	
+	// y tuong lam cau thong ke : deu sap xep ca 
+	// bo gnat ca hoa don 1 mang con tro -> sau do sap xep tren do 
+	int soLuongHD() {
+		int soLuong = 0; 
+		for (int i = 0;i < this->soLuongNV();i++) {
+			soLuong = soLuong + this->nv[i]->dsHoaDon.soHD(); 
+		}
+		return soLuong; 
+	}
+	
+	
+	void listToArrayHoaDon(HoaDon** arrHoaDon,int &index) {
+		for (int i = 0;i < this->soLuongNV();i++) {
+			this->nv[i]->dsHoaDon.ganMangHoaDon(arrHoaDon,index); 
+		}
+	}
+	
+	
+	int hoaDonTheoDate(HoaDon** arrHoaDon,HoaDon **hoaDonHople,int index,Date &start,Date &end) {  
+		int chiSo = 0; 
+		// ham tra ve so hoa don hop le !
+		for (int i = 0; i < index;i++) {  // index ( so hoa don ) 
+			  if (arrHoaDon[i]->date.isDateInRange(start,end)) {
+			  	hoaDonHople[chiSo++] = arrHoaDon[i]; 
+			  }
+		}
+		return chiSo; 
+	}
+	
 
-	// tra ve true neu ton tai! va nguoc lai
+
 	NodeHoaDon *timKiemHD(const string &soHD)
-	{ // tra ve NhanVien nam du hoa don do!
+	{
 		NodeHoaDon *tempTimKiem;
 		for (int i = 0; i < this->soLuong; i++)
 		{
