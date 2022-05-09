@@ -2,6 +2,7 @@
 using namespace std;
 #include "Tienich.h"
 #include "BienDoHoa.h"
+#include "DoanhThu.h"
 
 
 
@@ -12,6 +13,13 @@ using namespace std;
 // viet hamdo du lieu len table 
 
 void hienThiDuLieuLenTableXemHoaDonTheoDate() {
+	
+}
+
+
+void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[]) {
+	// chi can hien thi ra 10 vat tu thoi khong lam gi ca 
+	// ve ra cai bang 
 	
 }
 
@@ -428,18 +436,57 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						
 						
 					}
-					
-					
-					
-	 
 					delete []arrHoaDon; 
 				}
 				else 
 				{
 					MessageBox(NULL, "Thoi gian khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);	
+				}	
 				}
-					
-					
+				else if (thongKeTop10VT.isMouseHover(xclick,yclick)) {
+					// kiem tra ngay thang nam hop le hay chua 
+					if (Date::soSanhBeHonHoacBangDate(start,end)
+					&& nhapNgayBD.khongRong() && nhapThangBD.khongRong() && nhapNamBD.khongRong() &&
+					nhapNgayKT.khongRong() && nhapThangKT.khongRong() && nhapNamKT.khongRong() 
+					) {
+						int soLuongHoaDon = DSNV.soLuongHD(); 
+						int soLuongVatTu = dsVatTu.soLuongVT(); 
+						HoaDon** arrHoaDon = new HoaDon*[soLuongHoaDon]; 
+						DoanhThuVatTu arrDTVT[1000]; 
+						int index = 0; 
+						DSNV.listToArrayHoaDon(arrHoaDon,index); 
+						dsVatTu.BstVatTuToDoanhThuVatTu(arrDTVT,0); 
+						
+						// tiep tuc la sap xep ra 
+						tinhDoanhThu(arrDTVT,soLuongVatTu,arrHoaDon,soLuongHoaDon,start,end);
+						
+						sapXepDoanhThuVatTu(arrDTVT,soLuongVatTu); 
+						
+						system("cls"); 
+						cout << "TOP 10 VAT TU"; 
+						cout << "tu: " << start.getStringDate() << "  den: " << end.getStringDate() << endl; 
+						
+						for (int i = 0; i < soLuongVatTu;i++) {
+							cout << "ma vt: " << arrDTVT[i].pVatTu->maVT << "  " << "ten: " << arrDTVT[i].pVatTu->ten << endl; 
+							cout << "DOANH THU: " << arrDTVT[i].doanhThu << endl ;
+						}
+						
+						// hienThiTop10VatTu(arrDTVT); 
+						
+						
+						
+						
+						delete [] arrHoaDon;
+						
+						
+						
+						
+						
+						
+					}
+					else {
+							MessageBox(NULL, "Thoi gian khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);	
+					}
 					
 				}
 				}
@@ -487,7 +534,13 @@ void hienThiTinhNangDoanhThu(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBa
 				getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
 				if (thongKe.isMouseHover(xclick,yclick))
 				 {
+				 	thongKe.duocChon(); 
+				 	doanhThuNam.khongDuocChon(); 
 					inHoaDonTheoNgayThangNam(dsVatTu,DSNV,index,vatTu,nhanVien,hoaDon,doanhThu,thongKe,doanhThuNam );
+				}
+				else if (doanhThuNam.isMouseHover(xclick,yclick)) {
+					doanhThuNam.duocChon(); 
+					thongKe.khongDuocChon(); 
 				}
 				else if (vatTu.isMouseHover(xclick,yclick)) {
 					index = ID_VT; 

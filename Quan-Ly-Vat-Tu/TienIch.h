@@ -12,6 +12,12 @@ using namespace std;
 
 
 
+
+
+
+
+
+
 class TienichDoHoa
 {
 	// xu dung de xoa man hinh.
@@ -425,5 +431,8 @@ bool nhapDate(char c) {
 	return false; 
 	
 }
+
+
+
 
 

@@ -141,6 +141,19 @@ public:
 			dem++;
 		}
 	}
+	
+	// viet ham tinh ra so tong tien cua 1 vat tu doi voi vat tu do 
+	float tinhTienVatTu(string maVT) {
+		// vi trong cthd don chi co 1 1 vat tu do thoi nen ta tinh nhu the nay 
+		NodeCTHD* pTemp = this->timKiemCTHD(maVT); 
+		// kiem tra xem co ton tai thang nay hay khong 
+		if (pTemp) {
+			return pTemp->getTongTien(); 
+		}
+		return 0; // khong co vat tu nay!. 
+	}
+	// lap qua hoa don. 
+	
 };
 
 int ListCTHD::soLuongCTHD()

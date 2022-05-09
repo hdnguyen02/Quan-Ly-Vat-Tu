@@ -23,7 +23,17 @@ struct HoaDon
 				 cout << "nhan vien toa hoa don : " << tenNVLapHD; 
 			// cout << "HOA DON CHI TIET" << endl;
 			// this->info.dsCTHD.duyetCTHD();
-		}											   
+		}	
+		
+		// viet ham  tinh ra 1 
+		float doanhThuBanRaVatTu(string maVT)	{
+			if (this->loai == "N") { 
+				return 0; 
+			} 
+			else {
+				return this->dsCTHD.tinhTienVatTu(maVT); 
+			}
+		}									   
 																	   
 };
 

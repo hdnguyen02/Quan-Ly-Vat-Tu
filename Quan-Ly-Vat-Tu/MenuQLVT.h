@@ -99,7 +99,7 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 			{
 				hienThiTinhNangDoanhThu(dsVatTu,DSNV,index,vatTu,nhanVien,hoaDon,doanhThu); 
 				vatTu.khongDuocChon();
-				doanhThu.duocChon();
+				 doanhThu.duocChon();
 				nhanVien.khongDuocChon();
 				hoaDon.khongDuocChon();
 			}
