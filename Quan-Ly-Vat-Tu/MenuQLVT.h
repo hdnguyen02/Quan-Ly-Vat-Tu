@@ -63,7 +63,6 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 				nhanVien.khongDuocChon();
 				hoaDon.khongDuocChon();
 				hienThiTinhNangDoanhThu(dsVatTu,DSNV,index,vatTu,nhanVien,hoaDon,doanhThu); 
-				// GOI TOI HAM DOANH THU O DAY !
 			}
 		}
 		else if (ismouseclick(WM_LBUTTONDOWN))
@@ -97,11 +96,12 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 			}
 			else if (doanhThu.isMouseHover(xclick, yclick))
 			{
-				hienThiTinhNangDoanhThu(dsVatTu,DSNV,index,vatTu,nhanVien,hoaDon,doanhThu); 
+				doanhThu.duocChon();
 				vatTu.khongDuocChon();
-				 doanhThu.duocChon();
 				nhanVien.khongDuocChon();
 				hoaDon.khongDuocChon();
+				hienThiTinhNangDoanhThu(dsVatTu,DSNV,index,vatTu,nhanVien,hoaDon,doanhThu); 
+				
 			}
 		}
 		delay(1);

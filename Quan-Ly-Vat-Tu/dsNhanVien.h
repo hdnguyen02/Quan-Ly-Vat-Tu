@@ -200,15 +200,17 @@ public:
 	
 	
 	// viet ham ghi loai hoa don cua tat ca nhanvien 
-	void ghiFileNVHDTheoLoai(string loaiHoaDon) {
+	void ghiFileNVHDTheoLoai(string loaiHoaDon,string link) {
+		int soLuong = 0; 
 		ofstream fileout; 
-		fileout.open("data/ato.txt",ios::out | ios::trunc); 
+		fileout.open(link.c_str(),ios::out | ios::trunc); 
 		// tiep theo khong can ghi so luong gi ca
 		for (int i = 0; i < this->soLuong;i++) {
 			// chi ghi vao file hoa don theo loai thoi 
+			soLuong = soLuong +  nv[i]->dsHoaDon.soHoaDonTheoLoai(loaiHoaDon); 
 			nv[i]->dsHoaDon.ghiFileHoaDonTheoLoai(fileout,loaiHoaDon); 
-			
 		}
+		fileout << soLuong; 
 		
 		fileout.close(); 
 	}

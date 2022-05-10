@@ -128,12 +128,12 @@ public:
 	void ghiFileDSHD(ofstream &fileout);
 	int soHD();
 	
-	// viet ham dem so luong hoa don theo loai 
-	int soHoaDonXuat( ) {
+
+	int soHoaDonTheoLoai( string loaiHD ) {
 		int dem = 0; 
 		NodeHoaDon* pTemp = head; 
 		while (pTemp != NULL) {
-			if (pTemp->getinfo()->loai == "X") {  	// kiem tra xem co phai hoa don xuat hay khong
+			if (pTemp->getinfo()->loai == loaiHD) {  	// kiem tra xem co phai hoa don xuat hay khong
 				dem++;
 			}
 			pTemp = pTemp->pNext; 
@@ -141,17 +141,7 @@ public:
 		return dem; 
 	}
 	
-	int soHoaDonNhap( ) {
-		int dem = 0; 
-		NodeHoaDon* pTemp = head; 
-		while (pTemp != NULL) {
-			if (pTemp->getinfo()->loai == "N") {  	// kiem tra xem co phai hoa don xuat hay khong
-				dem++;
-			}
-			pTemp = pTemp->pNext; 
-		}
-		return dem; 
-	}
+	
 	
 	
 	

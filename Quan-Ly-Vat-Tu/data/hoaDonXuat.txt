@@ -1,0 +1,13 @@
+hd1,6/5/2022,X,Huynh ngoc Anh,
+1
+VT04,1,2,3,2.06
+hd2,6/5/2022,X,Huynh ngoc Anh,
+1
+VT07,23,23,23,650.67
+hd4,6/5/2022,X,Nguyen kieu my Hoa,
+1
+VT77,45,45,45,2936.25
+hd7,7/7/2002,X,Tu Thi Thao Nguyen,
+1
+VT77,77,77,77,10494.3
+4
