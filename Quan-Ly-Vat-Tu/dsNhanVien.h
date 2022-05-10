@@ -197,6 +197,22 @@ public:
 			nv[j + 1] = key;
 		}
 	}
+	
+	
+	// viet ham ghi loai hoa don cua tat ca nhanvien 
+	void ghiFileNVHDTheoLoai(string loaiHoaDon) {
+		ofstream fileout; 
+		fileout.open("data/ato.txt",ios::out | ios::trunc); 
+		// tiep theo khong can ghi so luong gi ca
+		for (int i = 0; i < this->soLuong;i++) {
+			// chi ghi vao file hoa don theo loai thoi 
+			nv[i]->dsHoaDon.ghiFileHoaDonTheoLoai(fileout,loaiHoaDon); 
+			
+		}
+		
+		fileout.close(); 
+	}
+	
 };
 
 // 	VOID CLASS DANH SACH NHAN VIEN

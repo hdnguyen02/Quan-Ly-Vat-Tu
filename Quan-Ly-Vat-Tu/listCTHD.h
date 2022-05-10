@@ -154,6 +154,9 @@ public:
 	}
 	// lap qua hoa don. 
 	
+	
+	void ghiFileCTHDCoTongTienVatTu(ofstream &fileout); 
+	
 };
 
 int ListCTHD::soLuongCTHD()
@@ -174,6 +177,18 @@ void ListCTHD::ghiFileCTHD(ofstream &fileout)
 	while (pTemp != NULL)
 	{
 		fileout << pTemp->info.maVT << "," << pTemp->info.soLuong << "," << pTemp->info.donGia << "," << pTemp->info.VAT << endl;
+		pTemp = pTemp->pNext;
+	}
+}
+
+
+void ListCTHD::ghiFileCTHDCoTongTienVatTu(ofstream &fileout)
+{
+	fileout << this->soLuongCTHD() << endl;
+	NodeCTHD *pTemp = head;
+	while (pTemp != NULL)
+	{
+		fileout << pTemp->info.maVT << "," << pTemp->info.soLuong << "," << pTemp->info.donGia << "," << pTemp->info.VAT << "," << pTemp->getTongTien() << endl;
 		pTemp = pTemp->pNext;
 	}
 }

@@ -7,12 +7,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	StartBGI start;
+	//StartBGI start;
 	dsNhanVien DSNV;
 	DSNV.docFileDSNV();
 	BstVatTu dsVatTu;
 	dsVatTu.docVatTuFile();
-	menuQuanLyVatTu(dsVatTu, DSNV);
+	//menuQuanLyVatTu(dsVatTu, DSNV);
 	
 	
 	// khai bao ra 1 mang vat tu 
@@ -39,6 +39,9 @@ int main(int argc, char *argv[])
 //		cout << endl; 
 //	}
 	
+	
+	// ghi file hoa don xuat ra xem thu 
+	DSNV.ghiFileNVHDTheoLoai("X"); 
 	
 	
 	DSNV.giaiPhongDSNV();

@@ -62,6 +62,17 @@ public:
 		fileout << endl;
 		info.dsCTHD.ghiFileCTHD(fileout);
 	}
+	
+	void ghiFileHDCoTongTien(ofstream &fileout) {
+		fileout << info.soHD << ","; 
+		info.date.ghiFile(fileout); 
+		fileout << "," << info.loai << "," << info.tenNVLapHD << ","; 
+		fileout << endl; 
+		info.dsCTHD.ghiFileCTHDCoTongTienVatTu(fileout);   //sau khi tu dong xuong dong roi!. 
+		
+		
+	}
+	
 	void docFileHD(ifstream &filein)
 	{
 		getline(filein, info.soHD, ',');
@@ -116,6 +127,36 @@ public:
 	void docFileDSHD(ifstream &filein);
 	void ghiFileDSHD(ofstream &fileout);
 	int soHD();
+	
+	// viet ham dem so luong hoa don theo loai 
+	int soHoaDonXuat( ) {
+		int dem = 0; 
+		NodeHoaDon* pTemp = head; 
+		while (pTemp != NULL) {
+			if (pTemp->getinfo()->loai == "X") {  	// kiem tra xem co phai hoa don xuat hay khong
+				dem++;
+			}
+			pTemp = pTemp->pNext; 
+		}
+		return dem; 
+	}
+	
+	int soHoaDonNhap( ) {
+		int dem = 0; 
+		NodeHoaDon* pTemp = head; 
+		while (pTemp != NULL) {
+			if (pTemp->getinfo()->loai == "N") {  	// kiem tra xem co phai hoa don xuat hay khong
+				dem++;
+			}
+			pTemp = pTemp->pNext; 
+		}
+		return dem; 
+	}
+	
+	
+	
+	
+	
 	string ghepSoHD()
 	{
 		// lap qua va noi chuoi lai bang 1 dau ,
@@ -147,6 +188,20 @@ public:
 		}
 	}
 	
+	
+	// viet ham chi xuat ra hon xuat va hon nhap ra 1 ben 
+	void ghiFileHoaDonTheoLoai(ofstream &fileout,string loaiHD)
+	{
+			NodeHoaDon* pTemp = head; 
+			while (pTemp != NULL) {
+				if (pTemp->getinfo()->loai == loaiHD) {
+					pTemp->ghiFileHDCoTongTien(fileout); 
+				}
+				pTemp = pTemp->pNext;
+			}
+	}
+
+		
 };
 
 int ListHoaDon::soHD()
@@ -183,6 +238,8 @@ void ListHoaDon::ghiFileDSHD(ofstream &fileout)
 		pTemp = pTemp->pNext;
 	}
 }
+
+
 
 void ListHoaDon::docFileDSHD(ifstream &filein)
 {
