@@ -39,10 +39,11 @@ void sapXepDoanhThuVatTu(DoanhThuVatTu arrDTVT[],int soLuongVatTu)
 
 void tinhDoanhThu(HoaDon** arrHoaDon,int soLuongHoaDon,float doanhThuNam[],int nam) {
 	// lap qua tat ca ca hoa don va kiem tra 
+	
 	for (int i = 0;i < soLuongHoaDon;i++) {
 		// kiem tra xem co phai hoa don xuat hay khong va kiem tra so nam phu hop thi kiem tra so thang  
 		if (arrHoaDon[i]->date.nam == nam && arrHoaDon[i]->loai == "X") {
-			doanhThuTheoNam[arrHoaDon[i]->date.thang - 1] = doanhThuTheoNam[arrHoaDon[i]->date.thang - 1] + arrHoaDon[i]->dsCTHD.tinhTongTien(); 
+			doanhThuNam[arrHoaDon[i]->date.thang - 1] = doanhThuNam[arrHoaDon[i]->date.thang - 1] + arrHoaDon[i]->dsCTHD.tinhTongTien(); 
 		}
 	}
 }

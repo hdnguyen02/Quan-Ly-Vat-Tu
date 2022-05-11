@@ -13,6 +13,10 @@ int main(int argc, char *argv[])
 	BstVatTu dsVatTu;
 	dsVatTu.docVatTuFile();
 	menuQuanLyVatTu(dsVatTu, DSNV);
+
+
+
+
 //	
 //	
 //	

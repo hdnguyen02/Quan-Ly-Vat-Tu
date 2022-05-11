@@ -145,6 +145,19 @@ struct Date
 	int nam;
 	Date(int ngay, int thang, int nam) : ngay(ngay), thang(thang), nam(nam) {}
 	Date() : ngay(0), thang(0), nam(0) {}
+	
+	// kiem tra ngay thang nam do co bi di qua trong tuong lai hay khong 
+	static bool ngayThangNamTuongLai(Date check) {  // ham return ve true neu ngay thang nam nam o tuong lai!
+		// truoc tien khai bao 1 date hien tai 
+		Date dateNow; 
+		dateNow.setDateNow(); 
+		// kiem tra so sanh ngay thang nam  // neu check <= dateNow -> thoi diem hien tai hoac qua khu 
+		if (Date::soSanhBeHonHoacBangDate(check,dateNow)) {  
+			return false; 
+		}
+		
+		return true; // check lon hon hien tai -> tuong lai!
+	}
 
 	static bool ngayThangNamHopLe(int ngay, int thang, int nam)
 	{
@@ -320,13 +333,11 @@ struct Date
 		return false;
 	}
 	static bool hopLeNam(int nam)
-	{
-		string tempNam = TienichDoHoa::intToString(nam);
-		if (tempNam.length() == 4 && TienichDoHoa::stringToInt(tempNam) <= 2022)
-		{
-			return true;
+	{ 
+		if (nam >= 1975) {
+			return true; 
 		}
-		return false;
+		return false; 
 	}
 	
 };
