@@ -862,7 +862,8 @@ void hienThiThemHoaDonXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index, NutB
 						nhapNgay.resetBoNhoDem();
 					}
 					else if (nhapThang.boNhoDem != "" && nhapNam.boNhoDem != "")
-					{ // ki?m tra ng�y th�ng n?m t?ng th? !
+					{ 
+						
 						tempDate.thang = TienichDoHoa::stringToInt(nhapThang.boNhoDem);
 						tempDate.nam = TienichDoHoa::stringToInt(nhapNam.boNhoDem);
 						if (!Date::ngayThangNamHopLe(tempDate.ngay, tempDate.thang, tempDate.nam))
@@ -1046,7 +1047,7 @@ void hienThiThemHoaDonXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index, NutB
 						nhapNam.voHieuHoa(); 
 						
 
-						tempHD = tempNV->dsHoaDon.themVaoCuoiHD(soHD.boNhoDem, tempDate, "X");
+						tempHD = tempNV->dsHoaDon.themVaoCuoiHD(soHD.boNhoDem, tempDate, "X",tempNV->getHoTen());
 						daThemHD = true;
 					}
 					tempVT = dsVatTu.timKiemVT(maVT.boNhoDem); // chan chac tim thay -> vi tren kia da bac dieu kien
@@ -1548,7 +1549,7 @@ void hienThiThemHoaDonNhap(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index, NutB
 						nhapNam.voHieuHoa(); 
 						
 
-						tempHD = tempNV->dsHoaDon.themVaoCuoiHD(soHD.boNhoDem, tempDate, "N");
+						tempHD = tempNV->dsHoaDon.themVaoCuoiHD(soHD.boNhoDem, tempDate, "N",tempNV->getHoTen());
 						daThemHD = true;
 					}
 					tempVT = dsVatTu.timKiemVT(maVT.boNhoDem); // chan chac tim thay -> vi tren kia da bac dieu kien
@@ -1723,8 +1724,6 @@ void hienThiThemHoaDonNhap(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index, NutB
 void hienThiTinhNangHoaDon(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam &nhanVien, NutBam &doanhThu)
 {
 	TienichDoHoa::xoaManHinhTheoToaDo(0, 56, DODAIMANHINH, DORONGMANHINH, BACKGROUP);
-	bool kiemTra[3] = {false};
-	bool kiemTraHD[2] = {false};
 	index = -1;
 	const int WMenuSub = 230;
 	const int HMenuSub = 35;

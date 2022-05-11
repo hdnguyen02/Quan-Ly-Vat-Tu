@@ -128,6 +128,14 @@ struct ONhap
 	{
 		this->boNhoDem.erase(this->boNhoDem.size() - 1); // xoa di ki tu cuoi cung.
 	}
+	
+	// return ve true neu boNhoDem khong rong 
+	bool khongRong() {
+		if (this->boNhoDem != "") {
+			return true;
+		}
+		return false;
+	}
 
 	void xoaNoiDungONhap()
 	{

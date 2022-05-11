@@ -141,6 +141,22 @@ public:
 			dem++;
 		}
 	}
+	
+	// viet ham tinh ra so tong tien cua 1 vat tu doi voi vat tu do 
+	float tinhTienVatTu(string maVT) {
+		// vi trong cthd don chi co 1 1 vat tu do thoi nen ta tinh nhu the nay 
+		NodeCTHD* pTemp = this->timKiemCTHD(maVT); 
+		// kiem tra xem co ton tai thang nay hay khong 
+		if (pTemp) {
+			return pTemp->getTongTien(); 
+		}
+		return 0; // khong co vat tu nay!. 
+	}
+	// lap qua hoa don. 
+	
+	
+	void ghiFileCTHDCoTongTienVatTu(ofstream &fileout); 
+	
 };
 
 int ListCTHD::soLuongCTHD()
@@ -161,6 +177,18 @@ void ListCTHD::ghiFileCTHD(ofstream &fileout)
 	while (pTemp != NULL)
 	{
 		fileout << pTemp->info.maVT << "," << pTemp->info.soLuong << "," << pTemp->info.donGia << "," << pTemp->info.VAT << endl;
+		pTemp = pTemp->pNext;
+	}
+}
+
+
+void ListCTHD::ghiFileCTHDCoTongTienVatTu(ofstream &fileout)
+{
+	fileout << this->soLuongCTHD() << endl;
+	NodeCTHD *pTemp = head;
+	while (pTemp != NULL)
+	{
+		fileout << pTemp->info.maVT << "," << pTemp->info.soLuong << "," << pTemp->info.donGia << "," << pTemp->info.VAT << "," << pTemp->getTongTien() << endl;
 		pTemp = pTemp->pNext;
 	}
 }

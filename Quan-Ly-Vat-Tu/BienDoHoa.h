@@ -32,6 +32,10 @@ const int ID_GOI_Y_DSNV = 15;
 const int ID_TIM_KIEM_HD = 16;
 const int ID_GOI_Y_VT = 17;
 
+// ID cua cac mên con cua ID_DT 
+const int ID_DT_NAM = 18; 
+const int ID_DT_THONG_KE = 19;
+
 // mau cho cac nut con
 const int COLOR_BTN_SUB = 15; // mau cua cac nut con
 const int COLOR_TEXT_BTN_SUB = 0;

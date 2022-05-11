@@ -1,6 +1,7 @@
 #pragma once
 #include "Tienich.h"
 using namespace std;
+
 // ================================== CAU TRUC VAT TU ==================================
 struct VatTu
 {
@@ -71,6 +72,15 @@ void VatTu::inVatTu()
 }
 
 // ================================ CAU TRUC NODE VAT TU ================================
+struct DoanhThuVatTu {
+	VatTu* pVatTu;  // chua dia chi vat tu do. 
+	float doanhThu; // doanh thu cua vat tu. 
+	
+	
+}; 
+
+
+
 class NodeVatTu
 {
 private:
@@ -117,6 +127,20 @@ public:
 	void ghiVatTuFile();
 	void docVatTuFile();
 	void hoTroGhiVatTuFile(NodeVatTu *root, ofstream &fileout);
+	
+	
+	// viet 1 ham do het tat ca vat tu vao trong 1 mang con tro 
+	void hoTroBstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int &index,NodeVatTu* root) {  // truyen vao 1 mang doanh sach cac vat tu  
+		if (root != NULL) {
+			hoTroBstVatTuToDoanhThuVatTu(arrDoanhThuVatTu,index,root->pLeft);
+			arrDoanhThuVatTu[index++].pVatTu = root->getInfo(); 
+			hoTroBstVatTuToDoanhThuVatTu(arrDoanhThuVatTu,index,root->pRight); 
+		}
+	}
+	
+	void BstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int index) {
+		hoTroBstVatTuToDoanhThuVatTu(arrDoanhThuVatTu,index,root);
+	} 
 };
 
 void BstVatTu::insertionSort(VatTu **arrVT, int soLuongVT, bool (*khoaSoSanh)(VatTu *, VatTu *))
@@ -141,25 +165,10 @@ int BstVatTu::soLuongVT()
 	return this->soLuong;
 }
 
-// void BstVatTu::sapXepTangDanTheoTen(NodeVatTu** arrVT) {
-//		int index = 0;
-//		int soLuongVT = this->soLuongVT();
-//		this->BstVatTuToArray(arrVT,index,root);
-//		for (int i = 0; i < soLuongVT - 1;i++) {
-//			for(int j = i + 1;j < soLuongVT;j++) {
-//				if (arrVT[i]->info.ten > arrVT[j]->info.ten) {
-//					NodeVatTu* temp = arrVT[i];
-//					arrVT[i] = arrVT[j];
-//					arrVT[j] = temp;
-//				}
-//			}
-//		}
-// }
 
-//
 
 void BstVatTu::hoTroBstVatTuToArray(VatTu **arrVT, int &index, NodeVatTu *root)
-{ // new o ben ngoai truoc khi chay!
+{ 
 	if (root != NULL)
 	{
 		hoTroBstVatTuToArray(arrVT, index, root->pLeft);
@@ -415,29 +424,7 @@ void BstVatTu::docVatTuFile()
 	filein.close();
 }
 
-// ============================================ HAM HUY ============================================
+// tao ra kieu struct moi -> thu thap toan bo 
 
-// viet ham sap xep thoi ! => nhiem vu ngay mai -> ve ra giao dien sap xep theo.
-// viet ra friend -> tai ham nay khong thuoc pham vi nay
-//	int partition(VatTu** arrVT,int low,int high,bool(*khoaSapXep)(VatTu*,VatTu*)) {
-//	VatTu* pivot = arrVT[high];   // chon pivot lam phan tu cuoi cung !
-//	int i = ( low - 1 ); // khoi tao vi tri -> luc nay la -1 neu la lan dau -> de ti vao ++
-//	for (int j = low; j < high - 1 ;j++) { // lan l'
-//		if (khoaSapXep(arrVT[j],pivot)) {  // dua vao khoa ma tuy co sap Xep!
-//			i++;
-//			VatTu::hoanDoiDiaChiVatTu(arrVT[i],arrVT[j]);
-//		}
-//	}
-//	VatTu::hoanDoiDiaChiVatTu(arrVT[i + 1],arrVT[high]);
-//	return (i + 1);
-//}
 
-// void quickSort(VatTu** arrVT,int low,int high,bool(*khoaSoSanh)(VatTu*,VatTu*)) {
-//	if (low < high) {
-//		int pi = partition(arrVT,low,high,khoaSoSanh);
-//		quickSort(arrVT,low,pi-1,khoaSoSanh);
-//		quickSort(arrVT,pi + 1,high,khoaSoSanh);
-//	}
-// }
 
-// viet ham sap xep chen ( nhan vao doi so sap xep

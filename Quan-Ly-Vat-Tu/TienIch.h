@@ -10,6 +10,14 @@ using namespace std;
 #include <windows.h>
 #include <ctime>
 
+
+
+
+
+
+
+
+
 class TienichDoHoa
 {
 	// xu dung de xoa man hinh.
@@ -137,6 +145,19 @@ struct Date
 	int nam;
 	Date(int ngay, int thang, int nam) : ngay(ngay), thang(thang), nam(nam) {}
 	Date() : ngay(0), thang(0), nam(0) {}
+	
+	// kiem tra ngay thang nam do co bi di qua trong tuong lai hay khong 
+	static bool ngayThangNamTuongLai(Date check) {  // ham return ve true neu ngay thang nam nam o tuong lai!
+		// truoc tien khai bao 1 date hien tai 
+		Date dateNow; 
+		dateNow.setDateNow(); 
+		// kiem tra so sanh ngay thang nam  // neu check <= dateNow -> thoi diem hien tai hoac qua khu 
+		if (Date::soSanhBeHonHoacBangDate(check,dateNow)) {  
+			return false; 
+		}
+		
+		return true; // check lon hon hien tai -> tuong lai!
+	}
 
 	static bool ngayThangNamHopLe(int ngay, int thang, int nam)
 	{
@@ -224,7 +245,49 @@ struct Date
 	{
 		cout << this->ngay << "/" << this->thang << "/" << this->nam;
 	}
+	
+	bool isDateInRange( Date &start, Date &end ){
+    int entryDate = (this->nam * 10000) + (this->thang * 100) + this->ngay;
+    int startDate = (start.nam * 10000) + (start.thang * 100) + start.ngay;
+    int endDate = (end.nam * 10000) + (end.thang * 100) + end.ngay;
 
+    if (entryDate >= startDate && entryDate <= endDate){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+	// return ve true neu start be hon hoac bang end !
+	static bool soSanhBeHonHoacBangDate(Date &start,Date &end) {  
+		// truoc tien kiem tra nam
+		// neu start < end 
+		if (start.nam < end.nam) { // chi khi nao nam bang hoac be hon thi moi di so sanh tiep 
+			return true;
+		}
+		else if (start.nam == end.nam) {
+			// tinh trang nam bang nha => tiep tuc di so sanh thang 
+			// di so sanh thang 
+			if (start.thang < end.thang) {
+				return true; 
+			}
+			else if (start.thang == end.thang ) {
+				// thang da bang nhau chi con cach so sanh ngay 
+				if (start.ngay < end.ngay ) {
+					return true; 
+				}
+				else if (start.ngay == end.ngay) {
+					return true; 
+				}
+				// truong hop nam bang thang bang nhung ngay lon hon 
+				return false; 
+			}
+			return false; 
+		}
+		return false; 
+		
+	}
 	// tra ve string date
 	string getStringDate()
 	{ // chuyen doi ve string het va noi chuoi ! lai !
@@ -270,14 +333,13 @@ struct Date
 		return false;
 	}
 	static bool hopLeNam(int nam)
-	{
-		string tempNam = TienichDoHoa::intToString(nam);
-		if (tempNam.length() == 4 && TienichDoHoa::stringToInt(tempNam) <= 2022)
-		{
-			return true;
+	{ 
+		if (nam >= 1975) {
+			return true; 
 		}
-		return false;
+		return false; 
 	}
+	
 };
 
 class StartBGI
@@ -373,90 +435,15 @@ bool kiemTraSoThuc(char c)
 	}
 }
 
-// viet mot ham cho phep nhap vao float => tuc la cho phep dau .
+bool nhapDate(char c) {
+	if (kiTuSo(c) || c == 47) {
+		return true; 
+	}
+	return false; 
+	
+}
 
-// struct Dates
-//{
-//	int day;
-//	int month;
-//	int year;
-//
-//	Dates()
-//	{
-//		day = 1;
-//		month = 1;
-//		year = 1;
-//	}
-//	bool isValid()
-//	{
-//		if(month<1 || month>12 || year<0 || day<0 || day>31)
-//		{
-//			return false;
-//		}
-//
-//		if (month==2 || month==4 || month==6 || month==9 || month == 11)
-//		{
-//			if (day > 30)
-//				return false;
-//			if (month == 2)
-//			{
-//				if ((year%4 == 0 && year%100 != 0) || year%400 == 0)
-//				{
-//					if (day > 29)
-//						return false;
-//				}
-//				else
-//				{
-//					if (day > 28)
-//						return false;
-//				}
-//			}
-//		}
-//		return true;
-//	}
-//
-//	bool operator > (const struct Dates &other)
-//	{
-//		if (this->year > other.year)
-//			return true;
-//		else if (this->year == other.year)
-//		{
-//			if(this->month > other.month)
-//				return true;
-//			else if (this->month == other.month)
-//			{
-//				if (this->day > other.day)
-//					return true;
-//			}
-//		}
-//
-//		return false;
-//	}
-//
-//	bool operator < (const struct Dates &other)
-//	{
-//		if (this->year < other.year)
-//			return true;
-//		else if (this->year == other.year)
-//		{
-//			if(this->month < other.month)
-//				return true;
-//			else if (this->month == other.month)
-//			{
-//				if (this->day < other.day)
-//					return true;
-//			}
-//		}
-//
-//		return false;
-//	}
-//
-//	bool operator == (const struct Dates &other)
-//	{
-//		if (this->year == other.year)
-//			if (this->month == other.month)
-//				if (this->day == other.day)
-//					return true;
-//		return false;
-//	}
-// };
+
+
+
+
