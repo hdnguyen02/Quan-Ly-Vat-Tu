@@ -97,6 +97,17 @@ public:
 	void docFileDSNV();
 	void ghiFileDSNV();
 	
+	// viet ham tim kiem theo truong bo vao 
+
+	NhanVien* timKiemNhanVienTheoTen(const string& key) {
+		for (int i = 0; i < this->soLuong;i++) {
+			if (key == nv[i]->getHoTen()) {
+				return nv[i]; 
+			}
+		}
+		return NULL; // KHONG TIM THAY  
+	}
+	
 	//
 	
 	

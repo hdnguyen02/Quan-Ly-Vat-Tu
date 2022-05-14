@@ -158,7 +158,7 @@ void chinhSuaVT(BstVatTu &dsVatTu, VatTu *vatTuCT )
 						if (luaChon == OK)
 						{
 								dsVatTu.xoaVT(nhapMaVT.boNhoDem); 
-								dsVatTu.ghiVatTuFile();
+								dsVatTu.ghiFileVatTu();
 								break;
 						}
 					}
@@ -505,7 +505,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 					{
 						MessageBox(NULL, "Them thanh cong!", "thong bao", MB_ICONINFORMATION | MB_OK);
 						delete []arrVT;
-						dsVatTu.ghiVatTuFile();
+						dsVatTu.ghiFileVatTu();
 						index = ID_VT;
 						return;
 					}
@@ -517,9 +517,11 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 				}
 			}
 			else if (searchVT.isMouseHover(xclick,yclick)) { 
-	 			if (theoMa) {
+	 			if (theoMa) 
+				 {
 	 				searchVT.NhapVao(nhapID,"Chi Nhan Chu,So Hoac _ !"); 
-	 				if (searchVT.khongRong()) {
+	 				if (searchVT.khongRong())
+					  {
 					 	NodeVatTu* nodeResult = dsVatTu.timKiemVT(searchVT.boNhoDem); 
 					 	if (nodeResult != NULL) {
 						 	chinhSuaVT(dsVatTu, nodeResult->getInfo());
@@ -537,10 +539,12 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 				else {
 					searchVT.NhapVao(kiTuChu,"Chi Nhan Chu!"); 
 					searchVT.chuanHoa(); 
-	 				if (searchVT.khongRong()) {
+	 				if (searchVT.khongRong())
+					  {
 					 	VatTu* result = NULL; 
 						for (int i = 0; i < soLuongVT;i++) {
-							if (arrVT[i]->ten == searchVT.boNhoDem) {
+							if (arrVT[i]->ten == searchVT.boNhoDem) 
+							{
 								result = arrVT[i]; 
 								break;
 							}

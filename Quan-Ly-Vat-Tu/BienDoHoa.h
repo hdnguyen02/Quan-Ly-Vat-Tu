@@ -45,8 +45,8 @@ const int COLOR_HIGHT_BTN_SUB = 5;
 const int COLOR_BACKGROUP_INPUT = 14;
 const int CACH_LE_O_NHAP = 10; // cach cai thanh o nhap ra bao nhieu px
 const int COLOR_TEXT_INPUT = 1;
-const int COLOR_NHAP = 11; 
-const int COLOR_DISABLE = 8; // mau khi input bi vo hieu hoa!
+const int COLOR_NHAP = 10; 
+const int COLOR_DISABLE = 11; // mau khi input bi vo hieu hoa!
 
 // bien mau khi in ra
 const int CinputText = 15;
@@ -57,7 +57,7 @@ const int canLeTrenHD = 120;
 const int canLeNgangHD = 16;
 const int WHD = 90;
 const int HHD = 46;
-const int mauNhapXuat = 14;
+const int mauNhapXuat = 11;
 const int mauHightNhapXuat = 14;
 const int doDaiCoban = DODAIMANHINH / 9 - 15;
 const int colorTieuDe = 15;

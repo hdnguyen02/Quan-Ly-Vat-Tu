@@ -112,7 +112,7 @@ private:
 
 public:
 	// HAM KHOI TAO, HAM HUY
-	BstVatTu() : root(NULL), soLuong(0) { this->docVatTuFile(); };
+	BstVatTu() : root(NULL), soLuong(0) { this->docFileVatTu(); };
 	~BstVatTu() { this->giaiPhongVT(root); };
 	// HAM CHUC NANG
 	void hoTroThemVT(NodeVatTu *root, string maVT, string ten, string donVi, float soLuongTon, int soLanTaoCTHD);
@@ -131,8 +131,8 @@ public:
 	void sapXepTangDanTheoTen(NodeVatTu **arrVT);											//  ham nay chi dang sap xep tang dan theo ten ma thoi !
 	void insertionSort(VatTu **arrVT, int soLuongVT, bool (*khoaSoSanh)(VatTu *, VatTu *)); // ham sap xep ( theo truong )
 	// XU LY FILE
-	void ghiVatTuFile();
-	void docVatTuFile();
+	void ghiFileVatTu();
+	void docFileVatTu();
 	void hoTroGhiVatTuFile(NodeVatTu *root, ofstream &fileout);
 	
 	
@@ -206,7 +206,6 @@ bool BstVatTu::dieuChinhVT(const string &key, const string &tenVT, const string 
 	}
 	nodeHieuChinh->info.ten = tenVT;
 	nodeHieuChinh->info.donVi = donViVT;
-	this->ghiVatTuFile();
 	return true;
 }
 
@@ -247,7 +246,6 @@ bool BstVatTu::xoaVT(const string &key)
 			delete root;
 			root = pTempDelete;
 			this->soLuong--;
-			this->ghiVatTuFile();
 			return true;
 		}
 		if (previousNodeDelete->pLeft == nodeDelete)
@@ -399,7 +397,7 @@ void BstVatTu::hoTroGhiVatTuFile(NodeVatTu *root, ofstream &fileout)
 	}
 }
 
-void BstVatTu::ghiVatTuFile()
+void BstVatTu::ghiFileVatTu()
 { // mo file ra va ghi du lieu vao.
 	ofstream fileout;
 	fileout.open("data/dataVatTu.txt", ios::out | ios::trunc); // chi ghi file vao va xoa du lieu cu di.
@@ -409,7 +407,7 @@ void BstVatTu::ghiVatTuFile()
 }
 
 // =================================== DOC VAT TU ( DOC TU FILE ) ===================================
-void BstVatTu::docVatTuFile()
+void BstVatTu::docFileVatTu()
 {
 	int soLuongVT;
 	ifstream filein;

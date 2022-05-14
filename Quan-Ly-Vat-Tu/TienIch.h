@@ -180,7 +180,9 @@ static void setText(int bkColor,int colorText,int typeFont,int size) {
 	settextstyle(typeFont,0,size);
 }
 
-
+static void hienThiThongBao(string thongBao) {
+	MessageBox(NULL, thongBao.c_str(), "Thong Bao", MB_ICONINFORMATION | MB_OK);
+}
 
  	
 	
@@ -192,7 +194,9 @@ struct Date
 	int thang;
 	int nam;
 	Date(int ngay, int thang, int nam) : ngay(ngay), thang(thang), nam(nam) {}
-	Date() : ngay(0), thang(0), nam(0) {}
+	Date() {
+		this->setDateNow(); 
+	}
 	
 	// kiem tra ngay thang nam do co bi di qua trong tuong lai hay khong 
 	static bool ngayThangNamTuongLai(Date check) {  // ham return ve true neu ngay thang nam nam o tuong lai!
@@ -206,9 +210,24 @@ struct Date
 		
 		return true; // check lon hon hien tai -> tuong lai!
 	}
+	
+	void stringToDate(string ngay,string thang,string nam) {
+		this->ngay = TienichDoHoa::stringToInt(ngay); 
+		this->thang = TienichDoHoa::stringToInt(thang); 
+		this->nam = TienichDoHoa::stringToInt(nam); 
+	}
+	
+	void dateToString(string &ngay,string &thang,string &nam) {
+		ngay = TienichDoHoa::intToString(this->ngay);
+		thang =  TienichDoHoa::intToString(this->thang);
+		nam =  TienichDoHoa::intToString(this->nam);
+	}
 
-	static bool ngayThangNamHopLe(int ngay, int thang, int nam)
+	static bool ngayThangNamHopLe(Date check)
 	{
+		int ngay = check.ngay; 
+		int thang = check.thang; 
+		int nam = check.nam; 
 		if (thang < 1 || thang > 12 || nam < 0 || ngay < 0 || ngay > 31)
 		{
 			return false;

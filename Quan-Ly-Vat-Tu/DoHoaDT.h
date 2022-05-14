@@ -331,7 +331,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							{ 
 								start.thang = TienichDoHoa::stringToInt(nhapThangBD.boNhoDem);
 								start.nam = TienichDoHoa::stringToInt(nhapNamBD.boNhoDem);
-								if (!Date::ngayThangNamHopLe(start.ngay, start.thang, start.nam))
+								if (!Date::ngayThangNamHopLe(start))
 								{
 									MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 									nhapNgayBD.resetBoNhoDem();
@@ -357,7 +357,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{ 
 							start.ngay = TienichDoHoa::stringToInt(nhapNgayBD.boNhoDem);
 							start.nam = TienichDoHoa::stringToInt(nhapNamBD.boNhoDem);
-							if (!Date::ngayThangNamHopLe(start.ngay, start.thang, start.nam))
+							if (!Date::ngayThangNamHopLe(start))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayBD.resetBoNhoDem();
@@ -382,7 +382,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{
 							start.ngay = TienichDoHoa::stringToInt(nhapNgayBD.boNhoDem);
 							start.thang = TienichDoHoa::stringToInt(nhapThangBD.boNhoDem);
-							if (!Date::ngayThangNamHopLe(start.ngay, start.thang, start.nam))
+							if (!Date::ngayThangNamHopLe(start))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayBD.resetBoNhoDem();
@@ -410,7 +410,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							{ 
 								end.thang = TienichDoHoa::stringToInt(nhapThangKT.boNhoDem);
 								end.nam = TienichDoHoa::stringToInt(nhapNamKT.boNhoDem);
-								if (!Date::ngayThangNamHopLe(end.ngay, end.thang, end.nam))
+								if (!Date::ngayThangNamHopLe(end))
 								{
 									MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 									nhapNgayKT.resetBoNhoDem();
@@ -436,7 +436,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{ 
 							end.ngay = TienichDoHoa::stringToInt(nhapNgayKT.boNhoDem);
 							end.nam = TienichDoHoa::stringToInt(nhapNamKT.boNhoDem);
-							if (!Date::ngayThangNamHopLe(end.ngay, end.thang, end.nam))
+							if (!Date::ngayThangNamHopLe(end))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayKT.resetBoNhoDem();
@@ -462,7 +462,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{
 							end.ngay = TienichDoHoa::stringToInt(nhapNgayKT.boNhoDem);
 							end.thang = TienichDoHoa::stringToInt(nhapThangKT.boNhoDem);
-							if (!Date::ngayThangNamHopLe(end.ngay, end.thang, end.nam))
+							if (!Date::ngayThangNamHopLe(end))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayKT.resetBoNhoDem();

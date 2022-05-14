@@ -53,7 +53,7 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 				vatTu.khongDuocChon();
 				nhanVien.khongDuocChon();
 				doanhThu.khongDuocChon();
-				hienThiTinhNangHoaDon(dsVatTu, DSNV, index, vatTu, nhanVien, doanhThu);
+				hienThiTinhNangHoaDon(dsVatTu, DSNV, index, vatTu, nhanVien,hoaDon, doanhThu);
 			}
 			else if (index == ID_DT)
 			{
@@ -84,7 +84,7 @@ void menuCha(BstVatTu &dsVatTu, dsNhanVien &DSNV)
 				vatTu.khongDuocChon();
 				nhanVien.khongDuocChon();
 				doanhThu.khongDuocChon();
-				hienThiTinhNangHoaDon(dsVatTu, DSNV, index, vatTu, nhanVien, doanhThu);
+				hienThiTinhNangHoaDon(dsVatTu, DSNV, index, vatTu, nhanVien, hoaDon,doanhThu);
 			}
 			else if (nhanVien.isMouseHover(xclick, yclick))
 			{

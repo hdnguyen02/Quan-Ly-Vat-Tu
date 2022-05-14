@@ -25,7 +25,7 @@ struct NutBam
 		this->colorHight = colorHight;
 		this->colorText = colorText;
 	}
-
+	
 	void duocChon()
 	{
 		this->duocTroVao = true;
@@ -151,7 +151,11 @@ struct ONhap
 
 	}
 	
-
+	void thayDoiNoiDung(string s) {
+		this->boNhoDem = s; 
+		this->xoaNoiDungONhap(); 
+		this->inNoiDung(); 
+	}
 	void inNoiDung()
 	{
 		int colorBack;
@@ -335,7 +339,7 @@ struct ONhap
 
 	void xoaGoiY()
 	{
-		TienichDoHoa::xoaManHinhTheoToaDo(x - 2, y + 1 + h, w + 40, 25, colorBgoiY);
+		TienichDoHoa::xoaManHinhTheoToaDo(x - 2, y + 1 + h, w + 52, 25, colorBgoiY);
 	}
 	void resetBoNhoDem()
 	{
