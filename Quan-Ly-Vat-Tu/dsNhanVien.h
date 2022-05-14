@@ -205,8 +205,8 @@ public:
 		ofstream fileout; 
 		fileout.open(link.c_str(),ios::out | ios::trunc); 
 		// tiep theo khong can ghi so luong gi ca
-		for (int i = 0; i < this->soLuong;i++) {
-			// chi ghi vao file hoa don theo loai thoi 
+		for (int i = 0; i < this->soLuong;i++) 
+		{
 			soLuong = soLuong +  nv[i]->dsHoaDon.soHoaDonTheoLoai(loaiHoaDon); 
 			nv[i]->dsHoaDon.ghiFileHoaDonTheoLoai(fileout,loaiHoaDon); 
 		}

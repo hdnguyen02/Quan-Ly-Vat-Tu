@@ -109,33 +109,81 @@ public:
 		}
 	}
 
-	static void chuanHoaTen(string &s)
-	{
-		xoaKhoangTrangThua(s);
-		int index = 1;
-		int n = s.length();
-		if (s[0] >= 97 && s[0] <= 122)
-		{
-			s[0] = s[0] - 32;
-		}
-		while (index < n)
-		{
-			if (s[index] == 32)
-			{
-				if (s[index + 1] >= 97 && s[index + 1] <= 122)
-				{
-					s[index + 1] = s[index + 1] - 32;
-					index++;
-				}
-			}
 
-			else if (s[index] >= 65 && s[index] <= 90)
-			{
-				s[index] = s[index] + 32;
-			}
-			index++;
+	
+	
+
+static void xoaKhoanTrangDauVaCuoi(string &str)
+{
+	while (str[0] == ' ')
+	{
+		str.erase(str.begin() + 0);
+	}
+
+	while (str[str.length() - 1] == ' ')
+	{
+		str.erase(str.begin() + str.length() - 1); 
+	}
+}
+
+
+static void xoaKhoanTrangOGiua(string &str)
+{
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (str[i] == ' ' && str[i + 1] == ' ')
+		{
+			str.erase(str.begin() + i);
+			i--;
 		}
 	}
+}
+
+
+static void inHoaKiTuDauMoiTu(string &str)
+{
+	if (str.length() == 0) {
+		return; 
+	}
+	strlwr((char *)str.c_str()); 
+	if (str[0] != ' ')
+	{
+		if (str[0] >= 97 && str[0] <= 122)
+		{
+			str[0] -= 32;
+		}
+		
+	}
+	for (int i = 0; i < str.length() - 1; i++)
+	{
+		if (str[i] == ' ' && str[i + 1] != ' ')
+		{
+		
+			if (str[i + 1] >= 97 && str[i + 1] <= 122)
+			{
+				str[i + 1] -= 32;
+			}
+		}
+	}
+}
+
+static void chuanHoaTen(string &str) {
+	xoaKhoanTrangDauVaCuoi(str); 
+	xoaKhoanTrangOGiua(str); 
+	inHoaKiTuDauMoiTu(str); 
+}
+
+
+static void setText(int bkColor,int colorText,int typeFont,int size) {
+	setbkcolor(bkColor); 
+	setcolor(colorText); 
+	settextstyle(typeFont,0,size);
+}
+
+
+
+ 	
+	
 };
 
 struct Date
@@ -186,44 +234,8 @@ struct Date
 		}
 		return true;
 	}
-	bool operator>(const struct Date &other)
-	{
-		if (this->nam > other.nam)
-			return true;
-		else if (this->nam == other.nam)
-		{
-			if (this->thang > other.thang)
-				return true;
-			else if (this->thang == other.thang)
-			{
-				if (this->ngay > other.ngay)
-					return true;
-			}
-		}
+	
 
-		return false;
-	}
-	Date(string ngay, string thang, string nam)
-	{
-		// do toi ham
-		ngay = TienichDoHoa::stringToInt(ngay);
-		thang = TienichDoHoa::stringToFloat(thang);
-		nam = TienichDoHoa::stringToInt(nam);
-	}
-
-	// viet ra phuong thuc nhap ngay thang nam
-	void nhap()
-	{
-		cout << "nhap ngay: ";
-		cin >> this->ngay;
-		cout << "nhap thang: ";
-		cin >> this->thang;
-		cout << "nhap nam: ";
-		cin >> this->nam;
-		cin.ignore(); // xoa di bo nho dem.
-	}
-
-	// viet ham doc vao ngay tu file
 	void docFile(ifstream &filein)
 	{
 		string temp;
@@ -374,9 +386,10 @@ bool kiTuChuThuong(char c)
 	}
 	return false;
 }
-bool kiTuSo(char c)
+bool kiTuSo(char c) 
 {
-	if (c >= 48 && c <= 57)
+	
+	if (c >= 48 && c <= 57 )
 	{
 		return true;
 	}
@@ -385,7 +398,7 @@ bool kiTuSo(char c)
 
 bool kiTuChu(char c)
 {
-	if (kiTuChuHoa(c) || kiTuChuThuong(c))
+	if (kiTuChuHoa(c) || kiTuChuThuong(c) || c == 32 )
 	{
 		return true;
 	}
@@ -442,6 +455,17 @@ bool nhapDate(char c) {
 	return false; 
 	
 }
+
+// nhap ma chap nhan 3 ki tu sau : chu, so va _ 
+bool nhapID(char c) {
+	// truoc tien kiem tra la so chua da 
+	if ( (kiTuSo(c) || c == 95 || kiTuChu(c)) && c != 32 ) { 
+		return true; 
+	}
+	return false; 
+}
+
+
 
 
 

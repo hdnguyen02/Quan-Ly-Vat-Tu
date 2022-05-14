@@ -42,9 +42,11 @@ const int COLOR_TEXT_BTN_SUB = 0;
 const int COLOR_HIGHT_BTN_SUB = 5;
 
 // dinh nghia mau nen o Nhap
-const int COLOR_BACKGROUP_INPUT = 2;
+const int COLOR_BACKGROUP_INPUT = 14;
 const int CACH_LE_O_NHAP = 10; // cach cai thanh o nhap ra bao nhieu px
-const int COLOR_TEXT_INPUT = 15;
+const int COLOR_TEXT_INPUT = 1;
+const int COLOR_NHAP = 11; 
+const int COLOR_DISABLE = 8; // mau khi input bi vo hieu hoa!
 
 // bien mau khi in ra
 const int CinputText = 15;

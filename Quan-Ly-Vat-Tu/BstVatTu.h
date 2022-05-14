@@ -5,39 +5,23 @@ using namespace std;
 // ================================== CAU TRUC VAT TU ==================================
 struct VatTu
 {
+	// THUOC TINH
 	string maVT;
 	string ten;
 	string donVi;
 	float soLuongTon;
-	int soLanTaoCTHD; // cho biet so Lan taoCTHD
+	int soLanTaoCTHD; // SO LAN TAO CHI TIET HOA DON CUA VAT TU
+	
+	// PHUONG THUC 
+	
 	VatTu(){};
-	VatTu(string maVT, string ten, string donVi, float soLuongTon, int soLanTaoCTHD) : maVT(maVT), ten(ten),
-																					   donVi(donVi), soLuongTon(soLuongTon), soLanTaoCTHD(soLanTaoCTHD){};
+	VatTu(string maVT, string ten, string donVi, float soLuongTon, int soLanTaoCTHD) : 
+	maVT(maVT), ten(ten), donVi(donVi), soLuongTon(soLuongTon), soLanTaoCTHD(soLanTaoCTHD){};
 	void inVatTu();
-	// viet ham cap nhap lai so luonng VT trong => dua vao so Luong capNhap
-	// kiemTraHang doi voi hd Xuat
-	bool kiemTraDuHang(float soLuongHangCanXuat)
-	{
-		if (soLuongHangCanXuat > soLuongTon)
-		{
-			return false;
-		}
-		return true;
-	}
-	// viet ham cap nhap lai so Luong
-	void capNhapSoLuongTon(string loaiHD, float soLuongCapNhap)
-	{
-		if (loaiHD == "X")
-		{
-			this->soLuongTon = this->soLuongTon - soLuongCapNhap;
-		}
-		else if (loaiHD == "N")
-		{
-			this->soLuongTon = this->soLuongTon + soLuongCapNhap;
-		}
-	}
-
-	// viet hamKiemTraTangDan hoac giamDan
+	bool kiemTraDuHang(float soLuongHangCanXuat); // ham kiem tra so luong xem co du de xuat kho
+	void capNhapSoLuongTon(string loaiHD, float soLuongCapNhap);
+	
+	// STATIC METHOD
 	static bool soSanhTheoTen(VatTu *vt1, VatTu *vt2)
 	{
 		return vt1->ten > vt2->ten;
@@ -66,17 +50,39 @@ struct VatTu
 		vt2 = tempVT;
 	}
 };
+
+bool VatTu::kiemTraDuHang(float soLuongHangCanXuat)
+	{
+		if (soLuongHangCanXuat > soLuongTon)
+		{
+			return false;
+		}
+		return true;
+	}
+	
+void VatTu::capNhapSoLuongTon(string loaiHD, float soLuongCapNhap)
+{
+	if (loaiHD == "X")
+	{
+		this->soLuongTon = this->soLuongTon - soLuongCapNhap;
+	}
+	else if (loaiHD == "N")
+	{
+		this->soLuongTon = this->soLuongTon + soLuongCapNhap;
+	}
+}
+
+
+
 void VatTu::inVatTu()
 {
 	cout << this->maVT << "  " << this->ten << "  " << this->donVi << "  " << this->soLuongTon << " " << this->soLanTaoCTHD;
 }
 
-// ================================ CAU TRUC NODE VAT TU ================================
+
 struct DoanhThuVatTu {
-	VatTu* pVatTu;  // chua dia chi vat tu do. 
-	float doanhThu; // doanh thu cua vat tu. 
-	
-	
+	VatTu* pVatTu;    // CONT TRO CHAU THONG TIN CUA VAT TU DANG TRO DEN
+	float doanhThu;   // DOANH THU CUA VAT TU DO : LAM TRONG CAU 3 CAU CUOI
 }; 
 
 
@@ -87,14 +93,15 @@ private:
 	VatTu info;
 	NodeVatTu *pLeft;
 	NodeVatTu *pRight;
-
 public:
 	friend class BstVatTu;
 	NodeVatTu() : pLeft(NULL), pRight(NULL){};
-	NodeVatTu(string maVT, string ten, string donVi, float soLuongTon, bool daThemCTHD) : info(maVT, ten, donVi, soLuongTon, daThemCTHD),
-																						  pLeft(NULL), pRight(NULL) {}
+	NodeVatTu(string maVT, string ten, string donVi, float soLuongTon, bool daThemCTHD) 
+	: info(maVT, ten, donVi, soLuongTon, daThemCTHD),pLeft(NULL), pRight(NULL) {}
 	VatTu *getInfo() { return &info; }
+	
 };
+
 
 // ==================================== BST VAT TU ====================================
 class BstVatTu
@@ -130,21 +137,28 @@ public:
 	
 	
 	// viet 1 ham do het tat ca vat tu vao trong 1 mang con tro 
-	void hoTroBstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int &index,NodeVatTu* root) {  // truyen vao 1 mang doanh sach cac vat tu  
-		if (root != NULL) {
+	void hoTroBstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int &index,NodeVatTu* root);
+	
+	void BstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int index);
+};
+
+void BstVatTu::hoTroBstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int &index,NodeVatTu* root) 
+{   
+		if (root != NULL) 
+		{
 			hoTroBstVatTuToDoanhThuVatTu(arrDoanhThuVatTu,index,root->pLeft);
 			arrDoanhThuVatTu[index++].pVatTu = root->getInfo(); 
 			hoTroBstVatTuToDoanhThuVatTu(arrDoanhThuVatTu,index,root->pRight); 
 		}
-	}
+}
 	
-	void BstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int index) {
-		hoTroBstVatTuToDoanhThuVatTu(arrDoanhThuVatTu,index,root);
-	} 
-};
+void BstVatTu::BstVatTuToDoanhThuVatTu(DoanhThuVatTu arrDoanhThuVatTu[],int index) 
+{
+	hoTroBstVatTuToDoanhThuVatTu(arrDoanhThuVatTu,index,root);
+} 
 
 void BstVatTu::insertionSort(VatTu **arrVT, int soLuongVT, bool (*khoaSoSanh)(VatTu *, VatTu *))
-{ // truyen vao 1 mang chua gia tri.
+{ 
 	int i, j;
 	VatTu *key;
 	for (i = 1; i < soLuongVT; i++)
@@ -213,11 +227,7 @@ bool BstVatTu::xoaVT(const string &key)
 		}
 	}
 	if (nodeDelete == NULL)
-	{ // truong hop can tim thay node de xoa hoac cay dang rong
-		return false;
-	}
-	if (nodeDelete->getInfo()->soLanTaoCTHD != 0)
-	{ // vat tu nay da tao HD roi !. khong duoc quyen xoa !
+	{ 
 		return false;
 	}
 	if (nodeDelete->pLeft == NULL || nodeDelete->pRight == NULL)
@@ -282,7 +292,7 @@ bool BstVatTu::xoaVT(const string &key)
 bool BstVatTu::themVT(string maVT, string ten, string donVi, float soLuongTon, int soLanTaoCTHD)
 {
 	if (this->timKiemVT(maVT) != NULL)
-	{ // khong tim thay.
+	{ 
 		return false;
 	}
 	if (root == NULL)
