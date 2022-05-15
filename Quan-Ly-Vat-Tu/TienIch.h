@@ -15,7 +15,13 @@ using namespace std;
 
 
 
-
+bool kiemTraSoNguyen(string str)
+{
+	for (int i = 0; i < str.length(); i++)
+		if (isdigit(str[i]) == false)
+			return false;
+	return true;
+}
 
 
 
@@ -184,7 +190,15 @@ static void setText(int bkColor,int colorText,int typeFont,int size) {
 static void hienThiThongBao(string thongBao) {
 	MessageBox(NULL, thongBao.c_str(), "Thong Bao", MB_ICONINFORMATION | MB_OK);
 }
-
+static float tinhToiDaPage(int mountShow, int soPhanTuTrenMotPage)  // ham tinh ra xem co bao nhieu page !
+{
+	float toiDaPage = (float)mountShow / (float)soPhanTuTrenMotPage;
+	if (!kiemTraSoNguyen(TienichDoHoa::floatToString(toiDaPage)))
+	{
+		toiDaPage = (int)toiDaPage + 1;
+	}
+	return toiDaPage; 
+}
  	
 	
 };
@@ -451,13 +465,7 @@ bool kiTuChuHoacSoKhongCach(char c)
 	return false;
 }
 
-bool kiemTraSoNguyen(string str)
-{
-	for (int i = 0; i < str.length(); i++)
-		if (isdigit(str[i]) == false)
-			return false;
-	return true;
-}
+
 
 bool kiemTraSoThuc(char c)
 {

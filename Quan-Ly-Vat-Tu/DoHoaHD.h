@@ -384,10 +384,7 @@ void hienThiChinhSuaCTHD(NodeCTHD *tempCTHD, ListCTHD *dsCTHD, BstVatTu &dsVatTu
 				}
 				else if (maVT.boNhoDem != maVTCu || soLuong.boNhoDem != soLuongCu || donGia.boNhoDem != donGiaCu || VAT.boNhoDem != VATCu)
 				{
-					// thuc hien chinh sua ! -> phai khac
-					// lay ra thang VT moi ra - kiem tra so Luonh
 					NodeVatTu *tempVT = dsVatTu.timKiemVT(maVT.boNhoDem);
-					// chi kiem tra trong truong hop la HD xuat con nhap thi khong can kiem tra
 					if (loaiHD == "X")
 					{
 						if (!tempVT->getInfo()->kiemTraDuHang(TienichDoHoa::stringToFloat(soLuong.boNhoDem)))
@@ -400,12 +397,10 @@ void hienThiChinhSuaCTHD(NodeCTHD *tempCTHD, ListCTHD *dsCTHD, BstVatTu &dsVatTu
 						{
 							if (maVT.boNhoDem != maVTCu)
 							{
-								// so Luong LapCTHD cua maVT cu da thay doi
 								NodeVatTu *vatTuCu = dsVatTu.timKiemVT(maVTCu);
 								vatTuCu->getInfo()->soLanTaoCTHD--; // giam di so lan tao CTHD, tang do Lan Tao CTHD len
 								tempVT->getInfo()->soLanTaoCTHD++;	// tang len so lan hien tai !
 							}
-							// khong co gi thay doi!
 							tempCTHD->getinfo()->maVT = maVT.boNhoDem;
 							tempCTHD->getinfo()->soLuong = TienichDoHoa::stringToFloat(soLuong.boNhoDem);
 							tempCTHD->getinfo()->donGia = TienichDoHoa::stringToFloat(donGia.boNhoDem);
@@ -424,7 +419,7 @@ void hienThiChinhSuaCTHD(NodeCTHD *tempCTHD, ListCTHD *dsCTHD, BstVatTu &dsVatTu
 							vatTuCu->getInfo()->soLanTaoCTHD--; // giam di so lan tao CTHD, tang do Lan Tao CTHD len
 							tempVT->getInfo()->soLanTaoCTHD++;	// tang len so lan hien tai !
 						}
-						// khong co gi thay doi!
+
 						tempCTHD->getinfo()->maVT = maVT.boNhoDem;
 						tempCTHD->getinfo()->soLuong = TienichDoHoa::stringToFloat(soLuong.boNhoDem);
 						tempCTHD->getinfo()->donGia = TienichDoHoa::stringToFloat(donGia.boNhoDem);
@@ -461,7 +456,7 @@ void hienThiChinhSuaCTHD(NodeCTHD *tempCTHD, ListCTHD *dsCTHD, BstVatTu &dsVatTu
 
 void veTableCTHD()
 {
-	TienichDoHoa::xoaManHinhTheoToaDo(margin, canLeTrenHD + 170, 1600, 400, BACKGROUP);
+	TienichDoHoa::xoaManHinhTheoToaDo(margin, canLeTrenHD + 170, 1600, 410, BACKGROUP);
 	NutBam titleMaVT(margin, canLeTrenHD + 170, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "MA VT");
 	NutBam titileTenVT(margin + doDaiCoBan + 3, canLeTrenHD + 170, doDaiCoBan * 2, 40, colorTieuDe, 7, conlorTextTieuDe, "TEN VT");
 	NutBam titiledonViVT(margin + doDaiCoBan * 3 + 3 * 2, canLeTrenHD + 170, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "DVT");
@@ -501,6 +496,9 @@ int hienThiCTHDLenTable(int indexPage, int soLuongItemPage, ListCTHD *dsCTHD, Bs
 	const int marginTop = 344;
 	const int khoanCach = 40;
 	int soLuongCTHD = dsCTHD->soLuongCTHD();
+	if (soLuongCTHD == 0) {
+		return 0; 
+	}
 	NodeCTHD **arrCTHD = new NodeCTHD *[soLuongCTHD];
 	dsCTHD->listToArray(arrCTHD);
 	int dem = 0; // bien dung dem so luong cua CTHD tren table.
@@ -555,15 +553,7 @@ void hienThiTongTienCTHD(ListCTHD *dsCTHD)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void tinhToiDaPage(int mountShow, float &toiDaPage, int soPhanTuTrenMotPage, int &soLuongPage)
-{
-	soLuongPage = mountShow / soPhanTuTrenMotPage;
-	toiDaPage = (float)mountShow / (float)soPhanTuTrenMotPage;
-	if (!kiemTraSoNguyen(TienichDoHoa::floatToString(toiDaPage)))
-	{
-		toiDaPage = (int)toiDaPage + 1;
-	}
-}
+
 
 void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam &nhanVien,
 								 NutBam &hoaDon, NutBam &doanhThu,NutBam &taoHDXuat, NutBam &taoHDNhap, NutBam &inHD, bool hoaDonXuat)
@@ -582,23 +572,30 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 	int soLuongCTHDTrenTable = 0;
 	bool nhapVaoChinhSua = false; // NEU BIEN LA TRUE NGUOI DUNG DA NHAP VAO CHINH SUA
 	bool khongBiLoiKhiTaoHD = true; // BIEN NAY  DANH DAU XEM NGUOI DUNG CO TAO SAI CHI TIET HOA DON HAY KHONG
+	bool hienThiTraCuu = false; // khi nguoi dung nhap vao day hien thi ra nut bang tra cuu 
+	
 	
 	
 	// khi dang tao hoa don -> nhap ra vung khac canh bao -> neu nhap oke => giai phong di 
+	int soLuongVatTu = dsVatTu.soLuongVT(); 
+	int soPhanTuVatTuTrenMotPage = 8; 
 	int indexPageVatTu = 0; 
-	int soPhanTuVatTuTrenMotPage = 6; 
+	float toiDaPageVatTu = TienichDoHoa::tinhToiDaPage(soLuongVatTu,soPhanTuVatTuTrenMotPage); 
+	int soLuongPageVatTu = 0; 
+	
 	int toaDoXVatTu = 400; 
 	int toaDoYVatTu = 290; 
 	
 	
 	int chieuCaoTableVatTu = 364;
-	int soLuongVatTu = dsVatTu.soLuongVT(); 
+	
 	VatTu** arrVatTu = new VatTu*[soLuongVatTu];
 	dsVatTu.BstVatTuToArray(arrVatTu,0); 
 	// ve ra cai bang thoi 
 	
 	
 	
+
 	
 	NutBam btnSave(margin + 1232 + 34, canLeTrenHD + 12, WHD * 2 - 34, HHD, mauNhapXuat, mauHightNhapXuat, 1, "SAVE");
 	NutBam themCTHD(margin + 1230 + 34, canLeTrenHD + 90, WHD * 2 - 34, HHD, mauNhapXuat, mauHightNhapXuat, 1, "THANH TOAN");
@@ -619,8 +616,8 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 	OVuong baoQuanhHD(54, canLeTrenHD, DODAIMANHINH - 12 - 102, 80, 15);
 	OVuong baoQuanCTHD(54, canLeTrenHD + 80, DODAIMANHINH - 12 - 102, 80, 15);
 
-	NutBam btnTienToi(margin + 56, 722, 50, 40, 15, 3, 1, ">>");
-	NutBam btnLui(margin, 722, 50, 40, 15, 3, 1, "<<");
+	NutBam btnTienToi(margin + 100, 722, 80, 40, 15, 3, 1, ">>");
+	NutBam btnLui(margin, 722, 80, 40, 15, 3, 1, "<<");
 	
 	hoTenNV.veONhap(); 
 	soHD.veONhap();
@@ -645,12 +642,13 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 	themCTHD.veNut();
 
 	// O VUONG BAO QUANH
+	int mauNenTableHoTro = 0; 
 	
 
 	btnTienToi.veNut();
 	btnLui.veNut();
 	veTableCTHD();
-	hienThiDuLieuVatTu(toaDoXVatTu,toaDoYVatTu,chieuCaoTableVatTu,8,indexPageVatTu,soPhanTuVatTuTrenMotPage,arrVatTu,soLuongVatTu); 
+	 
 
 	// TOA DO NUT HIEU CHINH CTHD.
 	NutBam hieuChinhCTHD1(margin + 36 + doDaiCoBan * 7 + 190, 354 - 4, 52, 28, 11, 3, 0, "sua");
@@ -662,10 +660,14 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 	NutBam hieuChinhCTHD7(margin + 36 + doDaiCoBan * 7 + 190, 354 + 36 * 6 - 4, 52, 28, 11, 3, 0, "sua");
 	NutBam hieuChinhCTHD8(margin + 36 + doDaiCoBan * 7 + 190, 354 + 36 * 7 - 4, 52, 28, 11, 3, 0, "sua");
 	NutBam hieuChinhCTHD9(margin + 36 + doDaiCoBan * 7 + 190, 354 + 36 * 8 - 4, 52, 28, 11, 3, 0, "sua");
+	
+	// them nut hien hien thi danh sach vat tu len de tham khao 
+	NutBam traCuuVatTu(200 + 100,722,200,40,15,0,0,"Tra Cuu Vat Tu");
+	traCuuVatTu.veNut();  
 
 	while (true)
 	{
-
+		
 		if (ismouseclick(WM_LBUTTONDOWN))
 		{
 			int xclick = -1;
@@ -706,9 +708,32 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 				index = ID_THEM_HD_XUAT;
 				return;
 			}
-		
+			
+			if (traCuuVatTu.isMouseHover(xclick,yclick)) {
+				if(!hienThiTraCuu) {
+					traCuuVatTu.thayDoiTieuDeNut("X");
+					hienThiTraCuu = true; 
+					TienichDoHoa::xoaManHinhTheoToaDo(margin, canLeTrenHD + 170, 1600, 410, BACKGROUP);
+					hienThiDuLieuVatTu(toaDoXVatTu,toaDoYVatTu,chieuCaoTableVatTu,mauNenTableHoTro,indexPageVatTu,soPhanTuVatTuTrenMotPage,arrVatTu,soLuongVatTu);
+					
+				}
+				else {
+					traCuuVatTu.thayDoiTieuDeNut("Tra Cuu Vat Tu");
+					hienThiTraCuu = false; 
+					veTableCTHD();
+					// kiem tra song hoa don da them chua  
+					if (tonTaiHoaDon) {
+						hienThiTongTienCTHD(tempHD->getdsCTHD());
+						soLuongCTHDTrenTable = hienThiCTHDLenTable(indexPage, soPhanTuTrenMotPage, tempHD->getdsCTHD(), dsVatTu);
+						hienThiChiMuc(DODAIMANHINH / 2 - 110, 736, indexPage, toiDaPage);
+					}
+					
+				}
+				
+				 
+			}
 
-			if (maNV.isMouseHover(xclick, yclick))
+			else if (maNV.isMouseHover(xclick, yclick))
 			{
 				maNV.NhapVao(nhapID, "Chi Nhan Chu,So Hoac _ !"); // xoa di khoan troan trang thua
 				if (maNV.khongRong())
@@ -887,25 +912,42 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 			}
 			else if (btnTienToi.isMouseHover(xclick, yclick))
 			{
-				if (indexPage < toiDaPage - 1)
-				{
-					indexPage++;
-					veTableCTHD();
-					hienThiTongTienCTHD(tempHD->getdsCTHD());
-					soLuongCTHDTrenTable = hienThiCTHDLenTable(indexPage, soPhanTuTrenMotPage, tempHD->getdsCTHD(), dsVatTu);
-					hienThiChiMuc(DODAIMANHINH / 2 - 110, 736, indexPage, toiDaPage);
+				// kiem tra xem dang o trang thai nao
+				if (hienThiTraCuu && indexPageVatTu < toiDaPageVatTu - 1 ) {
+						indexPageVatTu++;
+						hienThiDuLieuVatTu(toaDoXVatTu,toaDoYVatTu,chieuCaoTableVatTu,mauNenTableHoTro,indexPageVatTu,soPhanTuVatTuTrenMotPage,arrVatTu,soLuongVatTu);
 				}
+				else {
+					if (indexPage < toiDaPage - 1)  
+					{
+						indexPage++;
+						veTableCTHD();
+						hienThiTongTienCTHD(tempHD->getdsCTHD());
+						soLuongCTHDTrenTable = hienThiCTHDLenTable(indexPage, soPhanTuTrenMotPage, tempHD->getdsCTHD(), dsVatTu);
+						hienThiChiMuc(DODAIMANHINH / 2 - 110, 736, indexPage, toiDaPage);
+					}
+				}
+				
 			}
 			else if (btnLui.isMouseHover(xclick, yclick))
 			{
-				if (indexPage > 0)
+				if (hienThiTraCuu && indexPageVatTu > 0 ) 
 				{
-					indexPage--;
-					veTableCTHD();
-					hienThiTongTienCTHD(tempHD->getdsCTHD());
-					soLuongCTHDTrenTable = hienThiCTHDLenTable(indexPage, soPhanTuTrenMotPage, tempHD->getdsCTHD(), dsVatTu);
-					hienThiChiMuc(DODAIMANHINH / 2 - 110, 736, indexPage, toiDaPage);
+					indexPageVatTu--;
+					hienThiDuLieuVatTu(toaDoXVatTu,toaDoYVatTu,chieuCaoTableVatTu,mauNenTableHoTro,indexPageVatTu,soPhanTuVatTuTrenMotPage,arrVatTu,soLuongVatTu);
 				}
+				else {
+					if (indexPage > 0)
+					{
+						indexPage--;
+						veTableCTHD();
+						hienThiTongTienCTHD(tempHD->getdsCTHD());
+						soLuongCTHDTrenTable = hienThiCTHDLenTable(indexPage, soPhanTuTrenMotPage, tempHD->getdsCTHD(), dsVatTu);
+						hienThiChiMuc(DODAIMANHINH / 2 - 110, 736, indexPage, toiDaPage);
+					}
+				}
+				
+				
 			}
 
 			else if (themCTHD.isMouseHover(xclick, yclick))
@@ -978,12 +1020,15 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 								CThoaDon tempCTHD(maVT.boNhoDem, tempSL, tempdonGia, tempVAT); // khi tat ca da thoa dieu kien.
 								tempHD->getdsCTHD()->themVaoCuoiCTHD(tempCTHD);
 								soLuongCTHD = tempHD->getdsCTHD()->soLuongCTHD();
-								tinhToiDaPage(soLuongCTHD, toiDaPage, soPhanTuTrenMotPage, soLuongPage);
+								toiDaPage = TienichDoHoa::tinhToiDaPage(soLuongCTHD,soPhanTuTrenMotPage); 
+								
 								veTableCTHD();
 								soLuongCTHDTrenTable = hienThiCTHDLenTable(indexPage, soPhanTuTrenMotPage, tempHD->getdsCTHD(), dsVatTu);
 								hienThiTongTienCTHD(tempHD->getdsCTHD());
 								hienThiChiMuc(DODAIMANHINH / 2 - 110, 736, indexPage, toiDaPage);
-
+								
+								
+								
 								maVT.resetBoNhoDem();
 								soLuongVT.resetBoNhoDem();
 								donGia.resetBoNhoDem();
@@ -1077,6 +1122,9 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, dsNhanVien &DSNV, int &index
 							hienThiChinhSuaCTHD(pointerCTHD, tempHD->getdsCTHD(), dsVatTu, "N");
 						}
 						
+						
+						// tinh lai so luonh pag  
+						toiDaPage = TienichDoHoa::tinhToiDaPage(tempHD->getdsCTHD()->soLuongCTHD(),soPhanTuTrenMotPage); 
 						veTableCTHD();
 						soLuongCTHDTrenTable = hienThiCTHDLenTable(indexPage, soPhanTuTrenMotPage, tempHD->getdsCTHD(), dsVatTu);
 						hienThiChiMuc(DODAIMANHINH / 2 - 110, 736, indexPage, toiDaPage);

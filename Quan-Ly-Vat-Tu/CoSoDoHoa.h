@@ -68,6 +68,11 @@ struct NutBam
 		this->duocTroVao = false;
 		this->veNut();
 	}
+	
+	void thayDoiTieuDeNut(string tieuDe) {
+		this->tieuDe = tieuDe;
+		this->veNut(); 
+	}
 };
 
 // ====================================STRUCT O NHAP===============================================

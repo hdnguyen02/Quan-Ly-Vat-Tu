@@ -1,4 +1,11 @@
-int hienThiDuLieuLenTableVT1(int x,int y,int colorBack,int indexPage,int soLuongPhanTuTrenMotPage,VatTu **arrVT, int soLuongVT)
+
+
+
+
+#pragma once
+
+
+int hienThiDuLieuLenTableVT(int x,int y,int colorBack,int indexPage,int soLuongPhanTuTrenMotPage,VatTu **arrVT, int soLuongVT)
 {
 	int index;
 	int khoanCach = 46;
@@ -24,7 +31,7 @@ int hienThiDuLieuLenTableVT1(int x,int y,int colorBack,int indexPage,int soLuong
 }
 
 
-void veTableVT1(int x,int y,int h,int colorBack)  // truyen vao cac mau sac cu the -> 
+void veTableVT(int x,int y,int h,int colorBack)  // truyen vao cac mau sac cu the -> 
 {
 	int hightTitle = 40; 
 //	TienichDoHoa::xoaManHinhTheoToaDo(0, 140, 900, 580, BACKGROUP);
@@ -38,7 +45,7 @@ void veTableVT1(int x,int y,int h,int colorBack)  // truyen vao cac mau sac cu t
 	titileTenVT.veNut();
 	titiledonViVT.veNut();
 
-//	OVuong table(x, y, doDaiCoBan * 5 - 52, y + h, 15); // thay vi ve 1 o vuong ta ve ra 1 cai hinh chu nhat co nen
+	OVuong table(x - 2, y, doDaiCoBan * 5 - 50, hightTitle + h + 2  , 15); // thay vi ve 1 o vuong ta ve ra 1 cai hinh chu nhat co nen
 	NutBam mauNen(x,y + hightTitle,doDaiCoBan*5 - 52,h,colorBack,0,0,""); 
 	mauNen.veNut(); 
 	setcolor(15);
@@ -48,10 +55,10 @@ void veTableVT1(int x,int y,int h,int colorBack)  // truyen vao cac mau sac cu t
 }
 
 // viet 1 ham nhan vao 2 doi so 
-void hienThiDuLieuVatTu(int x,int y,int w,int colorBack,int indexPage,int numberShow,VatTu** arrVT,int soLuongVT ) {  // toa do cua cai bang 
-	veTableVT1(x,y,w,colorBack);   // hieu chinh table 1 
+int hienThiDuLieuVatTu(int x,int y,int w,int colorBack,int indexPage,int numberShow,VatTu** arrVT,int soLuongVT ) {  // toa do cua cai bang 
+	veTableVT(x,y,w,colorBack);   // hieu chinh table 1 
 	
-	hienThiDuLieuLenTableVT1(x,y + 50,colorBack,indexPage,numberShow,arrVT,soLuongVT); 
+	return hienThiDuLieuLenTableVT(x,y + 50,colorBack,indexPage,numberShow,arrVT,soLuongVT); 
 	
 
 	
