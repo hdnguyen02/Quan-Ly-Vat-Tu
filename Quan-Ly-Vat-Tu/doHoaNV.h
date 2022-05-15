@@ -11,32 +11,32 @@ using namespace std;
 void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien *nhanVienCT)
 {
 	bool daSua = false; 
-	OVuong themNV(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140, margin + doDaiCoban * 3 + 30, 400, 15);
-	NutBam titleHCNV(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140, margin + doDaiCoban * 3 + 30, 40, 15, 0, 0, "HIEU CHINH NHAN VIEN");
+	OVuong themNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140, margin + doDaiCoBan * 3 + 30, 400, 15);
+	NutBam titleHCNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140, margin + doDaiCoBan * 3 + 30, 40, 15, 0, 0, "HIEU CHINH NHAN VIEN");
 	titleHCNV.veNut();
-	ONhap nhapMaNV(margin + doDaiCoban * 6, canLeTrenHD + 170 + 30, doDaiCoban * 3 - 100, 40, 60, "MA: ", 0, 0, 10);
+	ONhap nhapMaNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 30, doDaiCoBan * 3 - 100, 40, 60, "MA: ", 0, 0, 10);
 	nhapMaNV.khongDuocNhap = true;
-	ONhap nhapHoNV(margin + doDaiCoban * 6, canLeTrenHD + 170 + 100, doDaiCoban * 3 - 100, 40, 60, "HO: ", 0, 0, 20);
-	ONhap nhapTenNV(margin + doDaiCoban * 6, canLeTrenHD + 170 + 70 * 2 + 30, doDaiCoban * 3 - 100, 40, 60, "TEN: ", 0, 0, 10);
+	ONhap nhapHoNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 100, doDaiCoBan * 3 - 100, 40, 60, "HO: ", 0, 0, 20);
+	ONhap nhapTenNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 70 * 2 + 30, doDaiCoBan * 3 - 100, 40, 60, "TEN: ", 0, 0, 10);
 
 	// tao ra 2 nut bam Nam Nu
-	NutBam nam(margin + doDaiCoban * 6 + 60, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NAM");
-	NutBam nu(margin + doDaiCoban * 6 + 364, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NU");
+	NutBam nam(margin + doDaiCoBan * 6 + 60, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NAM");
+	NutBam nu(margin + doDaiCoBan * 6 + 364, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NU");
 	nam.veNut();
 	nu.veNut();
 	nhapMaNV.veONhap();
 	nhapHoNV.veONhap();
 	nhapTenNV.veONhap();
 
-	NutBam saveNV(margin + doDaiCoban * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoban * 3 + 30, 40, 0, 2, 0, "");
+	NutBam saveNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoBan * 3 + 30, 40, 0, 2, 0, "");
 	saveNV.veNut();
 
-	NutBam xoa(margin + doDaiCoban * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, (margin + doDaiCoban * 3 + 30) / 2 - 1, 40, 14, 2, 1, "XOA");
+	NutBam xoa(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, (margin + doDaiCoBan * 3 + 30) / 2 - 1, 40, 14, 2, 1, "XOA");
 	xoa.veNut();
 
-	NutBam hieuChinh(margin + doDaiCoban * 6 - 60 + (margin + doDaiCoban * 3 + 30) / 2 + 1, canLeTrenHD + 170 + 50 + 160 + 120, (margin + doDaiCoban * 3 + 30) / 2, 40, 14, 2, 1, "HIEU CHINH");
+	NutBam hieuChinh(margin + doDaiCoBan * 6 - 60 + (margin + doDaiCoBan * 3 + 30) / 2 + 1, canLeTrenHD + 170 + 50 + 160 + 120, (margin + doDaiCoBan * 3 + 30) / 2, 40, 14, 2, 1, "HIEU CHINH");
 	hieuChinh.veNut();
-	NutBam thoat(margin + doDaiCoban * 6 - 60 + (margin + doDaiCoban * 3 + 30 - 40), canLeTrenHD + 140, 40, 40, 4, 0, 15, "X");
+	NutBam thoat(margin + doDaiCoBan * 6 - 60 + (margin + doDaiCoBan * 3 + 30 - 40), canLeTrenHD + 140, 40, 40, 4, 0, 15, "X");
 	thoat.veNut();
 
 	int xclick = -1;
@@ -156,20 +156,20 @@ void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien *nhanVienCT)
 void veTableNV()
 {
 	TienichDoHoa::xoaManHinhTheoToaDo(0, 140, 900, 580, BACKGROUP);
-	NutBam titleMaNV(margin, canLeTrenHD + 170 - 129, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "MA NHAN VIEN");
-	NutBam titileTenNV(margin + doDaiCoban + 3, canLeTrenHD + 170 - 129, doDaiCoban * 3 - 60 + 4, 40, colorTieuDe, 7, conlorTextTieuDe, "HO VA TEN");
-	NutBam titileGioiTinh(margin + doDaiCoban * 4 + 3 * 3 - 60, canLeTrenHD + 170 - 129, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "GIOI TINH");
-	NutBam titileHieuChinh(margin + doDaiCoban * 5 + 3 * 4 - 60, canLeTrenHD + 170 - 129, doDaiCoban + 6 - 60, 40, colorTieuDe, 7, conlorTextTieuDe, "SUA");
+	NutBam titleMaNV(margin, canLeTrenHD + 170 - 129, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "MA NHAN VIEN");
+	NutBam titileTenNV(margin + doDaiCoBan + 3, canLeTrenHD + 170 - 129, doDaiCoBan * 3 - 60 + 4, 40, colorTieuDe, 7, conlorTextTieuDe, "HO VA TEN");
+	NutBam titileGioiTinh(margin + doDaiCoBan * 4 + 3 * 3 - 60, canLeTrenHD + 170 - 129, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "GIOI TINH");
+	NutBam titileHieuChinh(margin + doDaiCoBan * 5 + 3 * 4 - 60, canLeTrenHD + 170 - 129, doDaiCoBan + 6 - 60, 40, colorTieuDe, 7, conlorTextTieuDe, "SUA");
 	titleMaNV.veNut();
 	titileTenNV.veNut();
 	titileGioiTinh.veNut();
 	titileHieuChinh.veNut();
-	OVuong table(margin, canLeTrenHD + 40, doDaiCoban * 6 + 18 - 120, 560, 15);
+	OVuong table(margin, canLeTrenHD + 40, doDaiCoBan * 6 + 18 - 120, 560, 15);
 	setcolor(15);
-	line(margin + doDaiCoban, canLeTrenHD + 170 - 129, margin + doDaiCoban, 720);
-	//	line(margin+ doDaiCoban*3 + 3 - 60,canLeTrenHD + 170 - 129,margin+ doDaiCoban*3 + 3 - 60,720);
-	line(margin + doDaiCoban * 4 + 3 * 2 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoban * 4 + 3 * 2 - 60, 720);
-	line(margin + doDaiCoban * 5 + 3 * 3 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoban * 5 + 3 * 3 - 60, 720);
+	line(margin + doDaiCoBan, canLeTrenHD + 170 - 129, margin + doDaiCoBan, 720);
+	//	line(margin+ doDaiCoBan*3 + 3 - 60,canLeTrenHD + 170 - 129,margin+ doDaiCoBan*3 + 3 - 60,720);
+	line(margin + doDaiCoBan * 4 + 3 * 2 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoBan * 4 + 3 * 2 - 60, 720);
+	line(margin + doDaiCoBan * 5 + 3 * 3 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoBan * 5 + 3 * 3 - 60, 720);
 }
 
 // viet 1 ham do du lieu len ham thong qua con mang VT
@@ -244,28 +244,28 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 	TienichDoHoa::xoaManHinhTheoToaDo(0, 60, 1600, 1600, BACKGROUP);
 
 	// bac dau ve ra truoc tien la ve ra cac title
-	OVuong themNV(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140, margin + doDaiCoban * 3 + 30, 400, 15);
-	NutBam titleThemNV(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140, margin + doDaiCoban * 3 + 30, 40, 15, 0, 0, "THEM NHAN VIEN");
+	OVuong themNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140, margin + doDaiCoBan * 3 + 30, 400, 15);
+	NutBam titleThemNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140, margin + doDaiCoBan * 3 + 30, 40, 15, 0, 0, "THEM NHAN VIEN");
 	titleThemNV.veNut();
-	ONhap nhapMaNV(margin + doDaiCoban * 6, canLeTrenHD + 170 + 30, doDaiCoban * 3 - 100, 40, 60, "MA: ", 0, 0, 10);
-	ONhap nhapHoNV(margin + doDaiCoban * 6, canLeTrenHD + 170 + 100, doDaiCoban * 3 - 100, 40, 60, "HO: ", 0, 0, 20);
-	ONhap nhapTenNV(margin + doDaiCoban * 6, canLeTrenHD + 170 + 70 * 2 + 30, doDaiCoban * 3 - 100, 40, 60, "TEN: ", 0, 0, 20);
+	ONhap nhapMaNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 30, doDaiCoBan * 3 - 100, 40, 60, "MA: ", 0, 0, 10);
+	ONhap nhapHoNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 100, doDaiCoBan * 3 - 100, 40, 60, "HO: ", 0, 0, 20);
+	ONhap nhapTenNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 70 * 2 + 30, doDaiCoBan * 3 - 100, 40, 60, "TEN: ", 0, 0, 20);
 
 	// tao ra 2 nut bam Nam Nu
-	NutBam nam(margin + doDaiCoban * 6 + 60, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NAM");
+	NutBam nam(margin + doDaiCoBan * 6 + 60, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NAM");
 	nam.duocTroVao = true;
 	nam.veNut();
 
-	NutBam nu(margin + doDaiCoban * 6 + 364, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NU");
+	NutBam nu(margin + doDaiCoBan * 6 + 364, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NU");
 	nu.veNut();
 	nhapMaNV.veONhap();
 	nhapHoNV.veONhap();
 	nhapTenNV.veONhap();
 
 	// ve ra o Vuong ngan cach nam nu
-	//	line(margin + doDaiCoban*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 60,margin + doDaiCoban*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 120);
+	//	line(margin + doDaiCoBan*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 60,margin + doDaiCoBan*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 120);
 
-	NutBam saveNV(margin + doDaiCoban * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoban * 3 + 30, 40, 14, 2, 0, "SAVE");
+	NutBam saveNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoBan * 3 + 30, 40, 14, 2, 0, "SAVE");
 	saveNV.veNut();
 
 	DSNV.insertionSort(NhanVien::soSanhTheoTen);

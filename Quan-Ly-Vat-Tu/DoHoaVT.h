@@ -6,73 +6,15 @@ using namespace std;
 
 
 
-//void hienThiVatTuSearch(VatTu* vatTuSearch) {
-//	NutBam tieuDeSearch(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140 - 60, margin + doDaiCoban * 3 + 30, 40, 15, 0, 0,"THONG TIN VAT TU");
-//	tieuDeSearch.veNut(); 
-//	ONhap nhapMaVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 140 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 10);
-//	ONhap nhapTenVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 234 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 25);
-//	ONhap nhapSoLuong(margin + doDaiCoban * 6 - 16, canLeTrenHD + 328 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 10);
-//	ONhap nhapDVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 170 + 50 + 70 * 2 + 60 + 32, doDaiCoban * 3 , 40, 0, "", 0, 0, 15);
-//	nhapMaVT.boNhoDem = vatTuSearch->maVT; // lay ra maVT
-//	nhapTenVT.boNhoDem = vatTuSearch->ten;
-//	nhapSoLuong.boNhoDem = TienichDoHoa::floatToString(vatTuSearch->soLuongTon);
-//	nhapDVT.boNhoDem = vatTuSearch->donVi;
-//
-//
-//	nhapMaVT.khongDuocNhap = true;
-//	nhapSoLuong.khongDuocNhap = true;
-//	nhapTenVT.khongDuocNhap = true; 
-//	nhapDVT.khongDuocNhap = true; 
-//	
-//
-//	nhapMaVT.veONhap();
-//	nhapTenVT.veONhap();
-//	nhapSoLuong.veONhap();
-//	nhapDVT.veONhap();
-//
-//	nhapMaVT.inNoiDung();
-//	nhapTenVT.inNoiDung();
-//	nhapSoLuong.inNoiDung();
-//	nhapDVT.inNoiDung();
-//	
-//
-//
-//	NutBam saveVT(margin + doDaiCoban * 6 - 60, canLeTrenHD +500 + 26, margin + doDaiCoban * 3 + 30, 40, 0, 2,0, "");
-//	saveVT.veNut();
-//	NutBam thoat(margin + doDaiCoban * 6 - 60 + (margin + doDaiCoban * 3 + 30 - 40), canLeTrenHD + 140 - 60, 40, 40, 4, 0, 15, "X");
-//	thoat.veNut();
-//	int xclick = -1;
-//	int yclick = -1;
-//	while (true)
-//	{
-//		if (ismouseclick(WM_LBUTTONDOWN))
-//		{
-//			getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
-//			if (thoat.isMouseHover(xclick, yclick))
-//			{
-//				
-//				break;
-//			}
-//		}
-//		delay(1);
-//	}
-//	
-//	
-//	
-//	
-//
-//}
-
-
 
 void chinhSuaVT(BstVatTu &dsVatTu, VatTu *vatTuCT )
 {
-	NutBam titleCSVT(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140 - 60, margin + doDaiCoban * 3 + 30, 40, 15, 0, 0,"THONG TIN VAT TU");
+	NutBam titleCSVT(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140 - 60, margin + doDaiCoBan * 3 + 30, 40, 15, 0, 0,"THONG TIN VAT TU");
 	titleCSVT.veNut(); 
-	ONhap nhapMaVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 140 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 10);
-	ONhap nhapTenVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 234 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 25);
-	ONhap nhapSoLuong(margin + doDaiCoban * 6 - 16, canLeTrenHD + 328 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 10);
-	ONhap nhapDVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 170 + 50 + 70 * 2 + 60 + 32, doDaiCoban * 3 , 40, 0, "", 0, 0, 15);
+	ONhap nhapMaVT(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 140 + 30, doDaiCoBan * 3 , 40, 0, "", 0, 0, 10);
+	ONhap nhapTenVT(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 234 + 30, doDaiCoBan * 3 , 40, 0, "", 0, 0, 25);
+	ONhap nhapSoLuong(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 328 + 30, doDaiCoBan * 3 , 40, 0, "", 0, 0, 10);
+	ONhap nhapDVT(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 170 + 50 + 70 * 2 + 60 + 32, doDaiCoBan * 3 , 40, 0, "", 0, 0, 15);
 	nhapMaVT.boNhoDem = vatTuCT->maVT; // lay ra maVT
 	nhapTenVT.boNhoDem = vatTuCT->ten;
 	nhapSoLuong.boNhoDem = TienichDoHoa::floatToString(vatTuCT->soLuongTon);
@@ -96,16 +38,16 @@ void chinhSuaVT(BstVatTu &dsVatTu, VatTu *vatTuCT )
 	
 
 
-	NutBam saveVT(margin + doDaiCoban * 6 - 60, canLeTrenHD +500 + 26, margin + doDaiCoban * 3 + 30, 40, 0, 2,0, "");
-	NutBam xoa(margin + doDaiCoban * 6 - 60, canLeTrenHD +500 + 26, (margin + doDaiCoban * 3 + 30) / 2 - 2, 40, 15, 2, 1, "XOA");
-	NutBam hieuChinh(margin + doDaiCoban * 6 - 60 + (margin + doDaiCoban * 3 + 30) / 2 + 2, canLeTrenHD +500 + 26, (margin + doDaiCoban * 3 + 30) / 2, 40, 15, 2, 1, "HIEU CHINH");
+	NutBam saveVT(margin + doDaiCoBan * 6 - 60, canLeTrenHD +500 + 26, margin + doDaiCoBan * 3 + 30, 40, 0, 2,0, "");
+	NutBam xoa(margin + doDaiCoBan * 6 - 60, canLeTrenHD +500 + 26, (margin + doDaiCoBan * 3 + 30) / 2 - 2, 40, 15, 2, 1, "XOA");
+	NutBam hieuChinh(margin + doDaiCoBan * 6 - 60 + (margin + doDaiCoBan * 3 + 30) / 2 + 2, canLeTrenHD +500 + 26, (margin + doDaiCoBan * 3 + 30) / 2, 40, 15, 2, 1, "HIEU CHINH");
 		
 	
 	saveVT.veNut();
 	xoa.veNut();
 	hieuChinh.veNut();
 
-	NutBam thoat(margin + doDaiCoban * 6 - 60 + (margin + doDaiCoban * 3 + 30 - 40), canLeTrenHD + 140 - 60, 40, 40, 4, 0, 15, "X");
+	NutBam thoat(margin + doDaiCoBan * 6 - 60 + (margin + doDaiCoBan * 3 + 30 - 40), canLeTrenHD + 140 - 60, 40, 40, 4, 0, 15, "X");
 	thoat.veNut();
 	int xclick = -1;
 	int yclick = -1;
@@ -196,25 +138,31 @@ void inDanhSachLenDoHoa(NodeVatTu **arrVT, int indexPage, int soLuongItemPage, i
 
 
 
-void veTableVT()
+
+
+
+
+
+
+
+void veTableVT()  // truyen vao cac mau sac cu the -> 
 {
 	TienichDoHoa::xoaManHinhTheoToaDo(0, 140, 900, 580, BACKGROUP);
-	NutBam titleMaVT(margin, canLeTrenHD + 170 - 129, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "MA VT");
-	NutBam titileTenVT(margin + doDaiCoban + 3, canLeTrenHD + 170 - 129, doDaiCoban * 2 - 60, 40, colorTieuDe, 7, conlorTextTieuDe, "TEN");
-	NutBam titiledonViVT(margin + doDaiCoban * 3 + 3 * 2 - 60, canLeTrenHD + 170 - 129, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "DVT");
-	NutBam titilesoLuongVT(margin + doDaiCoban * 4 + 3 * 3 - 60, canLeTrenHD + 170 - 129, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "SO LUONG TON");
+	NutBam titleMaVT(margin, canLeTrenHD + 170 - 129, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "MA VT");
+	NutBam titileTenVT(margin + doDaiCoBan + 3, canLeTrenHD + 170 - 129, doDaiCoBan * 2 - 60, 40, colorTieuDe, 7, conlorTextTieuDe, "TEN");
+	NutBam titiledonViVT(margin + doDaiCoBan * 3 + 3 * 2 - 60, canLeTrenHD + 170 - 129, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "DVT");
+	NutBam titilesoLuongVT(margin + doDaiCoBan * 4 + 3 * 3 - 60, canLeTrenHD + 170 - 129, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "SO LUONG TON");
 	
 	titleMaVT.veNut();
 	titilesoLuongVT.veNut();
 	titileTenVT.veNut();
 	titiledonViVT.veNut();
 
-	OVuong table(margin, canLeTrenHD + 40, doDaiCoban * 5 - 52, 552, 15);
+	OVuong table(margin, canLeTrenHD + 40, doDaiCoBan * 5 - 52, 552, 15);
 	setcolor(15);
-	line(margin + doDaiCoban, canLeTrenHD + 170 - 129, margin + doDaiCoban, 712);
-	line(margin + doDaiCoban * 3 + 3 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoban * 3 + 3 - 60, 712);
-	line(margin + doDaiCoban * 4 + 3 * 2 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoban * 4 + 3 * 2 - 60, 712);
-	// line(margin + doDaiCoban * 5 + 3 * 3 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoban * 5 + 3 * 3 - 60, 712);
+	line(margin + doDaiCoBan, canLeTrenHD + 170 - 129, margin + doDaiCoBan, 712);
+	line(margin + doDaiCoBan * 3 + 3 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoBan * 3 + 3 - 60, 712);
+	line(margin + doDaiCoBan * 4 + 3 * 2 - 60, canLeTrenHD + 170 - 129, margin + doDaiCoBan * 4 + 3 * 2 - 60, 712);
 }
 
 // viet 1 ham do du lieu len ham thong qua con mang VT
@@ -280,33 +228,33 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 	TienichDoHoa::xoaManHinhTheoToaDo(0, 60, 1600, 1600, BACKGROUP);
 	
 	
-	ONhap searchVT(margin + doDaiCoban* 6 + 94 + 100,94,300,40,0,"",0,0,25,13);
-	NutBam timKiemTheoMa(margin + doDaiCoban* 6 - 80,94,100,40,11,13,0,"Ma"); 
+	ONhap searchVT(margin + doDaiCoBan* 6 + 94 + 100,94,300,40,0,"",0,0,25,13);
+	NutBam timKiemTheoMa(margin + doDaiCoBan* 6 - 80,94,100,40,11,13,0,"Ma"); 
 	
 	timKiemTheoMa.veNut();
-	NutBam timKiemTheoTen(margin + doDaiCoban* 6 + 50,94,100,40,11,13,0,"Ten"); 
+	NutBam timKiemTheoTen(margin + doDaiCoBan* 6 + 50,94,100,40,11,13,0,"Ten"); 
 	timKiemTheoTen.veNut(); 
 	searchVT.veONhap();
 	timKiemTheoMa.duocChon(); 
 	timKiemTheoTen.khongDuocChon(); 
 	
 	
-	OVuong themVT(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140 - 60 , margin + doDaiCoban * 3 + 30, 400 + 60, 15);
+	OVuong themVT(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140 - 60 , margin + doDaiCoBan * 3 + 30, 400 + 60, 15);
 	
-	NutBam titleThemVT(margin + doDaiCoban * 6 - 60, canLeTrenHD + 140 - 60, margin + doDaiCoban * 3 + 30, 40, 15, 0, 0, "THEM VAT TU");
+	NutBam titleThemVT(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140 - 60, margin + doDaiCoBan * 3 + 30, 40, 15, 0, 0, "THEM VAT TU");
 	
 	TienichDoHoa::setText(0,15,3,1); 
-	outtextxy(margin + doDaiCoban* 6 - 180 ,102,"Tim Kiem"); 
-	outtextxy(margin + doDaiCoban * 6 - 16,canLeTrenHD + 140,"Ma Vat Tu");
-	outtextxy(margin + doDaiCoban * 6 - 16,canLeTrenHD + 234,"Ten Vat Tu");
-	outtextxy(margin + doDaiCoban * 6 - 16,canLeTrenHD + 328,"So Luong Ton");
-	outtextxy(margin + doDaiCoban * 6 - 16,canLeTrenHD + 170 + 50 + 70 * 2 + 20 + 42,"Don Vi Tinh"); 
+	outtextxy(margin + doDaiCoBan* 6 - 180 ,102,"Tim Kiem"); 
+	outtextxy(margin + doDaiCoBan * 6 - 16,canLeTrenHD + 140,"Ma Vat Tu");
+	outtextxy(margin + doDaiCoBan * 6 - 16,canLeTrenHD + 234,"Ten Vat Tu");
+	outtextxy(margin + doDaiCoBan * 6 - 16,canLeTrenHD + 328,"So Luong Ton");
+	outtextxy(margin + doDaiCoBan * 6 - 16,canLeTrenHD + 170 + 50 + 70 * 2 + 20 + 42,"Don Vi Tinh"); 
 	
 	
-	ONhap nhapMaVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 140 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 10);
-	ONhap nhapTenVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 234 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 25);
-	ONhap nhapSoLuong(margin + doDaiCoban * 6 - 16, canLeTrenHD + 328 + 30, doDaiCoban * 3 , 40, 0, "", 0, 0, 10);
-	ONhap nhapDVT(margin + doDaiCoban * 6 - 16, canLeTrenHD + 170 + 50 + 70 * 2 + 60 + 32, doDaiCoban * 3 , 40, 0, "", 0, 0, 15);
+	ONhap nhapMaVT(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 140 + 30, doDaiCoBan * 3 , 40, 0, "", 0, 0, 10);
+	ONhap nhapTenVT(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 234 + 30, doDaiCoBan * 3 , 40, 0, "", 0, 0, 25);
+	ONhap nhapSoLuong(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 328 + 30, doDaiCoBan * 3 , 40, 0, "", 0, 0, 10);
+	ONhap nhapDVT(margin + doDaiCoBan * 6 - 16, canLeTrenHD + 170 + 50 + 70 * 2 + 60 + 32, doDaiCoBan * 3 , 40, 0, "", 0, 0, 15);
 	
 	
 	
@@ -315,7 +263,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 	nhapTenVT.veONhap();
 	nhapSoLuong.veONhap();
 	nhapDVT.veONhap();
-	NutBam saveVT(margin + doDaiCoban * 6 - 60, canLeTrenHD +500 + 26, margin + doDaiCoban * 3 + 30 + 1, 40, 15, 2,0, "LUU VAT TU");
+	NutBam saveVT(margin + doDaiCoBan * 6 - 60, canLeTrenHD +500 + 26, margin + doDaiCoBan * 3 + 30 + 1, 40, 15, 2,0, "LUU VAT TU");
 	saveVT.veNut();
 	veTableVT();
 
@@ -358,10 +306,6 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 	NutBam hieuChinh9(margin + 746, marginTop + khoanCach * 8 - 4, 60, 28, 13, 0, 0, "sua");
 	NutBam hieuChinh10(margin + 746, marginTop + khoanCach * 9 - 4, 60, 28, 13, 0, 0, "sua");
 	NutBam hieuChinh11(margin + 746, marginTop + khoanCach * 10 - 4, 60, 28, 13, 0, 0, "sua");
-	
-	
-	// cho tim kiem theo nhieu truong : ten va ca ma so ( don vi tinh co qua nhieu cai trung nhau
-	// con so luong ton thi khong hop ly de tim kiem 
 	
 	
 	
