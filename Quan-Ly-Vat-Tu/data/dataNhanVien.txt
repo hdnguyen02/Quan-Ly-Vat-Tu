@@ -1,45 +1,6 @@
 12
-nv07,Huynh ngoc,Anh,1,2
-2
-hd1,6/5/2022,X,Huynh ngoc Anh,
-1
-VT04,1,2,3
-hd2,6/5/2022,X,Huynh ngoc Anh,
-1
-VT07,23,23,23
-nv11,Nguyen kieu the,Bao,1,0
-0
-nv14,Ho thai,Danh,0,0
-0
-nv09,Nguyen huynh,Dung,1,0
-0
-nv13,Nguyen tien,Dung,0,0
-0
-nv04,Nguyen Kieu My,Hoa,1,2
-2
-hd3,3/5/2022,N,Nguyen kieu my Hoa,
-10
-VT09,2,1,3
-VT14,42,5,5
-VT12,32,4,1
-VT02,23,1,34
-VT33,4,1,45
-VT07,23,1,2
-VT77,3,2,1
-VT23,34,1,1
-VT06,2,1,4
-VT44,23,1,5
-hd4,6/5/2022,X,Nguyen kieu my Hoa,
-1
-VT77,45,45,45
-nv03,Nguyen huynh dang,Khoa,0,0
-0
-nv12,Vu trong,Lan,1,0
-0
-nv08,Nguyen nhu,Ngoc,1,0
-0
-nv01,Ho Duc,Nguyen,0,6
-6
+nv01,Ho Duc,Nguyen,0,7
+7
 hd5,31/1/2022,N,Ho duc Nguyen,
 1
 VT05,23,1,1
@@ -59,10 +20,52 @@ VT05,32,23,54
 43,14/5/2022,N,Ho Duc Nguyen,
 1
 VT02,23,23,23
+ffg,16/1/2022,X,Ho Duc Nguyen,
+1
+VT05,23,1,43
+nv02,Ho thanh,Nhat,0,0
+0
+nv03,Nguyen huynh dang,Khoa,0,0
+0
+nv04,Nguyen Kieu My,Hoa,1,2
+2
+hd3,3/5/2022,N,Nguyen kieu my Hoa,
+10
+VT09,2,1,3
+VT14,42,5,5
+VT12,32,4,1
+VT02,23,1,34
+VT33,4,1,45
+VT07,23,1,2
+VT77,3,2,1
+VT23,34,1,1
+VT06,2,1,4
+VT44,23,1,5
+hd4,6/5/2022,X,Nguyen kieu my Hoa,
+1
+VT77,45,45,45
 nv06,Tu Thi Thao,Nguyen,1,1
 1
 hd7,7/7/2002,X,Tu Thi Thao Nguyen,
 1
 VT77,77,77,77
-nv02,Ho thanh,Nhat,0,0
+nv07,Huynh ngoc,Anh,1,2
+2
+hd1,6/5/2022,X,Huynh ngoc Anh,
+1
+VT04,1,2,3
+hd2,6/5/2022,X,Huynh ngoc Anh,
+1
+VT07,23,23,23
+nv08,Nguyen nhu,Ngoc,1,0
+0
+nv09,Nguyen huynh,Dung,1,0
+0
+nv11,Nguyen kieu the,Bao,1,0
+0
+nv12,Vu trong,Lan,1,0
+0
+nv13,Nguyen tien,Dung,0,0
+0
+nv14,Ho thai,Danh,0,0
 0

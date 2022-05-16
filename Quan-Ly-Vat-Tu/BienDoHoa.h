@@ -63,6 +63,8 @@ const int doDaiCoBan = DODAIMANHINH / 9 - 15;
 const int colorTieuDe = 15;
 const int conlorTextTieuDe = 0;
 const int margin = 60;
+const string HOADONXUAT = "X";
+const string HOADONNHAP = "N";
 
 // nut bam mess box
 
