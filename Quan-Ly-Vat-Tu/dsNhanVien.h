@@ -336,10 +336,6 @@ bool dsNhanVien::xoaNV(const string &maVT)
 	{
 		return false;
 	}
-	if (this->getNhanVien(viTriXoa)->soLanTaoHD != 0)
-	{ // da lap HD -> khong duoc phep xoa !
-		return false;
-	}
 	for (int i = viTriXoa; i < this->soLuong; i++)
 	{
 		nv[i] = nv[i + 1];

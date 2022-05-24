@@ -83,6 +83,19 @@ public:
 		ss >> temp;
 		return temp;
 	}
+	
+	// viet ham dua string ve chu thuong  
+	static string chuoiThuong(string s) {
+		// lap qua qua va kiem tra
+		int length = s.length();  
+		for (int i = 0; i < length;i++) {
+			// kiem tra xem co phai la chu thuong hay khong 
+			if (s[i] <= 'Z' && s[i] >= 'A') {
+				s[i] = s[i] - ('Z' - 'z'); 
+			} 
+		}
+		return s; 
+	}
 
 	static void xoaKhoangTrangThua(string &s)
 	{
@@ -432,7 +445,7 @@ bool kiTuSo(char c)
 
 bool kiTuChu(char c)
 {
-	if (kiTuChuHoa(c) || kiTuChuThuong(c) || c == 32 )
+	if ((kiTuChuHoa(c) || kiTuChuThuong(c) || c == 32 )  )
 	{
 		return true;
 	}

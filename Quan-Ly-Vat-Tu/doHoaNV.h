@@ -139,19 +139,21 @@ void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien *nhanVienCT)
 			}
 			else if (xoa.isMouseHover(xclick, yclick))
 			{
+		
 				if (nhapMaNV.boNhoDem == maNVCu && nhapTenNV.boNhoDem == tenNVCu && nhapHoNV.boNhoDem == hoNVCu)
 				{
-					int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
-					if (luaChon == OK)
-					{ // xoa di !
-						if (DSNV.xoaNV(nhapMaNV.boNhoDem) == false)
-						{
-							MessageBox(NULL, "Khong Duoc Phep Xoa! Nhan Vien da tao Hoa Don!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
-						}
-						else
-						{
-							DSNV.ghiFileDSNV();
-							break;
+					// kiem tra xem co xoa duoc hay khong 
+					// kiem tra xem hoa don nay da toa ra hoa don chua  
+					if (nhanVienCT->soLanTaoHD != 0) {
+						TienichDoHoa::hienThiThongBao("Khong Duoc Phep Xoa! Nhan Vien Da Tao Hoa Don!"); 
+					}
+					// tiep tuc kiem tra 
+					else {
+						int luaChon = MessageBox(NULL, "ban co chac chac muon xoa!", "thong bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK) {
+							DSNV.xoaNV(nhapMaNV.boNhoDem); 
+							DSNV.ghiFileDSNV(); 
+							break; 
 						}
 					}
 				}
@@ -258,10 +260,8 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 	nhapHoNV.veONhap();
 	nhapTenNV.veONhap();
 
-	// ve ra o Vuong ngan cach nam nu
-	//	line(margin + doDaiCoBan*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 60,margin + doDaiCoBan*6 + 200 + 36,canLeTrenHD + 170 + 70 * 2 + 30 + 120);
 
-	NutBam saveNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoBan * 3 + 30, 40, 14, 2, 0, "SAVE");
+	NutBam saveNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoBan * 3 + 30, 40, 15, 2, 0, "SAVE");
 	saveNV.veNut();
 
 	DSNV.insertionSort(NhanVien::soSanhTheoTen);
@@ -269,12 +269,8 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 	veTableNV();
 
 	soLuongNhanVienTrenTable = hienThiDuLieuLenTableNV(indexPage, itemTrenMotPage, DSNV);
-	hienThiChiMuc(430, 740, indexPage, toiDaPage);
-
-	// ve ra sap xep theo
-	setcolor(CinputText);
-	setbkcolor(0);
-	settextstyle(6, 0, 1);
+	hienThiChiMuc(430, 740, indexPage, toiDaPage); 
+	TienichDoHoa::setText(0,CinputText,6,1);
 	outtextxy(59, 106, "SAP XEP THEO: ");
 
 	NutBam theoTen(62 + 160 + 40, 96, 100, 40, 11, 13, 0, "HO TEN");
@@ -310,7 +306,7 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 			getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
 			if (nhapMaNV.isMouseHover(xclick, yclick))
 			{ 
-				nhapMaNV.NhapVao(kiTuChuHoacSo, "");
+				nhapMaNV.NhapVao(nhapID, "Chi Nhan Chu So Hoac _ !");
 				// sau khi nhap song kiem tra xem co trung hay khong
 				tempNV = DSNV.timKiemNVTraVeDiaChi(nhapMaNV.boNhoDem);
 				if (tempNV != NULL)

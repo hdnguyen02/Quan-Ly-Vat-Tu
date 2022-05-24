@@ -15,6 +15,11 @@ struct NutBam
 
 	NutBam(int x, int y, int w, int h, int colorBack, int colorHight, int colorText, string tieuDe)
 	{
+		this->set(x,y,w,h,colorBack,colorHight,colorText,tieuDe); 
+	}
+	
+	// viet mot ham y chang cai nay 
+	void set(int x, int y, int w, int h, int colorBack, int colorHight, int colorText, string tieuDe) {	
 		this->x = x;
 		this->y = y;
 		this->w = w;
@@ -24,6 +29,7 @@ struct NutBam
 		this->colorBack = colorBack;
 		this->colorHight = colorHight;
 		this->colorText = colorText;
+		
 	}
 	
 	void duocChon()
@@ -60,6 +66,15 @@ struct NutBam
 		else
 			setbkcolor(colorBack);
 		outtextxy(toaDoTextX, toaDoTextY, arr);
+	}
+	
+	void veNutCanTrai() {
+		setfillstyle(SOLID_FILL, duocTroVao ? colorHight : colorBack); // bo bua.
+		TienichDoHoa::setText(colorBack,colorText,3,1); 
+		bar(x, y, x + w, y + h);
+		int text_h = textheight(this->tieuDe.c_str());
+		int toaDoTextY = y + (h - text_h) / 2; // da tim ra toa do Y 
+		outtextxy(x + 10,toaDoTextY,this->tieuDe.c_str()); 		
 	}
 
 
@@ -222,6 +237,7 @@ struct ONhap
 				
 			}
 			
+			
 			else if (c == BACK_SPACE && !boNhoDem.empty() )
 			{
 				this->xoaGoiY();
@@ -251,11 +267,10 @@ struct ONhap
 				boNhoDem = boNhoDem + " ";
 			}
 			else if (loaiKiTu(c))
-			{
+			{ 
 				this->xoaGoiY();
 				boNhoDem = boNhoDem + c;
-			}
-			
+			}			
 		} while (!the_end);
 	}
 

@@ -10,9 +10,6 @@ int main(int argc, char *argv[])
 	DSNV.docFileDSNV();
 	BstVatTu dsVatTu;
 	menuQuanLyVatTu(dsVatTu, DSNV);
-	DSNV.giaiPhongDSNV();
-
-	
-	getch(); 
+	DSNV.giaiPhongDSNV(); 
 	return 0;
 }
