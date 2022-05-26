@@ -62,9 +62,9 @@ struct NutBam
 		int toaDoTextY = y + (h - text_h) / 2;
 		setcolor(colorText);
 		if (duocTroVao)
-			setbkcolor(colorHight);
+			TienichDoHoa::setText(colorHight,colorText,10,1); 
 		else
-			setbkcolor(colorBack);
+			TienichDoHoa::setText(colorBack,colorText,10,1);
 		outtextxy(toaDoTextX, toaDoTextY, arr);
 	}
 	
@@ -132,7 +132,7 @@ struct ONhap
 		else {
 			colorBack = mauNen; 
 		}
-		NutBam boxTieuDe(x, y, widthTitle, h, colorTitle, 3, 7, tieuDe);
+		NutBam boxTieuDe(x, y, widthTitle, h, colorTitle, 3, 15, tieuDe);
 		boxTieuDe.veNut();
 		setfillstyle(SOLID_FILL,colorBack);
 		bar(x + widthTitle, y, x + widthTitle + w, y + h);
@@ -189,7 +189,7 @@ struct ONhap
 			colorBack = mauNen; 	
 		}
 		int text_h;
-		TienichDoHoa::setText(colorBack,COLOR_TEXT_INPUT,3,2); 
+		TienichDoHoa::setText(colorBack,COLOR_TEXT_INPUT,10,1); 
 		text_h = textheight(&boNhoDem[0]);
 		int toaDoTextY = y + (h - text_h) / 2;
 		outtextxy(x + CACH_LE_O_NHAP + widthTitle, toaDoTextY, &boNhoDem[0]);
@@ -247,18 +247,14 @@ struct ONhap
 			else if (SLKTTD <= boNhoDem.length())
 			{
 				this->xoaGoiY();
-				setcolor(4);
-				setbkcolor(colorBgoiY);
 				string temp = "toi da " + TienichDoHoa::intToString(SLKTTD) + " ki tu!";
-				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
+				TienichDoHoa::setText(colorBgoiY,4,2,5); 
 				outtextxy(x, y + h + 3, &temp[0]);
 			}
 			else if (!loaiKiTu(c))
 			{
 				this->xoaGoiY();
-				setcolor(4);
-				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
-				setbkcolor(colorBgoiY);
+				TienichDoHoa::setText(colorBgoiY,4,2,5); 
 				outtextxy(x, y + h + 3, (char *)goiY.c_str());
 			}
 			else if (c == SPACE)
@@ -301,13 +297,13 @@ struct ONhap
 			if (c == ENTER || c == ESC)
 			{
 				this->isClick = false; 
-				if (boNhoDem[boNhoDem.length() - 1] == 46)
+				if (boNhoDem[boNhoDem.length() - 1] == DAUCHAM)
 				{
 					this->xoaKiTuCuoi();
 				}
 				this->xoaGoiY();
 				the_end = 1;
-				this->boNhoDem.erase(remove(this->boNhoDem.begin(), this->boNhoDem.end(), 32), this->boNhoDem.end());
+				this->boNhoDem.erase(remove(this->boNhoDem.begin(), this->boNhoDem.end(), SPACE), this->boNhoDem.end());  // cho nay xoa di bo nhhodem 
 				this->xoaNoiDungONhap();
 				this->inNoiDung();
 			}
@@ -330,13 +326,8 @@ struct ONhap
 				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
 				outtextxy(x, y + h + 3, &temp[0]);
 			}
-			else if (c == SPACE)
-			{
-				this->xoaGoiY();
-				boNhoDem = boNhoDem + " ";
-			}
-			else if (c == 46 && daNhapDauCham == false && boNhoDem.length() != 0)
-			{ // la dau .
+			else if (c == DAUCHAM && daNhapDauCham == false && boNhoDem.length() != 0)
+			{ 
 				boNhoDem = boNhoDem + ".";
 				daNhapDauCham = true;
 			}
@@ -348,9 +339,10 @@ struct ONhap
 			else if (!kiTuSo(c))
 			{
 				this->xoaGoiY();
-				setcolor(4);
-				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
-				setbkcolor(colorBgoiY);
+				//setcolor(4);
+				// settextstyle(SMALL_FONT, HORIZ_DIR, 6);
+				//setbkcolor(colorBgoiY);
+				TienichDoHoa::setText(colorBgoiY,4,2,5); 
 				outtextxy(x, y + h + 3, goiY.c_str());
 			}
 
@@ -359,7 +351,7 @@ struct ONhap
 
 	void xoaGoiY()
 	{
-		TienichDoHoa::xoaManHinhTheoToaDo(x - 2, y + 1 + h, w + 52, 25, colorBgoiY);
+		TienichDoHoa::xoaManHinhTheoToaDo(x - 2, y + 1 + h, w + 54, 25, colorBgoiY);
 	}
 	void resetBoNhoDem()
 	{

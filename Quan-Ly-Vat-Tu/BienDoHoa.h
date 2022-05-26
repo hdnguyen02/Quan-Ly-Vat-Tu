@@ -46,7 +46,7 @@ const int COLOR_BACKGROUP_INPUT = 14;
 const int CACH_LE_O_NHAP = 10; // cach cai thanh o nhap ra bao nhieu px
 const int COLOR_TEXT_INPUT = 1;
 const int COLOR_NHAP = 10; 
-const int COLOR_DISABLE = 11; // mau khi input bi vo hieu hoa!
+const int COLOR_DISABLE = 15; // mau khi input bi vo hieu hoa!
 
 // bien mau khi in ra
 const int CinputText = 15;
@@ -65,6 +65,8 @@ const int conlorTextTieuDe = 0;
 const int margin = 60;
 const string HOADONXUAT = "X";
 const string HOADONNHAP = "N";
+const int DAUCHAM = 46; 
+const string EMPTYSTRING = ""; 
 
 // nut bam mess box
 
