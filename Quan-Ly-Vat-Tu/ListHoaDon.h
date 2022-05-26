@@ -142,31 +142,7 @@ public:
 	}
 	
 	
-	
-	
-	
-	
-	
-	string ghepSoHD()
-	{
-		// lap qua va noi chuoi lai bang 1 dau ,
-		string tempSoHD;
-		NodeHoaDon *pTemp = head;
-		while (pTemp != NULL)
-		{
-			tempSoHD = tempSoHD + pTemp->info.soHD + ", ";
-			pTemp = pTemp->pNext;
-		}
-		// loai bo di dau cham o phia cuoi
-		tempSoHD.erase(tempSoHD.begin() + tempSoHD.length() - 2); // xoa di ki tu cuoi cung => dai ,
-		return tempSoHD;
-		// co nen in ra cai le hay khong.
-	}
-	
-	// viet ham noi chuoi so voi con tro head 
-	// viet ham truyen vao no cai mang va index => sau do gan hoa don vao mang do 
-	// khi thuc hien thong ke truoc tien can phai sap xep dua tren 
-	// khi qua nhan vien : lap qua tung nhan vien truyen vao index cho chinh xac 
+
 	
 	void ganMangHoaDon(HoaDon** arrHoaDon,int &index) {
 	
@@ -315,7 +291,7 @@ bool ListHoaDon::xoaHD(const string &soHD)
 		return false;
 	}
 	if (previousNodeDelete == NULL)
-	{ // truong hop node can xoa la node dau tien.
+	{
 		previousNodeDelete = head->pNext;
 		delete nodeDelete;
 		head = previousNodeDelete;

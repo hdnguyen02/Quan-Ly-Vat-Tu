@@ -32,11 +32,11 @@ void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end) {  // truyen
 	// troc tien in ra cai bang ! 
 	TienichDoHoa::xoaManHinhTheoToaDo(margin, canLeTrenHD + 170, 1600, 400, BACKGROUP);
 	int cachLe = margin + 60; 
-	NutBam maVT(cachLe + doDaiCoban , canLeTrenHD + 170, doDaiCoban + 3 , 40, colorTieuDe, 7, conlorTextTieuDe, "MA VT");
-	NutBam tenVT(cachLe + doDaiCoban * 2 + 3 * 2, canLeTrenHD + 170, doDaiCoban*2, 40, colorTieuDe, 7, conlorTextTieuDe, "TEN VAT TU");
-	NutBam donViTinh(cachLe + doDaiCoban * 4 + 3 * 3, canLeTrenHD + 170, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "DON VI TINH");
-	NutBam soLuongTon(cachLe + doDaiCoban * 5 + 3 * 4, canLeTrenHD + 170, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "SO LUONG TON");
-	NutBam tongTienVT(cachLe + doDaiCoban * 6 + 3 * 5, canLeTrenHD + 170, doDaiCoban + 3, 40, colorTieuDe, 7, conlorTextTieuDe, "DOANH THU");
+	NutBam maVT(cachLe + doDaiCoBan , canLeTrenHD + 170, doDaiCoBan + 3 , 40, colorTieuDe, 7, conlorTextTieuDe, "MA VT");
+	NutBam tenVT(cachLe + doDaiCoBan * 2 + 3 * 2, canLeTrenHD + 170, doDaiCoBan*2, 40, colorTieuDe, 7, conlorTextTieuDe, "TEN VAT TU");
+	NutBam donViTinh(cachLe + doDaiCoBan * 4 + 3 * 3, canLeTrenHD + 170, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "DON VI TINH");
+	NutBam soLuongTon(cachLe + doDaiCoBan * 5 + 3 * 4, canLeTrenHD + 170, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "SO LUONG TON");
+	NutBam tongTienVT(cachLe + doDaiCoBan * 6 + 3 * 5, canLeTrenHD + 170, doDaiCoBan + 3, 40, colorTieuDe, 7, conlorTextTieuDe, "DOANH THU");
 	
 
 	maVT.veNut(); 
@@ -45,12 +45,12 @@ void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end) {  // truyen
 	soLuongTon.veNut(); 
 	tongTienVT.veNut(); 	
 
-	OVuong table(cachLe + doDaiCoban, canLeTrenHD + 170, doDaiCoban * 6 + 18, 400, 15);
+	OVuong table(cachLe + doDaiCoBan, canLeTrenHD + 170, doDaiCoBan * 6 + 18, 400, 15);
 	setcolor(15);
-	line(cachLe + doDaiCoban * 2 + 3, canLeTrenHD + 170, cachLe + doDaiCoban * 2 + 3, 690);
-	line(cachLe + doDaiCoban * 4 + 3 * 2, canLeTrenHD + 170, cachLe + doDaiCoban * 4 + 3 * 2, 690);
-	line(cachLe + doDaiCoban * 5 + 3 * 3, canLeTrenHD + 170, cachLe + doDaiCoban * 5 + 3 * 3, 690);
-	line(cachLe + doDaiCoban * 6 + 3 * 4, canLeTrenHD + 170, cachLe + doDaiCoban * 6 + 3 * 4, 690);
+	line(cachLe + doDaiCoBan * 2 + 3, canLeTrenHD + 170, cachLe + doDaiCoBan * 2 + 3, 690);
+	line(cachLe + doDaiCoBan * 4 + 3 * 2, canLeTrenHD + 170, cachLe + doDaiCoBan * 4 + 3 * 2, 690);
+	line(cachLe + doDaiCoBan * 5 + 3 * 3, canLeTrenHD + 170, cachLe + doDaiCoBan * 5 + 3 * 3, 690);
+	line(cachLe + doDaiCoBan * 6 + 3 * 4, canLeTrenHD + 170, cachLe + doDaiCoBan * 6 + 3 * 4, 690);
 	
 	// hien thi 10 vat tu sau khi duoc sap xep len
 	
@@ -66,14 +66,14 @@ void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end) {  // truyen
 	for (int i = 0; i < 10;i++) {
 		if (arrDTVT[i].doanhThu != 0 ) {  
 			setbkcolor(0); 
-			line(cachLe + doDaiCoban ,marginTop10 + khoanCach*i + 26,cachLe + doDaiCoban + 948,marginTop10 + khoanCach*i + 26);
-			outtextxy(cachLe + doDaiCoban + 60,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->maVT.c_str() ); 
-			outtextxy(cachLe + doDaiCoban*2 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->ten.c_str() ); 
-			outtextxy(cachLe + doDaiCoban*4 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->donVi.c_str() );
+			line(cachLe + doDaiCoBan ,marginTop10 + khoanCach*i + 26,cachLe + doDaiCoBan + 948,marginTop10 + khoanCach*i + 26);
+			outtextxy(cachLe + doDaiCoBan + 60,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->maVT.c_str() ); 
+			outtextxy(cachLe + doDaiCoBan*2 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->ten.c_str() ); 
+			outtextxy(cachLe + doDaiCoBan*4 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->donVi.c_str() );
 			temp = TienichDoHoa::floatToString(arrDTVT[i].pVatTu->soLuongTon); 
-			outtextxy(cachLe + doDaiCoban*5 + 30,marginTop10 + khoanCach*i, temp.c_str() );
+			outtextxy(cachLe + doDaiCoBan*5 + 30,marginTop10 + khoanCach*i, temp.c_str() );
 			temp = TienichDoHoa::floatToString(arrDTVT[i].doanhThu);
-			outtextxy(cachLe + doDaiCoban*6 + 30,marginTop10 + khoanCach*i, temp.c_str() );
+			outtextxy(cachLe + doDaiCoBan*6 + 30,marginTop10 + khoanCach*i, temp.c_str() );
 			dem++; 
 		}
 		
@@ -104,13 +104,13 @@ int hienThiDuLieuLenTableXemHoaDonTheoDate(int indexPage, int soLuongItemPage, H
 		{
 			dem++;
 			int index = i + indexPage * soLuongItemPage; 
-			outtextxy(marginTable + doDaiCoban + 50, marginTop + khoanCach * i, hoaDonHopLe[index]->soHD.c_str());
-			outtextxy(marginTable + doDaiCoban * 2 + 40, marginTop + khoanCach * i,hoaDonHopLe[index]->date.getStringDate().c_str());
+			outtextxy(marginTable + doDaiCoBan + 50, marginTop + khoanCach * i, hoaDonHopLe[index]->soHD.c_str());
+			outtextxy(marginTable + doDaiCoBan * 2 + 40, marginTop + khoanCach * i,hoaDonHopLe[index]->date.getStringDate().c_str());
 			temp = hoaDonHopLe[index]->loai == "X" ? "Xuat" : "Nhap"; 
-			outtextxy(marginTable + doDaiCoban * 3 + 80, marginTop + khoanCach * i, temp.c_str());
-			outtextxy(marginTable + doDaiCoban * 4 + 60, marginTop + khoanCach * i, hoaDonHopLe[index]->tenNVLapHD.c_str());
+			outtextxy(marginTable + doDaiCoBan * 3 + 80, marginTop + khoanCach * i, temp.c_str());
+			outtextxy(marginTable + doDaiCoBan * 4 + 60, marginTop + khoanCach * i, hoaDonHopLe[index]->tenNVLapHD.c_str());
 			temp = TienichDoHoa::floatToString(hoaDonHopLe[index]->dsCTHD.tinhTongTien());
-			outtextxy(marginTable + doDaiCoban * 6 + 60, marginTop + khoanCach * i,temp.c_str() );
+			outtextxy(marginTable + doDaiCoBan * 6 + 60, marginTop + khoanCach * i,temp.c_str() );
 		}
 	}
 	return dem;
@@ -121,11 +121,11 @@ void veTableXemHDTheoDate()
 {
 	TienichDoHoa::xoaManHinhTheoToaDo(margin, canLeTrenHD + 170, 1600, 400, BACKGROUP);
 	int cachLe = margin + 60; 
-	NutBam soHD(cachLe + doDaiCoban , canLeTrenHD + 170, doDaiCoban + 3 , 40, colorTieuDe, 7, conlorTextTieuDe, "SO HOA DON");
-	NutBam ngayLap(cachLe + doDaiCoban * 2 + 3 * 2, canLeTrenHD + 170, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "NGAY LAP");
-	NutBam loaiHoaDon(cachLe + doDaiCoban * 3 + 3 * 3, canLeTrenHD + 170, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "LOAI HOA DON");
-	NutBam hoTenNV(cachLe + doDaiCoban * 4 + 3 * 4, canLeTrenHD + 170, doDaiCoban*2, 40, colorTieuDe, 7, conlorTextTieuDe, "HO TEN NHAN VIEN LAP");
-	NutBam titleVAT(cachLe + doDaiCoban * 6 + 3 * 5, canLeTrenHD + 170, doDaiCoban + 3, 40, colorTieuDe, 7, conlorTextTieuDe, "THANH TIEN");
+	NutBam soHD(cachLe + doDaiCoBan , canLeTrenHD + 170, doDaiCoBan + 3 , 40, colorTieuDe, 7, conlorTextTieuDe, "SO HOA DON");
+	NutBam ngayLap(cachLe + doDaiCoBan * 2 + 3 * 2, canLeTrenHD + 170, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "NGAY LAP");
+	NutBam loaiHoaDon(cachLe + doDaiCoBan * 3 + 3 * 3, canLeTrenHD + 170, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "LOAI HOA DON");
+	NutBam hoTenNV(cachLe + doDaiCoBan * 4 + 3 * 4, canLeTrenHD + 170, doDaiCoBan*2, 40, colorTieuDe, 7, conlorTextTieuDe, "HO TEN NHAN VIEN LAP");
+	NutBam titleVAT(cachLe + doDaiCoBan * 6 + 3 * 5, canLeTrenHD + 170, doDaiCoBan + 3, 40, colorTieuDe, 7, conlorTextTieuDe, "THANH TIEN");
 	
 
 	soHD.veNut(); 
@@ -134,12 +134,12 @@ void veTableXemHDTheoDate()
 	hoTenNV.veNut(); 
 	titleVAT.veNut(); 	
 
-	OVuong table(cachLe + doDaiCoban, canLeTrenHD + 170, doDaiCoban * 6 + 18, 400, 15);
+	OVuong table(cachLe + doDaiCoBan, canLeTrenHD + 170, doDaiCoBan * 6 + 18, 400, 15);
 	setcolor(15);
-	line(cachLe + doDaiCoban * 2 + 3, canLeTrenHD + 170, cachLe + doDaiCoban * 2 + 3, 690);
-	line(cachLe + doDaiCoban * 3 + 3 * 2, canLeTrenHD + 170, cachLe + doDaiCoban * 3 + 3 * 2, 690);
-	line(cachLe + doDaiCoban * 4 + 3 * 3, canLeTrenHD + 170, cachLe + doDaiCoban * 4 + 3 * 3, 690);
-	line(cachLe + doDaiCoban * 6 + 3 * 4, canLeTrenHD + 170, cachLe + doDaiCoban * 6 + 3 * 4, 690);
+	line(cachLe + doDaiCoBan * 2 + 3, canLeTrenHD + 170, cachLe + doDaiCoBan * 2 + 3, 690);
+	line(cachLe + doDaiCoBan * 3 + 3 * 2, canLeTrenHD + 170, cachLe + doDaiCoBan * 3 + 3 * 2, 690);
+	line(cachLe + doDaiCoBan * 4 + 3 * 3, canLeTrenHD + 170, cachLe + doDaiCoBan * 4 + 3 * 3, 690);
+	line(cachLe + doDaiCoBan * 6 + 3 * 4, canLeTrenHD + 170, cachLe + doDaiCoBan * 6 + 3 * 4, 690);
 
 }
 
@@ -331,7 +331,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							{ 
 								start.thang = TienichDoHoa::stringToInt(nhapThangBD.boNhoDem);
 								start.nam = TienichDoHoa::stringToInt(nhapNamBD.boNhoDem);
-								if (!Date::ngayThangNamHopLe(start.ngay, start.thang, start.nam))
+								if (!Date::ngayThangNamHopLe(start))
 								{
 									MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 									nhapNgayBD.resetBoNhoDem();
@@ -357,7 +357,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{ 
 							start.ngay = TienichDoHoa::stringToInt(nhapNgayBD.boNhoDem);
 							start.nam = TienichDoHoa::stringToInt(nhapNamBD.boNhoDem);
-							if (!Date::ngayThangNamHopLe(start.ngay, start.thang, start.nam))
+							if (!Date::ngayThangNamHopLe(start))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayBD.resetBoNhoDem();
@@ -382,7 +382,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{
 							start.ngay = TienichDoHoa::stringToInt(nhapNgayBD.boNhoDem);
 							start.thang = TienichDoHoa::stringToInt(nhapThangBD.boNhoDem);
-							if (!Date::ngayThangNamHopLe(start.ngay, start.thang, start.nam))
+							if (!Date::ngayThangNamHopLe(start))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayBD.resetBoNhoDem();
@@ -410,7 +410,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							{ 
 								end.thang = TienichDoHoa::stringToInt(nhapThangKT.boNhoDem);
 								end.nam = TienichDoHoa::stringToInt(nhapNamKT.boNhoDem);
-								if (!Date::ngayThangNamHopLe(end.ngay, end.thang, end.nam))
+								if (!Date::ngayThangNamHopLe(end))
 								{
 									MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 									nhapNgayKT.resetBoNhoDem();
@@ -436,7 +436,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{ 
 							end.ngay = TienichDoHoa::stringToInt(nhapNgayKT.boNhoDem);
 							end.nam = TienichDoHoa::stringToInt(nhapNamKT.boNhoDem);
-							if (!Date::ngayThangNamHopLe(end.ngay, end.thang, end.nam))
+							if (!Date::ngayThangNamHopLe(end))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayKT.resetBoNhoDem();
@@ -462,7 +462,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{
 							end.ngay = TienichDoHoa::stringToInt(nhapNgayKT.boNhoDem);
 							end.thang = TienichDoHoa::stringToInt(nhapThangKT.boNhoDem);
-							if (!Date::ngayThangNamHopLe(end.ngay, end.thang, end.nam))
+							if (!Date::ngayThangNamHopLe(end))
 							{
 								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 								nhapNgayKT.resetBoNhoDem();
@@ -654,18 +654,18 @@ NutBam &doanhThu,NutBam &thongKe,NutBam &doanhThuNam) {
 						
 						int cachLe = margin + 60; 
 	
-						NutBam loaiHoaDon(cachLe + doDaiCoban * 3 + 3 * 3, canLeTrenHD + 120, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "THANG");
-						NutBam hoTenNV(cachLe + doDaiCoban * 4 + 3 * 4, canLeTrenHD + 120, doDaiCoban, 40, colorTieuDe, 7, conlorTextTieuDe, "DOANH THU");
+						NutBam loaiHoaDon(cachLe + doDaiCoBan * 3 + 3 * 3, canLeTrenHD + 120, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "THANG");
+						NutBam hoTenNV(cachLe + doDaiCoBan * 4 + 3 * 4, canLeTrenHD + 120, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "DOANH THU");
 
 					
 						loaiHoaDon.veNut(); 
 						hoTenNV.veNut(); 
 					
 					
-						OVuong table(cachLe + doDaiCoban*3 + 8, canLeTrenHD + 120, doDaiCoban * 2 + 18 - 15, 500, 15);
+						OVuong table(cachLe + doDaiCoBan*3 + 8, canLeTrenHD + 120, doDaiCoBan * 2 + 18 - 15, 500, 15);
 						setcolor(15);
 						
-						line(cachLe + doDaiCoban * 4 + 3 * 3, canLeTrenHD + 120, cachLe + doDaiCoban * 4 + 3 * 3, 690 + 50);
+						line(cachLe + doDaiCoBan * 4 + 3 * 3, canLeTrenHD + 120, cachLe + doDaiCoBan * 4 + 3 * 3, 690 + 50);
 					
 						// thuc hien vong lap va in ra 
 						int khoanCach = 38; 
@@ -673,9 +673,9 @@ NutBam &doanhThu,NutBam &thongKe,NutBam &doanhThuNam) {
 						for (int i = 0; i < 12; i++) {
 							setbkcolor(0); 
 							setcolor(15); 
-							line(cachLe +doDaiCoban*3 + 10,i*khoanCach + canLeTrenHD + 202,cachLe +doDaiCoban*3 + 320,i*khoanCach + canLeTrenHD + 202);
-							outtextxy(cachLe +doDaiCoban*3 + 80,i*khoanCach + canLeTrenHD + 176,TienichDoHoa::intToString(i + 1).c_str()); 
-							outtextxy(cachLe +doDaiCoban*3 + 180,i*khoanCach + canLeTrenHD + 176,TienichDoHoa::floatToString(doanhThuTheoThang[i]).c_str()); 
+							line(cachLe +doDaiCoBan*3 + 10,i*khoanCach + canLeTrenHD + 202,cachLe +doDaiCoBan*3 + 320,i*khoanCach + canLeTrenHD + 202);
+							outtextxy(cachLe +doDaiCoBan*3 + 80,i*khoanCach + canLeTrenHD + 176,TienichDoHoa::intToString(i + 1).c_str()); 
+							outtextxy(cachLe +doDaiCoBan*3 + 180,i*khoanCach + canLeTrenHD + 176,TienichDoHoa::floatToString(doanhThuTheoThang[i]).c_str()); 
 						}
 						
 					}

@@ -1,4 +1,4 @@
-12
+10
 nv07,Huynh ngoc,Anh,1,2
 2
 hd1,6/5/2022,X,Huynh ngoc Anh,
@@ -7,15 +7,11 @@ VT04,1,2,3
 hd2,6/5/2022,X,Huynh ngoc Anh,
 1
 VT07,23,23,23
-nv11,Nguyen kieu the,Bao,1,0
-0
 nv14,Ho thai,Danh,0,0
 0
 nv09,Nguyen huynh,Dung,1,0
 0
-nv13,Nguyen tien,Dung,0,0
-0
-nv04,Nguyen kieu my,Hoa,1,2
+nv04,Nguyen Kieu My,Hoa,1,2
 2
 hd3,3/5/2022,N,Nguyen kieu my Hoa,
 10
@@ -38,15 +34,47 @@ nv12,Vu trong,Lan,1,0
 0
 nv08,Nguyen nhu,Ngoc,1,0
 0
-nv01,Ho duc,Nguyen,0,1
-1
+nv01,Ho Duc,Nguyen,0,11
+11
 hd5,31/1/2022,N,Ho duc Nguyen,
 1
 VT05,23,1,1
+hd24,14/5/2022,X,Ho duc Nguyen,
+1
+VT05,23,1,54
+hd34,14/5/2022,X,Ho duc Nguyen,
+2
+VT04,23,45,34
+VT02,911,34,35
+23,14/5/2022,X,Ho Duc Nguyen,
+1
+VT05,34,45,2
+ssd34,14/5/2022,N,Ho Duc Nguyen,
+1
+VT05,32,23,54
+43,14/5/2022,N,Ho Duc Nguyen,
+1
+VT02,23,23,23
+ffg,16/1/2022,X,Ho Duc Nguyen,
+1
+VT05,23,1,43
+hd03,20/5/2022,X,Ho Duc Nguyen,
+2
+VT02,1,5,10
+VT04,23,42,50
+45,26/5/2022,X,Ho Duc Nguyen,
+1
+VT28,1,3,2
+545,26/5/2022,X,Ho Duc Nguyen,
+1
+VT29,1,54,1
+454,27/5/2022,X,Ho Duc Nguyen,
+1
+VT05,1,3,23
 nv06,Tu Thi Thao,Nguyen,1,1
 1
 hd7,7/7/2002,X,Tu Thi Thao Nguyen,
 1
 VT77,77,77,77
-nv02,Ho thanh,Nhat,0,0
+nv02,Ho Duc Nguyen,Thao,0,0
 0

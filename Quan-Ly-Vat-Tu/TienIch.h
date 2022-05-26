@@ -15,6 +15,13 @@ using namespace std;
 
 
 
+bool kiemTraSoNguyen(string str)
+{
+	for (int i = 0; i < str.length(); i++)
+		if (isdigit(str[i]) == false)
+			return false;
+	return true;
+}
 
 
 
@@ -76,6 +83,19 @@ public:
 		ss >> temp;
 		return temp;
 	}
+	
+	// viet ham dua string ve chu thuong  
+	static string chuoiThuong(string s) {
+		// lap qua qua va kiem tra
+		int length = s.length();  
+		for (int i = 0; i < length;i++) {
+			// kiem tra xem co phai la chu thuong hay khong 
+			if (s[i] <= 'Z' && s[i] >= 'A') {
+				s[i] = s[i] - ('Z' - 'z'); 
+			} 
+		}
+		return s; 
+	}
 
 	static void xoaKhoangTrangThua(string &s)
 	{
@@ -109,33 +129,91 @@ public:
 		}
 	}
 
-	static void chuanHoaTen(string &s)
-	{
-		xoaKhoangTrangThua(s);
-		int index = 1;
-		int n = s.length();
-		if (s[0] >= 97 && s[0] <= 122)
-		{
-			s[0] = s[0] - 32;
-		}
-		while (index < n)
-		{
-			if (s[index] == 32)
-			{
-				if (s[index + 1] >= 97 && s[index + 1] <= 122)
-				{
-					s[index + 1] = s[index + 1] - 32;
-					index++;
-				}
-			}
 
-			else if (s[index] >= 65 && s[index] <= 90)
-			{
-				s[index] = s[index] + 32;
-			}
-			index++;
+	
+	
+
+static void xoaKhoanTrangDauVaCuoi(string &str)
+{
+	while (str[0] == ' ')
+	{
+		str.erase(str.begin() + 0);
+	}
+
+	while (str[str.length() - 1] == ' ')
+	{
+		str.erase(str.begin() + str.length() - 1); 
+	}
+}
+
+
+static void xoaKhoanTrangOGiua(string &str)
+{
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (str[i] == ' ' && str[i + 1] == ' ')
+		{
+			str.erase(str.begin() + i);
+			i--;
 		}
 	}
+}
+
+
+static void inHoaKiTuDauMoiTu(string &str)
+{
+	if (str.length() == 0) {
+		return; 
+	}
+	strlwr((char *)str.c_str()); 
+	if (str[0] != ' ')
+	{
+		if (str[0] >= 97 && str[0] <= 122)
+		{
+			str[0] -= 32;
+		}
+		
+	}
+	for (int i = 0; i < str.length() - 1; i++)
+	{
+		if (str[i] == ' ' && str[i + 1] != ' ')
+		{
+		
+			if (str[i + 1] >= 97 && str[i + 1] <= 122)
+			{
+				str[i + 1] -= 32;
+			}
+		}
+	}
+}
+
+static void chuanHoaTen(string &str) {
+	xoaKhoanTrangDauVaCuoi(str); 
+	xoaKhoanTrangOGiua(str); 
+	inHoaKiTuDauMoiTu(str); 
+}
+
+
+static void setText(int bkColor,int colorText,int typeFont,int size) {
+	setbkcolor(bkColor); 
+	setcolor(colorText); 
+	settextstyle(typeFont,0,size);
+}
+
+static void hienThiThongBao(string thongBao) {
+	MessageBox(NULL, thongBao.c_str(), "Thong Bao", MB_ICONINFORMATION | MB_OK);
+}
+static float tinhToiDaPage(int mountShow, int soPhanTuTrenMotPage)  // ham tinh ra xem co bao nhieu page !
+{
+	float toiDaPage = (float)mountShow / (float)soPhanTuTrenMotPage;
+	if (!kiemTraSoNguyen(TienichDoHoa::floatToString(toiDaPage)))
+	{
+		toiDaPage = (int)toiDaPage + 1;
+	}
+	return toiDaPage; 
+}
+ 	
+	
 };
 
 struct Date
@@ -144,7 +222,9 @@ struct Date
 	int thang;
 	int nam;
 	Date(int ngay, int thang, int nam) : ngay(ngay), thang(thang), nam(nam) {}
-	Date() : ngay(0), thang(0), nam(0) {}
+	Date() {
+		this->setDateNow(); 
+	}
 	
 	// kiem tra ngay thang nam do co bi di qua trong tuong lai hay khong 
 	static bool ngayThangNamTuongLai(Date check) {  // ham return ve true neu ngay thang nam nam o tuong lai!
@@ -158,9 +238,24 @@ struct Date
 		
 		return true; // check lon hon hien tai -> tuong lai!
 	}
+	
+	void stringToDate(string ngay,string thang,string nam) {
+		this->ngay = TienichDoHoa::stringToInt(ngay); 
+		this->thang = TienichDoHoa::stringToInt(thang); 
+		this->nam = TienichDoHoa::stringToInt(nam); 
+	}
+	
+	void dateToString(string &ngay,string &thang,string &nam) {
+		ngay = TienichDoHoa::intToString(this->ngay);
+		thang =  TienichDoHoa::intToString(this->thang);
+		nam =  TienichDoHoa::intToString(this->nam);
+	}
 
-	static bool ngayThangNamHopLe(int ngay, int thang, int nam)
+	static bool ngayThangNamHopLe(Date check)
 	{
+		int ngay = check.ngay; 
+		int thang = check.thang; 
+		int nam = check.nam; 
 		if (thang < 1 || thang > 12 || nam < 0 || ngay < 0 || ngay > 31)
 		{
 			return false;
@@ -186,44 +281,8 @@ struct Date
 		}
 		return true;
 	}
-	bool operator>(const struct Date &other)
-	{
-		if (this->nam > other.nam)
-			return true;
-		else if (this->nam == other.nam)
-		{
-			if (this->thang > other.thang)
-				return true;
-			else if (this->thang == other.thang)
-			{
-				if (this->ngay > other.ngay)
-					return true;
-			}
-		}
+	
 
-		return false;
-	}
-	Date(string ngay, string thang, string nam)
-	{
-		// do toi ham
-		ngay = TienichDoHoa::stringToInt(ngay);
-		thang = TienichDoHoa::stringToFloat(thang);
-		nam = TienichDoHoa::stringToInt(nam);
-	}
-
-	// viet ra phuong thuc nhap ngay thang nam
-	void nhap()
-	{
-		cout << "nhap ngay: ";
-		cin >> this->ngay;
-		cout << "nhap thang: ";
-		cin >> this->thang;
-		cout << "nhap nam: ";
-		cin >> this->nam;
-		cin.ignore(); // xoa di bo nho dem.
-	}
-
-	// viet ham doc vao ngay tu file
 	void docFile(ifstream &filein)
 	{
 		string temp;
@@ -374,9 +433,10 @@ bool kiTuChuThuong(char c)
 	}
 	return false;
 }
-bool kiTuSo(char c)
+bool kiTuSo(char c) 
 {
-	if (c >= 48 && c <= 57)
+	
+	if (c >= 48 && c <= 57 )
 	{
 		return true;
 	}
@@ -385,7 +445,7 @@ bool kiTuSo(char c)
 
 bool kiTuChu(char c)
 {
-	if (kiTuChuHoa(c) || kiTuChuThuong(c))
+	if ((kiTuChuHoa(c) || kiTuChuThuong(c) || c == 32 )  )
 	{
 		return true;
 	}
@@ -418,13 +478,7 @@ bool kiTuChuHoacSoKhongCach(char c)
 	return false;
 }
 
-bool kiemTraSoNguyen(string str)
-{
-	for (int i = 0; i < str.length(); i++)
-		if (isdigit(str[i]) == false)
-			return false;
-	return true;
-}
+
 
 bool kiemTraSoThuc(char c)
 {
@@ -442,6 +496,17 @@ bool nhapDate(char c) {
 	return false; 
 	
 }
+
+// nhap ma chap nhan 3 ki tu sau : chu, so va _ 
+bool nhapID(char c) {
+	// truoc tien kiem tra la so chua da 
+	if ( (kiTuSo(c) || c == 95 || kiTuChu(c)) && c != 32 ) { 
+		return true; 
+	}
+	return false; 
+}
+
+
 
 
 

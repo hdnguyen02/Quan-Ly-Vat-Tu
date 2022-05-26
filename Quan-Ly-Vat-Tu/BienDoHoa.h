@@ -42,9 +42,11 @@ const int COLOR_TEXT_BTN_SUB = 0;
 const int COLOR_HIGHT_BTN_SUB = 5;
 
 // dinh nghia mau nen o Nhap
-const int COLOR_BACKGROUP_INPUT = 2;
+const int COLOR_BACKGROUP_INPUT = 14;
 const int CACH_LE_O_NHAP = 10; // cach cai thanh o nhap ra bao nhieu px
-const int COLOR_TEXT_INPUT = 15;
+const int COLOR_TEXT_INPUT = 1;
+const int COLOR_NHAP = 10; 
+const int COLOR_DISABLE = 15; // mau khi input bi vo hieu hoa!
 
 // bien mau khi in ra
 const int CinputText = 15;
@@ -55,12 +57,16 @@ const int canLeTrenHD = 120;
 const int canLeNgangHD = 16;
 const int WHD = 90;
 const int HHD = 46;
-const int mauNhapXuat = 14;
+const int mauNhapXuat = 11;
 const int mauHightNhapXuat = 14;
-const int doDaiCoban = DODAIMANHINH / 9 - 15;
+const int doDaiCoBan = DODAIMANHINH / 9 - 15;
 const int colorTieuDe = 15;
 const int conlorTextTieuDe = 0;
 const int margin = 60;
+const string HOADONXUAT = "X";
+const string HOADONNHAP = "N";
+const int DAUCHAM = 46; 
+const string EMPTYSTRING = ""; 
 
 // nut bam mess box
 

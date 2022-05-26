@@ -97,6 +97,17 @@ public:
 	void docFileDSNV();
 	void ghiFileDSNV();
 	
+	// viet ham tim kiem theo truong bo vao 
+
+	NhanVien* timKiemNhanVienTheoTen(const string& key) {
+		for (int i = 0; i < this->soLuong;i++) {
+			if (key == nv[i]->getHoTen()) {
+				return nv[i]; 
+			}
+		}
+		return NULL; // KHONG TIM THAY  
+	}
+	
 	//
 	
 	
@@ -205,8 +216,8 @@ public:
 		ofstream fileout; 
 		fileout.open(link.c_str(),ios::out | ios::trunc); 
 		// tiep theo khong can ghi so luong gi ca
-		for (int i = 0; i < this->soLuong;i++) {
-			// chi ghi vao file hoa don theo loai thoi 
+		for (int i = 0; i < this->soLuong;i++) 
+		{
 			soLuong = soLuong +  nv[i]->dsHoaDon.soHoaDonTheoLoai(loaiHoaDon); 
 			nv[i]->dsHoaDon.ghiFileHoaDonTheoLoai(fileout,loaiHoaDon); 
 		}
@@ -323,10 +334,6 @@ bool dsNhanVien::xoaNV(const string &maVT)
 	int viTriXoa = this->timKiemNVTraVeViTri(maVT);
 	if (this->dsRong() || viTriXoa == -1)
 	{
-		return false;
-	}
-	if (this->getNhanVien(viTriXoa)->soLanTaoHD != 0)
-	{ // da lap HD -> khong duoc phep xoa !
 		return false;
 	}
 	for (int i = viTriXoa; i < this->soLuong; i++)

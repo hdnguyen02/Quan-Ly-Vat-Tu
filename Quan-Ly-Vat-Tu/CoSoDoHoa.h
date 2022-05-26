@@ -2,6 +2,7 @@
 using namespace std;
 #include "Tienich.h"
 #include "BienDoHoa.h"
+#include <algorithm>
 
 //=====================================STRUCT NUT BAM==================================================
 
@@ -14,6 +15,11 @@ struct NutBam
 
 	NutBam(int x, int y, int w, int h, int colorBack, int colorHight, int colorText, string tieuDe)
 	{
+		this->set(x,y,w,h,colorBack,colorHight,colorText,tieuDe); 
+	}
+	
+	// viet mot ham y chang cai nay 
+	void set(int x, int y, int w, int h, int colorBack, int colorHight, int colorText, string tieuDe) {	
 		this->x = x;
 		this->y = y;
 		this->w = w;
@@ -23,8 +29,9 @@ struct NutBam
 		this->colorBack = colorBack;
 		this->colorHight = colorHight;
 		this->colorText = colorText;
+		
 	}
-
+	
 	void duocChon()
 	{
 		this->duocTroVao = true;
@@ -55,31 +62,32 @@ struct NutBam
 		int toaDoTextY = y + (h - text_h) / 2;
 		setcolor(colorText);
 		if (duocTroVao)
-			setbkcolor(colorHight);
+			TienichDoHoa::setText(colorHight,colorText,10,1); 
 		else
-			setbkcolor(colorBack);
+			TienichDoHoa::setText(colorBack,colorText,10,1);
 		outtextxy(toaDoTextX, toaDoTextY, arr);
 	}
+	
+	void veNutCanTrai() {
+		setfillstyle(SOLID_FILL, duocTroVao ? colorHight : colorBack); // bo bua.
+		TienichDoHoa::setText(colorBack,colorText,3,1); 
+		bar(x, y, x + w, y + h);
+		int text_h = textheight(this->tieuDe.c_str());
+		int toaDoTextY = y + (h - text_h) / 2; // da tim ra toa do Y 
+		outtextxy(x + 10,toaDoTextY,this->tieuDe.c_str()); 		
+	}
 
-	// viet ham ve lai
+
 	void khongDuocChon()
 	{
 		this->duocTroVao = false;
 		this->veNut();
 	}
-	// ham kiem tra xem co nen ve lai mot nut hay khong ( hover thi ve lai hoac co the khong )
-	//	void kiemTraVeLai(int &mx,int &my,bool &kiemTra) {
-	//		if (this->isMouseHover(mx,my)) {
-	//				this->duocTroVao = true;
-	//				this->veNut();
-	//				kiemTra = true;
-	//			}
-	//		else if (kiemTra == true) {
-	//				this->duocTroVao = false;
-	//				this->veNut();
-	//				kiemTra = false;
-	//			}
-	//		}
+	
+	void thayDoiTieuDeNut(string tieuDe) {
+		this->tieuDe = tieuDe;
+		this->veNut(); 
+	}
 };
 
 // ====================================STRUCT O NHAP===============================================
@@ -88,10 +96,12 @@ struct ONhap
 	int x, y, w, h, SLKTTD;
 	string boNhoDem;
 	int widthTitle, colorTitle, colorBgoiY;
-	string tieuDe;
+	string tieuDe; 
 	bool khongDuocNhap, daNhapDauCham;
+	bool isClick; 
+	int mauNen;
 	ONhap() {}
-	ONhap(int x, int y, int w, int h, int widthTitle, string tieuDe, int colorTitle, int colorBgoiY, int SLKTTD)
+	ONhap(int x, int y, int w, int h, int widthTitle, string tieuDe, int colorTitle, int colorBgoiY, int SLKTTD,int mauNen = COLOR_BACKGROUP_INPUT )
 	{
 		this->x = x;
 		this->y = y;
@@ -105,13 +115,31 @@ struct ONhap
 		this->colorBgoiY = colorBgoiY;
 		this->khongDuocNhap = false;
 		this->daNhapDauCham = false; // chua he nhap dau . nao =>  su dung cho ham nhap KiTu
+		this->isClick = false; // khi nguoi dung nhap vao nut nay tuc la form dang duoc chon
+		this->mauNen = mauNen; 
 	}
 
 	void veONhap()
 	{
-		NutBam boxTieuDe(x, y, widthTitle, h, colorTitle, 3, 7, tieuDe);
+		// co 3 trang thai -> trang thai khong duoc nhap 
+		int colorBack; 
+		if (this->khongDuocNhap) {
+			colorBack = COLOR_DISABLE; 
+		}
+		else if (this->isClick) {  // tiep theo neu tinh trang o nhap dang la click -> ve theo 
+			colorBack = COLOR_NHAP; // form dang duoc nhap vao vi vay cho nen cho nay ve lai mau 
+		}
+		else {
+			colorBack = mauNen; 
+		}
+		NutBam boxTieuDe(x, y, widthTitle, h, colorTitle, 3, 15, tieuDe);
 		boxTieuDe.veNut();
-		setfillstyle(SOLID_FILL, khongDuocNhap ? 8 : COLOR_BACKGROUP_INPUT);
+		setfillstyle(SOLID_FILL,colorBack);
+		bar(x + widthTitle, y, x + widthTitle + w, y + h);
+	}
+	
+	void veONhapKhiNhap() {
+		setfillstyle(SOLID_FILL, COLOR_NHAP);
 		bar(x + widthTitle, y, x + widthTitle + w, y + h);
 	}
 
@@ -121,7 +149,6 @@ struct ONhap
 		TienichDoHoa::chuanHoaTen(this->boNhoDem);
 		this->xoaNoiDungONhap();
 		this->inNoiDung();
-		this->tatHienThiBoder();
 	}
 
 	void xoaKiTuCuoi()
@@ -140,54 +167,57 @@ struct ONhap
 	void xoaNoiDungONhap()
 	{
 		TienichDoHoa::xoaManHinhTheoToaDo(x + widthTitle, y, w, h, COLOR_BACKGROUP_INPUT); // xoa song ve lai
-		this->veONhap();
-		this->hienThiBoder();
-	}
+		this->veONhap(); 
 
+	}
+	
+	void thayDoiNoiDung(string s) {
+		this->boNhoDem = s; 
+		this->xoaNoiDungONhap(); 
+		this->inNoiDung(); 
+	}
 	void inNoiDung()
 	{
+		int colorBack;
+		if (this->isClick) {
+			colorBack = COLOR_NHAP; 
+		}
+		else if (this->khongDuocNhap) {
+			colorBack = COLOR_DISABLE; 
+		}
+		else {
+			colorBack = mauNen; 	
+		}
 		int text_h;
-		int toaDoTextY;
-		settextstyle(1, 0, 2);
+		TienichDoHoa::setText(colorBack,COLOR_TEXT_INPUT,10,1); 
 		text_h = textheight(&boNhoDem[0]);
-		toaDoTextY = y + (h - text_h) / 2;
-		setbkcolor(khongDuocNhap ? 8 : COLOR_BACKGROUP_INPUT); // chung mau voi cai ma no ve
-		setcolor(COLOR_TEXT_INPUT);
+		int toaDoTextY = y + (h - text_h) / 2;
 		outtextxy(x + CACH_LE_O_NHAP + widthTitle, toaDoTextY, &boNhoDem[0]);
 	}
-
-	void tatHienThiBoder()
-	{
-		setcolor(COLOR_BACKGROUP_INPUT);
-		rectangle(x + widthTitle, y, x + w + widthTitle, y + h); // hien thi thanh sang cai boder len.
-	}
-
-	// viet 1 ham chuan xoa di khoan trang
-	void chuanHoaXoaKhoanTrang()
-	{
-		TienichDoHoa::xoaKhoangTrangThua(this->boNhoDem);
-		this->xoaNoiDungONhap();
-		this->inNoiDung();
-		this->tatHienThiBoder();
+	
+	void xoaBoNhoDem () {
+		while (kbhit())
+		{ 
+			getch();
+		}
 	}
 
 	void NhapVao(bool (*loaiKiTu)(char), const string &goiY)
 	{
+		
 		if (khongDuocNhap == true)
 		{
 			return;
 		}
-		while (kbhit())
-		{ // xoa di bo nho dem!
-			getch();
-		}
-		this->hienThiBoder();
+		this->isClick = true;
+		this->veONhap();
+		this->xoaBoNhoDem(); 
 		int the_end = 0;
 		char c;
 		bool kiemTraBackSpace = false;
 		do
 		{
-			boNhoDem = boNhoDem + "_"; // them dau gach nhay.
+			boNhoDem = boNhoDem + "-"; // them dau gach nhay.
 			if (kiemTraBackSpace)
 			{
 				this->xoaNoiDungONhap();
@@ -198,17 +228,18 @@ struct ONhap
 			c = getch();
 			if (c == ENTER || c == ESC)
 			{
+				this->isClick  = false; 
 				this->xoaGoiY();
 				the_end = 1;
-				TienichDoHoa::xoaKhoangTrangThua(this->boNhoDem);
-				this->xoaNoiDungONhap();
+				this->veONhap(); 
+				this->xoaNoiDungONhap(); 
 				this->inNoiDung();
-				this->tatHienThiBoder();
+				
 			}
-			else if (c == BACK_SPACE && !boNhoDem.empty())
+			
+			
+			else if (c == BACK_SPACE && !boNhoDem.empty() )
 			{
-				// kiem tra xem neu da xoa di dau . thi bat lai trang thai cho nhap vao dau . tiep tuc
-
 				this->xoaGoiY();
 				boNhoDem.erase(boNhoDem.size() - 1);
 				kiemTraBackSpace = true;
@@ -216,11 +247,15 @@ struct ONhap
 			else if (SLKTTD <= boNhoDem.length())
 			{
 				this->xoaGoiY();
-				setcolor(4);
-				setbkcolor(colorBgoiY);
 				string temp = "toi da " + TienichDoHoa::intToString(SLKTTD) + " ki tu!";
-				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
+				TienichDoHoa::setText(colorBgoiY,4,2,5); 
 				outtextxy(x, y + h + 3, &temp[0]);
+			}
+			else if (!loaiKiTu(c))
+			{
+				this->xoaGoiY();
+				TienichDoHoa::setText(colorBgoiY,4,2,5); 
+				outtextxy(x, y + h + 3, (char *)goiY.c_str());
 			}
 			else if (c == SPACE)
 			{
@@ -228,18 +263,10 @@ struct ONhap
 				boNhoDem = boNhoDem + " ";
 			}
 			else if (loaiKiTu(c))
-			{
+			{ 
 				this->xoaGoiY();
 				boNhoDem = boNhoDem + c;
-			}
-			else if (!loaiKiTu(c))
-			{
-				this->xoaGoiY();
-				setcolor(4);
-				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
-				setbkcolor(colorBgoiY);
-				outtextxy(x, y + h + 3, (char *)goiY.c_str());
-			}
+			}			
 		} while (!the_end);
 	}
 
@@ -249,17 +276,16 @@ struct ONhap
 		{
 			return;
 		}
-		while (kbhit())
-		{ // xoa di bo nho dem!
-			getch();
-		}
-		this->hienThiBoder();
+		this->isClick = true; 
+		this->veONhap(); 
+		this->xoaBoNhoDem();
+
 		int the_end = 0;
 		char c;
 		bool kiemTraBackSpace = false;
 		do
 		{
-			boNhoDem = boNhoDem + "_"; // them dau gach nhay.
+			boNhoDem = boNhoDem + "-"; 
 			if (kiemTraBackSpace)
 			{
 				this->xoaNoiDungONhap();
@@ -270,16 +296,16 @@ struct ONhap
 			c = getch();
 			if (c == ENTER || c == ESC)
 			{
-				if (boNhoDem[boNhoDem.length() - 1] == 46)
+				this->isClick = false; 
+				if (boNhoDem[boNhoDem.length() - 1] == DAUCHAM)
 				{
 					this->xoaKiTuCuoi();
 				}
 				this->xoaGoiY();
 				the_end = 1;
-				TienichDoHoa::xoaKhoangTrangThua(this->boNhoDem);
+				this->boNhoDem.erase(remove(this->boNhoDem.begin(), this->boNhoDem.end(), SPACE), this->boNhoDem.end());  // cho nay xoa di bo nhhodem 
 				this->xoaNoiDungONhap();
 				this->inNoiDung();
-				this->tatHienThiBoder();
 			}
 			else if (c == BACK_SPACE && !boNhoDem.empty())
 			{
@@ -300,13 +326,8 @@ struct ONhap
 				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
 				outtextxy(x, y + h + 3, &temp[0]);
 			}
-			else if (c == SPACE)
-			{
-				this->xoaGoiY();
-				boNhoDem = boNhoDem + " ";
-			}
-			else if (c == 46 && daNhapDauCham == false && boNhoDem.length() != 0)
-			{ // la dau .
+			else if (c == DAUCHAM && daNhapDauCham == false && boNhoDem.length() != 0)
+			{ 
 				boNhoDem = boNhoDem + ".";
 				daNhapDauCham = true;
 			}
@@ -318,9 +339,10 @@ struct ONhap
 			else if (!kiTuSo(c))
 			{
 				this->xoaGoiY();
-				setcolor(4);
-				settextstyle(SMALL_FONT, HORIZ_DIR, 6);
-				setbkcolor(colorBgoiY);
+				//setcolor(4);
+				// settextstyle(SMALL_FONT, HORIZ_DIR, 6);
+				//setbkcolor(colorBgoiY);
+				TienichDoHoa::setText(colorBgoiY,4,2,5); 
 				outtextxy(x, y + h + 3, goiY.c_str());
 			}
 
@@ -329,20 +351,14 @@ struct ONhap
 
 	void xoaGoiY()
 	{
-		TienichDoHoa::xoaManHinhTheoToaDo(x - 2, y + 1 + h, w + 40, 25, colorBgoiY);
+		TienichDoHoa::xoaManHinhTheoToaDo(x - 2, y + 1 + h, w + 54, 25, colorBgoiY);
 	}
 	void resetBoNhoDem()
 	{
 		this->boNhoDem = "";
 		this->xoaNoiDungONhap();
-		this->tatHienThiBoder();
 	}
-	void hienThiBoder()
-	{
-		setcolor(14);
-		settextstyle(5, 0, 14);
-		rectangle(x + widthTitle, y, x + w + widthTitle, y + h);
-	}
+	
 
 	bool isMouseHover(int mx, int my)
 	{

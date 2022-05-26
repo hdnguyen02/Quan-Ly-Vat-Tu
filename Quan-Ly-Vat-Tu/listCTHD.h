@@ -11,12 +11,13 @@ struct CThoaDon
 	CThoaDon(const string &maVT, const float &soLuong, const float &donGia, const float &VAT) : maVT(maVT), soLuong(soLuong), donGia(donGia), VAT(VAT) {}
 	CThoaDon() {}
 	void inCTHD();
-	float tinhTien()
-	{
-
-		return soLuong * donGia * (1 + VAT / 100); // VAT = 0 => khong co the => tren kia la co the
-	}
+	float tinhTien(); 
 };
+
+float CThoaDon::tinhTien()
+{
+	return soLuong * donGia * (1 + VAT / 100); // VAT = 0 => khong co the => tren kia la co the
+}
 
 void CThoaDon::inCTHD()
 {
