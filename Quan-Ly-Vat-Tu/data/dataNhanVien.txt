@@ -1,4 +1,4 @@
-10
+15
 nv07,Huynh ngoc,Anh,1,2
 2
 hd1,6/5/2022,X,Huynh ngoc Anh,
@@ -7,9 +7,17 @@ VT04,1,2,3
 hd2,6/5/2022,X,Huynh ngoc Anh,
 1
 VT07,23,23,23
+NV77,Ahihi,Bop,0,0
+0
+NV22,Nguyen Kieu Lan,Chi,1,0
+0
+NGUYN,Kieu My Hoa,Cv,0,0
+0
 nv14,Ho thai,Danh,0,0
 0
-nv09,Nguyen huynh,Dung,1,0
+VV,Vtgffgfgfgfgfgfghjhj,Dfdfdfd,0,0
+0
+FF,Fdfdfdfdfdfdfdfdfdfd,Gfgff,0,0
 0
 nv04,Nguyen Kieu My,Hoa,1,2
 2
@@ -76,5 +84,7 @@ nv06,Tu Thi Thao,Nguyen,1,1
 hd7,7/7/2002,X,Tu Thi Thao Nguyen,
 1
 VT77,77,77,77
-nv02,Ho Duc Nguyen,Thao,0,0
+NV08,Hien Thi Lan,Nhi,1,0
+0
+nv02,Ho Duc Nguyen,Trum,0,0
 0

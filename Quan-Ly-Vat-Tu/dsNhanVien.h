@@ -226,6 +226,23 @@ public:
 		fileout.close(); 
 	}
 	
+	// viet ham tim kiem nhung 
+	int traVeNhanVienTimKiemPhuHop(string stringSearch,NhanVien **result) {
+		int soLuongNhanVienPhuHop = 0; 
+		string tenNV; 
+		string str = TienichDoHoa::chuoiThuong(stringSearch); 
+		cout << "string search : " << str; 
+		for (int i = 0;i < this->soLuong;i++) 
+		{
+			tenNV = TienichDoHoa::chuoiThuong(this->nv[i]->getHoTen());  
+			if (strstr(tenNV.c_str(),str.c_str()))
+			{
+				result[soLuongNhanVienPhuHop++] = this->nv[i]; 
+			}
+		}
+		return soLuongNhanVienPhuHop; 
+	}
+	
 };
 
 // 	VOID CLASS DANH SACH NHAN VIEN

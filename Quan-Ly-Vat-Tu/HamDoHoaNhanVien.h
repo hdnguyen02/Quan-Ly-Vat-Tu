@@ -31,7 +31,7 @@ int hienThiDuLieuLenTableNV1(int x,int y,int indexPage, int soLuongPhanTuTrenMot
 	NhanVien **arrNV = DSNV.getDSNV();
 	for (int i = 0; i < soLuongPhanTuTrenMotPage; i++)
 	{
-		TienichDoHoa::setText(0,15,3,1);
+		TienichDoHoa::setText(2,10,10,1);
 		if (i + indexPage * soLuongPhanTuTrenMotPage < soLuongNV)
 		{
 			index = i + indexPage * soLuongPhanTuTrenMotPage;
@@ -47,6 +47,7 @@ int hienThiDuLieuLenTableNV1(int x,int y,int indexPage, int soLuongPhanTuTrenMot
 				temp = "Nu";
 			}
 			outtextxy(x + 600, marginTop + khoanCach * i, temp.c_str()); // hien thi ra maVT
+			setcolor(15); 
 			line(x, marginTop + khoanCach * i + 32, x + 724, marginTop + khoanCach * i + 32);
 			dem++;
 		}
@@ -58,8 +59,8 @@ int hienThiDuLieuLenTableNV1(int x,int y,int indexPage, int soLuongPhanTuTrenMot
 int hienThiDuLieuNhanVien(int x,int y,int h,int indexPage,int numberShow,dsNhanVien &DSNV) {
 	
 	veTableNV1(x,y,h); 
-	// hien thi ra du lieu
-	hienThiDuLieuLenTableNV1(x,y,indexPage,numberShow,DSNV); 
+
+
 	return hienThiDuLieuLenTableNV1(x,y,indexPage,numberShow,DSNV); 
 
 	

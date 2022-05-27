@@ -202,7 +202,7 @@ struct ONhap
 		}
 	}
 
-	void NhapVao(bool (*loaiKiTu)(char), const string &goiY)
+	void NhapVao(bool (*loaiKiTu)(char&), const string &goiY)  // cho phep thay doi ki tu
 	{
 		
 		if (khongDuocNhap == true)

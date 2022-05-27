@@ -417,7 +417,7 @@ public:
 };
 
 // =========================== HAM KIEM TRA KY TU ==============================
-bool kiTuChuHoa(char c)
+bool kiTuChuHoa(char &c)
 {
 	if (c >= 65 && c <= 90)
 	{
@@ -425,7 +425,7 @@ bool kiTuChuHoa(char c)
 	}
 	return false;
 }
-bool kiTuChuThuong(char c)
+bool kiTuChuThuong(char &c)
 {
 	if (c >= 97 && c <= 122)
 	{
@@ -433,7 +433,7 @@ bool kiTuChuThuong(char c)
 	}
 	return false;
 }
-bool kiTuSo(char c) 
+bool kiTuSo(char &c) 
 {
 	
 	if (c >= 48 && c <= 57 )
@@ -443,7 +443,7 @@ bool kiTuSo(char c)
 	return false;
 }
 
-bool kiTuChu(char c)
+bool kiTuChu(char &c)
 {
 	if ((kiTuChuHoa(c) || kiTuChuThuong(c) || c == 32 )  )
 	{
@@ -451,7 +451,7 @@ bool kiTuChu(char c)
 	}
 	return false;
 }
-bool kiTuChuHoacSo(char c)
+bool kiTuChuHoacSo(char &c)
 {
 	if (kiTuChu(c) || kiTuSo(c))
 	{
@@ -460,7 +460,7 @@ bool kiTuChuHoacSo(char c)
 	return false;
 }
 
-bool khongPhaiKhoanCach(char c)
+bool khongPhaiKhoanCach(char &c)
 {
 	if (c != 32)
 	{
@@ -469,7 +469,7 @@ bool khongPhaiKhoanCach(char c)
 	return false;
 }
 
-bool kiTuChuHoacSoKhongCach(char c)
+bool kiTuChuHoacSoKhongCach(char &c)
 {
 	if ((kiTuChu(c) || kiTuSo(c)) && khongPhaiKhoanCach(c))
 	{
@@ -480,7 +480,7 @@ bool kiTuChuHoacSoKhongCach(char c)
 
 
 
-bool kiemTraSoThuc(char c)
+bool kiemTraSoThuc(char &c)
 {
 	// chap nhan la ki tu so va dau .
 	if (kiTuSo(c) || c == 46)
@@ -489,7 +489,7 @@ bool kiemTraSoThuc(char c)
 	}
 }
 
-bool nhapDate(char c) {
+bool nhapDate(char &c) {
 	if (kiTuSo(c) || c == 47) {
 		return true; 
 	}
@@ -498,8 +498,12 @@ bool nhapDate(char c) {
 }
 
 // nhap ma chap nhan 3 ki tu sau : chu, so va _ 
-bool nhapID(char c) {
+bool nhapID(char &c) {
 	// truoc tien kiem tra la so chua da 
+	// kiem tra neu la ki tu so va la ki tu so thuong => in hoa len 
+	if (kiTuChuThuong(c)) { 
+		 c = c - 32; // in hoa len 
+	}
 	if ( (kiTuSo(c) || c == 95 || kiTuChu(c)) && c != 32 ) { 
 		return true; 
 	}
