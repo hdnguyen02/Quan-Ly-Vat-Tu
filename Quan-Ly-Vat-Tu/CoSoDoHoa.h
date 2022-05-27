@@ -70,7 +70,7 @@ struct NutBam
 	
 	void veNutCanTrai() {
 		setfillstyle(SOLID_FILL, duocTroVao ? colorHight : colorBack); // bo bua.
-		TienichDoHoa::setText(colorBack,colorText,3,1); 
+		TienichDoHoa::setText(colorBack,colorText,10,1); 
 		bar(x, y, x + w, y + h);
 		int text_h = textheight(this->tieuDe.c_str());
 		int toaDoTextY = y + (h - text_h) / 2; // da tim ra toa do Y 

@@ -8,9 +8,9 @@ const int SPACE = 32;
 const int DODAIMANHINH = 1536;
 const int DORONGMANHINH = 864;
 const int BACKGROUP = 0;
-const int COLOR_MENU_CAP1 = 14;
-const int COLOR_HIGHT_LIGHT = 3;
-const int COLOR_TEXT = 1;
+const int COLOR_MENU_CAP1 = 10;
+const int COLOR_HIGHT_LIGHT = 7;
+const int COLOR_TEXT = 0;
 const int COLOR_BODER_INPUT = 12;
 
 // cap do menu 1

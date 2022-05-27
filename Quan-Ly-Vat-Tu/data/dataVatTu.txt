@@ -1,7 +1,7 @@
-16
+17
 VT06,Kim Cuong,Vien,725,1
 VT02,Cat Trang,Khoi,22,1
-VT05,May Tinh,Cai,319,2
+VT05,May Tinh,Cai,319,1
 VT04,Dien Thoai,Cai,184,1
 VT045,Xi Mang Cung,Bao,4545.45,0
 VT07,Gach Men,Cai,2447,1
@@ -15,3 +15,4 @@ VT29,Thu Nghiem Mot,Kg,99,1
 VT28,Thu Nghiem Hai,Kg,22,1
 VT44,Kinh lup,Cai,289,1
 VT77,Giay Dep,Doi,225,1
+VT768,Dfdffd,Vfg,4.54545e+006,0
