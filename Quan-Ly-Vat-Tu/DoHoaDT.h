@@ -20,7 +20,7 @@ void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end) {  // truyen
 	setbkcolor(0); 
 	setcolor(15); 
 	settextstyle(6,0,3);
-	outtextxy(520,160,"TOP 10 VAT TU BAN CHAY"); 
+	outtextxy(430,160,"10 VAT TU CO DOANH THU CAO NHAT"); 
 	string strStart = "Tu ngay :  " + start.getStringDate(); 
 	string strEnd = "Den ngay :  " + end.getStringDate(); 
 	outtextxy(360 + 30,200,strStart.c_str());
@@ -100,6 +100,7 @@ int hienThiDuLieuLenTableXemHoaDonTheoDate(int indexPage, int soLuongItemPage, H
 		setcolor(CinputText);
 		setbkcolor(0);
 		settextstyle(6, 0, 1);
+		TienichDoHoa::setText(BACKGROUP,10,10,1); 
 		if (i + indexPage * soLuongItemPage < soLuongHoaDon)
 		{
 			dem++;
@@ -145,16 +146,41 @@ void veTableXemHDTheoDate()
 
 //,NutBam &vatTu,NutBam nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam &doanhThuNam
 
+// LAM HAM SAP XEP HOA DON THEO NGAY !
+//void sapXepHoaDontheoNgayThangNamTaoHoaDon()
+//	{
+//		int i, j;
+//		HoaDon *key;  
+//		for (i = 1; i < soLuong; i++)
+//		{
+//			key = nv[i];
+//			j = i - 1;
+//			while (j >= 0 && khoaSoSanh(nv[j], key))
+//			{
+//				nv[j + 1] = nv[j];
+//				j = j - 1;
+//			}
+//			nv[j + 1] = key;
+//		}
+//	}
 
+
+
+// Co sap xep thoi gian  
 void hienThiGiaoDienHoaDonTrongKhoanThoiGian (Date &start,Date &end,HoaDon** hoaDonHopLe,int soLuong,int &index
 	,NutBam &vatTu,NutBam nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam &doanhThuNam
 ) 
 {
+	
+	
 	TienichDoHoa::xoaManHinhTheoToaDo(0, 96, DODAIMANHINH, 1000, BACKGROUP);
 	
 	// khi vào ham nay tuc la co hoa don moi vao 
+	
+	// hien thi lai code cho nay 1 ti -> nen sap xep theo ngay thang nam ch de nhon 
+	
 	int indexPage = 0; 
-	int iTempTrenMotPage = 9; 
+	int iTempTrenMotPage = 8; 
 	setbkcolor(0); 
 	setcolor(15); 
 	settextstyle(6,0,3);
@@ -165,24 +191,16 @@ void hienThiGiaoDienHoaDonTrongKhoanThoiGian (Date &start,Date &end,HoaDon** hoa
 	outtextxy(750 + 30,200,strEnd.c_str());
 	
 	// ve ra hai cai nut 
-	NutBam btnLui(276,730,100,40,11,3,0,"BACK"); 
+	NutBam btnLui(276,730,100,40,14,3,1,"<<"); 
 	btnLui.veNut(); 
 	
-	NutBam btnTien(276 + 848,730,100,40,11,3,0,"NEXT"); 
+	NutBam btnTien(276 + 848,730,100,40,14,3,1,">>"); 
 	btnTien.veNut(); 
 	
 	veTableXemHDTheoDate(); 
-	
-	float toiDaPage = (float)soLuong / (float)iTempTrenMotPage;
+	float toiDaPage = TienichDoHoa::tinhToiDaPage(soLuong,iTempTrenMotPage); 
 	int soLuongCTHDTrenTable = hienThiDuLieuLenTableXemHoaDonTheoDate(indexPage,iTempTrenMotPage,hoaDonHopLe,soLuong);
-	
-	
-	int soLuongPage = soLuong / iTempTrenMotPage;
-	
-	if (!kiemTraSoNguyen(TienichDoHoa::floatToString(toiDaPage)))
-	{
-		toiDaPage = (int)toiDaPage + 1;
-	}
+
 	
 	hienThiChiMuc(DODAIMANHINH / 2 - 30,736,indexPage,toiDaPage); 
 
@@ -236,7 +254,7 @@ void hienThiGiaoDienHoaDonTrongKhoanThoiGian (Date &start,Date &end,HoaDon** hoa
 	
 }
 
-void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam &thongKe, NutBam &doanhThuNam ) {
+void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,DsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu,NutBam &thongKe, NutBam &doanhThuNam ) {
 	TienichDoHoa::xoaManHinhTheoToaDo(0, canLeTrenHD, 1600, 1600, BACKGROUP);
 	ONhap nhapNgayBD(510,350,100,40,40,"TU: ",0,0,2);  // nhap ngay bac dau 
 	ONhap nhapThangBD(550 + 120,350,100,40,40,"/",0,0,2);
@@ -263,7 +281,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 	
 	NutBam thongKeHD(470,540,260,40,15,0,0,"THONG KE HOA DON");
 	
-	NutBam thongKeTop10VT(470 + 260 + 10,540,260,40,15,0,0,"10 VAT TU BAN CHAY");  
+	NutBam thongKeTop10VT(470 + 260 + 10,540,260,40,15,0,0,"TOP 10 VAT TU DOANH THU");  
 	thongKeTop10VT.veNut(); 
 	thongKeHD.veNut();
 	// bac su kien click
@@ -324,7 +342,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						{
 							if (!Date::hopLeNgay(start.ngay))
 							{
-								MessageBox(NULL, "Ngay Khong Hop Le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+								TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 								nhapNgayBD.resetBoNhoDem();
 							}
 							else if (nhapThangBD.boNhoDem != "" && nhapNamBD.boNhoDem != "")
@@ -333,7 +351,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 								start.nam = TienichDoHoa::stringToInt(nhapNamBD.boNhoDem);
 								if (!Date::ngayThangNamHopLe(start))
 								{
-									MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+									TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 									nhapNgayBD.resetBoNhoDem();
 									nhapThangBD.resetBoNhoDem();
 									nhapNamBD.resetBoNhoDem();
@@ -350,7 +368,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 					{
 						if (!Date::hopLeThang(start.thang))
 						{
-							MessageBox(NULL, "Thang Khong Hop Le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+							MessageBox(NULL, "mm Khong Hop Le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 							nhapThangBD.resetBoNhoDem();
 						}
 						else if (nhapNgayBD.boNhoDem != "" && nhapNamBD.boNhoDem != "")
@@ -359,7 +377,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							start.nam = TienichDoHoa::stringToInt(nhapNamBD.boNhoDem);
 							if (!Date::ngayThangNamHopLe(start))
 							{
-								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+								TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 								nhapNgayBD.resetBoNhoDem();
 								nhapThangBD.resetBoNhoDem();
 								nhapNamBD.resetBoNhoDem();
@@ -375,7 +393,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 					{
 						if (!Date::hopLeNam(start.nam))
 						{
-							MessageBox(NULL, "Nam Khong Hop Le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+							TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 							nhapNamBD.resetBoNhoDem();
 						}
 						else if (nhapNgayBD.boNhoDem != "" && nhapThangBD.boNhoDem != "")
@@ -384,7 +402,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							start.thang = TienichDoHoa::stringToInt(nhapThangBD.boNhoDem);
 							if (!Date::ngayThangNamHopLe(start))
 							{
-								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+								TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 								nhapNgayBD.resetBoNhoDem();
 								nhapThangBD.resetBoNhoDem();
 								nhapNamBD.resetBoNhoDem();
@@ -412,7 +430,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 								end.nam = TienichDoHoa::stringToInt(nhapNamKT.boNhoDem);
 								if (!Date::ngayThangNamHopLe(end))
 								{
-									MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+									TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 									nhapNgayKT.resetBoNhoDem();
 									nhapThangKT.resetBoNhoDem();
 									nhapNamKT.resetBoNhoDem();
@@ -429,7 +447,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 					{
 						if (!Date::hopLeThang(end.thang))
 						{
-							MessageBox(NULL, "Thang Khong Hop Le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+							TienichDoHoa::hienThiThongBao("mm Khong Hop Le!");
 							nhapThangKT.resetBoNhoDem();
 						}
 						else if (nhapNgayKT.boNhoDem != "" && nhapNamKT.boNhoDem != "")
@@ -438,7 +456,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							end.nam = TienichDoHoa::stringToInt(nhapNamKT.boNhoDem);
 							if (!Date::ngayThangNamHopLe(end))
 							{
-								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+								TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 								nhapNgayKT.resetBoNhoDem();
 								nhapThangKT.resetBoNhoDem();
 								nhapNamKT.resetBoNhoDem();
@@ -455,7 +473,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 					{
 						if (!Date::hopLeNam(end.nam))
 						{
-							MessageBox(NULL, "Nam Khong Hop Le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+							TienichDoHoa::hienThiThongBao("yyyy Khong Hop Le!");
 							nhapNamKT.resetBoNhoDem();
 						}
 						else if (nhapNgayKT.boNhoDem != "" && nhapThangKT.boNhoDem != "")
@@ -464,7 +482,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 							end.thang = TienichDoHoa::stringToInt(nhapThangKT.boNhoDem);
 							if (!Date::ngayThangNamHopLe(end))
 							{
-								MessageBox(NULL, "Ngay-Thang-Nam khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+								TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
 								nhapNgayKT.resetBoNhoDem();
 								nhapThangKT.resetBoNhoDem();
 								nhapNamKT.resetBoNhoDem();
@@ -492,7 +510,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 					
 					if (soLuongHDHopLe == 0) 
 					{
-						MessageBox(NULL, "Khong Ton Tai Hoa Don Trong Khoan Thoi Gian Nay!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
+						TienichDoHoa::hienThiThongBao("Khong Ton Tai Hoa Don Trong Khoan Thoi Gian Nay!");
 					}
 					else  // hien thi ra table ! 
 					{ 
@@ -502,7 +520,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 				}
 				else 
 				{
-					MessageBox(NULL, "Thoi gian khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);	
+					TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");	
 				}	
 				}
 				else if (thongKeTop10VT.isMouseHover(xclick,yclick)) {
@@ -514,7 +532,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						int soLuongHoaDon = DSNV.soLuongHD(); 
 						int soLuongVatTu = dsVatTu.soLuongVT(); 
 						HoaDon** arrHoaDon = new HoaDon*[soLuongHoaDon]; 
-						DoanhThuVatTu arrDTVT[1000]; 
+						DoanhThuVatTu *arrDTVT = new DoanhThuVatTu[dsVatTu.soLuongVT()]; 
 						int index = 0; 
 						DSNV.listToArrayHoaDon(arrHoaDon,index); 
 						dsVatTu.BstVatTuToDoanhThuVatTu(arrDTVT,0); 
@@ -523,10 +541,12 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 						tinhDoanhThu(arrDTVT,soLuongVatTu,arrHoaDon,soLuongHoaDon,start,end);
 						sapXepDoanhThuVatTu(arrDTVT,soLuongVatTu); 
 						hienThiTop10VatTu(arrDTVT,start,end); 	
+						delete []arrDTVT; 
 						delete [] arrHoaDon;		
 					}
 					else {
-							MessageBox(NULL, "Thoi gian khong hop le!", "Thong Bao", MB_ICONINFORMATION | MB_OK);	
+							TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
+
 					}
 					
 				}
@@ -541,7 +561,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutB
 }
 
 
-void inDoanhThuNam(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &nhanVien,NutBam &hoaDon,
+void inDoanhThuNam(BstVatTu &dsVatTu,DsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &nhanVien,NutBam &hoaDon,
 
 NutBam &doanhThu,NutBam &thongKe,NutBam &doanhThuNam) {
 	
@@ -567,11 +587,6 @@ NutBam &doanhThu,NutBam &thongKe,NutBam &doanhThuNam) {
 	
 	// set cho nam mac dinh 
 	nhapNam.boNhoDem = TienichDoHoa::intToString(tempDate.nam); 
-	// hien thi nam len 
-	
-	
-	
-	
 	nhapNam.veONhap(); 
 	nhapNam.inNoiDung(); 
 	int xclick = - 1; 
@@ -688,7 +703,7 @@ NutBam &doanhThu,NutBam &thongKe,NutBam &doanhThuNam) {
 }
 
 
-void hienThiTinhNangDoanhThu(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu) 
+void hienThiTinhNangDoanhThu(BstVatTu &dsVatTu,DsNhanVien &DSNV,int &index,NutBam &vatTu,NutBam &nhanVien,NutBam &hoaDon,NutBam &doanhThu) 
 {
 	TienichDoHoa::xoaManHinhTheoToaDo(0, 56, DODAIMANHINH, DORONGMANHINH, BACKGROUP);
 	index = -1; 
@@ -753,6 +768,7 @@ void hienThiTinhNangDoanhThu(BstVatTu &dsVatTu,dsNhanVien &DSNV,int &index,NutBa
 					index = ID_DT; 
 					return; 
 				}
+				
 			}
 		delay(10);
 	}

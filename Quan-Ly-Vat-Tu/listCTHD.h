@@ -1,6 +1,4 @@
-#pragma once
-using namespace std;
-#include "Tienich.h"
+
 struct CThoaDon
 {
 	string maVT;

@@ -6,7 +6,7 @@ using namespace std;
 
 // chinh sua do hoa nhan vien 
 
-void hienThiChinhSuaNV(dsNhanVien &DSNV, NhanVien *nhanVienCT)
+void hienThiChinhSuaNV(DsNhanVien &DSNV, NhanVien *nhanVienCT)
 {
 	bool daSua = false; 
 	OVuong themNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140, margin + doDaiCoBan * 3 + 30, 400, 15);
@@ -179,7 +179,7 @@ void veTableNV()
 
 
 
-int hienThiDuLieuLenTableNV(int indexPage, int soLuongPhanTuTrenMotPage, dsNhanVien &DSNV)
+int hienThiDuLieuLenTableNV(int indexPage, int soLuongPhanTuTrenMotPage, DsNhanVien &DSNV)
 {
 	int index;
 	int khoanCach = 46;
@@ -221,9 +221,33 @@ int hienThiDuLieuLenTableNV(int indexPage, int soLuongPhanTuTrenMotPage, dsNhanV
 }
 
 
+void tableThemNV() {
+	OVuong themNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140, margin + doDaiCoBan * 3 + 30, 400, 15);
+	NutBam titleThemNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 140, margin + doDaiCoBan * 3 + 30, 40, 15, 0, 0, "THEM NHAN VIEN");
+	titleThemNV.veNut();
+	ONhap nhapMaNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 30, doDaiCoBan * 3 - 100, 40, 60, "MA: ", 0, 0, 10);
+	ONhap nhapHoNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 100, doDaiCoBan * 3 - 100, 40, 60, "HO: ", 0, 0, 20);
+	ONhap nhapTenNV(margin + doDaiCoBan * 6, canLeTrenHD + 170 + 70 * 2 + 30, doDaiCoBan * 3 - 100, 40, 60, "TEN: ", 0, 0, 15);
+
+	// tao ra 2 nut bam Nam Nu
+	NutBam nam(margin + doDaiCoBan * 6 + 60, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NAM");
+	nam.duocTroVao = true;
+	nam.veNut();
+
+	NutBam nu(margin + doDaiCoBan * 6 + 364, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NU");
+	nu.veNut();
+	nhapMaNV.veONhap();
+	nhapHoNV.veONhap();
+	nhapTenNV.veONhap();
 
 
-void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam &hoaDon, NutBam &doanhThu, bool (*khoaSapXep)(NhanVien *, NhanVien *))
+	NutBam saveNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoBan * 3 + 30, 40, 15, 2, 0, "SAVE");
+	saveNV.veNut();
+}
+
+
+
+void hienThiTinhNangNhanVien(DsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam &hoaDon, NutBam &doanhThu,NutBam &close, bool (*khoaSapXep)(NhanVien *, NhanVien *))
 {
 	int indexPage = 0;
 	int soLuongPhanTuHienThi = 0;
@@ -246,20 +270,12 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 	// tao ra 2 nut bam Nam Nu
 	NutBam nam(margin + doDaiCoBan * 6 + 60, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NAM");
 	nam.duocTroVao = true;
-	nam.veNut();
-
 	NutBam nu(margin + doDaiCoBan * 6 + 364, canLeTrenHD + 170 + 70 * 2 + 30 + 70, 60, 40, 11, 13, 0, "NU");
-	nu.veNut();
-	nhapMaNV.veONhap();
-	nhapHoNV.veONhap();
-	nhapTenNV.veONhap();
-
+	
 
 	NutBam saveNV(margin + doDaiCoBan * 6 - 60, canLeTrenHD + 170 + 50 + 160 + 120, margin + doDaiCoBan * 3 + 30, 40, 15, 2, 0, "SAVE");
-	saveNV.veNut();
-
 	DSNV.insertionSort(NhanVien::soSanhTheoTen);
-	
+	tableThemNV(); 
 	// khai bao ra 
 	veTableNV();
 	soLuongNhanVienTrenTable = hienThiDuLieuLenTableNV(indexPage, itemTrenMotPage, DSNV);
@@ -353,17 +369,15 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 				{
 					NhanVien** result = new NhanVien*[soLuongNV];  
 					int soLuongNhanVienThoaMan = DSNV.traVeNhanVienTimKiemPhuHop(searchNV.boNhoDem,result); 
-					cout << soLuongNhanVienThoaMan; 
-					
 					if (soLuongNhanVienThoaMan == 0) {
 						TienichDoHoa::hienThiThongBao("Khong Ton Nhan Vien Nay! ");  
 						searchNV.resetBoNhoDem(); 
-						// tableThemVT(); 
+						 tableThemNV(); 
 						
 					}
 					else 
 					{
-						NutBam *hienThiKetQua = new NutBam[soLuongNhanVienThoaMan]; 
+						NutBam *hienThiKetQua = new NutBam[soLuongNhanVienThoaMan];   /// 
 						
 						// tiep tuc xet noi dung cho tui no 
 						// bang cach lap qua 
@@ -376,6 +390,8 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 							hienThiKetQua[i].set(1176,canLeTren + i*khoanCach,300,24,BACKGROUP,14,3,result[i]->maNV + " - " + result[i]->getHoTen()); 
 							hienThiKetQua[i].veNutCanTrai(); 
 						}
+						
+						// sau khi da tim kiem song -> khong can 
 						NutBam huyTimKiem(1176,canLeTren + soLuongNhanVienThoaMan*khoanCach,300,24,BACKGROUP,2,15,"Huy Tim Kiem...");
 					 	huyTimKiem.veNutCanTrai(); 
 					 	
@@ -411,6 +427,9 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 							}
 							delay(10); 
 						}
+						//khong can toi cai cac nut kia nua 
+						delete []hienThiKetQua; 
+						
 						// kiem tra xem 
 						
 						if (indexResult != -1) 
@@ -419,11 +438,12 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 							// xoa het di cai vung ben duo 
 							TienichDoHoa::xoaManHinhTheoToaDo(1176,canLeTren,1000,1000,BACKGROUP);
 							hienThiChinhSuaNV(DSNV,result[indexResult]); 
-						
+							// sau khi nguoi dung hien thi song => delete di mang 
 							
 						}
 				
 						index = ID_NV; 
+						delete []result; //giai phong di vung nho 
 						return; 
 						
 					}
@@ -454,11 +474,16 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 					{
 						phai = 1;
 					}
-					DSNV.themNV(nhapMaNV.boNhoDem, nhapHoNV.boNhoDem, nhapTenNV.boNhoDem, phai, 0);
-					DSNV.ghiFileDSNV();
-					MessageBox(NULL, "Them thanh cong!", "thong bao", MB_ICONINFORMATION | MB_OK);
-					index = ID_NV;
-					return;
+					if (DSNV.themNV(nhapMaNV.boNhoDem, nhapHoNV.boNhoDem, nhapTenNV.boNhoDem, phai, 0) !=NULL) {
+						DSNV.ghiFileDSNV();
+						TienichDoHoa::hienThiThongBao("Them Nhan Vien Thanh Cong!"); 
+						index = ID_NV;
+						return;
+					}
+					else {
+						// truong hop da day bo nho  
+						TienichDoHoa::hienThiThongBao("Da Day Danh Sach Nhan Vien! Vui Long Xoa Bot Hoac Khong Them Nhan Vien Moi!"); 
+					}
 				}
 			}
 			else if (btnTien.isMouseHover(xclick, yclick))
@@ -600,20 +625,78 @@ void hienThiTinhNangNhanVien(dsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 					return;
 				}
 			}
+			else if (close.isMouseHover(xclick,yclick)) {
+				if (nhapMaNV.khongRong() || nhapHoNV.khongRong() || nhapTenNV.khongRong() ) 
+				{
+					// canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Nhan Vien Va Dong Chuong Trinh!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_CLOSE; 
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_CLOSE;
+					return;
+				}
+			}
 			else if (vatTu.isMouseHover(xclick, yclick))
 			{
-				index = ID_VT;
-				return;
+				// kiem tra xem nguoi dung co da nhap gi truoc khi di chua-> xac nhan roi di khi chua dien het 
+				if (nhapMaNV.khongRong() || nhapHoNV.khongRong() || nhapTenNV.khongRong() ) 
+				{
+					// canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Nhan Vien!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_VT; 
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_VT;
+					return;
+				}
+				
 			}
 			else if (hoaDon.isMouseHover(xclick, yclick))
 			{
-				index = ID_HD;
-				return;
+				if (nhapMaNV.khongRong() || nhapHoNV.khongRong() || nhapTenNV.khongRong() ) 
+				{
+					// canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Nhan Vien!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_HD; 
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_HD;
+					return;
+				}
 			}
 			else if (doanhThu.isMouseHover(xclick, yclick))
 			{
-				index = ID_DT;
-				return;
+				if (nhapMaNV.khongRong() || nhapHoNV.khongRong() || nhapTenNV.khongRong() ) 
+				{
+					// canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Nhan Vien!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_DT; 
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_DT;
+					return;
+				}
 			}
 		}
 		delay(1);

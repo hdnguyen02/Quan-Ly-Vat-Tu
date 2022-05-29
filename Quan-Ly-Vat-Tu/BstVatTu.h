@@ -112,8 +112,13 @@ private:
 
 public:
 	// HAM KHOI TAO, HAM HUY
-	BstVatTu() : root(NULL), soLuong(0) { this->docFileVatTu(); };
-	~BstVatTu() { this->giaiPhongVT(root); };
+	BstVatTu() : root(NULL), soLuong(0) { 
+	this->docFileVatTu(); }
+	~BstVatTu() 
+	{ 
+	cout << "Giai Phong Vat Tu..."; 
+	this->giaiPhongVT(root); 
+	};
 	// HAM CHUC NANG
 	void hoTroThemVT(NodeVatTu *root, string maVT, string ten, string donVi, float soLuongTon, int soLanTaoCTHD);
 	bool themVT(string maVT, string ten, string donVi, float soLuongTon, int soLanTaoCTHD);

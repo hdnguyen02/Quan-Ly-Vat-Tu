@@ -409,10 +409,19 @@ public:
 		int y = GetSystemMetrics(SM_CYSCREEN);
 		int x = GetSystemMetrics(SM_CXSCREEN);
 		initwindow(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) - 40);
+		this->removeExitButton(); // khong cho nguoi dung click vao nut X  
+		// lay ra full toa do man hinh 
+		
+		 
 	}
 	~StartBGI()
 	{
 		closegraph();
+	}
+	void removeExitButton()
+	{
+		HMENU hmenu = GetSystemMenu(GetForegroundWindow(), FALSE);
+		EnableMenuItem(hmenu, SC_CLOSE, MF_GRAYED);
 	}
 };
 
@@ -460,49 +469,14 @@ bool kiTuChuHoacSo(char &c)
 	return false;
 }
 
-bool khongPhaiKhoanCach(char &c)
-{
-	if (c != 32)
-	{
-		return true;
-	}
-	return false;
-}
-
-bool kiTuChuHoacSoKhongCach(char &c)
-{
-	if ((kiTuChu(c) || kiTuSo(c)) && khongPhaiKhoanCach(c))
-	{
-		return true;
-	}
-	return false;
-}
 
 
 
-bool kiemTraSoThuc(char &c)
-{
-	// chap nhan la ki tu so va dau .
-	if (kiTuSo(c) || c == 46)
-	{
-		return true;
-	}
-}
 
-bool nhapDate(char &c) {
-	if (kiTuSo(c) || c == 47) {
-		return true; 
-	}
-	return false; 
-	
-}
 
-// nhap ma chap nhan 3 ki tu sau : chu, so va _ 
 bool nhapID(char &c) {
-	// truoc tien kiem tra la so chua da 
-	// kiem tra neu la ki tu so va la ki tu so thuong => in hoa len 
 	if (kiTuChuThuong(c)) { 
-		 c = c - 32; // in hoa len 
+		 c = c - 32;
 	}
 	if ( (kiTuSo(c) || c == 95 || kiTuChu(c)) && c != 32 ) { 
 		return true; 

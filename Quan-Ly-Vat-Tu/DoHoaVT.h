@@ -143,6 +143,8 @@ void tableThemVT() {
 	nhapDVT.veONhap();
 	NutBam saveVT(margin + doDaiCoBan * 6 - 60, canLeTrenHD +500 + 26, margin + doDaiCoBan * 3 + 30 + 1, 40, 15, 2,0, "LUU VAT TU");
 	saveVT.veNut();
+	
+	
 }
 
 
@@ -165,7 +167,7 @@ void veNutHieuChinhVatTu(int x,int y,int w,int h,int khoanCach,int soLuongHieuCh
 
 
 
-void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBam &hoaDon, NutBam &doanhThu, bool (*khoaSapXep)(VatTu *, VatTu *))
+void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBam &hoaDon, NutBam &doanhThu,NutBam &close, bool (*khoaSapXep)(VatTu *, VatTu *))
 {
 	int indexPage = 0;
 	int soLuongPhanTuHienThi = 0;
@@ -267,6 +269,8 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 	NutBam hieuChinh10(margin + 746, marginTop + khoanCach * 9 - 4, 60, 28, 13, 0, 0, "sua");
 	NutBam hieuChinh11(margin + 746, marginTop + khoanCach * 10 - 4, 60, 28, 13, 0, 0, "sua");
 	
+	// thay vi khai bao 12 nut nen chuyen ve khai bao cai mang -> hay hon -> khong hard code 
+	
 	
 	
 	string tenVTCu = nhapTenVT.boNhoDem;
@@ -279,6 +283,26 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 		if (ismouseclick(WM_LBUTTONDOWN))
 		{
 			getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
+			if (close.isMouseHover(xclick,yclick)) {
+				// hien thi ra hoa don 
+				if (nhapMaVT.khongRong() || nhapTenVT.khongRong() || nhapDVT.khongRong() || nhapSoLuong.khongRong() ) 
+				{
+					// hien thi canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Vat Tu Va Dong Chuong Trinh!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_CLOSE; 
+							delete[] arrVT;
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_CLOSE;
+					delete[] arrVT;
+					return;
+				}
+			}
 			if (btnTien.isMouseHover(xclick, yclick))
 			{
 				if (indexPage < toiDaPage - 1)
@@ -439,6 +463,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 						TienichDoHoa::hienThiThongBao("Khong Ton Vat Tu Nay! ");  
 						searchVT.resetBoNhoDem(); 
 						tableThemVT(); 
+		
 						
 					}
 					else 
@@ -502,6 +527,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 						
 							
 						}
+						delete []hienThiKetQua; 
 						delete []arrVT; 
 						index = ID_VT; 
 						return; 
@@ -609,21 +635,65 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 			// bac dieu kien nguoi dung nhap ra ngaoi
 			else if (nhanVien.isMouseHover(xclick, yclick))
 			{
-				index = ID_NV;
-				delete[] arrVT;
-				return;
+				// kiem tra xem  -> can phai giai phong nhung gi 
+				if (nhapMaVT.khongRong() || nhapTenVT.khongRong() || nhapDVT.khongRong() || nhapSoLuong.khongRong() ) 
+				{
+					// hien thi canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Nhan Vien!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_NV; 
+							delete[] arrVT;
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_NV;
+					delete[] arrVT;
+					return;
+				}
+				
 			}
 			else if (hoaDon.isMouseHover(xclick, yclick))
 			{
-				index = ID_HD;
-				delete[] arrVT;
-				return;
+				if (nhapMaVT.khongRong() || nhapTenVT.khongRong() || nhapDVT.khongRong() || nhapSoLuong.khongRong() ) 
+				{
+					// hien thi canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Nhan Vien!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_HD; 
+							delete[] arrVT;
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_HD;
+					delete[] arrVT;
+					return;
+				}
 			}
 			else if (doanhThu.isMouseHover(xclick, yclick))
 			{
-				index = ID_DT;
-				delete[] arrVT;
-				return;
+				if (nhapMaVT.khongRong() || nhapTenVT.khongRong() || nhapDVT.khongRong() || nhapSoLuong.khongRong() ) 
+				{
+					// hien thi canh bao nguoi dung 
+					int luaChon = MessageBox(NULL, "Huy Bo Them Nhan Vien!", "Thong Bao", MB_ICONWARNING | MB_OKCANCEL);
+						if (luaChon == OK)
+						{
+							index = ID_DT; 
+							delete[] arrVT;
+							return; 
+						}
+				}
+				else 
+				{
+					index = ID_DT;
+					delete[] arrVT;
+					return;
+				}
 			}
 			if (nhapVaoChinhSua) 
 			{
