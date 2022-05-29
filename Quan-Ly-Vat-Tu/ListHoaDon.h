@@ -154,6 +154,23 @@ public:
 		}
 	}
 	
+	static void sapXepHoaDonTheoNgay(HoaDon **arr,int soLuongHD)
+	{
+		int i, j;
+			HoaDon *key;
+			for (i = 1; i < soLuongHD; i++)
+			{
+				key = arr[i];
+				j = i - 1;
+				while (j >= 0 && arr[j]->date > key->date )
+				{
+					arr[j + 1] = arr[j];
+					j = j - 1;
+				}
+				arr[j + 1] = key;
+			}
+	}
+	
 	
 	// viet ham chi xuat ra hon xuat va hon nhap ra 1 ben 
 	void ghiFileHoaDonTheoLoai(ofstream &fileout,string loaiHD)

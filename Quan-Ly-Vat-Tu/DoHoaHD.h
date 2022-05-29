@@ -33,6 +33,7 @@ int hienThiCTHDLenTableKhongCoSua(int indexPage, int soLuongItemPage, ListCTHD *
 			setcolor(CinputText);
 			setbkcolor(0);
 			settextstyle(6, 0, 1);
+			TienichDoHoa::setText(BACKGROUP,10,10,1); 
 			outtextxy(marginTable + 6, marginTop + khoanCach * i, arrCTHD[i + indexPage * soLuongItemPage]->getmaVT().c_str());
 			NodeVatTu *tempVT = dsVatTu.timKiemVT(arrCTHD[i + indexPage * soLuongItemPage]->getmaVT());
 			outtextxy(marginTable + doDaiCoBan, marginTop + khoanCach * i, tempVT->getInfo()->ten.c_str());
@@ -44,7 +45,7 @@ int hienThiCTHDLenTableKhongCoSua(int indexPage, int soLuongItemPage, ListCTHD *
 			temp = TienichDoHoa::floatToString(arrCTHD[i + indexPage * soLuongItemPage]->getVAT());
 			outtextxy(marginTable + doDaiCoBan * 6 + 32, marginTop + khoanCach * i, temp.c_str());
 			// in them giaTien cua hoadon ra
-			temp = TienichDoHoa::floatToString(arrCTHD[i + indexPage * soLuongItemPage]->getTongTien());
+			temp = TienichDoHoa::longLongToString((long long)arrCTHD[i + indexPage * soLuongItemPage]->getTongTien());
 			outtextxy(marginTable + doDaiCoBan * 7, marginTop + khoanCach * i, temp.c_str());
 			setcolor(15);
 			line(marginTable - 34, marginTop + khoanCach * i + 26, marginTable + 1378, marginTop + khoanCach * i + 26);
@@ -83,14 +84,10 @@ void hienThiHoaDon(NhanVienLapHD &nvLapHD, BstVatTu &dsVatTu, int &index, NutBam
 	int soLuongCTHD = nvLapHD.ptrHoaDon->getdsCTHD()->soLuongCTHD();
 	float toiDaPage = TienichDoHoa::tinhToiDaPage(soLuongCTHD,itemTrenMotPage); 
 
-	setcolor(13);  // mau Vang
-	setbkcolor(0); // xet mau nen ve thanh mau den !
-	settextstyle(6, 0, 4);
-	outtextxy(650, 130, "HOA DON");
-	setcolor(CinputText);
-	setbkcolor(0);
-
-	settextstyle(1, 0, 1);
+	TienichDoHoa::setText(BACKGROUP,3,10,4);
+	outtextxy(682, 130, "HOA DON");
+	TienichDoHoa::setText(BACKGROUP,14,10,1); 
+	
 	outtextxy(678, 180, nvLapHD.ptrHoaDon->getinfo()->date.getStringDate().c_str());
 	string loaiHD;
 	if (nvLapHD.ptrHoaDon->getinfo()->loai == "X")
@@ -114,10 +111,8 @@ void hienThiHoaDon(NhanVienLapHD &nvLapHD, BstVatTu &dsVatTu, int &index, NutBam
 	OVuong(52, 120, doDaiCoBan * 9 + 30 + 4, 590, 15);
 	NutBam mauNen(52, 180, 600, 40, 2, 3, 4, "");
 
-	setcolor(CinputText);
-	setbkcolor(0);
-	settextstyle(6, 0, 1);
-	outtextxy(margin + 1250, 736, TienichDoHoa::floatToString(nvLapHD.ptrHoaDon->getdsCTHD()->tinhTongTien()).c_str());
+	TienichDoHoa::setText(BACKGROUP,15,10,1); 
+	outtextxy(margin + 1100, 736, TienichDoHoa::longLongToString((long long)nvLapHD.ptrHoaDon->getdsCTHD()->tinhTongTien()).c_str());
 	hienThiCTHDLenTableKhongCoSua(indexPage, itemTrenMotPage, nvLapHD.ptrHoaDon->getdsCTHD(), dsVatTu); // moi vao thi hien Thi index page thu nhat -> sau do co nhap chon thi tinh sau!
 	hienThiChiMuc(toaDoChiMucX, toaDoChiMucY, indexPage, toiDaPage);
 	// VE RA CAC CHI TIET XUNG QUANH
@@ -147,7 +142,7 @@ void hienThiHoaDon(NhanVienLapHD &nvLapHD, BstVatTu &dsVatTu, int &index, NutBam
 					veTableCTHD();
 					OVuong(52, 120, doDaiCoBan * 9 + 30 + 4, 590, 15);
 					hienThiChiMuc(toaDoChiMucX, toaDoChiMucY, indexPage, toiDaPage);
-					outtextxy(margin + 1250, 736, TienichDoHoa::floatToString(nvLapHD.ptrHoaDon->getdsCTHD()->tinhTongTien()).c_str());
+					outtextxy(margin + 1100, 736, TienichDoHoa::longLongToString((long long)nvLapHD.ptrHoaDon->getdsCTHD()->tinhTongTien()).c_str());
 					hienThiCTHDLenTableKhongCoSua(indexPage, itemTrenMotPage, nvLapHD.ptrHoaDon->getdsCTHD(), dsVatTu);
 				}
 			}
@@ -160,7 +155,7 @@ void hienThiHoaDon(NhanVienLapHD &nvLapHD, BstVatTu &dsVatTu, int &index, NutBam
 					OVuong(52, 120, doDaiCoBan * 9 + 30 + 4, 590, 15);
 
 					hienThiChiMuc(toaDoChiMucX, toaDoChiMucY, indexPage, toiDaPage);
-					outtextxy(margin + 1250, 736, TienichDoHoa::floatToString(nvLapHD.ptrHoaDon->getdsCTHD()->tinhTongTien()).c_str());
+					outtextxy(margin + 1100, 736, TienichDoHoa::longLongToString((long long)nvLapHD.ptrHoaDon->getdsCTHD()->tinhTongTien()).c_str());
 					hienThiCTHDLenTableKhongCoSua(indexPage, itemTrenMotPage, nvLapHD.ptrHoaDon->getdsCTHD(), dsVatTu);
 				}
 			}
@@ -240,7 +235,7 @@ void hienThiXuatHoaDon(BstVatTu &dsVatTu, DsNhanVien &DSNV, int &index, NutBam &
 					}
 					else
 					{
-						MessageBox(NULL, "khong ton tai so HD nay!", "thong bao", MB_ICONINFORMATION | MB_OK);
+						MessageBox(NULL, "Khong Ton Tai Hoa Don nay!", "Thong Bao", MB_ICONINFORMATION | MB_OK);
 						timKiemHD.resetBoNhoDem();
 					}
 				}
@@ -299,8 +294,8 @@ void hienThiChinhSuaCTHD(NodeCTHD *tempCTHD, ListCTHD *dsCTHD, BstVatTu &dsVatTu
 	title.veNut();
 	// ve ra 4 nut -> sau do tao ra cac hieu chinh =>
 	ONhap maVT(x + 30, y + 46, w - 170, 40, 110, "MA VT: ", 8, 8, 10);
-	ONhap soLuong(x + 30, y + 46 + 48 + 19, w - 170, 40, 110, "SO LUONG: ", 8, 8, 7);
-	ONhap donGia(x + 30, y + 46 * 2 + 48 + 19 * 2, w - 170, 40, 110, "DON GIA: ", 8, 8, 7);
+	ONhap soLuong(x + 30, y + 46 + 48 + 19, w - 170, 40, 110, "SO LUONG: ", 8, 8, 5);
+	ONhap donGia(x + 30, y + 46 * 2 + 48 + 19 * 2, w - 170, 40, 110, "DON GIA: ", 8, 8, 5);
 	ONhap VAT(x + 30, y + 46 * 3 + 48 + 19 * 3, w - 170, 40, 110, "VAT(%): ", 8, 8, 4);
 	
 	
@@ -496,7 +491,7 @@ void veTableCTHD()
 	line(margin + doDaiCoBan * 7 + 3 * 5, canLeTrenHD + 170, margin + doDaiCoBan * 7 + 3 * 5, 690);
 	setbkcolor(0);
 	setcolor(15);
-	outtextxy(margin + 1102, 736, "TONG TIEN: ");
+	outtextxy(margin + 980, 736, "TONG TIEN: ");
 }
 
 
@@ -530,7 +525,7 @@ int hienThiCTHDLenTable(int indexPage, int soLuongItemPage, ListCTHD *dsCTHD, Bs
 			outtextxy(marginTable + doDaiCoBan * 5, marginTop + khoanCach * i, temp.c_str());
 			temp = TienichDoHoa::floatToString(arrCTHD[i + indexPage * soLuongItemPage]->getVAT()) + " %"; 
 			outtextxy(marginTable + doDaiCoBan * 6 + 32, marginTop + khoanCach * i, temp.c_str());
-			temp = TienichDoHoa::floatToString(arrCTHD[i + indexPage * soLuongItemPage]->getTongTien());
+			temp = TienichDoHoa::longLongToString((long long)arrCTHD[i + indexPage * soLuongItemPage]->getTongTien());
 			outtextxy(marginTable + doDaiCoBan * 7, marginTop + khoanCach * i, temp.c_str());
 			NutBam hieuChinh(marginTable + doDaiCoBan * 7 + 190, marginTop + khoanCach * i - 4, 52, 28, 11, 2, 0, "Sua");
 			hieuChinh.veNut();
@@ -548,7 +543,7 @@ void hienThiTongTienCTHD(ListCTHD *dsCTHD)
 {
 	TienichDoHoa::setText(BACKGROUP,10,10,1); 
 	TienichDoHoa::xoaManHinhTheoToaDo(margin + 1250, 720, margin + 1250 + 100, 720 + 100, BACKGROUP);
-	outtextxy(margin + 1250, 736, TienichDoHoa::floatToString(dsCTHD->tinhTongTien()).c_str());
+	outtextxy(margin + 1250, 736, TienichDoHoa::longLongToString((long long)dsCTHD->tinhTongTien()).c_str());
 }
 
 
@@ -620,8 +615,8 @@ void hienThiThemHoaDonNhapVaXuat(BstVatTu &dsVatTu, DsNhanVien &DSNV, int &index
 	NutBam tenVT(margin + 300 ,canLeTrenHD + 90,260,40,14,1,1 ,"");
 	tenVT.veNut(); 
 	
-	ONhap soLuongVT(margin + 400 + 120 + 10 + 30 + 20, canLeTrenHD + 90, 130, 40, 96, "SO LUONG: ", 0, 0, 7);
-	ONhap donGia(margin + 660 + 120 + 10 + 30 + 10, canLeTrenHD + 90, 130, 40, 96, "DON GIA: ", 0, 0, 7);
+	ONhap soLuongVT(margin + 400 + 120 + 10 + 30 + 20, canLeTrenHD + 90, 130, 40, 96, "SO LUONG: ", 0, 0, 5);
+	ONhap donGia(margin + 660 + 120 + 10 + 30 + 10, canLeTrenHD + 90, 130, 40, 96, "DON GIA: ", 0, 0, 5);
 	ONhap VAT(margin + 990 + 60 + 30, canLeTrenHD + 90, 100, 40, 80, "VAT(%): ", 0, 0, 4);
 	
 	OVuong baoQuanhHD(54, canLeTrenHD, DODAIMANHINH - 12 - 102, 80, 15);

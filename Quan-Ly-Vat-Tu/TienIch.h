@@ -42,6 +42,14 @@ public:
 		ss >> temp;
 		return temp;
 	}
+	static string longLongToString(long long n) {
+		stringstream ss; 
+		ss << n;
+		string temp;
+		ss >> temp; 
+		return temp; 
+		
+	}
 	static string intToString(int n)
 	{
 		stringstream ss;
@@ -237,6 +245,24 @@ struct Date
 		}
 		
 		return true; // check lon hon hien tai -> tuong lai!
+	}
+	
+	bool operator>(const struct Date &other)
+	{
+		if (this->nam > other.nam)
+			return true;
+		else if (this->nam == other.nam)
+		{
+			if (this->thang > other.thang)
+				return true;
+			else if (this->thang == other.thang)
+			{
+				if (this->ngay > other.ngay)
+					return true;
+			}
+		}
+
+		return false;
 	}
 	
 	void stringToDate(string ngay,string thang,string nam) {

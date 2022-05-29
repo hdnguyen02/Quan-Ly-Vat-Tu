@@ -18,7 +18,7 @@ void chinhSuaVT(BstVatTu &dsVatTu, VatTu *vatTuCT )
 	titleCSVT.veNut(); 
 	ONhap nhapMaVT(margin + doDaiCoBan * 6  , canLeTrenHD + 140 + 30, doDaiCoBan * 3 - 20 - 10 , 40, 0, "", 0, 0, 10);
 	ONhap nhapTenVT(margin + doDaiCoBan * 6 , canLeTrenHD + 234 + 30, doDaiCoBan * 3 - 20 - 10 , 40, 0, "", 0, 0, 25);
-	ONhap nhapSoLuong(margin + doDaiCoBan * 6 , canLeTrenHD + 328 + 30, doDaiCoBan * 3 -20 - 10 , 40, 0, "", 0, 0, 7);
+	ONhap nhapSoLuong(margin + doDaiCoBan * 6 , canLeTrenHD + 328 + 30, doDaiCoBan * 3 -20 - 10 , 40, 0, "", 0, 0, 5);
 	ONhap nhapDVT(margin + doDaiCoBan * 6 , canLeTrenHD + 170 + 50 + 70 * 2 + 60 + 32, doDaiCoBan * 3 - 20 - 10 , 40, 0, "", 0, 0, 15);
 	nhapMaVT.boNhoDem = vatTuCT->maVT; // lay ra maVT
 	nhapTenVT.boNhoDem = vatTuCT->ten;
@@ -214,7 +214,7 @@ void hienThiTinhNangVatTu(BstVatTu &dsVatTu, int &index, NutBam &nhanVien, NutBa
 	
 	ONhap nhapMaVT(margin + doDaiCoBan * 6  , canLeTrenHD + 140 + 30, doDaiCoBan * 3 - 20 - 10 , 40, 0, "", 0, 0, 10);
 	ONhap nhapTenVT(margin + doDaiCoBan * 6 , canLeTrenHD + 234 + 30, doDaiCoBan * 3 - 20 - 10 , 40, 0, "", 0, 0, 25);
-	ONhap nhapSoLuong(margin + doDaiCoBan * 6 , canLeTrenHD + 328 + 30, doDaiCoBan * 3 -20 - 10 , 40, 0, "", 0, 0, 7);
+	ONhap nhapSoLuong(margin + doDaiCoBan * 6 , canLeTrenHD + 328 + 30, doDaiCoBan * 3 -20 - 10 , 40, 0, "", 0, 0, 5);
 	ONhap nhapDVT(margin + doDaiCoBan * 6 , canLeTrenHD + 170 + 50 + 70 * 2 + 60 + 32, doDaiCoBan * 3 - 20 - 10 , 40, 0, "", 0, 0, 15);
 	
 	
