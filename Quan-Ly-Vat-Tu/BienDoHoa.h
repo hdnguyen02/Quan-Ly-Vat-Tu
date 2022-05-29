@@ -18,7 +18,7 @@ const int ID_VT = 0;
 const int ID_NV = 1;
 const int ID_HD = 2;
 const int ID_DT = 3;
-
+const int ID_CLOSE = 100;
 // ID cua cac menu con cua ID_VT
 const int ID_THEM_VT = 4;
 const int ID_HIEUCHINH_VT = 5;
@@ -39,7 +39,7 @@ const int ID_DT_THONG_KE = 19;
 // mau cho cac nut con
 const int COLOR_BTN_SUB = 15; // mau cua cac nut con
 const int COLOR_TEXT_BTN_SUB = 0;
-const int COLOR_HIGHT_BTN_SUB = 5;
+const int COLOR_HIGHT_BTN_SUB = 7;
 
 // dinh nghia mau nen o Nhap
 const int COLOR_BACKGROUP_INPUT = 14;

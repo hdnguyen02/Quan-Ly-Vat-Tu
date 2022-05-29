@@ -409,15 +409,24 @@ public:
 		int y = GetSystemMetrics(SM_CYSCREEN);
 		int x = GetSystemMetrics(SM_CXSCREEN);
 		initwindow(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) - 40);
+		this->removeExitButton(); // khong cho nguoi dung click vao nut X  
+		// lay ra full toa do man hinh 
+		
+		 
 	}
 	~StartBGI()
 	{
 		closegraph();
 	}
+	void removeExitButton()
+	{
+		HMENU hmenu = GetSystemMenu(GetForegroundWindow(), FALSE);
+		EnableMenuItem(hmenu, SC_CLOSE, MF_GRAYED);
+	}
 };
 
 // =========================== HAM KIEM TRA KY TU ==============================
-bool kiTuChuHoa(char c)
+bool kiTuChuHoa(char &c)
 {
 	if (c >= 65 && c <= 90)
 	{
@@ -425,7 +434,7 @@ bool kiTuChuHoa(char c)
 	}
 	return false;
 }
-bool kiTuChuThuong(char c)
+bool kiTuChuThuong(char &c)
 {
 	if (c >= 97 && c <= 122)
 	{
@@ -433,7 +442,7 @@ bool kiTuChuThuong(char c)
 	}
 	return false;
 }
-bool kiTuSo(char c) 
+bool kiTuSo(char &c) 
 {
 	
 	if (c >= 48 && c <= 57 )
@@ -443,7 +452,7 @@ bool kiTuSo(char c)
 	return false;
 }
 
-bool kiTuChu(char c)
+bool kiTuChu(char &c)
 {
 	if ((kiTuChuHoa(c) || kiTuChuThuong(c) || c == 32 )  )
 	{
@@ -451,7 +460,7 @@ bool kiTuChu(char c)
 	}
 	return false;
 }
-bool kiTuChuHoacSo(char c)
+bool kiTuChuHoacSo(char &c)
 {
 	if (kiTuChu(c) || kiTuSo(c))
 	{
@@ -460,46 +469,15 @@ bool kiTuChuHoacSo(char c)
 	return false;
 }
 
-bool khongPhaiKhoanCach(char c)
-{
-	if (c != 32)
-	{
-		return true;
+
+
+
+
+
+bool nhapID(char &c) {
+	if (kiTuChuThuong(c)) { 
+		 c = c - 32;
 	}
-	return false;
-}
-
-bool kiTuChuHoacSoKhongCach(char c)
-{
-	if ((kiTuChu(c) || kiTuSo(c)) && khongPhaiKhoanCach(c))
-	{
-		return true;
-	}
-	return false;
-}
-
-
-
-bool kiemTraSoThuc(char c)
-{
-	// chap nhan la ki tu so va dau .
-	if (kiTuSo(c) || c == 46)
-	{
-		return true;
-	}
-}
-
-bool nhapDate(char c) {
-	if (kiTuSo(c) || c == 47) {
-		return true; 
-	}
-	return false; 
-	
-}
-
-// nhap ma chap nhan 3 ki tu sau : chu, so va _ 
-bool nhapID(char c) {
-	// truoc tien kiem tra la so chua da 
 	if ( (kiTuSo(c) || c == 95 || kiTuChu(c)) && c != 32 ) { 
 		return true; 
 	}

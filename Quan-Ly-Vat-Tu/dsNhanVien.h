@@ -77,14 +77,14 @@ struct NhanVienLapHD
 	}
 };
 
-class dsNhanVien
+class DsNhanVien
 {
 private:
 	int soLuong;
 	NhanVien *nv[MAX];
 
 public:
-	dsNhanVien() : soLuong(0) {}
+	DsNhanVien() : soLuong(0) {}
 	bool dsRong();
 	bool dsDay();
 	void duyetDSNV();
@@ -226,10 +226,26 @@ public:
 		fileout.close(); 
 	}
 	
+	// viet ham tim kiem nhung 
+	int traVeNhanVienTimKiemPhuHop(string stringSearch,NhanVien **result) {
+		int soLuongNhanVienPhuHop = 0; 
+		string tenNV; 
+		string str = TienichDoHoa::chuoiThuong(stringSearch); 
+		for (int i = 0;i < this->soLuong;i++) 
+		{
+			tenNV = TienichDoHoa::chuoiThuong(this->nv[i]->getHoTen());  
+			if (strstr(tenNV.c_str(),str.c_str()))
+			{
+				result[soLuongNhanVienPhuHop++] = this->nv[i]; 
+			}
+		}
+		return soLuongNhanVienPhuHop; 
+	}
+	
 };
 
 // 	VOID CLASS DANH SACH NHAN VIEN
-void dsNhanVien::ghiFileDSNV()
+void DsNhanVien::ghiFileDSNV()
 { // ham nay se duoc goi khi them xoa sua.
 	ofstream fileout;
 	fileout.open("data/dataNhanVien.txt", ios::out | ios::trunc); // mo ra chi ghi va xoa het
@@ -241,7 +257,7 @@ void dsNhanVien::ghiFileDSNV()
 	fileout.close();
 }
 
-void dsNhanVien::docFileDSNV()
+void DsNhanVien::docFileDSNV()
 {
 	ifstream filein;
 	filein.open("data/dataNhanVien.txt", ios::in);
@@ -267,7 +283,7 @@ void dsNhanVien::docFileDSNV()
 	filein.close();
 }
 
-bool dsNhanVien::dsRong()
+bool DsNhanVien::dsRong()
 {
 	if (soLuong == 0)
 	{
@@ -275,7 +291,7 @@ bool dsNhanVien::dsRong()
 	}
 	return false;
 }
-bool dsNhanVien::dsDay()
+bool DsNhanVien::dsDay()
 {
 	if (soLuong == MAX)
 	{
@@ -284,7 +300,7 @@ bool dsNhanVien::dsDay()
 	return false;
 }
 
-void dsNhanVien::duyetDSNV()
+void DsNhanVien::duyetDSNV()
 {
 	for (int i = 0; i < this->soLuong; i++)
 	{
@@ -294,7 +310,7 @@ void dsNhanVien::duyetDSNV()
 }
 
 // ham them nv => tra ve dia chi vua moi them vao.
-NhanVien *dsNhanVien::themNV(const string &maNV, const string &ho, const string &ten, const int &phai, int soLanTaoHD)
+NhanVien *DsNhanVien::themNV(const string &maNV, const string &ho, const string &ten, const int &phai, int soLanTaoHD)
 {
 	if (!this->dsDay())
 	{
@@ -305,7 +321,7 @@ NhanVien *dsNhanVien::themNV(const string &maNV, const string &ho, const string 
 	return NULL; // them that bai !
 }
 
-int dsNhanVien::timKiemNVTraVeViTri(const string &maVT)
+int DsNhanVien::timKiemNVTraVeViTri(const string &maVT)
 {
 	for (int i = 0; i < this->soLuong; i++)
 	{
@@ -317,7 +333,7 @@ int dsNhanVien::timKiemNVTraVeViTri(const string &maVT)
 	return -1;
 }
 
-NhanVien *dsNhanVien::timKiemNVTraVeDiaChi(const string &maVT)
+NhanVien *DsNhanVien::timKiemNVTraVeDiaChi(const string &maVT)
 {
 	for (int i = 0; i < this->soLuong; i++)
 	{
@@ -329,7 +345,7 @@ NhanVien *dsNhanVien::timKiemNVTraVeDiaChi(const string &maVT)
 	return NULL;
 }
 
-bool dsNhanVien::xoaNV(const string &maVT)
+bool DsNhanVien::xoaNV(const string &maVT)
 {
 	int viTriXoa = this->timKiemNVTraVeViTri(maVT);
 	if (this->dsRong() || viTriXoa == -1)
@@ -344,13 +360,15 @@ bool dsNhanVien::xoaNV(const string &maVT)
 	return true;
 }
 
-int dsNhanVien::soLuongNV()
+int DsNhanVien::soLuongNV()
 {
 	return this->soLuong;
 }
 
-void dsNhanVien::giaiPhongDSNV()
+void DsNhanVien::giaiPhongDSNV()
 {
+	// ham khoi tao chua he duoc goi 
+	cout << "Giai Phong Nhan Vien..." << endl; 
 	for (int i = 0; i < this->soLuong; i++)
 	{
 		nv[i]->dsHoaDon.giaiPhongListHoaDon(); // truoc tien can goi toi ham giai phong
