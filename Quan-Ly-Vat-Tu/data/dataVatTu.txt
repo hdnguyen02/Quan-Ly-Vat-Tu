@@ -1,7 +1,8 @@
-21
+23
 VT06,Kim Cuong,Vien,748,1
 VT02,Cat Trang,Khoi,4.54548e+006,1
-45,Gh,Gff,1.00003e+006,1
+45,Gh,Gff,1.00003e+006,2
+HGHGFHFGHG,Anh Hghg Kkkkkmkpm,Caai,12456,0
 VT05,May Tinh,Cai,322,1
 VT04,Dien Thoai,Cai,186,1
 VT07,Gach Men,Cai,2447,1
@@ -10,13 +11,14 @@ VT14,Cat Bien,Khoi,2365,1
 VT12,Cat Den,Khoi,340,1
 VT99,Dinh Gi,Tram Cay,2423,1
 VT23,Khau Trang,Hop,1.00261e+006,1
-VT33,Day Dien,Kg,3330,1
+VT33,Day Dien,Kg,2997,2
 VT29,Thu Nghiem Mot,Kg,99,1
-VT28,Thu Nghiem Hai,Kg,22,1
+VT28,Thu Nghiem Hai,Jhjh,22,1
 VT27,Iphone Xs Max,Cai,999,0
 VT245,Gfg,Fgh,99999,0
 VT44,Kinh lup,Cai,312,1
 VT343,Ho Duc Nguyen,Fgfgf,79011,1
 VT344545,Vt,Ggg,1e+007,0
-VT77,Giay Dep,Doi,177995,2
+VT77,Giay Dep,Doi,177961,1
 VT99344,Fggfg,U,999999,0
+YHFGHFG,Hjh,Hgh,657,0

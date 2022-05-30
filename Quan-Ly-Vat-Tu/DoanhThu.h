@@ -1,5 +1,5 @@
 #include "Tienich.h"
-void tinhDoanhThu(DoanhThuVatTu arrDTVT[],int soLuongVatTu,HoaDon** arrHoaDon,int soLuongHoaDon,Date &start,Date end) {
+void tinhDoanhThuVatTuTheoDate(DoanhThuVatTu arrDTVT[],int soLuongVatTu,HoaDon** arrHoaDon,int soLuongHoaDon,Date &start,Date end) {
 		for (int i = 0; i < soLuongVatTu;i++) { 
 			arrDTVT[i].doanhThu = 0; 	
 			for (int j = 0; j < soLuongHoaDon;j++) {
@@ -37,7 +37,7 @@ void sapXepDoanhThuVatTu(DoanhThuVatTu arrDTVT[],int soLuongVatTu)
 // ly thuyet nhu sau: 
 // nhan vao nam : sau do di loc ra cac hoa don co nam phu hop 
 
-void tinhDoanhThu(HoaDon** arrHoaDon,int soLuongHoaDon,float doanhThuNam[],int nam) {
+void tinhDoanhThu12Thang(HoaDon** arrHoaDon,int soLuongHoaDon,float doanhThuNam[],int nam) {
 	// lap qua tat ca ca hoa don va kiem tra 
 	
 	for (int i = 0;i < soLuongHoaDon;i++) {
@@ -47,3 +47,5 @@ void tinhDoanhThu(HoaDon** arrHoaDon,int soLuongHoaDon,float doanhThuNam[],int n
 		}
 	}
 }
+
+

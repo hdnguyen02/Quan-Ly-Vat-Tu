@@ -4,32 +4,55 @@ using namespace std;
 #include "BienDoHoa.h"
 #include "DoanhThu.h"
 
+const int SO_LUONG_TOP_DOANH_THU_VT = 10;  // theo de !
 
+// ham tra so phan tu se hien thi tren top 10 doanh thu vat tu. 
 
+// logic ham chua dung
+// neu nhu so phan tu khac 0 nhieu qua -> neu no bang khong -> no nam o cuoi mang  
 
-void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end) {  // truyen vao 1 cai mang dap sap xep va viec cua ta la hien thi ra thoi 
-	// chi can hien thi ra 10 vat tu thoi khong lam gi ca 
-	// ve ra cai bang 
-	// hien thi ra 10 vat tu do len thoi 
-	TienichDoHoa::xoaManHinhTheoToaDo(0, 96, DODAIMANHINH, 1000, BACKGROUP);
-	// nen in ra cac truong nhu sau : 
-	// lay ra nhung vat tu va hien thi nhung thong tin sau 
-
-
+int soVatTuHienThiTrenTableTop10DoanhThuVatTu(DoanhThuVatTu arrDTVT[]) {
+	const int KHONG_CO_DOANH_THU = 0;  
+	int soPhanTuTrungNhau = 0; 
+	int doanhThuKhacKhong = 0; 
+	// Dem so Luong Vat Tu co Doanh Thu Khac Khong
+	for (int i = 0;i < SO_LUONG_TOP_DOANH_THU_VT;i++) {
+		if (arrDTVT[i].doanhThu != KHONG_CO_DOANH_THU) {
+			doanhThuKhacKhong++;
+		}
+	}
+	// Dem so Luong Vat Tu Trung Doanh Thu
+	for (int i = 0;i < doanhThuKhacKhong - 1;i++) { 
+		if (arrDTVT[i].doanhThu == arrDTVT[i+1].doanhThu) {  
+			soPhanTuTrungNhau++; 
+		}
+	}
+	// tat ca vat tu deu khac khong va khong co phan tu nao trung nhau -> hien thi day du tu tren xuong duoi ! 
+	if (doanhThuKhacKhong == SO_LUONG_TOP_DOANH_THU_VT && soPhanTuTrungNhau == 0) {  // tat ca doanh thu deu khac khong   
+		return SO_LUONG_TOP_DOANH_THU_VT; 
+	}
 	
-	setbkcolor(0); 
-	setcolor(15); 
-	settextstyle(6,0,3);
-	outtextxy(430,160,"10 VAT TU CO DOANH THU CAO NHAT"); 
-	string strStart = "Tu ngay :  " + start.getStringDate(); 
-	string strEnd = "Den ngay :  " + end.getStringDate(); 
-	outtextxy(360 + 30,200,strStart.c_str());
-	outtextxy(750 + 30,200,strEnd.c_str());
 	
-	// ve ra 10 cai khung va in ra theo thu tu 
+	// Co Doanh Thu Vat Tu Bang Khong
+	if (doanhThuKhacKhong != SO_LUONG_TOP_DOANH_THU_VT) {
+		// kiem tra xem bao nhieu doanh thu va di so sanh voi so luong trung 
+		// vi du nhu co 4 phan tu khac khong va co 6 phan tu trung nhau 
+		// tuc la co 2 phan tu trung nhau khac khong 
+		// 10 - 6 + 2 -> 4 + 2 = 6 phan tu -> hien thi ra 6 phan tu 
+		// tinh ra so luong vat tu khac khong  
+		if (doanhThuKhacKhong == 0)  //  Khong Hien Thi Gi Ca 
+		{
+			return 0; 
+		}
+		int soLuongDoanhThuBangKhong = SO_LUONG_TOP_DOANH_THU_VT - doanhThuKhacKhong;
+		return SO_LUONG_TOP_DOANH_THU_VT - soLuongDoanhThuBangKhong + soPhanTuTrungNhau; 
+	}
 	
-	// lay ra 10 vat tu dau tien 
-	// troc tien in ra cai bang ! 
+}
+
+
+// Viet Ham Ve Ra Table Hien Thi Nhan Doanh Thu Len  
+void veTableDoanhThuVatTu() {
 	TienichDoHoa::xoaManHinhTheoToaDo(margin, canLeTrenHD + 170, 1600, 400, BACKGROUP);
 	int cachLe = margin + 60; 
 	NutBam maVT(cachLe + doDaiCoBan , canLeTrenHD + 170, doDaiCoBan + 3 , 40, colorTieuDe, 7, conlorTextTieuDe, "MA VT");
@@ -38,7 +61,6 @@ void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end) {  // truyen
 	NutBam soLuongTon(cachLe + doDaiCoBan * 5 + 3 * 4, canLeTrenHD + 170, doDaiCoBan, 40, colorTieuDe, 7, conlorTextTieuDe, "SO LUONG TON");
 	NutBam tongTienVT(cachLe + doDaiCoBan * 6 + 3 * 5, canLeTrenHD + 170, doDaiCoBan + 3, 40, colorTieuDe, 7, conlorTextTieuDe, "DOANH THU");
 	
-
 	maVT.veNut(); 
 	tenVT.veNut(); 
 	donViTinh.veNut(); 
@@ -52,39 +74,150 @@ void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end) {  // truyen
 	line(cachLe + doDaiCoBan * 5 + 3 * 3, canLeTrenHD + 170, cachLe + doDaiCoBan * 5 + 3 * 3, 690);
 	line(cachLe + doDaiCoBan * 6 + 3 * 4, canLeTrenHD + 170, cachLe + doDaiCoBan * 6 + 3 * 4, 690);
 	
-	// hien thi 10 vat tu sau khi duoc sap xep len
+	// thu goi toi ham -> 
 	
+	
+}
 
-	
+
+// viet ham hien thi du lieu len table 
+int hienThiDoanhThuVatTuLenTable(int indexPage,int soLuongHienThi,DoanhThuVatTu arrDTVT[],int soLuongDoanhThu) {
+	int index;
+	int dem = 0; 
 	int khoanCach = 36; 
 	int marginTop10 = 340; 
 	
 	string temp; 
-	
-	int dem = 0; 
-	
-	for (int i = 0; i < 10;i++) {
-		if (arrDTVT[i].doanhThu != 0 ) {  
-			setbkcolor(0); 
+	int cachLe = margin + 60; 
+	for (int i = 0; i  < soLuongHienThi;i++) {
+		TienichDoHoa::setText(BACKGROUP,10,10,1); 
+		if (i + indexPage * soLuongHienThi  < soLuongDoanhThu  ) {
+			index = i + indexPage * soLuongHienThi; 
+			
+			// in ra 
+			
 			line(cachLe + doDaiCoBan ,marginTop10 + khoanCach*i + 26,cachLe + doDaiCoBan + 948,marginTop10 + khoanCach*i + 26);
-			outtextxy(cachLe + doDaiCoBan + 60,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->maVT.c_str() ); 
-			outtextxy(cachLe + doDaiCoBan*2 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->ten.c_str() ); 
-			outtextxy(cachLe + doDaiCoBan*4 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->donVi.c_str() );
-			temp = TienichDoHoa::longLongToString((long long)arrDTVT[i].pVatTu->soLuongTon); 
+			outtextxy(cachLe + doDaiCoBan + 60,marginTop10 + khoanCach*i, arrDTVT[index].pVatTu->maVT.c_str() ); 
+			outtextxy(cachLe + doDaiCoBan*2 + 30,marginTop10 + khoanCach*i, arrDTVT[index].pVatTu->ten.c_str() ); 
+			outtextxy(cachLe + doDaiCoBan*4 + 30,marginTop10 + khoanCach*i, arrDTVT[index].pVatTu->donVi.c_str() );
+			temp = TienichDoHoa::longLongToString((long long)arrDTVT[index].pVatTu->soLuongTon); 
 			outtextxy(cachLe + doDaiCoBan*5 + 30,marginTop10 + khoanCach*i, temp.c_str() );
 			temp = TienichDoHoa::longLongToString((long long)arrDTVT[i].doanhThu);
 			outtextxy(cachLe + doDaiCoBan*6 + 30,marginTop10 + khoanCach*i, temp.c_str() );
 			dem++; 
 		}
+	}
+}
+
+void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end,int &index,NutBam &vatTu,NutBam &nhanVien,
+	NutBam& hoaDon,NutBam &doanhThu,NutBam &close,NutBam &thongKeHD)
+ {  // truyen vao 1 cai mang dap sap xep va viec cua ta la hien thi ra thoi 
+
+	TienichDoHoa::xoaManHinhTheoToaDo(0, 96, DODAIMANHINH, 1000, BACKGROUP);
+	TienichDoHoa::setText(BACKGROUP,14,10,1); 
+	int soVatTuHienThi = soVatTuHienThiTrenTableTop10DoanhThuVatTu(arrDTVT); 
+	// Kiem Tra Neu Nhu soVatTuHienThiLa0 -> thong bao voi nguoi dung luon 
+	if ( soVatTuHienThi == 0) {
+		TienichDoHoa::hienThiThongBao("Khong Ton Tai Doanh Thu!"); 
+		// sau khi nguoi dung nhap vao oke => tra ket thuc ham nay 
+		return; 
+	}
+	else 
+	{
+		TienichDoHoa::setText(BACKGROUP,14,10,1); 
+		outtextxy(430,160,"Top 10 VAT TU CO DOANH THU CAO NHAT"); 
+		string strStart = "Tu ngay :  " + start.getStringDate(); 
+		string strEnd = "Den ngay :  " + end.getStringDate(); 
+		outtextxy(360 + 30,200,strStart.c_str());
+		outtextxy(750 + 30,200,strEnd.c_str());
+		// tiep tuc chay vong lap 
+		int soPageToiDate = TienichDoHoa::tinhToiDaPage(soVatTuHienThi,10); 
+		// tiep theo ve ra table 
+		veTableDoanhThuVatTu();  
+		hienThiDoanhThuVatTuLenTable(1,10,arrDTVT,soVatTuHienThi);
+		
+		// tiep theo la do du lieu len table 
 		
 		
+		// lam phep tinh don gian : 
+		// neu chi co 7 vat tu :  
+		// thi tinh nhu sau :  
+	
+		
+//		int xclick,yclick; 
+//		while(true) {
+//			if (ismouseclick(WM_LBUTTONDOWN))
+//			{
+//				getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
+//				if (close.isMouseHover(xclick,yclick)) {
+//					index = ID_CLOSE; 
+//					return;
+//				}
+//				if (vatTu.isMouseHover(xclick,yclick)) {
+//					index = ID_VT; 
+//					return; 
+//				}
+//				if (nhanVien.isMouseHover(xclick,yclick)) {
+//					index = ID_NV; 
+//					return; 
+//				}
+//				if (hoaDon.isMouseHover(xclick,yclick)) {
+//					index = ID_HD;
+//					return; 
+//				}
+//				if (doanhThu.isMouseHover(xclick,yclick)) {
+//					index = ID_DT; 
+//					return; 
+//				}
+//				else if (thongKeHD.isMouseHover(xclick,yclick)) {
+//					index = ID_DT_THONG_KE; 
+//				}
+//			}
+//			delay(10); 
+//		}
+	
 	}
-	if (dem == 0) {
-		MessageBox(NULL, "Thong Bao", "Doanh Thu Tat Ca Vat Tu Trong Thoi Gian Nay la 0!", MB_ICONINFORMATION | MB_OK);
-	}
-	else if (dem != 10) {
-		outtextxy(264, 720, "*Nhung vat tu con lai co doanh thu la 0");
-	}
+	
+	
+	
+	
+	
+	
+	// tao nut thoat ra cho nguoi dung  
+	
+	// hien thi 10 vat tu sau khi duoc sap xep len
+	
+
+	
+//	int khoanCach = 36; 
+//	int marginTop10 = 340; 
+//	
+//	string temp; 
+//	int cachLe = margin + 60; 
+//	int dem = 0; 
+//	
+//	for (int i = 0; i < 10;i++) {
+//		if (arrDTVT[i].doanhThu != 0 ) {  
+//			setbkcolor(0); 
+//			line(cachLe + doDaiCoBan ,marginTop10 + khoanCach*i + 26,cachLe + doDaiCoBan + 948,marginTop10 + khoanCach*i + 26);
+//			outtextxy(cachLe + doDaiCoBan + 60,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->maVT.c_str() ); 
+//			outtextxy(cachLe + doDaiCoBan*2 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->ten.c_str() ); 
+//			outtextxy(cachLe + doDaiCoBan*4 + 30,marginTop10 + khoanCach*i, arrDTVT[i].pVatTu->donVi.c_str() );
+//			temp = TienichDoHoa::longLongToString((long long)arrDTVT[i].pVatTu->soLuongTon); 
+//			outtextxy(cachLe + doDaiCoBan*5 + 30,marginTop10 + khoanCach*i, temp.c_str() );
+//			temp = TienichDoHoa::longLongToString((long long)arrDTVT[i].doanhThu);
+//			outtextxy(cachLe + doDaiCoBan*6 + 30,marginTop10 + khoanCach*i, temp.c_str() );
+//			dem++; 
+//		}
+//		
+//		
+//	}
+//	if (dem == 0) {
+//		MessageBox(NULL, "Thong Bao", "Doanh Thu Tat Ca Vat Tu Trong Thoi Gian Nay la 0!", MB_ICONINFORMATION | MB_OK);
+//	}
+//	else if (dem != 10) {
+//		outtextxy(264, 720, "*Nhung vat tu con lai co doanh thu la 0");
+//	}
 	
 	
 }
@@ -502,7 +635,7 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,DsNhanVien &DSNV,int &index,NutB
 					{
 						TienichDoHoa::hienThiThongBao("Khong Ton Tai Hoa Don Trong Khoan Thoi Gian Nay!");
 					}
-					else  // hien thi ra table ! 
+					else  
 					{ 
 						hienThiGiaoDienHoaDonTrongKhoanThoiGian (start,end,hoaDonHopLe,soLuongHDHopLe,index,vatTu,nhanVien,hoaDon,doanhThu,close,doanhThuNam);   // da truyen vao ds hoa don hop le! 	
 					}
@@ -519,24 +652,25 @@ void inHoaDonTheoNgayThangNam(BstVatTu &dsVatTu,DsNhanVien &DSNV,int &index,NutB
 					&& nhapNgayBD.khongRong() && nhapThangBD.khongRong() && nhapNamBD.khongRong() &&
 					nhapNgayKT.khongRong() && nhapThangKT.khongRong() && nhapNamKT.khongRong() 
 					) {
+						
 						int soLuongHoaDon = DSNV.soLuongHD(); 
 						int soLuongVatTu = dsVatTu.soLuongVT(); 
 						HoaDon** arrHoaDon = new HoaDon*[soLuongHoaDon]; 
 						DoanhThuVatTu *arrDTVT = new DoanhThuVatTu[dsVatTu.soLuongVT()]; 
 						int index = 0; 
 						DSNV.listToArrayHoaDon(arrHoaDon,index); 
-						dsVatTu.BstVatTuToDoanhThuVatTu(arrDTVT,0); 
+						dsVatTu.BstVatTuToDoanhThuVatTu(arrDTVT,0);  
+						tinhDoanhThuVatTuTheoDate(arrDTVT,soLuongVatTu,arrHoaDon,soLuongHoaDon,start,end);
+						// kiem tra xemco doanh thu nao trung doanh thu nao khong 
 						
-						// tiep tuc la sap xep ra 
-						tinhDoanhThu(arrDTVT,soLuongVatTu,arrHoaDon,soLuongHoaDon,start,end);
 						sapXepDoanhThuVatTu(arrDTVT,soLuongVatTu); 
-						hienThiTop10VatTu(arrDTVT,start,end); 	
+						hienThiTop10VatTu(arrDTVT,start,end,index,vatTu,nhanVien,hoaDon,doanhThu,close,thongKeHD); 	
 						delete []arrDTVT; 
 						delete [] arrHoaDon;		
 					}
-					else {
+					else 
+					{
 							TienichDoHoa::hienThiThongBao("dd/mm/yyyy Khong Hop Le!");
-
 					}
 					
 				}
@@ -650,7 +784,7 @@ NutBam &doanhThu,NutBam &close,NutBam &thongKe,NutBam &doanhThuNam) {
 						DSNV.listToArrayHoaDon(arrHoaDon,index); 
 						float doanhThuTheoThang[12] = {0};  // bao gom 12 phan tu dai dien 12 thang!
 						int nam = TienichDoHoa::stringToInt(nhapNam.boNhoDem); // lay ra nam cua nguoi dung
-						tinhDoanhThu(arrHoaDon,soLuongHoaDon,doanhThuTheoThang,nam); 
+						tinhDoanhThu12Thang(arrHoaDon,soLuongHoaDon,doanhThuTheoThang,nam); 
 						// xoa di het man hinh va in ra ngay thang nam tuong ung 
 						TienichDoHoa::xoaManHinhTheoToaDo(0, 96, DODAIMANHINH, 1000, BACKGROUP);
 						// tiep tuc in ra 12 thang  
@@ -684,7 +818,7 @@ NutBam &doanhThu,NutBam &close,NutBam &thongKe,NutBam &doanhThuNam) {
 							setcolor(15); 
 							line(cachLe +doDaiCoBan*3 + 10,i*khoanCach + canLeTrenHD + 202,cachLe +doDaiCoBan*3 + 320,i*khoanCach + canLeTrenHD + 202);
 							outtextxy(cachLe +doDaiCoBan*3 + 80,i*khoanCach + canLeTrenHD + 176,TienichDoHoa::intToString(i + 1).c_str()); 
-							outtextxy(cachLe +doDaiCoBan*3 + 180,i*khoanCach + canLeTrenHD + 176,TienichDoHoa::floatToString(doanhThuTheoThang[i]).c_str()); 
+							outtextxy(cachLe +doDaiCoBan*3 + 180,i*khoanCach + canLeTrenHD + 176,TienichDoHoa::longLongToString((long long)doanhThuTheoThang[i]).c_str()); 
 						}
 					}
 				}

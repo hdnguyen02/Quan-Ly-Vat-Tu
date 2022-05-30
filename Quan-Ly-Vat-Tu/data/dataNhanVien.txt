@@ -1,5 +1,7 @@
-16
+18
 nv08,Nguyen nhu,An,1,0
+0
+NV09,B,Anh,0,0
 0
 nv07,Huynh ngoc,Anh,1,2
 2
@@ -9,8 +11,8 @@ VT04,1,2,3
 hd2,6/5/2022,X,Huynh ngoc Anh,
 1
 VT07,23,23,23
-NV77,Ahihi Gfgv,Bop,0,4
-5
+NV77,Ahihi Gfgv,Bop,0,6
+7
 FG,28/5/2022,X,Ahihi Bop,
 1
 VT77,4,45,6
@@ -35,11 +37,19 @@ VT44,23,6,45
 3434,30/5/2022,N,Ahihi Gfgv Bop,
 1
 VT77,77777,99999,56
+345,30/5/2022,X,Ahihi Gfgv Bop,
+1
+VT33,333,333,0
+FGG,30/5/2022,X,Ahihi Gfgv Bop,
+1
+45,1,1,1
 NV22,Nguyen Kieu Lan,Chi,1,0
 0
 NGUYN,Kieu My Hoa,Cv,0,0
 0
 nv14,Ho thai,Danh,0,0
+0
+HGHGF8878_,Huynh Ngiv A,G Ggf,0,0
 0
 nv04,Nguyen Kieu My,Hoa,0,2
 2
@@ -62,6 +72,11 @@ nv03,Nguyen huynh dang,Khoa,0,0
 0
 nv12,Vu trong,Lan,1,0
 0
+NV23545,Ho Duc,Nguyen,0,1
+1
+HD46,30/11/2021,X,Ho Duc Nguyen,
+1
+VT77,34,55,23
 NV66,Ho Duc,Nguyen,0,2
 3
 698,28/2/2022,X,Ho Duc Nguyen,
@@ -114,8 +129,6 @@ VT29,1,54,1
 454,27/5/2022,X,Ho Duc Nguyen,
 1
 VT05,1,3,23
-NV23545,Ho Duc,Nguyen,0,0
-0
 nv06,Tu Thi Thao,Nguyen,1,1
 1
 hd7,7/7/2002,X,Tu Thi Thao Nguyen,

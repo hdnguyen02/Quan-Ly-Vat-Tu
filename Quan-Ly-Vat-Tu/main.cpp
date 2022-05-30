@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
 	BstVatTu dsVatTu;
 	menuQuanLyVatTu(dsVatTu, DSNV);
 	DSNV.giaiPhongDSNV(); 
+	return 0; 
+	
 }; 
 
 
