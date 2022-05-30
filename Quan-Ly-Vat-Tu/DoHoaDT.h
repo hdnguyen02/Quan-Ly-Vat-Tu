@@ -3,6 +3,7 @@ using namespace std;
 #include "Tienich.h"
 #include "BienDoHoa.h"
 #include "DoanhThu.h"
+#include  "DoHoaHD.h"
 
 const int SO_LUONG_TOP_DOANH_THU_VT = 10;  // theo de !
 
@@ -16,8 +17,10 @@ int soVatTuHienThiTrenTableTop10DoanhThuVatTu(DoanhThuVatTu arrDTVT[]) {
 	int soPhanTuTrungNhau = 0; 
 	int doanhThuKhacKhong = 0; 
 	// Dem so Luong Vat Tu co Doanh Thu Khac Khong
-	for (int i = 0;i < SO_LUONG_TOP_DOANH_THU_VT;i++) {
-		if (arrDTVT[i].doanhThu != KHONG_CO_DOANH_THU) {
+	for (int i = 0;i < SO_LUONG_TOP_DOANH_THU_VT;i++) 
+	{
+		if (arrDTVT[i].doanhThu != KHONG_CO_DOANH_THU) 
+		{
 			doanhThuKhacKhong++;
 		}
 	}
@@ -124,57 +127,72 @@ void hienThiTop10VatTu(DoanhThuVatTu arrDTVT[],Date start,Date end,int &index,Nu
 	}
 	else 
 	{
+		// khai bao  
+		int indexPage = 0; 
 		TienichDoHoa::setText(BACKGROUP,14,10,1); 
-		outtextxy(430,160,"Top 10 VAT TU CO DOANH THU CAO NHAT"); 
+		outtextxy(570,160,"Top 10 VAT TU CO DOANH THU CAO NHAT"); 
 		string strStart = "Tu ngay :  " + start.getStringDate(); 
 		string strEnd = "Den ngay :  " + end.getStringDate(); 
-		outtextxy(360 + 30,200,strStart.c_str());
-		outtextxy(750 + 30,200,strEnd.c_str());
+		outtextxy(360 + 30 + 50,200,strStart.c_str());
+		outtextxy(750 + 30 +50,200,strEnd.c_str());
 		// tiep tuc chay vong lap 
-		int soPageToiDate = TienichDoHoa::tinhToiDaPage(soVatTuHienThi,10); 
+		int toiDaPage = TienichDoHoa::tinhToiDaPage(soVatTuHienThi,10); 
 		// tiep theo ve ra table 
 		veTableDoanhThuVatTu();  
-		hienThiDoanhThuVatTuLenTable(1,10,arrDTVT,soVatTuHienThi);
-		
-		// tiep theo la do du lieu len table 
-		
-		
-		// lam phep tinh don gian : 
-		// neu chi co 7 vat tu :  
-		// thi tinh nhu sau :  
+		hienThiDoanhThuVatTuLenTable(0,10,arrDTVT,soVatTuHienThi); //  hien thi ra tab 0 
+		NutBam btnTien(100 + 1100 - 50 - 20 - 6,720,100,40,15,0,0,">>"); 
+		NutBam btnLui(100 + 100 + 50 + 20 + 6,720,100,40,15,0,0,"<<");
+		btnTien.veNut(); 
+		btnLui.veNut(); 
+		hienThiChiMuc(730,720,indexPage,toiDaPage); 
 	
-		
-//		int xclick,yclick; 
-//		while(true) {
-//			if (ismouseclick(WM_LBUTTONDOWN))
-//			{
-//				getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
-//				if (close.isMouseHover(xclick,yclick)) {
-//					index = ID_CLOSE; 
-//					return;
-//				}
-//				if (vatTu.isMouseHover(xclick,yclick)) {
-//					index = ID_VT; 
-//					return; 
-//				}
-//				if (nhanVien.isMouseHover(xclick,yclick)) {
-//					index = ID_NV; 
-//					return; 
-//				}
-//				if (hoaDon.isMouseHover(xclick,yclick)) {
-//					index = ID_HD;
-//					return; 
-//				}
-//				if (doanhThu.isMouseHover(xclick,yclick)) {
-//					index = ID_DT; 
-//					return; 
-//				}
-//				else if (thongKeHD.isMouseHover(xclick,yclick)) {
-//					index = ID_DT_THONG_KE; 
-//				}
-//			}
-//			delay(10); 
-//		}
+		int xclick,yclick; 
+		while(true) {
+			if (ismouseclick(WM_LBUTTONDOWN))
+			{
+				getmouseclick(WM_LBUTTONDOWN, xclick, yclick);
+				if (close.isMouseHover(xclick,yclick)) {
+					index = ID_CLOSE; 
+					return;
+				}
+				if (vatTu.isMouseHover(xclick,yclick)) {
+					index = ID_VT; 
+					return; 
+				}
+				if (nhanVien.isMouseHover(xclick,yclick)) {
+					index = ID_NV; 
+					return; 
+				}
+				if (hoaDon.isMouseHover(xclick,yclick)) {
+					index = ID_HD;
+					return; 
+				}
+				if (doanhThu.isMouseHover(xclick,yclick)) {
+					index = ID_DT; 
+					return; 
+				}
+				else if (thongKeHD.isMouseHover(xclick,yclick)) {
+					index = ID_DT_THONG_KE; 
+				}
+				else if (btnTien.isMouseHover(xclick,yclick)) {
+					if (index < toiDaPage - 1) {
+						indexPage++; 
+						veTableDoanhThuVatTu();  
+						hienThiDoanhThuVatTuLenTable(0,10,arrDTVT,soVatTuHienThi); //  hien thi ra tab 0 
+						hienThiChiMuc(730,720,indexPage,toiDaPage); 
+					}
+				}
+				else if (btnLui.isMouseHover(xclick,yclick)) {
+					if (index > 0) {
+						index--; 
+						veTableDoanhThuVatTu();  
+						hienThiDoanhThuVatTuLenTable(0,10,arrDTVT,soVatTuHienThi); //  hien thi ra tab 0 
+						hienThiChiMuc(730,720,indexPage,toiDaPage);
+					}
+				}
+			}
+			delay(10); 
+		}
 	
 	}
 	
@@ -295,7 +313,7 @@ void hienThiGiaoDienHoaDonTrongKhoanThoiGian (Date &start,Date &end,HoaDon** hoa
 	
 	int indexPage = 0; 
 	int iTempTrenMotPage = 8; 
-	setbkcolor(0); 
+	setbkcolor(BACKGROUP); 
 	setcolor(15); 
 	settextstyle(6,0,3);
 	outtextxy(330,160,"BANG LIET KE HOA DON TRONG KHOAN THOI GIAN"); 
