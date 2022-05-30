@@ -1,24 +1,15 @@
-23
-VT06,Kim Cuong,Vien,748,1
-VT02,Cat Trang,Khoi,4.54548e+006,1
-45,Gh,Gff,1.00003e+006,1
-HGHGFHFGHG,Anh Hghg Kkkkkmkpm,Caai,12456,0
-VT05,May Tinh,Cai,320,1
-VT04,Dien Thoai,Cai,184,1
-VT07,Gach Men,Cai,2447,1
-VT09,Cat Bien,Xe,74,1
-VT14,Cat Bien,Khoi,2365,1
-VT12,Cat Den,Khoi,340,1
-VT99,Dinh Gi,Tram Cay,2423,1
-VT23,Khau Trang,Hop,1.00259e+006,2
-VT33,Day Dien,Kg,2997,1
-VT29,Thu Nghiem Mot,Kg,99,1
-VT28,Thu Nghiem Hai,Jhjh,22,1
-VT27,Iphone Xs Max,Cai,999,0
-VT245,Gfg,Fgh,99999,0
-VT44,Kinh lup,Cai,312,1
-VT343,Ho Duc Nguyen,Fgfgf,79011,1
-VT344545,Vt,Ggg,1e+007,0
-VT77,Giay Dep,Doi,177938,2
-VT99344,Fggfg,U,999999,0
-YHFGHFG,Hjh,Hgh,657,0
+14
+VT099,Xi Mang,Kg,2531,1
+VT023,Gach Men,Kg,3433,1
+VT003,Loa,Cap,342,1
+VT007,Bong Den,Cai,0,1
+VT025,Gach Hoa,Kg,318,1
+VT106,Cat Trang,Khoi,308,1
+VT303,Cat Bien,Khoi,448,1
+VT224,Cat Tho,Khoi,541,1
+VT200,Xi Mang Trang,Kg,3425,1
+VT304,Den Hoc,Cai,449,1
+VT542,May Tron Ben Tong,Xe,5533,0
+VT447,Cat Tron,Kg,32,0
+VT442,Cua So,Cap,410,1
+VT923,Da Than,Kg,399,1

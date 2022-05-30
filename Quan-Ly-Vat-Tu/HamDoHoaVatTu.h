@@ -16,8 +16,7 @@ int hienThiDuLieuLenTableVT(int x,int y,int colorBack,int indexPage,int soLuongP
 		if (i + indexPage * soLuongPhanTuTrenMotPage < soLuongVT)
 		{
 			index = i + indexPage * soLuongPhanTuTrenMotPage;
-			temp = TienichDoHoa::longLongToString((long long)arrVT[index]->soLuongTon);  // ep ve kieu long long 
-			
+			temp = TienichDoHoa::floatToString(arrVT[index]->soLuongTon);  // ep ve kieu long long 
 			outtextxy(x + 30, y  + khoanCach * i, arrVT[index]->maVT.c_str());	 // hien thi ra maVT
 			outtextxy(x + 186, y + khoanCach * i, arrVT[index]->ten.c_str());	 // hien thi ra maVT
 			outtextxy(x + 430, y + khoanCach * i, arrVT[index]->donVi.c_str()); // hien thi ra maVT

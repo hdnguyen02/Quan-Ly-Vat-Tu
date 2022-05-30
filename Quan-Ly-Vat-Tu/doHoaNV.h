@@ -75,7 +75,7 @@ void hienThiChinhSuaNV(DsNhanVien &DSNV, NhanVien *nhanVienCT)
 
 			if (nhapTenNV.isMouseHover(xclick, yclick))
 			{
-				nhapTenNV.NhapVao(kiTuChuHoacSo, "");
+				nhapTenNV.NhapVao(nhapTen, "Chi Nhan Chu Khong Cach");
 				nhapTenNV.chuanHoa();
 			}
 			else if (nhapHoNV.isMouseHover(xclick, yclick))
@@ -342,7 +342,7 @@ void hienThiTinhNangNhanVien(DsNhanVien &DSNV, int &index, NutBam &vatTu, NutBam
 			}
 			else if (nhapTenNV.isMouseHover(xclick, yclick))
 			{
-				nhapTenNV.NhapVao(kiTuChu, "chu nhap chu!");
+				nhapTenNV.NhapVao(nhapTen, "Chu Khong Khoan Trang!");
 				nhapTenNV.chuanHoa();
 			}
 			else if (nam.isMouseHover(xclick, yclick))

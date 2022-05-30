@@ -510,7 +510,13 @@ bool nhapID(char &c) {
 	return false; 
 }
 
-
+// khong cho pehp nhan dau space 
+bool nhapTen(char &c) {
+	if (kiTuChu(c) && c != 32) {  // khong phai la space 
+		return true; 
+	}
+	return false; 
+}
 
 
 
