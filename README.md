@@ -3,8 +3,8 @@
 # Table of Contents
 - [ĐỀ BÀI](#1)
 - [CHỨC NĂNG](#2)
-- [LƯU Ý](#3)
-- [THẦY NHẬN XÉT](#4)
+- [THẦY NHẬN XÉT](#3)
+- [CÀI THƯ VIỆN](#4)
 
 ## ĐỀ BÀI <a name="1"></a>
 #### Danh sách vật tư
@@ -19,7 +19,8 @@
 #### Chương trình có các chức năng sau: 
 
 a/ Nhập vật tư : cho phép cập nhật (thêm / xóa / hiệu chỉnh ) thông tin của vật tư; riêng số lượng tồn chỉ cho phép nhập khi đó là vật tư mới thêm. 
-b/ In danh sách vật tư tồn kho : liệt kê ds vật tư ra màn hình theo thứ tự tên vật tư tăng dần.  Kết xuất : Mã VT		Tên vật tư		Đơn vị tính		Số lượng tồn
+b/ In danh sách vật tư tồn kho : liệt kê ds vật tư ra màn hình theo thứ tự tên vật tư tăng dần.  
+Mã VT		Tên vật tư		Đơn vị tính		Số lượng tồn
 c/ Nhập nhân viên: Cập nhập (thêm / xóa / hiệu chỉnh ) các nhân viên  dựa vào mã nhân viên, họ, tên không được rỗng.
 d/ In danh sách nhân viên theo thứ tự tên nhân viên tăng dần, nếu trùng tên thì tăng dần theo họ ra màn hình, 1 nhân viên / dòng
 e/ Lập hóa đơn nhập/Lập hóa đơn xuất: nhập vào số hóa đơn, ngày lập, loại (chỉ nhận ký tự N hoặc X). Sau đó, tiếp tục cho phép nhập các vật tư của hóa đơn đó; Căn cứ vào loại hóa đơn, chương trình sẽ tự động cập nhật số lượng tồn. 
@@ -44,8 +45,6 @@ a > VẬT TƯ ( THÊM / XÓA / SỮA )
 - Không được xóa vật tư đã tạo chi tiết hóa đơn 
 - Không nên cho người dùng chỉnh sữa MAVT và số lượng tồn.   
 
-
-
 b > IN VẬT TƯ
 
 ![Vật Tư](https://user-images.githubusercontent.com/83913057/179233349-a9953de8-28aa-4620-832c-b617739626bf.PNG)
@@ -68,10 +67,36 @@ e > TẠO HÓA ĐƠN ( CHỨC NĂNG QUAN TRỌNG )
 
 g/h/i > THỐNG KÊ / IN HÓA ĐƠN. 
 
-![In Hóa Đơn](https://user-images.githubusercontent.com/83913057/179233483-30ced96a-664d-4a74-81
-![Thống kê](https://user-images.githubusercontent.com/83913057/179233490-a6f79516-d9f5-4a52-919a-a2d65ebf29c0.PNG)
-e0-745c72d49119.PNG)
+![In Hóa Đơn](https://user-images.githubusercontent.com/83913057/179233994-a5eb5334-e16a-45aa-9ac4-6ec4754d2425.PNG)
 
+
+![Thống kê](https://user-images.githubusercontent.com/83913057/179234007-25f630d7-c614-4769-b10a-6dbd81b786f1.PNG)
+
+
+
+## THẦY NHẬN XÉT <a name="3"></a>
+Chỗ bị trừ điểm : 
+- Quên giải phóng khi xóa nhân viên -> Nghiêm trọng 
+- Thừa trường dữ liệu ( tại cấu trúc chi tiết hóa đơn : trường tên nhân viên ) -> Nghiệm trọng
+- Sai yêu cầu thông kê top 10 vật tư. 
+
+Lời Khuyên: 
+- Đồ họa không cần đẹp lung linh. Chỉ cần thân thiện với người dùng. Chẳng hạn nên để thêm / xóa / in về 1 màn hình. 
+- Chú tâm vào cấu trúc dữ liệu. Và các chức năng trong đề. 
+- Khi new nhớ phải phóng. 
+
+Công nghệ sử dụng: 
+- devC.
+- Graphics.h.
+- C/C++.
+
+
+ ## CÀI THƯ VIỆN <a name="4"></a>
+ - Tham khảo thêm link https://github.com/ahuynh359/Graphics
+ - Demo https://www.youtube.com/watch?v=rGFWxpukt2s
+
+
+ https://www.facebook.com/nguyen.ducnguyen7702/
 
 
 
