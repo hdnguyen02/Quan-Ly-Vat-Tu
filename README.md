@@ -23,7 +23,6 @@ c/ Nhập nhân viên: Cập nhập (thêm / xóa / hiệu chỉnh ) các nhân 
 d/ In danh sách nhân viên theo thứ tự tên nhân viên tăng dần, nếu trùng tên thì tăng dần theo họ ra màn hình, 1 nhân viên / dòng
 e/ Lập hóa đơn nhập/Lập hóa đơn xuất: nhập vào số hóa đơn, ngày lập, loại (chỉ nhận ký tự N hoặc X). Sau đó, tiếp tục cho phép nhập các vật tư của hóa đơn đó; Căn cứ vào loại hóa đơn, chương trình sẽ tự động cập nhật số lượng tồn. 
 - Lập hóa đơn có 2 loại hóa đơn : hóa đơn nhập, hóa đơn xuất 
-- Nhưng cần lấy ra nhân viên lập hóa đơn hoặc xuất hóa đơn => có 1 hàm trả về 1 nhân viên đó -> sau đó thêm cái hóa đơn đó vào nhân viên, Thêm VT ( có maVT : kiểm tra xem có tồn tại mã VT đó không ).
 Lưu ý: - Nếu số lượng xuất không đủ hàng thì báo lỗi và in ra số lượng tồn hiện có trong kho;
 - Chỉ được phép xóa vật tư đang lập của hóa đơn hiện tại. Khi hóa đơn đã ghi thì không được xóa các vật tư trog hóa đơn 
 f/ In hóa đơn : In hóa đơn dựa vào số hóa đơn do ta nhập vào
@@ -38,11 +37,31 @@ BẢNG THỐNG KÊ DOANH THU NĂM ####
         
 ## CHỨC NĂNG <a name="2"></a>
 a > VẬT TƯ ( THÊM / XÓA / SỮA )  
-- Chú ý đến key ( không được trùng )  
-- Không được xóa vật tư đã tọa hóa đơn 
+- Chú ý đến MAVT ( không được trùng ) 
+- Không được xóa vật tư đã tạo chi tiết hóa đơn 
 - Không nên cho người dùng chỉnh sữa MAVT và số lượng tồn.   
 
-b > 
+
+
+b > IN VẬT TƯ
+
+c > NHÂN VIÊN ( THÊM / XÓA / SỮA ) 
+- Chú ý đến MANV ( không được trùng )
+- Không được xóa nhân viên đã tạo hóa đơn 
+- Không nên cho người dùng chỉnh sữa MANV. 
+
+d > IN NHÂN VIÊN 
+
+e > TẠO HÓA ĐƠN ( CHỨC NĂNG QUAN TRỌNG )  
+- Chỉ Nhận 2 loại hóa đơn nhập / xuất. 
+- Tạo dao diện thân thiện người dùng, hiển thị đầy đủ thông tin lên màn hình khi thêm hóa đơn ( bao gồm cả tên nhân viên tạo hóa đơn và tên của mã vật tư ).  
+- Không được xuất hóa đơn với số lượng < số lượng tồn ( đối với hóa đơn xuất ) 
+
+g/h/i > THỐNG KÊ / IN HÓA ĐƠN. 
+
+
+
+
 
 
 
